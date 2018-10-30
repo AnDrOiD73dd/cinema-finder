@@ -6,11 +6,6 @@ public class PopularMovies {
     private int totalPages;
     private MovieCardResult[] results;
 
-    private class DateRange {
-        String minimum;
-        String maximum;
-    }
-
     public int getPage() {
         return page;
     }

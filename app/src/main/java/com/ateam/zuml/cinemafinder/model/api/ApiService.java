@@ -4,7 +4,9 @@ import com.ateam.zuml.cinemafinder.model.entities.Credits;
 import com.ateam.zuml.cinemafinder.model.entities.Movie;
 import com.ateam.zuml.cinemafinder.model.entities.NowPlayingMovies;
 import com.ateam.zuml.cinemafinder.model.entities.People;
+import com.ateam.zuml.cinemafinder.model.entities.PopularMovies;
 
+import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -27,7 +29,7 @@ public interface ApiService {
      * https://api.themoviedb.org/3/movie/534?api_key=<<api_key>>&language=en-US&append_to_response=videos,images
      */
     @GET("/movie/{movie_id}")
-    Movie getMovieInfo(@Path("movie_id") int movieId,
+    Single<Movie> getMovieInfo(@Path("movie_id") int movieId,
                        @Query("api_key") String accessToken,
                        @Query("language") String language,
                        @Query("append_to_response") String additionalData);
@@ -45,7 +47,7 @@ public interface ApiService {
      * https://api.themoviedb.org/3/movie/now_playing?api_key=<<api_key>>&language=ru-RU&page=1&region=ru
      */
     @GET("/movie/now_playing")
-    NowPlayingMovies getNowPlayingMovies(@Query("api_key") String accessToken,
+    Single<NowPlayingMovies> getNowPlayingMovies(@Query("api_key") String accessToken,
                                          @Query("language") String language,
                                          @Query("page") String page,
                                          @Query("region") String region);
@@ -63,10 +65,10 @@ public interface ApiService {
      * https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=ru-RU&page=1&region=ru
      */
     @GET("/movie/popular")
-    NowPlayingMovies getPopularMovies(@Query("api_key") String accessToken,
-                                      @Query("language") String language,
-                                      @Query("page") String page,
-                                      @Query("region") String region);
+    Single<PopularMovies> getPopularMovies(@Query("api_key") String accessToken,
+                                           @Query("language") String language,
+                                           @Query("page") String page,
+                                           @Query("region") String region);
 
     /*
      * Get the cast and crew for a movie.
@@ -81,7 +83,7 @@ public interface ApiService {
      * https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>
      */
     @GET("/movie/{movie_id}/credits")
-    Credits getMovieCredits(@Path("movie_id") int movieId,
+    Single<Credits> getMovieCredits(@Path("movie_id") int movieId,
                             @Query("api_key") String accessToken);
 
     /*
@@ -98,7 +100,7 @@ public interface ApiService {
      * https://api.themoviedb.org/3/tv/{tv_id}/credits?api_key=<<api_key>>&language=en-US
      */
     @GET("/tv/{tv_id}/credits")
-    Credits getTVCredits(@Path("tv_id") int tvId,
+    Single<Credits> getTVCredits(@Path("tv_id") int tvId,
                          @Query("api_key") String accessToken,
                          @Query("language") String language);
 
@@ -117,15 +119,15 @@ public interface ApiService {
      * https://api.themoviedb.org/3/tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits?api_key=<<api_key>>
      */
     @GET("/tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits")
-    Credits getTVEpisodeCredits(@Path("tv_id") int tvId,
-                                @Path("season_number") int seasonNumber,
-                                @Path("episode_number") int episodeNumber,
-                                @Query("api_key") String accessToken);
+    Single<Credits> getTVEpisodeCredits(@Path("tv_id") int tvId,
+                                       @Path("season_number") int seasonNumber,
+                                       @Path("episode_number") int episodeNumber,
+                                       @Query("api_key") String accessToken);
 
     /*
      * Required:
      * String api_key - API Key
-     * int movie_id - Given movie ID
+     * int movie_id - Given person ID
      *
      * Optional:
      * String language - Pass a ISO 639-1 value to display translated data for the fields that support it.
@@ -136,7 +138,7 @@ public interface ApiService {
      * https://api.themoviedb.org/3/person/6885?api_key=6951767fd82df6dc250442aa410c968e&language=en-US&append_to_response=images
      */
     @GET("/person/{person_id}")
-    People getPeople(@Path("person_id") int personId,
+    Single<People> getPeople(@Path("person_id") int personId,
                      @Query("api_key") String accessToken,
                      @Query("language") String language,
                      @Query("append_to_response") String additionalData);
