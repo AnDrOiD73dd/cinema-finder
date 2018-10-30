@@ -4,13 +4,45 @@ import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
+// Part of other objects: Credits
+
 class Crew {
-    String creditId;
-    String department;
-    @Nullable int gender;
+    private String creditId;
+    private String department;
+    @Nullable
+    private int gender;
     @SerializedName("id")
-    int peopleId;
-    String job;
-    String name;
-    String profilePath;
+    private int peopleId;
+    private String job;
+    private String name;
+    private String profilePath;
+
+    public String getCreditId() {
+        return creditId;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    @Nullable
+    public int getGender() {
+        return gender;
+    }
+
+    public int getPeopleId() {
+        return peopleId;
+    }
+
+    public String getJob() {
+        return job;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProfilePath() {
+        return profilePath;
+    }
 }

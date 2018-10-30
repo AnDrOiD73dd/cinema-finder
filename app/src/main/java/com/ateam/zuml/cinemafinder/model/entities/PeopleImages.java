@@ -4,6 +4,14 @@ import com.google.gson.annotations.SerializedName;
 
 public class PeopleImages {
     @SerializedName("id")
-    int peopleId;
-    ProfileImage[] profiles;
+    private int peopleId;
+    private Image[] profiles;
+
+    public int getPeopleId() {
+        return peopleId;
+    }
+
+    public Image[] getProfiles() {
+        return profiles;
+    }
 }

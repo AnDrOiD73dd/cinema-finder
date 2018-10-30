@@ -4,11 +4,36 @@ import android.support.annotation.Nullable;
 
 import com.google.gson.annotations.SerializedName;
 
+// Part of other objects: PopularMovies, NowPlayingMovies
+
 public class MovieCardResult {
     @SerializedName("id")
-    int movieId;
-    @Nullable String backdropPath;  //кадр из  фильма
-    boolean video;
-    int[] genreIds;
-    boolean adult;
+    private int movieId;
+    @Nullable
+    private String backdropPath;  //кадр из фильма
+    private boolean video;
+    private int[] genreIds;
+    private boolean adult;
+
+    public int getMovieId() {
+        return movieId;
+    }
+
+    @Nullable
+    public String getBackdropPath() {
+        return backdropPath;
+    }
+
+    public boolean isVideo() {
+        return video;
+    }
+
+    public int[] getGenreIds() {
+        return genreIds;
+    }
+
+    public boolean isAdult() {
+        return adult;
+    }
+
 }
