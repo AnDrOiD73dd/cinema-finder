@@ -2,7 +2,7 @@ package com.ateam.zuml.cinemafinder.model.entities;
 
 import com.google.gson.annotations.SerializedName;
 
-public class PeopleImages {
+public class PersonImages {
     @SerializedName("id")
     private int peopleId;
     private Image[] profiles;

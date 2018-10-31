@@ -3,7 +3,7 @@ package com.ateam.zuml.cinemafinder.model.api;
 import com.ateam.zuml.cinemafinder.model.entities.Credits;
 import com.ateam.zuml.cinemafinder.model.entities.Movie;
 import com.ateam.zuml.cinemafinder.model.entities.NowPlayingMovies;
-import com.ateam.zuml.cinemafinder.model.entities.People;
+import com.ateam.zuml.cinemafinder.model.entities.Person;
 import com.ateam.zuml.cinemafinder.model.entities.PopularMovies;
 
 import io.reactivex.Single;
@@ -138,8 +138,8 @@ public interface ApiService {
      * https://api.themoviedb.org/3/person/6885?api_key=6951767fd82df6dc250442aa410c968e&language=en-US&append_to_response=images
      */
     @GET("/person/{person_id}")
-    Single<People> getPeople(@Path("person_id") int personId,
-                     @Query("api_key") String accessToken,
-                     @Query("language") String language,
-                     @Query("append_to_response") String additionalData);
+    Single<Person> getPeople(@Path("person_id") int personId,
+                             @Query("api_key") String accessToken,
+                             @Query("language") String language,
+                             @Query("append_to_response") String additionalData);
 }

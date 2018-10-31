@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.model.entities;
 
-// Part of other objects: PeopleImages
+// Part of other objects: PersonImages
 
 public class Image {
     private long aspectRatio;

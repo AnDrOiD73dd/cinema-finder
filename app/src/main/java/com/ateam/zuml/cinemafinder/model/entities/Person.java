@@ -2,7 +2,7 @@ package com.ateam.zuml.cinemafinder.model.entities;
 
 import android.support.annotation.Nullable;
 
-public class People {
+public class Person {
     private int id;
     private @Nullable String birthday;
     private @Nullable String deathday;
@@ -12,7 +12,7 @@ public class People {
     private @Nullable String placeOfBirth;
     private @Nullable String profilePath;
     private @Nullable String homepage;
-    private PeopleImages images;
+    private PersonImages images;
 
     public int getId() {
         return id;
@@ -55,7 +55,7 @@ public class People {
         return homepage;
     }
 
-    public PeopleImages getImages() {
+    public PersonImages getImages() {
         return images;
     }
 }
