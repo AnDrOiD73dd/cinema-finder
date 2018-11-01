@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CinemaFinder</string>
+    <string name="search">Search</string>
+    <string name="settings">Settings</string>
+    <string name="trends">Trends</string>
+    <string name="favorites">Favorites</string>
+    <string name="ratings">Ratings</string>
 </resources>
