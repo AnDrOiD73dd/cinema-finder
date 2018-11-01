@@ -1,10 +1,11 @@
-package com.ateam.zuml.cinemafinder.model.api;
+package com.ateam.zuml.cinemafinder.service.api;
 
-import com.ateam.zuml.cinemafinder.model.entities.Credits;
-import com.ateam.zuml.cinemafinder.model.entities.Movie;
-import com.ateam.zuml.cinemafinder.model.entities.NowPlayingMovies;
-import com.ateam.zuml.cinemafinder.model.entities.Person;
-import com.ateam.zuml.cinemafinder.model.entities.PopularMovies;
+import android.graphics.Movie;
+
+import com.ateam.zuml.cinemafinder.service.model.person.credits.Credits;
+import com.ateam.zuml.cinemafinder.service.model.movie.details.NowPlayingMovies;
+import com.ateam.zuml.cinemafinder.service.model.person.Person;
+import com.ateam.zuml.cinemafinder.service.model.movie.details.PopularMovies;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -30,9 +31,9 @@ public interface ApiService {
      */
     @GET("/movie/{movie_id}")
     Single<Movie> getMovieInfo(@Path("movie_id") int movieId,
-                       @Query("api_key") String accessToken,
-                       @Query("language") String language,
-                       @Query("append_to_response") String additionalData);
+                               @Query("api_key") String accessToken,
+                               @Query("language") String language,
+                               @Query("append_to_response") String additionalData);
 
     /*
      * Required:
@@ -48,9 +49,9 @@ public interface ApiService {
      */
     @GET("/movie/now_playing")
     Single<NowPlayingMovies> getNowPlayingMovies(@Query("api_key") String accessToken,
-                                         @Query("language") String language,
-                                         @Query("page") String page,
-                                         @Query("region") String region);
+                                                 @Query("language") String language,
+                                                 @Query("page") String page,
+                                                 @Query("region") String region);
 
     /*
      * Required:
@@ -84,7 +85,7 @@ public interface ApiService {
      */
     @GET("/movie/{movie_id}/credits")
     Single<Credits> getMovieCredits(@Path("movie_id") int movieId,
-                            @Query("api_key") String accessToken);
+                                    @Query("api_key") String accessToken);
 
     /*
      * Get the credits (cast and crew) that have been added to a TV show.
