@@ -92,10 +92,10 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
 
     @Override
     public void setBottomNavigationVisibility(boolean visible) {
-        if (bottomNavigationView.isShown() && !visible) {
-            bottomNavigationView.setVisibility(View.GONE);
-        } else if (!bottomNavigationView.isShown() && visible) {
+        if (visible) {
             bottomNavigationView.setVisibility(View.VISIBLE);
+        } else {
+            bottomNavigationView.setVisibility(View.GONE);
         }
     }
 }
