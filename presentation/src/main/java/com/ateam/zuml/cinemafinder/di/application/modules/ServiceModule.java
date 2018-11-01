@@ -30,7 +30,7 @@ public final class ServiceModule {
                 .build();
     }
 
-    @Singleton @Provides ApiService apiService(final OkHttpClient okHttpClient, final Gson gson,
+    @Singleton @Provides ApiService provideApiService(final OkHttpClient okHttpClient, final Gson gson,
                           @Named("baseUrl") final String baseUrl) {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
