@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity">
+    tools:context="com.ateam.zuml.cinemafinder.ui.MainActivity">
 
     <!-- TODO 01.11.2018 Move title a little to the right -->
     <!-- TODO 01.11.2018 Icon color does not match  -->
