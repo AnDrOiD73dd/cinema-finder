@@ -1,7 +1,6 @@
 package com.ateam.zuml.cinemafinder.service.api;
 
-import android.graphics.Movie;
-
+import com.ateam.zuml.cinemafinder.service.model.movie.Movie;
 import com.ateam.zuml.cinemafinder.service.model.person.credits.Credits;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.NowPlayingMovies;
 import com.ateam.zuml.cinemafinder.service.model.person.Person;
