@@ -11,8 +11,6 @@ import com.ateam.zuml.cinemafinder.R;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
-    public static final String TAG = "SettingsFragment";
-
     public static SettingsFragment newInstance() {
         SettingsFragment fragment = new SettingsFragment();
         Bundle args = new Bundle();

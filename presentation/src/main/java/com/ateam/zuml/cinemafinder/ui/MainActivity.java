@@ -1,30 +1,49 @@
 package com.ateam.zuml.cinemafinder.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.NavigatorHolder;
+import ru.terrakok.cicerone.Router;
+import ru.terrakok.cicerone.android.support.SupportAppNavigator;
+import ru.terrakok.cicerone.commands.Command;
 
 public class MainActivity extends AppCompatActivity implements WidgetTuning {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
 
+    @Inject Router router;
+    @Inject NavigatorHolder navigatorHolder;
+
+    private Navigator navigator = new SupportAppNavigator(this, R.id.main_container)  {
+        @Override
+        public void applyCommands(Command[] commands) {
+            super.applyCommands(commands);
+            getSupportFragmentManager().executePendingTransactions();
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        App.getApp().getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
-            setFragment(HomeFragment.newInstance(), HomeFragment.TAG);
+            router.navigateTo(new Screens.HomeScreen());
         }
     }
 
@@ -32,22 +51,14 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                getSupportFragmentManager().popBackStack();
+                router.exit();
                 return true;
             case R.id.action_settings:
-                setFragment(SettingsFragment.newInstance(), SettingsFragment.TAG);
+                router.navigateTo(new Screens.SettingsScreen());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void setFragment(Fragment fragment, String tag) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_container, fragment, tag)
-                .addToBackStack(tag)
-                .commit();
     }
 
     @Override
@@ -58,5 +69,17 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
             actionBar.setDisplayHomeAsUpEnabled(visible);
             actionBar.setElevation(0);
         }
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
+        navigatorHolder.setNavigator(navigator);
+    }
+
+    @Override
+    protected void onPause() {
+        navigatorHolder.removeNavigator();
+        super.onPause();
     }
 }

@@ -3,32 +3,36 @@ package com.ateam.zuml.cinemafinder.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.HomeView;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.NavigatorHolder;
+import ru.terrakok.cicerone.Router;
+import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 
 public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
-    public static final String TAG = "HomeFragment";
+    @Inject Router router;
+    @Inject NavigatorHolder navigatorHolder;
 
     @InjectPresenter HomePresenter mMainPresenter;
 
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
 
-    private FragmentManager fragmentManager;
+    private Navigator navigator;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -41,53 +45,48 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ButterKnife.bind(this, view);
-        init();
-        return view;
-    }
 
-    @Override
-    public void onViewCreated(@NonNull final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        fragmentManager = getChildFragmentManager();
-        if (fragmentManager.findFragmentByTag(TrendsFragment.TAG) == null) {
-            replaceChildFragment(TrendsFragment.newInstance(), TrendsFragment.TAG);
-        }
+        App.getApp().getAppComponent().inject(this);
+
+        ButterKnife.bind(this, view);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
             switch (menuItem.getItemId()) {
                 case R.id.action_trends:
-                    replaceChildFragment(TrendsFragment.newInstance(), TrendsFragment.TAG);
+                    router.replaceScreen(new Screens.TrendsScreen());
                     return true;
                 case R.id.action_favorites:
-                    replaceChildFragment(FavoritesFragment.newInstance(), FavoritesFragment.TAG);
+                    router.replaceScreen(new Screens.FavoritesScreen());
                     return true;
                 case R.id.action_ratings:
-                    replaceChildFragment(RatingsFragment.newInstance(), RatingsFragment.TAG);
+                    router.replaceScreen(new Screens.RatingsScreen());
                     return true;
                 default:
                     return false;
             }
         });
-    }
 
-    private void replaceChildFragment(Fragment fragment, String fragmentTag) {
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.child_container, fragment, fragmentTag)
-                .commit();
+        return view;
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
+    public void onResume() {
+        super.onResume();
+        navigatorHolder.setNavigator(getNavigator());
+        //TODO 02.11.2018 fix this
+        router.replaceScreen(new Screens.TrendsScreen());
     }
 
-    private void init() {
-        setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (MainActivity) getActivity();
-        if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.app_name), false);
+    @Override
+    public void onPause() {
+        navigatorHolder.removeNavigator();
+        super.onPause();
+    }
+
+    private Navigator getNavigator() {
+        if (navigator == null) {
+            navigator = new SupportAppNavigator(getActivity(), getChildFragmentManager(), R.id.child_container);
         }
+        return navigator;
     }
 }
