@@ -3,16 +3,30 @@ package com.ateam.zuml.cinemafinder.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.presentation.presenter.FavoritesPresenter;
+import com.ateam.zuml.cinemafinder.presentation.view.FavoritesView;
 
-public class FavoritesFragment extends Fragment {
+public class FavoritesFragment extends MvpAppCompatFragment implements FavoritesView {
+    public static final String TAG = "FavoritesFragment";
+
+    @InjectPresenter
+    FavoritesPresenter favoritesPresenter;
+
+    public static FavoritesFragment newInstance() {
+        FavoritesFragment fragment = new FavoritesFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -27,7 +41,6 @@ public class FavoritesFragment extends Fragment {
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
-            widgetTuning.setBottomNavigationVisibility(true);
         }
     }
 
@@ -37,4 +50,3 @@ public class FavoritesFragment extends Fragment {
         inflater.inflate(R.menu.menu_main, menu);
     }
 }
-

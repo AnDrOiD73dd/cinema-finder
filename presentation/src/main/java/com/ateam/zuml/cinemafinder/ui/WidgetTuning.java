@@ -4,5 +4,4 @@ public interface WidgetTuning {
 
     void setupToolbar(String title, boolean visible);
 
-    void setBottomNavigationVisibility(boolean visible);
 }

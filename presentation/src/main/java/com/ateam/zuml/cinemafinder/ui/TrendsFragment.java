@@ -3,16 +3,33 @@ package com.ateam.zuml.cinemafinder.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.presentation.presenter.TrendsPresenter;
+import com.ateam.zuml.cinemafinder.presentation.view.TrendsView;
 
-public class TrendsFragment extends Fragment {
+public class TrendsFragment extends MvpAppCompatFragment implements TrendsView {
+
+    public static final String TAG = "TrendsFragment";
+
+    @InjectPresenter
+    TrendsPresenter trendsPresenter;
+
+    public static TrendsFragment newInstance() {
+        TrendsFragment fragment = new TrendsFragment();
+
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -27,7 +44,6 @@ public class TrendsFragment extends Fragment {
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.trends), false);
-            widgetTuning.setBottomNavigationVisibility(true);
         }
     }
 
