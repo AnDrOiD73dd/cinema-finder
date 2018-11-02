@@ -1,10 +1,11 @@
 package com.ateam.zuml.cinemafinder.service.api;
 
 import com.ateam.zuml.cinemafinder.service.model.movie.Movie;
-import com.ateam.zuml.cinemafinder.service.model.person.credits.Credits;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.NowPlayingMovies;
-import com.ateam.zuml.cinemafinder.service.model.person.Person;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.PopularMovies;
+import com.ateam.zuml.cinemafinder.service.model.movie.search.MovieSearchResult;
+import com.ateam.zuml.cinemafinder.service.model.person.Person;
+import com.ateam.zuml.cinemafinder.service.model.person.credits.Credits;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -14,6 +15,27 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     // String BASE_ADDRESS = "https://api.themoviedb.org/3"
+
+    /*
+     * Required:
+     * String api_key - API Key
+     * String query - Pass a text query to search. This value should be URI encoded.
+     *
+     * Optional:
+     * String language - Pass a ISO 639-1 value to display translated data for the fields that support it.
+     * int page - Specify which page to query. minimum: 1, maximum: 1000, default: 1
+     * String region - Specify a ISO 3166-1 code to filter release dates. Must be uppercase. pattern: ^[A-Z]{2}$
+     *
+     * Examples:
+     * https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&query=Iron%20Man&page=1&include_adult=false&region=en-US
+     * https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&query=Matrix&page=1&include_adult=false&region=en-US
+     */
+    @GET("/search/movie")
+    Single<MovieSearchResult> getSearchMovies(@Query("api_key") String accessToken,
+                                              @Query("language") String language,
+                                              @Query("query") String query,
+                                              @Query("page") String page,
+                                              @Query("region") String region);
 
     /*
      * Required:
@@ -101,8 +123,8 @@ public interface ApiService {
      */
     @GET("/tv/{tv_id}/credits")
     Single<Credits> getTVCredits(@Path("tv_id") int tvId,
-                         @Query("api_key") String accessToken,
-                         @Query("language") String language);
+                                 @Query("api_key") String accessToken,
+                                 @Query("language") String language);
 
     /*
      * Get the credits (cast, crew and guest stars) for a TV episode.
@@ -120,9 +142,9 @@ public interface ApiService {
      */
     @GET("/tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits")
     Single<Credits> getTVEpisodeCredits(@Path("tv_id") int tvId,
-                                       @Path("season_number") int seasonNumber,
-                                       @Path("episode_number") int episodeNumber,
-                                       @Query("api_key") String accessToken);
+                                        @Path("season_number") int seasonNumber,
+                                        @Path("episode_number") int episodeNumber,
+                                        @Query("api_key") String accessToken);
 
     /*
      * Required:
