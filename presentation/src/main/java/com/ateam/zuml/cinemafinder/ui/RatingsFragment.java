@@ -14,6 +14,15 @@ import com.ateam.zuml.cinemafinder.R;
 
 public class RatingsFragment extends Fragment {
 
+    public static final String TAG = "RatingsFragment";
+
+    public static RatingsFragment newInstance() {
+        RatingsFragment fragment = new RatingsFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,7 +36,6 @@ public class RatingsFragment extends Fragment {
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.ratings), false);
-            widgetTuning.setBottomNavigationVisibility(true);
         }
     }
 

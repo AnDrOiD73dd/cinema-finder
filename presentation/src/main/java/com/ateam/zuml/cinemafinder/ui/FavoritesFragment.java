@@ -14,6 +14,15 @@ import com.ateam.zuml.cinemafinder.R;
 
 public class FavoritesFragment extends Fragment {
 
+    public static final String TAG = "FavoritesFragment";
+
+    public static FavoritesFragment newInstance() {
+        FavoritesFragment fragment = new FavoritesFragment();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -27,7 +36,6 @@ public class FavoritesFragment extends Fragment {
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
-            widgetTuning.setBottomNavigationVisibility(true);
         }
     }
 
