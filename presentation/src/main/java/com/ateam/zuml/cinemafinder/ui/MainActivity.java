@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     }
 
     @Override
-    protected void onResumeFragments() {
-        super.onResumeFragments();
+    protected void onResume() {
+        super.onResume();
         navigatorHolder.setNavigator(navigator);
     }
 

@@ -50,31 +50,32 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
         ButterKnife.bind(this, view);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.action_trends:
-                    router.replaceScreen(new Screens.TrendsScreen());
-                    return true;
-                case R.id.action_favorites:
-                    router.replaceScreen(new Screens.FavoritesScreen());
-                    return true;
-                case R.id.action_ratings:
-                    router.replaceScreen(new Screens.RatingsScreen());
-                    return true;
-                default:
-                    return false;
-            }
-        });
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> showFragment(menuItem.getItemId()));
 
         return view;
+    }
+
+    private boolean showFragment(int itemId) {
+        switch (itemId) {
+            case R.id.action_trends:
+                router.replaceScreen(new Screens.TrendsScreen());
+                return true;
+            case R.id.action_favorites:
+                router.replaceScreen(new Screens.FavoritesScreen());
+                return true;
+            case R.id.action_ratings:
+                router.replaceScreen(new Screens.RatingsScreen());
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
         navigatorHolder.setNavigator(getNavigator());
-        //TODO 02.11.2018 fix this
-        router.replaceScreen(new Screens.TrendsScreen());
+        showFragment(bottomNavigationView.getSelectedItemId());
     }
 
     @Override
