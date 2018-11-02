@@ -1,15 +1,13 @@
 package com.ateam.zuml.cinemafinder.ui;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -26,15 +24,11 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
     public static final String TAG = "HomeFragment";
 
-    @InjectPresenter
-    HomePresenter mMainPresenter;
+    @InjectPresenter HomePresenter mMainPresenter;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.bottom_navigation)
-    BottomNavigationView bottomNavigationView;
+    @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
+
     private FragmentManager fragmentManager;
-    private OnFragmentInteractionListener listener;
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -44,18 +38,7 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            listener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
@@ -64,7 +47,7 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         fragmentManager = getChildFragmentManager();
         if (fragmentManager.findFragmentByTag(TrendsFragment.TAG) == null) {
@@ -87,29 +70,11 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
         });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                fragmentManager.popBackStack();
-                return true;
-            case R.id.action_settings:
-                listener.onOpenSettingsClick();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     private void replaceChildFragment(Fragment fragment, String fragmentTag) {
         fragmentManager
                 .beginTransaction()
                 .replace(R.id.child_container, fragment, fragmentTag)
                 .commit();
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onOpenSettingsClick();
     }
 
     @Override
@@ -122,7 +87,7 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
-            widgetTuning.setupToolbar(toolbar, getResources().getString(R.string.app_name), false);
+            widgetTuning.setupToolbar(getResources().getString(R.string.app_name), false);
         }
     }
 }

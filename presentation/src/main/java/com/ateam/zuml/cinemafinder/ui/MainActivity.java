@@ -5,42 +5,58 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
 import com.ateam.zuml.cinemafinder.R;
 
-public class MainActivity extends AppCompatActivity implements WidgetTuning, HomeFragment.OnFragmentInteractionListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class MainActivity extends AppCompatActivity implements WidgetTuning {
+
+    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
             setFragment(HomeFragment.newInstance(), HomeFragment.TAG);
         }
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getSupportFragmentManager().popBackStack();
+                return true;
+            case R.id.action_settings:
+                setFragment(SettingsFragment.newInstance(), SettingsFragment.TAG);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
     private void setFragment(Fragment fragment, String tag) {
         getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.fragment_container, fragment, tag)
+                .replace(R.id.main_container, fragment, tag)
                 .addToBackStack(tag)
                 .commit();
     }
 
     @Override
-    public void setupToolbar(Toolbar toolbar, String title, boolean visible) {
-        setSupportActionBar(toolbar);
+    public void setupToolbar(String title, boolean visible) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(visible);
             actionBar.setElevation(0);
         }
-    }
-
-    @Override
-    public void onOpenSettingsClick() {
-        setFragment(SettingsFragment.newInstance(), SettingsFragment.TAG);
     }
 }

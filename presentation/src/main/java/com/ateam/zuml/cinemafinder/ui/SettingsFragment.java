@@ -33,6 +33,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private void init(Context context) {
         setHasOptionsMenu(true);
-//        ((WidgetTuning) context).setupToolbar(getResources().getString(R.string.settings), true);
+        ((WidgetTuning) context).setupToolbar(getResources().getString(R.string.settings), true);
     }
 }
