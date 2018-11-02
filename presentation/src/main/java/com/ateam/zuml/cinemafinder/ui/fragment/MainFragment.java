@@ -14,11 +14,8 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.presentation.presenter.MainPresenter;
+import com.ateam.zuml.cinemafinder.presentation.presenter.MainFragmentPresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.MainFragmentView;
-import com.ateam.zuml.cinemafinder.ui.FavoritesFragment;
-import com.ateam.zuml.cinemafinder.ui.RatingsFragment;
-import com.ateam.zuml.cinemafinder.ui.TrendsFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +25,7 @@ public class MainFragment extends MvpAppCompatFragment implements MainFragmentVi
     public static final String TAG = "MainFragment";
 
     @InjectPresenter
-    MainPresenter mMainPresenter;
+    MainFragmentPresenter mMainPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;

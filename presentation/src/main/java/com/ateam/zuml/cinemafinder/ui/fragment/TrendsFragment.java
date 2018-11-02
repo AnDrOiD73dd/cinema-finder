@@ -1,32 +1,42 @@
-package com.ateam.zuml.cinemafinder.ui;
+package com.ateam.zuml.cinemafinder.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.arellomobile.mvp.MvpAppCompatFragment;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.presentation.presenter.TrendsPresenter;
+import com.ateam.zuml.cinemafinder.presentation.view.TrendsView;
+import com.ateam.zuml.cinemafinder.ui.MainActivity;
+import com.ateam.zuml.cinemafinder.ui.WidgetTuning;
 
-public class FavoritesFragment extends Fragment {
+public class TrendsFragment extends MvpAppCompatFragment implements TrendsView {
 
-    public static final String TAG = "FavoritesFragment";
+    public static final String TAG = "TrendsFragment";
 
-    public static FavoritesFragment newInstance() {
-        FavoritesFragment fragment = new FavoritesFragment();
+    @InjectPresenter
+    TrendsPresenter trendsPresenter;
+
+    public static TrendsFragment newInstance() {
+        TrendsFragment fragment = new TrendsFragment();
+
         Bundle args = new Bundle();
         fragment.setArguments(args);
+
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        View view = inflater.inflate(R.layout.fragment_trends, container, false);
         init();
         return view;
     }
@@ -35,7 +45,7 @@ public class FavoritesFragment extends Fragment {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
+            widgetTuning.setupToolbar(getResources().getString(R.string.trends), false);
         }
     }
 
@@ -45,4 +55,3 @@ public class FavoritesFragment extends Fragment {
         inflater.inflate(R.menu.menu_main, menu);
     }
 }
-
