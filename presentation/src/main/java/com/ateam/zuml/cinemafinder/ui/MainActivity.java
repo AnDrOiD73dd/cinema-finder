@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 
 import com.ateam.zuml.cinemafinder.R;
 
-public class MainActivity extends AppCompatActivity implements WidgetTuning, MainFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements WidgetTuning, HomeFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning, Mai
         setContentView(R.layout.activity_main);
 
         if (savedInstanceState == null) {
-            setFragment(MainFragment.newInstance(), MainFragment.TAG);
+            setFragment(HomeFragment.newInstance(), HomeFragment.TAG);
         }
     }
 

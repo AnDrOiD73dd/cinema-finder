@@ -14,18 +14,18 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.presentation.presenter.MainFragmentPresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.MainFragmentView;
+import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
+import com.ateam.zuml.cinemafinder.presentation.view.HomeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainFragment extends MvpAppCompatFragment implements MainFragmentView {
+public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
-    public static final String TAG = "MainFragment";
+    public static final String TAG = "HomeFragment";
 
     @InjectPresenter
-    MainFragmentPresenter mMainPresenter;
+    HomePresenter mMainPresenter;
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -34,8 +34,8 @@ public class MainFragment extends MvpAppCompatFragment implements MainFragmentVi
     private FragmentManager fragmentManager;
     private OnFragmentInteractionListener listener;
 
-    public static MainFragment newInstance() {
-        MainFragment fragment = new MainFragment();
+    public static HomeFragment newInstance() {
+        HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -55,7 +55,7 @@ public class MainFragment extends MvpAppCompatFragment implements MainFragmentVi
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
         return view;
     }
