@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,14 +59,13 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
                              final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this, view);
+        init();
         return view;
     }
 
     @Override
     public void onViewCreated(final View view, final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        listener.setupToolbar(toolbar);
-        setHasOptionsMenu(true);
         fragmentManager = getChildFragmentManager();
         if (fragmentManager.findFragmentByTag(TrendsFragment.TAG) == null) {
             replaceChildFragment(TrendsFragment.newInstance(), TrendsFragment.TAG);
@@ -108,9 +109,20 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     }
 
     public interface OnFragmentInteractionListener {
-
-        void setupToolbar(Toolbar toolbar);
-
         void onOpenSettingsClick();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    private void init() {
+        setHasOptionsMenu(true);
+        WidgetTuning widgetTuning = (MainActivity) getActivity();
+        if (widgetTuning != null) {
+            widgetTuning.setupToolbar(toolbar, getResources().getString(R.string.app_name), false);
+        }
     }
 }

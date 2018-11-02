@@ -2,7 +2,6 @@ package com.ateam.zuml.cinemafinder.ui;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +33,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private void init(Context context) {
         setHasOptionsMenu(true);
-        ((WidgetTuning) context).setupToolbar(getResources().getString(R.string.settings), true);
+//        ((WidgetTuning) context).setupToolbar(getResources().getString(R.string.settings), true);
     }
 }

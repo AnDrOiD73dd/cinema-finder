@@ -29,18 +29,14 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning, Hom
     }
 
     @Override
-    public void setupToolbar(String title, boolean visible) {
+    public void setupToolbar(Toolbar toolbar, String title, boolean visible) {
+        setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(visible);
             actionBar.setElevation(0);
         }
-    }
-
-    @Override
-    public void setupToolbar(Toolbar toolbar) {
-        setSupportActionBar(toolbar);
     }
 
     @Override
