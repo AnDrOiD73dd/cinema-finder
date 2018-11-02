@@ -6,7 +6,7 @@ import com.ateam.zuml.cinemafinder.service.model.movie.video.VideoSet;
 import com.google.gson.annotations.SerializedName;
 
 //Get the primary information about a movie.
-public final class Movie {
+public final class MovieInfo {
     @SerializedName("id") private final int movieId;
     private final int budget;
     private final String title;
@@ -24,11 +24,11 @@ public final class Movie {
     private final int voteCount;
     private final VideoSet videos;
 
-    public Movie(final int movieId, final int budget, final String title, final boolean adult,
-                 final Genre[] genres, @Nullable final String homepage, final String overview,
-                 final String posterPath, final String releaseDate, final String status,
-                 final String tagline, final Country[] countries, final int runtime,
-                 final long voteAverage, final int voteCount, final VideoSet videos) {
+    public MovieInfo(final int movieId, final int budget, final String title, final boolean adult,
+                     final Genre[] genres, @Nullable final String homepage, final String overview,
+                     final String posterPath, final String releaseDate, final String status,
+                     final String tagline, final Country[] countries, final int runtime,
+                     final long voteAverage, final int voteCount, final VideoSet videos) {
         this.movieId = movieId;
         this.budget = budget;
         this.title = title;
