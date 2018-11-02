@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.fragment.MainFragment;
 
 public class MainActivity extends AppCompatActivity implements WidgetTuning, MainFragment.OnFragmentInteractionListener {
 

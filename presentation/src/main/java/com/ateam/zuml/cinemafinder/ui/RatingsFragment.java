@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.fragment;
+package com.ateam.zuml.cinemafinder.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,19 +12,18 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.presentation.presenter.FavoritesPresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.FavoritesView;
-import com.ateam.zuml.cinemafinder.ui.MainActivity;
-import com.ateam.zuml.cinemafinder.ui.WidgetTuning;
+import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
+import com.ateam.zuml.cinemafinder.presentation.view.RatingsView;
 
-public class FavoritesFragment extends MvpAppCompatFragment implements FavoritesView {
-    public static final String TAG = "FavoritesFragment";
+public class RatingsFragment extends MvpAppCompatFragment implements RatingsView {
+
+    public static final String TAG = "RatingsFragment";
 
     @InjectPresenter
-    FavoritesPresenter favoritesPresenter;
+    RatingsPresenter ratingsPresenter;
 
-    public static FavoritesFragment newInstance() {
-        FavoritesFragment fragment = new FavoritesFragment();
+    public static RatingsFragment newInstance() {
+        RatingsFragment fragment = new RatingsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -33,7 +32,7 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        View view = inflater.inflate(R.layout.fragment_ratings, container, false);
         init();
         return view;
     }
@@ -42,7 +41,7 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
+            widgetTuning.setupToolbar(getResources().getString(R.string.ratings), false);
         }
     }
 

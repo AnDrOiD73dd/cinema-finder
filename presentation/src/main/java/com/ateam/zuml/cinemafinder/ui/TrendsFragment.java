@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.fragment;
+package com.ateam.zuml.cinemafinder.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,29 +12,29 @@ import android.view.ViewGroup;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.RatingsView;
-import com.ateam.zuml.cinemafinder.ui.MainActivity;
-import com.ateam.zuml.cinemafinder.ui.WidgetTuning;
+import com.ateam.zuml.cinemafinder.presentation.presenter.TrendsPresenter;
+import com.ateam.zuml.cinemafinder.presentation.view.TrendsView;
 
-public class RatingsFragment extends MvpAppCompatFragment implements RatingsView {
+public class TrendsFragment extends MvpAppCompatFragment implements TrendsView {
 
-    public static final String TAG = "RatingsFragment";
+    public static final String TAG = "TrendsFragment";
 
     @InjectPresenter
-    RatingsPresenter ratingsPresenter;
+    TrendsPresenter trendsPresenter;
 
-    public static RatingsFragment newInstance() {
-        RatingsFragment fragment = new RatingsFragment();
+    public static TrendsFragment newInstance() {
+        TrendsFragment fragment = new TrendsFragment();
+
         Bundle args = new Bundle();
         fragment.setArguments(args);
+
         return fragment;
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ratings, container, false);
+        View view = inflater.inflate(R.layout.fragment_trends, container, false);
         init();
         return view;
     }
@@ -43,7 +43,7 @@ public class RatingsFragment extends MvpAppCompatFragment implements RatingsView
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.ratings), false);
+            widgetTuning.setupToolbar(getResources().getString(R.string.trends), false);
         }
     }
 

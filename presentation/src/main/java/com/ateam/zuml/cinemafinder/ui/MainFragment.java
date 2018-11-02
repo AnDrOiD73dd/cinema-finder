@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.fragment;
+package com.ateam.zuml.cinemafinder.ui;
 
 import android.content.Context;
 import android.os.Bundle;
