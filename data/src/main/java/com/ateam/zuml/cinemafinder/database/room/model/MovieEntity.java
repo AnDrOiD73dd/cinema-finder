@@ -6,6 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
+import com.ateam.zuml.cinemafinder.database.room.MovieStatusConverter;
 import com.ateam.zuml.cinemafinder.enums.MovieStatus;
 
 @Entity(tableName = "movies", primaryKeys = "id")
@@ -13,27 +14,38 @@ public final class MovieEntity {
 
     @PrimaryKey @NonNull
     private final int id;
-    @NonNull
-    private final String title;
+
+    @NonNull private final String title;
+
     private final boolean adult;
-    private final String homepage;
-    private final String overview;
+
+    @NonNull private final String homepage;
+
+    @NonNull private final String overview;
+
     @ColumnInfo(name = "poster_path")
-    private final String posterPath;
+    @NonNull private final String posterPath;
+
     @ColumnInfo(name = "release_data")
-    private final String releaseDate;
-    @TypeConverters({MovieStatus.class}) @NonNull
-    private final MovieStatus status;  //Allowed Values: Rumored, Planned, In Production, Post Production, Released, Canceled
-    private final String tagline;
+    @NonNull private final String releaseDate;
+
+    @TypeConverters({MovieStatusConverter.class})
+    @NonNull private final MovieStatus status;  //Allowed Values: Rumored, Planned, In Production, Post Production, Released, Canceled
+
+    @NonNull private final String tagline;
+
     private final int runtime;
+
     @ColumnInfo(name = "vote_average")
     private final long voteAverage;
+
     @ColumnInfo(name = "vote_count")
     private final int voteCount;
 
-    public MovieEntity(@NonNull int id, String title, boolean adult, String homepage,
-                       String overview, String posterPath, String releaseDate, MovieStatus status,
-                       String tagline, Integer runtime, long voteAverage, int voteCount) {
+    public MovieEntity(@NonNull int id, @NonNull String title, boolean adult, @NonNull String homepage,
+                       @NonNull String overview, @NonNull String posterPath, @NonNull String releaseDate,
+                       @NonNull MovieStatus status, @NonNull String tagline, int runtime,
+                       long voteAverage, int voteCount) {
         this.id = id;
         this.title = title;
         this.adult = adult;
