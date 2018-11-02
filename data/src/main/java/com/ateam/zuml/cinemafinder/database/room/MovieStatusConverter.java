@@ -1,14 +1,14 @@
-package com.ateam.zuml.cinemafinder.database.room.converters;
+package com.ateam.zuml.cinemafinder.database.room;
 
 import android.arch.persistence.room.TypeConverter;
 import android.support.annotation.NonNull;
 
-import com.ateam.zuml.cinemafinder.enums.AnnotatedMovieStatus;
+import com.ateam.zuml.cinemafinder.enums.MovieStatus;
 
 public class MovieStatusConverter {
     @TypeConverter
-    public AnnotatedMovieStatus convertStoredValueToMovieStatus(String value) {
-        for (AnnotatedMovieStatus lc : AnnotatedMovieStatus.values()) {
+    public MovieStatus convertStoredValueToMovieStatus(String value) {
+        for (MovieStatus lc : MovieStatus.values()) {
             if (lc.name().equals(value)) {
                 return lc;
             }
@@ -17,7 +17,7 @@ public class MovieStatusConverter {
     }
 
     @TypeConverter
-    public int convertMovieStatusToStoredValue(@NonNull AnnotatedMovieStatus status) {
+    public int convertMovieStatusToStoredValue(@NonNull MovieStatus status) {
         return status.ordinal();
     }
 
