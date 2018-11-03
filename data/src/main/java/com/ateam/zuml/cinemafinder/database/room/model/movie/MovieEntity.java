@@ -1,19 +1,23 @@
-package com.ateam.zuml.cinemafinder.database.room.model;
+package com.ateam.zuml.cinemafinder.database.room.model.movie;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.Relation;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import com.ateam.zuml.cinemafinder.database.room.MovieStatusConverter;
 import com.ateam.zuml.cinemafinder.enums.MovieStatus;
 
+import java.util.List;
+
 @Entity(tableName = "movies", primaryKeys = "id")
 public final class MovieEntity {
 
-    @PrimaryKey @NonNull
-    private final int id;
+    @PrimaryKey
+    private int id;
 
     @NonNull private final String title;
 
@@ -24,13 +28,16 @@ public final class MovieEntity {
     @NonNull private final String overview;
 
     @ColumnInfo(name = "poster_path")
-    @NonNull private final String posterPath;
+    @NonNull
+    private final String posterPath;
 
     @ColumnInfo(name = "release_data")
-    @NonNull private final String releaseDate;
+    @NonNull
+    private final String releaseDate;
 
-    @TypeConverters({MovieStatusConverter.class})
-    @NonNull private final MovieStatus status;  //Allowed Values: Rumored, Planned, In Production, Post Production, Released, Canceled
+    @TypeConverters(MovieStatusConverter.class)
+    @NonNull
+    private final MovieStatus status;  //Allowed Values: Rumored, Planned, In Production, Post Production, Released, Canceled
 
     @NonNull private final String tagline;
 
@@ -42,11 +49,19 @@ public final class MovieEntity {
     @ColumnInfo(name = "vote_count")
     private final int voteCount;
 
-    public MovieEntity(@NonNull int id, @NonNull String title, boolean adult, @NonNull String homepage,
+    @Ignore
+    @Relation(entity = MovieGenresEntity.class, parentColumn = "id", entityColumn = "movie_id")
+    private List<MovieGenresEntity> genres;
+
+    @Ignore
+    @Relation(entity = ProductionCountriesEntity.class, parentColumn = "id", entityColumn = "movie_id")
+    private List<ProductionCountriesEntity> productionCountries;
+
+
+    public MovieEntity(@NonNull String title, boolean adult, @NonNull String homepage,
                        @NonNull String overview, @NonNull String posterPath, @NonNull String releaseDate,
                        @NonNull MovieStatus status, @NonNull String tagline, int runtime,
                        long voteAverage, int voteCount) {
-        this.id = id;
         this.title = title;
         this.adult = adult;
         this.homepage = homepage;
@@ -60,7 +75,6 @@ public final class MovieEntity {
         this.voteCount = voteCount;
     }
 
-    @NonNull
     public int getId() {
         return id;
     }
@@ -107,5 +121,13 @@ public final class MovieEntity {
 
     public int getVoteCount() {
         return voteCount;
+    }
+
+    public List<MovieGenresEntity> getGenres() {
+        return genres;
+    }
+
+    public List<ProductionCountriesEntity> getProductionCountries() {
+        return productionCountries;
     }
 }
