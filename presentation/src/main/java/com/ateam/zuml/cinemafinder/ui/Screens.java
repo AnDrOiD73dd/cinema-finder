@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import ru.terrakok.cicerone.android.support.SupportAppScreen;
 
 public class Screens {
-
+    //TODO 03.11.2018 В этом классе надо что-то подумать c переиспользование фрагментов
     public static final class HomeScreen extends SupportAppScreen {
         @Override
         public Fragment getFragment()   {
