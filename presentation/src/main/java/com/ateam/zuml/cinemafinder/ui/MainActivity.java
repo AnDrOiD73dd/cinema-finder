@@ -8,25 +8,25 @@ import android.view.MenuItem;
 
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.util.CiceroneHolder;
+import com.ateam.zuml.cinemafinder.util.Const;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.terrakok.cicerone.Cicerone;
 import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 import ru.terrakok.cicerone.commands.Command;
 
 public class MainActivity extends AppCompatActivity implements WidgetTuning {
 
-    private static final String CONTAINER_NAME = "main_container";
-
     @BindView(R.id.toolbar) Toolbar toolbar;
 
-    @Inject CiceroneHolder ciceroneHolder;
+    @Named(Const.MAIN_CONTAINER) @Inject NavigatorHolder navigatorHolder;
+    @Named(Const.MAIN_CONTAINER) @Inject Router router;
 
     private Navigator navigator = new SupportAppNavigator(this, R.id.main_container) {
         @Override
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
         setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
-            getRouter().navigateTo(new Screens.HomeScreen());
+            router.navigateTo(new Screens.HomeScreen());
         }
     }
 
@@ -54,10 +54,10 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                getRouter().exit();
+                router.exit();
                 return true;
             case R.id.action_settings:
-                getRouter().navigateTo(new Screens.SettingsScreen());
+                router.navigateTo(new Screens.SettingsScreen());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -77,20 +77,12 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @Override
     public void onResume() {
         super.onResume();
-        getCicerone().getNavigatorHolder().setNavigator(navigator);
+        navigatorHolder.setNavigator(navigator);
     }
 
     @Override
     public void onPause() {
-        getCicerone().getNavigatorHolder().removeNavigator();
+        navigatorHolder.removeNavigator();
         super.onPause();
-    }
-
-    private Cicerone<Router> getCicerone() {
-        return ciceroneHolder.getCicerone(CONTAINER_NAME);
-    }
-
-    private Router getRouter() {
-        return getCicerone().getRouter();
     }
 }

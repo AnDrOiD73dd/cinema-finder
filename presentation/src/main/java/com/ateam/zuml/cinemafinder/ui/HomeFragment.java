@@ -15,31 +15,30 @@ import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.HomeView;
-import com.ateam.zuml.cinemafinder.util.CiceroneHolder;
+import com.ateam.zuml.cinemafinder.util.Const;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.terrakok.cicerone.Cicerone;
 import ru.terrakok.cicerone.Navigator;
-import ru.terrakok.cicerone.Router;
+import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 
 public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
-    private static final String CONTAINER_NAME = "child_container";
     private Navigator navigator;
 
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
 
-    @Inject CiceroneHolder ciceroneHolder;
+    @Named(Const.CHILD_CONTAINER) @Inject NavigatorHolder navigatorHolder;
 
     @InjectPresenter HomePresenter presenter;
 
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
-        HomePresenter presenter = new HomePresenter(CONTAINER_NAME);
+        HomePresenter presenter = new HomePresenter();
         App.getApp().getAppComponent().inject(presenter);
         return presenter;
     }
@@ -75,17 +74,13 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     @Override
     public void onResume() {
         super.onResume();
-        getCicerone().getNavigatorHolder().setNavigator(getNavigator());
+        navigatorHolder.setNavigator(getNavigator());
     }
 
     @Override
     public void onPause() {
-        getCicerone().getNavigatorHolder().removeNavigator();
+        navigatorHolder.removeNavigator();
         super.onPause();
-    }
-
-    private Cicerone<Router> getCicerone() {
-        return ciceroneHolder.getCicerone(CONTAINER_NAME);
     }
 
     private Navigator getNavigator() {
