@@ -2,6 +2,7 @@ package com.ateam.zuml.cinemafinder.ui;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,30 +10,39 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.HomeView;
+import com.ateam.zuml.cinemafinder.util.CiceroneHolder;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.terrakok.cicerone.Cicerone;
 import ru.terrakok.cicerone.Navigator;
-import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 
 public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
-    @Inject Router router;
-    @Inject NavigatorHolder navigatorHolder;
-
-    @InjectPresenter HomePresenter mMainPresenter;
+    private static final String CONTAINER_NAME = "child_container";
+    private Navigator navigator;
 
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
 
-    private Navigator navigator;
+    @Inject CiceroneHolder ciceroneHolder;
+
+    @InjectPresenter HomePresenter presenter;
+
+    @ProvidePresenter
+    HomePresenter provideHomePresenter() {
+        HomePresenter presenter = new HomePresenter(CONTAINER_NAME);
+        App.getApp().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -47,41 +57,35 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         App.getApp().getAppComponent().inject(this);
-
         ButterKnife.bind(this, view);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> showFragment(menuItem.getItemId()));
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem ->
+                presenter.showFragment(menuItem.getItemId()));
 
         return view;
     }
 
-    private boolean showFragment(int itemId) {
-        switch (itemId) {
-            case R.id.action_trends:
-                router.replaceScreen(new Screens.TrendsScreen());
-                return true;
-            case R.id.action_favorites:
-                router.replaceScreen(new Screens.FavoritesScreen());
-                return true;
-            case R.id.action_ratings:
-                router.replaceScreen(new Screens.RatingsScreen());
-                return true;
-            default:
-                return false;
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (getChildFragmentManager().findFragmentById(R.id.child_container) == null) {
+            presenter.showFragment(bottomNavigationView.getSelectedItemId());
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        navigatorHolder.setNavigator(getNavigator());
-        showFragment(bottomNavigationView.getSelectedItemId());
+        getCicerone().getNavigatorHolder().setNavigator(getNavigator());
     }
 
     @Override
     public void onPause() {
-        navigatorHolder.removeNavigator();
+        getCicerone().getNavigatorHolder().removeNavigator();
         super.onPause();
+    }
+
+    private Cicerone<Router> getCicerone() {
+        return ciceroneHolder.getCicerone(CONTAINER_NAME);
     }
 
     private Navigator getNavigator() {

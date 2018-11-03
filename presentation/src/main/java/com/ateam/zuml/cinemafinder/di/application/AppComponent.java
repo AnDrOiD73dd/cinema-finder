@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
+import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
 import com.ateam.zuml.cinemafinder.ui.HomeFragment;
 import com.ateam.zuml.cinemafinder.ui.MainActivity;
 
@@ -26,4 +27,6 @@ public interface AppComponent {
     void inject(MainActivity activity);
 
     void inject(HomeFragment fragment);
+
+    void inject(HomePresenter presenter);
 }
