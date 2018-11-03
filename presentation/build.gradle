@@ -66,4 +66,7 @@ dependencies {
     implementation "com.arello-mobile:moxy:$moxy_version"
     implementation "com.arello-mobile:moxy-app-compat:$moxy_version"
     annotationProcessor "com.arello-mobile:moxy-compiler:$moxy_version"
+
+    // Navigation Cicerone
+    implementation 'ru.terrakok.cicerone:cicerone:4.0.2'
 }

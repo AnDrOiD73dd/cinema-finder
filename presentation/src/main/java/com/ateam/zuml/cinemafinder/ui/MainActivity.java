@@ -1,31 +1,67 @@
 package com.ateam.zuml.cinemafinder.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 
+import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.util.Const;
 
-public class MainActivity extends AppCompatActivity implements WidgetTuning, HomeFragment.OnFragmentInteractionListener {
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.NavigatorHolder;
+import ru.terrakok.cicerone.Router;
+import ru.terrakok.cicerone.android.support.SupportAppNavigator;
+import ru.terrakok.cicerone.commands.Command;
+
+public class MainActivity extends AppCompatActivity implements WidgetTuning {
+
+    @BindView(R.id.toolbar) Toolbar toolbar;
+
+    @Named(Const.MAIN_CONTAINER) @Inject NavigatorHolder navigatorHolder;
+    @Named(Const.MAIN_CONTAINER) @Inject Router router;
+
+    private Navigator navigator = new SupportAppNavigator(this, R.id.main_container) {
+        @Override
+        public void applyCommands(Command[] commands) {
+            super.applyCommands(commands);
+            getSupportFragmentManager().executePendingTransactions();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        App.getApp().getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
 
         if (savedInstanceState == null) {
-            setFragment(HomeFragment.newInstance(), HomeFragment.TAG);
+            router.navigateTo(new Screens.HomeScreen());
         }
     }
 
-    private void setFragment(Fragment fragment, String tag) {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, fragment, tag)
-                .addToBackStack(tag)
-                .commit();
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                router.exit();
+                return true;
+            case R.id.action_settings:
+                router.navigateTo(new Screens.SettingsScreen());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
@@ -39,12 +75,14 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning, Hom
     }
 
     @Override
-    public void setupToolbar(Toolbar toolbar) {
-        setSupportActionBar(toolbar);
+    public void onResume() {
+        super.onResume();
+        navigatorHolder.setNavigator(navigator);
     }
 
     @Override
-    public void onOpenSettingsClick() {
-        setFragment(SettingsFragment.newInstance(), SettingsFragment.TAG);
+    public void onPause() {
+        navigatorHolder.removeNavigator();
+        super.onPause();
     }
 }

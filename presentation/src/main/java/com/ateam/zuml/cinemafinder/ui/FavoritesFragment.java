@@ -16,10 +16,8 @@ import com.ateam.zuml.cinemafinder.presentation.presenter.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.FavoritesView;
 
 public class FavoritesFragment extends MvpAppCompatFragment implements FavoritesView {
-    public static final String TAG = "FavoritesFragment";
 
-    @InjectPresenter
-    FavoritesPresenter favoritesPresenter;
+    @InjectPresenter FavoritesPresenter favoritesPresenter;
 
     public static FavoritesFragment newInstance() {
         FavoritesFragment fragment = new FavoritesFragment();
@@ -36,17 +34,17 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
     private void init() {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
         }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
     }
 }

@@ -2,27 +2,28 @@ package com.ateam.zuml.cinemafinder;
 
 import android.app.Application;
 
-import com.ateam.zuml.cinemafinder.di.application.ApplicationComponent;
-import com.ateam.zuml.cinemafinder.di.application.DaggerApplicationComponent;
+import com.ateam.zuml.cinemafinder.di.application.AppComponent;
+import com.ateam.zuml.cinemafinder.di.application.DaggerAppComponent;
 
 public final class App extends Application {
 
-    private static App application;
-    private ApplicationComponent applicationComponent;
+    private static App app;
+
+    private AppComponent appComponent;
 
     @Override public void onCreate() {
         super.onCreate();
-        application = this;
-        applicationComponent = DaggerApplicationComponent.builder()
+        app = this;
+        appComponent = DaggerAppComponent.builder()
                 .with(getApplicationContext())
                 .build();
     }
 
     public static App getApp() {
-        return application;
+        return app;
     }
 
-    public ApplicationComponent getApplicationComponent() {
-        return applicationComponent;
+    public AppComponent getAppComponent() {
+        return appComponent;
     }
 }

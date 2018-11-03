@@ -1,38 +1,47 @@
 package com.ateam.zuml.cinemafinder.ui;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.HomeView;
+import com.ateam.zuml.cinemafinder.util.Const;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import ru.terrakok.cicerone.Navigator;
+import ru.terrakok.cicerone.NavigatorHolder;
+import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 
 public class HomeFragment extends MvpAppCompatFragment implements HomeView {
 
-    public static final String TAG = "HomeFragment";
+    private Navigator navigator;
 
-    @InjectPresenter
-    HomePresenter mMainPresenter;
+    @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.bottom_navigation)
-    BottomNavigationView bottomNavigationView;
-    private FragmentManager fragmentManager;
-    private OnFragmentInteractionListener listener;
+    @Named(Const.CHILD_CONTAINER) @Inject NavigatorHolder navigatorHolder;
+
+    @InjectPresenter HomePresenter presenter;
+
+    @ProvidePresenter
+    HomePresenter provideHomePresenter() {
+        HomePresenter presenter = new HomePresenter();
+        App.getApp().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -42,75 +51,42 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            listener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
+    public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem ->
+                presenter.showFragment(menuItem.getItemId()));
+
         return view;
     }
 
     @Override
-    public void onViewCreated(final View view, final Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        listener.setupToolbar(toolbar);
-        setHasOptionsMenu(true);
-        fragmentManager = getChildFragmentManager();
-        if (fragmentManager.findFragmentByTag(TrendsFragment.TAG) == null) {
-            replaceChildFragment(TrendsFragment.newInstance(), TrendsFragment.TAG);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (getChildFragmentManager().findFragmentById(R.id.child_container) == null) {
+            presenter.showFragment(bottomNavigationView.getSelectedItemId());
         }
-        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> {
-            switch (menuItem.getItemId()) {
-                case R.id.action_trends:
-                    replaceChildFragment(TrendsFragment.newInstance(), TrendsFragment.TAG);
-                    return true;
-                case R.id.action_favorites:
-                    replaceChildFragment(FavoritesFragment.newInstance(), FavoritesFragment.TAG);
-                    return true;
-                case R.id.action_ratings:
-                    replaceChildFragment(RatingsFragment.newInstance(), RatingsFragment.TAG);
-                    return true;
-                default:
-                    return false;
-            }
-        });
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                fragmentManager.popBackStack();
-                return true;
-            case R.id.action_settings:
-                listener.onOpenSettingsClick();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+    public void onResume() {
+        super.onResume();
+        navigatorHolder.setNavigator(getNavigator());
+    }
+
+    @Override
+    public void onPause() {
+        navigatorHolder.removeNavigator();
+        super.onPause();
+    }
+
+    private Navigator getNavigator() {
+        if (navigator == null) {
+            navigator = new SupportAppNavigator(getActivity(), getChildFragmentManager(), R.id.child_container);
         }
-    }
-
-    private void replaceChildFragment(Fragment fragment, String fragmentTag) {
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.child_container, fragment, fragmentTag)
-                .commit();
-    }
-
-    public interface OnFragmentInteractionListener {
-
-        void setupToolbar(Toolbar toolbar);
-
-        void onOpenSettingsClick();
+        return navigator;
     }
 }
