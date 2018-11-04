@@ -6,6 +6,12 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/product_sans_regular</item>
     </style>
 
+    <style name="bottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="itemIconTint">@color/bnv_color_selector</item>
+        <item name="itemTextColor">@color/bnv_color_selector</item>
+    </style>
 </resources>

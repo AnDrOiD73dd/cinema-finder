@@ -17,10 +17,7 @@ import com.ateam.zuml.cinemafinder.presentation.view.RatingsView;
 
 public class RatingsFragment extends MvpAppCompatFragment implements RatingsView {
 
-    public static final String TAG = "RatingsFragment";
-
-    @InjectPresenter
-    RatingsPresenter ratingsPresenter;
+    @InjectPresenter RatingsPresenter ratingsPresenter;
 
     public static RatingsFragment newInstance() {
         RatingsFragment fragment = new RatingsFragment();
@@ -37,17 +34,17 @@ public class RatingsFragment extends MvpAppCompatFragment implements RatingsView
         return view;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
     private void init() {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.ratings), false);
         }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
     }
 }
