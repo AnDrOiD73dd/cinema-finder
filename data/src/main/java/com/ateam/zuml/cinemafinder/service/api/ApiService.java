@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.service.api;
 
+import com.ateam.zuml.cinemafinder.service.model.configuration.Configuration;
 import com.ateam.zuml.cinemafinder.service.model.movie.GenresList;
 import com.ateam.zuml.cinemafinder.service.model.movie.Movie;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.NowPlayingMovies;
@@ -179,4 +180,17 @@ public interface ApiService {
     @GET("/genre/movie/list")
     Single<GenresList> getGenres(@Query("api_key") String accessToken,
                                  @Query("language") String language);
+
+    /*
+     * To build an image URL, you will need 3 pieces of data. The base_url, size and file_path.
+     * Simply combine them all and you will have a fully qualified URL. Here’s an example URL:
+     * https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
+     * Required:
+     * String api_key - API Key
+     *
+     * Examples:
+     * https://api.themoviedb.org/3/configuration?api_key=<<api_key>>
+     */
+    @GET("/genre/movie/list")
+    Single<Configuration> getConfiguration(@Query("api_key") String accessToken);
 }
