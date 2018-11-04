@@ -2,6 +2,7 @@ package com.ateam.zuml.cinemafinder.di.application;
 
 import android.content.Context;
 
+import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
 import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
@@ -14,14 +15,18 @@ import dagger.BindsInstance;
 import dagger.Component;
 
 @Singleton
-@Component(modules = {ServiceModule.class, NavigationModule.class})
+@Component(modules = {
+        MapperModule.class,
+        NavigationModule.class,
+        ServiceModule.class})
 public interface AppComponent {
 
     @Component.Builder
     interface Builder {
         AppComponent build();
 
-        @BindsInstance Builder with(final Context context);
+        @BindsInstance
+        Builder with(final Context context);
     }
 
     void inject(MainActivity activity);
