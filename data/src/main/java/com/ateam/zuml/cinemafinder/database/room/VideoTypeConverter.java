@@ -17,8 +17,8 @@ public final class VideoTypeConverter {
     }
 
     @TypeConverter
-    public String convertVideoTypeToStoredValue(@NonNull VideoType status) {
-        return status.name();
+    public String convertVideoTypeToStoredValue(@NonNull VideoType type) {
+        return type.name();
     }
 
 }

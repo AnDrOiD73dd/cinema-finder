@@ -17,8 +17,8 @@ public final class MovieCollectionConverter {
     }
 
     @TypeConverter
-    public String convertCollectionTypeToStoredValue(@NonNull MovieCollectionType status) {
-        return status.name();
+    public String convertCollectionTypeToStoredValue(@NonNull MovieCollectionType type) {
+        return type.name();
     }
 
 }

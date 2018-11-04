@@ -8,9 +8,11 @@ import android.arch.persistence.room.Relation;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
+import com.ateam.zuml.cinemafinder.database.room.DateConverters;
 import com.ateam.zuml.cinemafinder.database.room.MovieStatusConverter;
 import com.ateam.zuml.cinemafinder.enums.MovieStatus;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity(tableName = "movies", primaryKeys = "id")
@@ -32,8 +34,9 @@ public final class MovieEntity {
     private final String posterPath;
 
     @ColumnInfo(name = "release_data")
+    @TypeConverters(DateConverters.class)
     @NonNull
-    private final String releaseDate;
+    private final Date releaseDate;
 
     @TypeConverters(MovieStatusConverter.class)
     @NonNull
@@ -59,7 +62,7 @@ public final class MovieEntity {
 
 
     public MovieEntity(@NonNull String title, boolean adult, @NonNull String homepage,
-                       @NonNull String overview, @NonNull String posterPath, @NonNull String releaseDate,
+                       @NonNull String overview, @NonNull String posterPath, @NonNull Date releaseDate,
                        @NonNull MovieStatus status, @NonNull String tagline, int runtime,
                        long voteAverage, int voteCount) {
         this.title = title;
@@ -99,7 +102,7 @@ public final class MovieEntity {
         return posterPath;
     }
 
-    public String getReleaseDate() {
+    public Date getReleaseDate() {
         return releaseDate;
     }
 
