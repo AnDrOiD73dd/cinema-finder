@@ -14,10 +14,10 @@
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_navigation"
+        style="@style/bottomNavigationViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:menu="@menu/menu_bottom_navigation"
-        style="@style/Widget.MaterialComponents.BottomNavigationView.Colored" />
+        app:menu="@menu/menu_bottom_navigation" />
 
 </RelativeLayout>
