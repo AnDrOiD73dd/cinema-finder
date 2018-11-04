@@ -20,17 +20,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public final class ServiceModule {
 
-    @Named("baseUrl") @Provides String provideBaseUrl() {
+    @Named("baseUrl")
+    @Provides
+    String provideBaseUrl() {
         return "https://api.themoviedb.org/3";
     }
 
-    @Singleton @Provides OkHttpClient provideOkHttpClientLogging(final HttpLoggingInterceptor loggingInterceptor) {
+    @Singleton
+    @Provides
+    OkHttpClient provideOkHttpClientLogging(final HttpLoggingInterceptor loggingInterceptor) {
         return new OkHttpClient.Builder()
                 .addInterceptor(loggingInterceptor)
                 .build();
     }
 
-    @Singleton @Provides ApiService provideApiService(final OkHttpClient okHttpClient, final Gson gson,
+    @Singleton
+    @Provides
+    ApiService provideApiService(final OkHttpClient okHttpClient, final Gson gson,
                           @Named("baseUrl") final String baseUrl) {
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -42,13 +48,17 @@ public final class ServiceModule {
     }
 
 
-    @Singleton @Provides HttpLoggingInterceptor provideLoggingInterceptor() {
+    @Singleton
+    @Provides
+    HttpLoggingInterceptor provideLoggingInterceptor() {
         final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return interceptor;
     }
 
-    @Singleton @Provides Gson provideGson() {
+    @Singleton
+    @Provides
+    Gson provideGson() {
         return new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
