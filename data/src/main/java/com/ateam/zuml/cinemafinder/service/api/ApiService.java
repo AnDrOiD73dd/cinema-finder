@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.service.api;
 
+import com.ateam.zuml.cinemafinder.service.model.movie.GenresList;
 import com.ateam.zuml.cinemafinder.service.model.movie.Movie;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.NowPlayingMovies;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.PopularMovies;
@@ -176,6 +177,6 @@ public interface ApiService {
      * https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US
      */
     @GET("/genre/movie/list")
-    Single<Person> getGenres(@Query("api_key") String accessToken,
-                             @Query("language") String language);
+    Single<GenresList> getGenres(@Query("api_key") String accessToken,
+                                 @Query("language") String language);
 }
