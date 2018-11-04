@@ -9,4 +9,9 @@
         <item name="android:fontFamily">@font/product_sans_regular</item>
     </style>
 
+    <style name="bottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="itemIconTint">@color/bnv_color_selector</item>
+        <item name="itemTextColor">@color/bnv_color_selector</item>
+    </style>
 </resources>
