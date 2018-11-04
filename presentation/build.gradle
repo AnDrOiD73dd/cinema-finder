@@ -27,6 +27,7 @@ dependencies {
 
     //dependencies to other modules
     implementation project(path: ':data')
+    implementation project(path: ':domain')
 
     // Support libraries
     def support_version = "28.0.0"
