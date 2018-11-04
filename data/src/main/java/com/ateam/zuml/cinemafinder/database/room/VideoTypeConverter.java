@@ -7,7 +7,7 @@ import com.ateam.zuml.cinemafinder.enums.VideoType;
 
 public final class VideoTypeConverter {
     @TypeConverter
-    public VideoType convertStoredValueToMovieStatus(String value) {
+    public VideoType convertStoredValueToVideoType(String value) {
         for (VideoType entity : VideoType.values()) {
             if (entity.name().equals(value)) {
                 return entity;
@@ -17,7 +17,7 @@ public final class VideoTypeConverter {
     }
 
     @TypeConverter
-    public String convertMovieStatusToStoredValue(@NonNull VideoType status) {
+    public String convertVideoTypeToStoredValue(@NonNull VideoType status) {
         return status.name();
     }
 

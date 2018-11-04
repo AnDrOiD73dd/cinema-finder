@@ -7,7 +7,7 @@ import com.ateam.zuml.cinemafinder.enums.MovieCollectionType;
 
 public final class MovieCollectionConverter {
     @TypeConverter
-    public MovieCollectionType convertStoredValueToMovieStatus(String value) {
+    public MovieCollectionType convertStoredValueToCollectionType(String value) {
         for (MovieCollectionType entity : MovieCollectionType.values()) {
             if (entity.name().equals(value)) {
                 return entity;
@@ -17,7 +17,7 @@ public final class MovieCollectionConverter {
     }
 
     @TypeConverter
-    public String convertMovieStatusToStoredValue(@NonNull MovieCollectionType status) {
+    public String convertCollectionTypeToStoredValue(@NonNull MovieCollectionType status) {
         return status.name();
     }
 
