@@ -164,4 +164,18 @@ public interface ApiService {
                              @Query("api_key") String accessToken,
                              @Query("language") String language,
                              @Query("append_to_response") String additionalData);
+
+    /*
+     * Required:
+     * String api_key - API Key
+     *
+     * Optional:
+     * String language - Pass a ISO 639-1 value to display translated data for the fields that support it.
+     *
+     * Examples:
+     * https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US
+     */
+    @GET("/genre/movie/list")
+    Single<Person> getGenres(@Query("api_key") String accessToken,
+                             @Query("language") String language);
 }
