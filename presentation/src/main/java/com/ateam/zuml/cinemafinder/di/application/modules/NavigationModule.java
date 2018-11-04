@@ -12,7 +12,7 @@ import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 
 @Module
-public class NavigationModule {
+public final class NavigationModule {
 
     @Named(Const.MAIN_CONTAINER)
     @Provides
