@@ -8,5 +8,5 @@ public enum LogoSize {
     W_185,
     W_300,
     W_500,
-    OROGINAL
+    ORIGINAL
 }
