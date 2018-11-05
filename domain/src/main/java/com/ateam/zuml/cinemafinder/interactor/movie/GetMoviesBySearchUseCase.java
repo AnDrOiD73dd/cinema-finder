@@ -23,7 +23,7 @@ public final class GetMoviesBySearchUseCase {
         this.moviesRepository = moviesRepository;
     }
 
-    public Single<List<MovieModel>> execute(final String query, final int page, final Language language,
+    public Single<List<MovieModel>> execute(final String query, final String page, final Language language,
                                             final Region region, LogoSize logoSize) {
         return moviesRepository.getMoviesBySearch(query, page, language, region, logoSize);
     }

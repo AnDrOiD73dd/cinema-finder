@@ -11,9 +11,9 @@ import io.reactivex.Single;
 
 public interface MoviesRepository {
 
-    Single<List<MovieModel>> getMoviesBySearch(final String query, final int page, final Language language,
+    Single<List<MovieModel>> getMoviesBySearch(final String query, final String page, final Language language,
                                                final Region region, final LogoSize logoSize);
 
-    Single<List<MovieModel>> getPopularMovies(final int page, final Language language,
+    Single<List<MovieModel>> getPopularMovies(final String page, final Language language,
                                               final Region region, final LogoSize logoSize);
 }

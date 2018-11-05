@@ -23,7 +23,7 @@ public final class GetPopularMoviesUseCase {
         this.moviesRepository = moviesRepository;
     }
 
-    public Single<List<MovieModel>> execute(final int page, final Language language,
+    public Single<List<MovieModel>> execute(final String page, final Language language,
                                             final Region region, final LogoSize logoSize) {
         return moviesRepository.getPopularMovies(page, language, region, logoSize);
     }
