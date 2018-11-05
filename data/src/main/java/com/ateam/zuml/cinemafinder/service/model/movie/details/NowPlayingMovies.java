@@ -7,10 +7,10 @@ public final class NowPlayingMovies {
     private final int page;
     private final int totalPages;
     private final DateRange dates;
-    private final MovieCardResult[] results;
+    private final MovieResult[] results;
 
     public NowPlayingMovies(final int page, final int totalPages, final DateRange dates,
-                            final MovieCardResult[] results) {
+                            final MovieResult[] results) {
         this.page = page;
         this.totalPages = totalPages;
         this.dates = dates;
@@ -29,7 +29,7 @@ public final class NowPlayingMovies {
         return dates;
     }
 
-    public MovieCardResult[] getMovies() {
+    public MovieResult[] getMovies() {
         return results;
     }
 }

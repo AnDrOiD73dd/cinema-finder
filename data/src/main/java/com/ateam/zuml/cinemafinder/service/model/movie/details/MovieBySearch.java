@@ -1,14 +1,14 @@
-package com.ateam.zuml.cinemafinder.service.model.movie.search;
+package com.ateam.zuml.cinemafinder.service.model.movie.details;
 
-public final class MovieSearchResult {
+public final class MovieBySearch {
 
     private final int page;
     private final int totalResults;
     private final int totalPages;
-    private final Results[] results;
+    private final MovieResult[] results;
 
-    public MovieSearchResult(final int page, final int totalResults, final int totalPages,
-                             final Results[] results) {
+    public MovieBySearch(final int page, final int totalResults, final int totalPages,
+                         final MovieResult[] results) {
         this.page = page;
         this.totalResults = totalResults;
         this.totalPages = totalPages;
@@ -27,7 +27,7 @@ public final class MovieSearchResult {
         return totalPages;
     }
 
-    public Results[] getResults() {
+    public MovieResult[] getResults() {
         return results;
     }
 }

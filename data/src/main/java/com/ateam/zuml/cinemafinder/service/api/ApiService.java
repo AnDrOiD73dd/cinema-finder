@@ -5,7 +5,7 @@ import com.ateam.zuml.cinemafinder.service.model.movie.GenresList;
 import com.ateam.zuml.cinemafinder.service.model.movie.MovieInfo;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.NowPlayingMovies;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.PopularMovies;
-import com.ateam.zuml.cinemafinder.service.model.movie.search.MovieSearchResult;
+import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieBySearch;
 import com.ateam.zuml.cinemafinder.service.model.person.PersonInfo;
 import com.ateam.zuml.cinemafinder.service.model.person.credits.Credits;
 
@@ -33,11 +33,11 @@ public interface ApiService {
      * https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&query=Matrix&page=1&include_adult=false&region=en-US
      */
     @GET("/search/movie")
-    Single<MovieSearchResult> getSearchMovies(@Query("api_key") String accessToken,
-                                              @Query("language") String language,
-                                              @Query("query") String query,
-                                              @Query("page") String page,
-                                              @Query("region") String region);
+    Single<MovieBySearch> getSearchMovies(@Query("api_key") String accessToken,
+                                          @Query("language") String language,
+                                          @Query("query") String query,
+                                          @Query("page") String page,
+                                          @Query("region") String region);
 
     /*
      * Required:
