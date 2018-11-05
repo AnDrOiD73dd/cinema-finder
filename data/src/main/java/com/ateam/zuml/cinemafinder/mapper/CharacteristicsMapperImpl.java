@@ -5,6 +5,7 @@ import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.service.api.ApiService;
 import com.ateam.zuml.cinemafinder.service.model.configuration.Images;
+import com.ateam.zuml.cinemafinder.service.model.movie.Genre;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,11 +17,15 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
     private static final String EN_LANGUAGE = "en-EN";
     private static final String RU_REGION = "ru";
     private static final String EN_REGION = "en";
-    private final Images imageSizes;
+    private final Images images;
+    private final Genre[] ruGenres;
+    private final Genre[] enGenres;
 
     @Inject
     CharacteristicsMapperImpl(final ApiService apiService) {
-        imageSizes = apiService.getConfiguration().blockingGet().getImages();// TODO: temporary solution. It will be replaced by cache
+        images = apiService.getConfiguration().blockingGet().getImages();// TODO: temporary solution. It will be replaced by cache
+        ruGenres = apiService.getGenres(mapLanguage(Language.RUSSIAN)).blockingGet().getGenres();// TODO: temporary solution. It will be replaced by cache
+        enGenres = apiService.getGenres(mapLanguage(Language.ENGLISH)).blockingGet().getGenres();// TODO: temporary solution. It will be replaced by cache
     }
 
     @Override
@@ -48,28 +53,54 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
     }
 
     @Override
-    public String mapLogoSize(final LogoSize logoSize) {
+    public String mapLogoSizeToPath(final LogoSize logoSize, final String logoPath) {
+        final String baseUrl = images.getSecureBaseUrl();
+        String size;
         try {
             switch (logoSize) {
                 case W_45:
-                    return imageSizes.getLogoSizes()[0];
+                    size = images.getLogoSizes()[0];
+                    break;
                 case W_92:
-                    return imageSizes.getLogoSizes()[1];
+                    size = images.getLogoSizes()[1];
+                    break;
                 case W_154:
-                    return imageSizes.getLogoSizes()[2];
+                    size = images.getLogoSizes()[2];
+                    break;
                 case W_185:
-                    return imageSizes.getLogoSizes()[3];
+                    size = images.getLogoSizes()[3];
+                    break;
                 case W_300:
-                    return imageSizes.getLogoSizes()[4];
+                    size = images.getLogoSizes()[4];
+                    break;
                 case W_500:
-                    return imageSizes.getLogoSizes()[5];
+                    size = images.getLogoSizes()[5];
+                    break;
                 case ORIGINAL:
-                    return imageSizes.getLogoSizes()[6];
+                    size = images.getLogoSizes()[6];
+                    break;
                 default:
-                    return imageSizes.getLogoSizes()[0];
+                    size = images.getLogoSizes()[0];
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            return imageSizes.getLogoSizes()[0];
+            size = images.getLogoSizes()[0];
         }
+        return baseUrl + size + logoPath.substring(1);
+    }
+
+    @Override
+    public String[] mapGenres(final int[] genresIds, final Language language) {
+        final Genre[] genres = language == Language.RUSSIAN ? ruGenres : enGenres;
+        final String[] resultGenres = new String[genresIds.length];
+        for (int i = 0; i < genresIds.length; i++) {
+            for (final Genre genre : genres) {
+                final int supposedGenre = genre.getId();
+                if (genresIds[i] == supposedGenre) {
+                    resultGenres[i] = String.valueOf(supposedGenre);
+                    break;
+                }
+            }
+        }
+        return resultGenres;
     }
 }

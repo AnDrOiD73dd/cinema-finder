@@ -10,5 +10,7 @@ public interface CharacteristicsMapper {
 
     String mapRegion(final Region region);
 
-    String mapLogoSize(final LogoSize logoSize);
+    String mapLogoSizeToPath(final LogoSize logoSize, final String logoPath);
+
+    String[] mapGenres(final int[] genresIds, final Language language);
 }
