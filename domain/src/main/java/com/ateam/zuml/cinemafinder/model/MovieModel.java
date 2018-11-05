@@ -1,23 +1,30 @@
 package com.ateam.zuml.cinemafinder.model;
 
+import io.reactivex.annotations.Nullable;
+
 public final class MovieModel {
 
-    private final int id;
+    private final String id;
     private final String title;
+    private final String originalTitle;
     private final String releaseDate;
     private final String[] genres;
-    private final float voteAverage;
+    private final String voteAverage;
+    private final String posterPath;
 
-    public MovieModel(final int id, final String title, final String releaseDate,
-                      final String[] genres, final float voteAverage) {
+    public MovieModel(final String id, final String title, final String originalTitle,
+                      final String releaseDate, final String[] genres, final String voteAverage,
+                      final String posterPath) {
         this.id = id;
         this.title = title;
+        this.originalTitle = originalTitle;
         this.releaseDate = releaseDate;
         this.genres = genres;
         this.voteAverage = voteAverage;
+        this.posterPath = posterPath;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -25,15 +32,46 @@ public final class MovieModel {
         return title;
     }
 
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
     public String getReleaseDate() {
         return releaseDate;
+    }
+
+    @Nullable
+    public String getReleaseYear() {
+        return getPartOfReleaseDate(0);
+    }
+
+    @Nullable
+    public String getReleaseMonth() {
+        return getPartOfReleaseDate(1);
+    }
+
+    @Nullable
+    public String getReleaseDay() {
+        return getPartOfReleaseDate(2);
     }
 
     public String[] getGenres() {
         return genres;
     }
 
-    public float getVoteAverage() {
+    public String getVoteAverage() {
         return voteAverage;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    private String getPartOfReleaseDate(int part) {
+        try {
+            return releaseDate.split("-")[part];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return null;
+        }
     }
 }
