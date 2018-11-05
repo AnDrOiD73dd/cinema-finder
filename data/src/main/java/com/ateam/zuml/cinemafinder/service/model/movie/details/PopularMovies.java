@@ -20,7 +20,7 @@ public final class PopularMovies {
         return totalPages;
     }
 
-    public MovieResult[] getMovies() {
+    public MovieResult[] getResults() {
         return results;
     }
 }
