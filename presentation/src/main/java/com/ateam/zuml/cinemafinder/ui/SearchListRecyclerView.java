@@ -9,19 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ateam.zuml.cinemafinder.R;
-
-import java.util.List;
+import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
+import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class SearchListRecyclerView extends RecyclerView.Adapter<SearchListRecyclerView.ViewHolder> {
 
-    private List<MovieModel> searchList;
+    private SearchResponsePresenter.SearchListPresenter presenter;
     private OnItemClickListener itemClickListener;
 
-    RecyclerViewAdapter(List<MovieModel> searchList) {
-        this.searchList = searchList;
+    SearchListRecyclerView(SearchResponsePresenter.SearchListPresenter presenter) {
+        this.presenter = presenter;
     }
 
     public interface OnItemClickListener {
@@ -34,27 +34,22 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @NonNull
     @Override
-    public RecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SearchListRecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.search_item, viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        viewHolder.poster.setImageResource(searchList.get(i).getPosterPath());
-        viewHolder.title.setText(searchList.get(i).getTitle());
-        viewHolder.originalTitle.setText(searchList.get(i).getOriginalTitle());
-        viewHolder.releaseDate.setText(String.valueOf(searchList.get(i).getReleaseYear()));
-        viewHolder.genres.setText(searchList.get(i).getGenres());
-        viewHolder.voteAverage.setText(searchList.get(i).getVoteAverage());
+        presenter.bindViewAt(viewHolder, i);
     }
 
     @Override
     public int getItemCount() {
-        return searchList.size();
+        return presenter.getSearchCount();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements SearchRowView {
 
         @BindView(R.id.iv_poster_search) ImageView poster;
         @BindView(R.id.tv_title_search) TextView title;
@@ -68,6 +63,36 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             ButterKnife.bind(this, itemView);
 
             itemView.setOnClickListener(v -> itemClickListener.onItemClick(v, getAdapterPosition()));
+        }
+
+        @Override
+        public void setPoster(int path) {
+            this.poster.setImageResource(path);
+        }
+
+        @Override
+        public void setTitle(String title) {
+            this.title.setText(title);
+        }
+
+        @Override
+        public void setOriginalTitle(String originalTitle) {
+            this.originalTitle.setText(originalTitle);
+        }
+
+        @Override
+        public void setReleaseDate(String releaseDate) {
+            this.releaseDate.setText(releaseDate);
+        }
+
+        @Override
+        public void setGenres(String genres) {
+            this.genres.setText(genres);
+        }
+
+        @Override
+        public void setVoteAverage(String voteAverage) {
+            this.voteAverage.setText(voteAverage);
         }
     }
 }

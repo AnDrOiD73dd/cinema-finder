@@ -3,6 +3,7 @@
     <color name="colorPrimary">@android:color/white</color>
     <color name="colorPrimaryDark">@android:color/white</color>
     <color name="colorAccent">@color/purple500</color>
+    <color name="colorBaseIcons">@android:color/black</color>
 
     <color name="purple500">#6200EE</color>
     <color name="amber500">#FFC107</color>
