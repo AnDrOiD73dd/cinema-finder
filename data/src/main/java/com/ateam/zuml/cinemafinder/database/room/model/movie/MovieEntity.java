@@ -64,6 +64,7 @@ public final class MovieEntity {
                        @NonNull String overview, @NonNull String posterPath, @NonNull Date releaseDate,
                        @NonNull MovieStatus status, @NonNull String tagline, int runtime,
                        long voteAverage, int voteCount) {
+        this.id = id;
         this.title = title;
         this.adult = adult;
         this.homepage = homepage;

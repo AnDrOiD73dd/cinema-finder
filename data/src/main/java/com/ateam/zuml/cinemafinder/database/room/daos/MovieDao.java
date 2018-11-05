@@ -33,7 +33,7 @@ public interface MovieDao {
 
     @Query("SELECT * FROM movies WHERE id IN (SELECT movie_id FROM movie_collections WHERE collection_type = :collectionType)")
     @TypeConverters(MovieCollectionConverter.class)
-    Flowable<List<MovieEntity>> getMovieCollection(MovieCollectionType collectionType);
+    Flowable<List<MovieEntity>> getMoviesFromCollection(MovieCollectionType collectionType);
 
     @Query("SELECT * FROM movies WHERE id = :id")
     Maybe<MovieEntity> getMovieById(int id);
