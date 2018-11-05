@@ -35,10 +35,13 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     // Rx
     implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
-    // javax.inject
-    implementation 'javax.inject:javax.inject:1'
     //Retrofit service
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     //gson
     implementation 'com.google.code.gson:gson:2.8.2'
+    // Room components
+    def room_version = "1.1.1"
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
+
 }

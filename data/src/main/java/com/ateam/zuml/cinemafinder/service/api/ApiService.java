@@ -2,11 +2,11 @@ package com.ateam.zuml.cinemafinder.service.api;
 
 import com.ateam.zuml.cinemafinder.service.model.configuration.Configuration;
 import com.ateam.zuml.cinemafinder.service.model.movie.GenresList;
-import com.ateam.zuml.cinemafinder.service.model.movie.Movie;
+import com.ateam.zuml.cinemafinder.service.model.movie.MovieInfo;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.NowPlayingMovies;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.PopularMovies;
 import com.ateam.zuml.cinemafinder.service.model.movie.search.MovieSearchResult;
-import com.ateam.zuml.cinemafinder.service.model.person.Person;
+import com.ateam.zuml.cinemafinder.service.model.person.PersonInfo;
 import com.ateam.zuml.cinemafinder.service.model.person.credits.Credits;
 
 import io.reactivex.Single;
@@ -53,10 +53,10 @@ public interface ApiService {
      * https://api.themoviedb.org/3/movie/534?api_key=<<api_key>>&language=en-US&append_to_response=videos,images
      */
     @GET("/movie/{movie_id}")
-    Single<Movie> getMovieInfo(@Path("movie_id") int movieId,
-                               @Query("api_key") String accessToken,
-                               @Query("language") String language,
-                               @Query("append_to_response") String additionalData);
+    Single<MovieInfo> getMovieInfo(@Path("movie_id") int movieId,
+                                   @Query("api_key") String accessToken,
+                                   @Query("language") String language,
+                                   @Query("append_to_response") String additionalData);
 
     /*
      * Required:
@@ -162,10 +162,10 @@ public interface ApiService {
      * https://api.themoviedb.org/3/person/6885?api_key=6951767fd82df6dc250442aa410c968e&language=en-US&append_to_response=images
      */
     @GET("/person/{person_id}")
-    Single<Person> getPeople(@Path("person_id") int personId,
-                             @Query("api_key") String accessToken,
-                             @Query("language") String language,
-                             @Query("append_to_response") String additionalData);
+    Single<PersonInfo> getPeople(@Path("person_id") int personId,
+                                 @Query("api_key") String accessToken,
+                                 @Query("language") String language,
+                                 @Query("append_to_response") String additionalData);
 
     /*
      * Required:

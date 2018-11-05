@@ -4,7 +4,7 @@ import android.support.annotation.Nullable;
 
 import com.ateam.zuml.cinemafinder.service.model.person.image.PersonImages;
 
-public final class Person {
+public final class PersonInfo {
     private final int id;
     @Nullable private final String birthday;
     @Nullable private final String deathday;
@@ -16,10 +16,10 @@ public final class Person {
     @Nullable private final String homepage;
     private final PersonImages images;
 
-    public Person(final int id, @Nullable final String birthday, @Nullable final String deathday,
-                  final String name, final int gender, final String biography,
-                  @Nullable final String placeOfBirth, @Nullable final String profilePath,
-                  @Nullable final String homepage, final PersonImages images) {
+    public PersonInfo(final int id, @Nullable final String birthday, @Nullable final String deathday,
+               final String name, final int gender, final String biography,
+               @Nullable final String placeOfBirth, @Nullable final String profilePath,
+               @Nullable final String homepage, final PersonImages images) {
         this.id = id;
         this.birthday = birthday;
         this.deathday = deathday;
