@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
         if (actionBar != null) {
             actionBar.setTitle(title);
             actionBar.setDisplayHomeAsUpEnabled(visible);
-            actionBar.setElevation(0);
         }
     }
 
