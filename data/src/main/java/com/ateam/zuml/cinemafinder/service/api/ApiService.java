@@ -184,6 +184,6 @@ public interface ApiService {
      * Examples:
      * https://api.themoviedb.org/3/configuration?api_key=<<api_key>>
      */
-    @GET("/genre/movie/list?api_key=" + ACCESS_TOKEN)
+    @GET("/configuration?api_key=" + ACCESS_TOKEN)
     Single<Configuration> getConfiguration();
 }
