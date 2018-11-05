@@ -39,7 +39,7 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
         final String mappedLanguage = characteristicsMapper.mapLanguage(language);
         final String mappedRegion = characteristicsMapper.mapRegion(region);
         return apiService.getSearchMovies(mappedLanguage, query, page, mappedRegion)
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .map(response -> Arrays.asList(response.getResults()))
                 .map(movieResults -> movieMapper.mapMovieResults(movieResults, language, logoSize));
     }
@@ -50,7 +50,7 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
         final String mappedLanguage = characteristicsMapper.mapLanguage(language);
         final String mappedRegion = characteristicsMapper.mapRegion(region);
         return apiService.getPopularMovies(mappedLanguage, page, mappedRegion)
-                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.io())
                 .map(response -> Arrays.asList(response.getResults()))
                 .map(movieResults -> movieMapper.mapMovieResults(movieResults, language, logoSize));
     }
