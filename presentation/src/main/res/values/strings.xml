@@ -13,4 +13,5 @@
     <string name="right_brace">)</string>
     <string name="detail_movie">DetailMovie</string>
     <string name="home">Home</string>
+    <string name="search_hint">Enter movie title</string>
 </resources>
