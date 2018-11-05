@@ -3,7 +3,7 @@ package com.ateam.zuml.cinemafinder.database.room;
 import android.arch.persistence.room.TypeConverter;
 import android.support.annotation.NonNull;
 
-import com.ateam.zuml.cinemafinder.enums.VideoType;
+import com.ateam.zuml.cinemafinder.database.room.model.enums.VideoType;
 
 public final class VideoTypeConverter {
     @TypeConverter

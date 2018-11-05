@@ -8,7 +8,7 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
-import com.ateam.zuml.cinemafinder.enums.MovieCollectionType;
+import com.ateam.zuml.cinemafinder.database.room.model.enums.MovieCollectionType;
 
 import java.util.List;
 

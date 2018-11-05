@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 
 import com.ateam.zuml.cinemafinder.database.room.DateConverters;
 import com.ateam.zuml.cinemafinder.database.room.MovieStatusConverter;
-import com.ateam.zuml.cinemafinder.enums.MovieStatus;
+import com.ateam.zuml.cinemafinder.database.room.model.enums.MovieStatus;
 
 import java.util.Date;
 import java.util.List;
@@ -82,6 +82,7 @@ public final class MovieEntity {
         return id;
     }
 
+    @NonNull
     public String getTitle() {
         return title;
     }
@@ -90,26 +91,32 @@ public final class MovieEntity {
         return adult;
     }
 
+    @NonNull
     public String getHomepage() {
         return homepage;
     }
 
+    @NonNull
     public String getOverview() {
         return overview;
     }
 
+    @NonNull
     public String getPosterPath() {
         return posterPath;
     }
 
+    @NonNull
     public Date getReleaseDate() {
         return releaseDate;
     }
 
+    @NonNull
     public MovieStatus getStatus() {
         return status;
     }
 
+    @NonNull
     public String getTagline() {
         return tagline;
     }

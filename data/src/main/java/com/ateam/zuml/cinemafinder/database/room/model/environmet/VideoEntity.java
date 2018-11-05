@@ -10,7 +10,7 @@ import android.support.annotation.NonNull;
 
 import com.ateam.zuml.cinemafinder.database.room.VideoTypeConverter;
 import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
-import com.ateam.zuml.cinemafinder.enums.VideoType;
+import com.ateam.zuml.cinemafinder.database.room.model.enums.VideoType;
 
 @Entity(tableName = "video",
         indices = {@Index(value = {"movie_id", "country_id", "language_id"})},
@@ -23,7 +23,6 @@ public final class VideoEntity {
     private int id;
 
     @ColumnInfo(name = "movie_id")
-    @NonNull
     private final int movieId;
 
     @ColumnInfo(name = "language_id")
@@ -49,7 +48,7 @@ public final class VideoEntity {
     @TypeConverters(VideoTypeConverter.class)
     private final VideoType type;
 
-    public VideoEntity(@NonNull int movieId, @NonNull String languageId, @NonNull String countryId,
+    public VideoEntity(int movieId, @NonNull String languageId, @NonNull String countryId,
                        @NonNull String videoKey, @NonNull String name, @NonNull String siteName,
                        @NonNull VideoType type) {
         this.movieId = movieId;
@@ -65,7 +64,6 @@ public final class VideoEntity {
         return id;
     }
 
-    @NonNull
     public int getMovieId() {
         return movieId;
     }
