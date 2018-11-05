@@ -36,7 +36,8 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true, true);
+            widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true);
+            widgetTuning.setSearchVisibility(true);
         }
     }
 }

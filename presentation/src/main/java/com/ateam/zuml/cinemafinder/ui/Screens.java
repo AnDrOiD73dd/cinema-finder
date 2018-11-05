@@ -9,14 +9,14 @@ public class Screens {
     public static final class HomeScreen extends SupportAppScreen {
         @Override
         public Fragment getFragment()   {
-            return HomeFragment.newInstance();
+            return MainContainerFragment.newInstance();
         }
     }
 
     public static final class TrendsScreen extends SupportAppScreen {
         @Override
         public Fragment getFragment()   {
-            return TrendsFragment.newInstance();
+            return HomeFragment.newInstance();
         }
     }
 

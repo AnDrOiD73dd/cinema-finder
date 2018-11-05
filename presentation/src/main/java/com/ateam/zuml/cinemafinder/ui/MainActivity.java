@@ -87,14 +87,18 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     }
 
     @Override
-    public void setupToolbar(String title, boolean visibleHome, boolean visibleSearch) {
+    public void setupToolbar(String title, boolean visible) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
-            actionBar.setDisplayHomeAsUpEnabled(visibleHome);
+            actionBar.setDisplayHomeAsUpEnabled(visible);
             actionBar.setElevation(0);
         }
-        if(visibleSearch)    {
+    }
+
+    @Override
+    public void setSearchVisibility(boolean visible)    {
+        if(visible)    {
             search.setVisibility(View.VISIBLE);
         }else {
             search.setVisibility(View.GONE);
