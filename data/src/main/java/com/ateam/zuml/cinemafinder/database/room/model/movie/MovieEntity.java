@@ -3,7 +3,6 @@ package com.ateam.zuml.cinemafinder.database.room.model.movie;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.Relation;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
@@ -18,7 +17,6 @@ import java.util.List;
 @Entity(tableName = "movies", primaryKeys = "id")
 public final class MovieEntity {
 
-    @PrimaryKey
     private int id;
 
     @NonNull private final String title;
@@ -61,7 +59,7 @@ public final class MovieEntity {
     private List<ProductionCountriesEntity> productionCountries;
 
 
-    public MovieEntity(@NonNull String title, boolean adult, @NonNull String homepage,
+    public MovieEntity(int id, @NonNull String title, boolean adult, @NonNull String homepage,
                        @NonNull String overview, @NonNull String posterPath, @NonNull Date releaseDate,
                        @NonNull MovieStatus status, @NonNull String tagline, int runtime,
                        long voteAverage, int voteCount) {

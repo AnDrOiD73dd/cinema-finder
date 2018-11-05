@@ -24,16 +24,16 @@ public interface MovieDao {
     @Update
     void update(MovieEntity movie);
 
-    @Delete
     @Query("DELETE FROM movies")
     void deleteAllMovies();
 
     @Query("SELECT * FROM movies")
     Flowable<List<MovieEntity>> getAll();
 
-    @Query("SELECT * FROM movie_collections WHERE collection_type = :collectionType")
-    Flowable<List<MovieEntity>> getMovieCollection(MovieCollectionType collectionType);
+    //TODO: it is necessary to correct it
+//    @Query("SELECT * FROM movie_collections WHERE collection_type = :collectionType")
+//    Flowable<List<MovieEntity>> getMovieCollection(MovieCollectionType collectionType);
 
-    @Query("SELECT * FROM movies WHERE id = :id")
-    Maybe<MovieEntity> getMovieById(int id);
+//    @Query("SELECT * FROM movies WHERE id = :id")
+//    Maybe<MovieEntity> getMovieById(int id);
 }

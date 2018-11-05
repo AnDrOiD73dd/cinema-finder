@@ -9,8 +9,8 @@ import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import com.ateam.zuml.cinemafinder.database.room.VideoTypeConverter;
-import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
 import com.ateam.zuml.cinemafinder.database.room.model.enums.VideoType;
+import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
 
 @Entity(tableName = "video",
         indices = {@Index(value = {"movie_id", "country_id", "language_id"})},
@@ -48,7 +48,7 @@ public final class VideoEntity {
     @TypeConverters(VideoTypeConverter.class)
     private final VideoType type;
 
-    public VideoEntity(int movieId, @NonNull String languageId, @NonNull String countryId,
+    public VideoEntity(int id, int movieId, @NonNull String languageId, @NonNull String countryId,
                        @NonNull String videoKey, @NonNull String name, @NonNull String siteName,
                        @NonNull VideoType type) {
         this.movieId = movieId;

@@ -4,7 +4,11 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.Index;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+
+import com.ateam.zuml.cinemafinder.database.room.MovieCollectionConverter;
+import com.ateam.zuml.cinemafinder.database.room.model.enums.MovieCollectionType;
 
 @Entity(tableName = "movie_collections",
         primaryKeys = {"movie_id", "collection_type"},
@@ -23,13 +27,14 @@ public final class MovieCollectionEntity {
     private final String backdropPath;
 
     @ColumnInfo(name = "collection_type")
+    @TypeConverters(MovieCollectionConverter.class)
     @NonNull
-    private final MovieCollectionEntity collectionType;
+    private final MovieCollectionType collectionType;
 
 
     public MovieCollectionEntity(int movieId,
                                  @NonNull String backdropPath,
-                                 @NonNull MovieCollectionEntity collectionType) {
+                                 @NonNull MovieCollectionType collectionType) {
         this.movieId = movieId;
         this.backdropPath = backdropPath;
         this.collectionType = collectionType;
@@ -45,7 +50,7 @@ public final class MovieCollectionEntity {
     }
 
     @NonNull
-    public MovieCollectionEntity getCollectionType() {
+    public MovieCollectionType getCollectionType() {
         return collectionType;
     }
 }
