@@ -2,6 +2,7 @@ package com.ateam.zuml.cinemafinder.di.application;
 
 import android.content.Context;
 
+import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
@@ -16,6 +17,7 @@ import dagger.Component;
 
 @Singleton
 @Component(modules = {
+        DataModule.class,
         MapperModule.class,
         NavigationModule.class,
         ServiceModule.class})
