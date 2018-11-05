@@ -106,6 +106,11 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     }
 
     @Override
+    public void closeSearch()   {
+        search.onActionViewCollapsed();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         navigatorHolder.setNavigator(navigator);

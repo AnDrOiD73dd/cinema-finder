@@ -17,6 +17,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     @Named(Const.MAIN_CONTAINER) @Inject Router router;
 
     public void showDetailsInfo() {
+        getViewState().closeSearch();
         router.navigateTo(new Screens.DetailMovieScreen());
     }
 }

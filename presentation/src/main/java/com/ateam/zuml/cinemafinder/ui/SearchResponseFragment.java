@@ -96,4 +96,11 @@ public class SearchResponseFragment extends MvpAppCompatFragment
     public void onItemClick(View view, int position) {
         presenter.showDetailsInfo();
     }
+
+    @Override
+    public void closeSearch()   {
+        if (getActivity() != null) {
+            ((WidgetTuning) getActivity()).closeSearch();
+        }
+    }
 }
