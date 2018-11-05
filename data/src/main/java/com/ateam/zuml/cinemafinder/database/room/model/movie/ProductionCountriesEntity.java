@@ -3,10 +3,12 @@ package com.ateam.zuml.cinemafinder.database.room.model.movie;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 
 import com.ateam.zuml.cinemafinder.database.room.model.environmet.CountryEntity;
 
 @Entity(tableName = "production_countries",
+        indices = @Index(value = {"movie_id"}),
         primaryKeys = {"country_id", "movie_id"},
         foreignKeys = {@ForeignKey(entity = MovieEntity.class,
                 parentColumns = "id",
