@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.service.model.movie.details;
 
-final class MovieResult {
+public final class MovieResult {
 
     private final int voteCount;
     private final int id;
@@ -17,7 +17,7 @@ final class MovieResult {
     private final String overview;
     private final String releaseDate;
 
-    MovieResult(final int voteCount, final int id, final boolean video, final float voteAverage,
+    public MovieResult(final int voteCount, final int id, final boolean video, final float voteAverage,
                 final String title, final float popularity, final String posterPath,
                 final String originalLanguage, final String originalTitle, final int[] genreIds,
                 final String backdropPath, final boolean adult, final String overview,
