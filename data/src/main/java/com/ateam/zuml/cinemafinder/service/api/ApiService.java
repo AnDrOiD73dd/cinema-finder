@@ -16,7 +16,7 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    String ACCESS_TOKEN = "<<api key>>";
+    String ACCESS_TOKEN = "6951767fd82df6dc250442aa410c968e";
 
     // String BASE_ADDRESS = "https://api.themoviedb.org/3"
 
