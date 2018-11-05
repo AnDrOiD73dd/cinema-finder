@@ -16,17 +16,26 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class HomePresenter extends MvpPresenter<HomeView> {
 
+    private int currentPageId;
+
     @Named(Const.CHILD_CONTAINER) @Inject Router router;
 
     public boolean showFragment(int itemId) {
+        if(currentPageId == itemId) {
+            return false;
+        }
+
         switch (itemId) {
             case R.id.action_trends:
+                currentPageId = itemId;
                 router.replaceScreen(new Screens.TrendsScreen());
                 return true;
             case R.id.action_favorites:
+                currentPageId = itemId;
                 router.replaceScreen(new Screens.FavoritesScreen());
                 return true;
             case R.id.action_ratings:
+                currentPageId = itemId;
                 router.replaceScreen(new Screens.RatingsScreen());
                 return true;
             default:

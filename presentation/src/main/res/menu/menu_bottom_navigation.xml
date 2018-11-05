@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_trends"
-        android:icon="@drawable/ic_whatshot"
+        android:icon="@drawable/ic_home_border"
         android:title="@string/trends"
         app:showAsAction="ifRoom" />
     <item
@@ -13,7 +13,7 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_ratings"
-        android:icon="@drawable/ic_trending_up"
+        android:icon="@drawable/ic_chart_border"
         android:title="@string/ratings"
         app:showAsAction="ifRoom" />
 </menu>

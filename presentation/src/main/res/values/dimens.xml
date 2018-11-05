@@ -4,4 +4,5 @@
     <dimen name="card_elevation">5dp</dimen>
     <dimen name="card_padding">5dp</dimen>
     <dimen name="card_corner_radius">5dp</dimen>
+    <dimen name="elevation_toolbar">4dp</dimen>
 </resources>

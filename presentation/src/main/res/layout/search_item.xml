@@ -92,7 +92,6 @@
             android:id="@+id/tv_vote_average_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FFD700"
             android:layout_marginStart="@dimen/card_layout_margin"
             app:layout_constraintBottom_toBottomOf="@id/iv_vote_average_search"
             app:layout_constraintStart_toEndOf="@id/iv_vote_average_search"

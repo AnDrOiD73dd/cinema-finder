@@ -75,6 +75,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                search.onActionViewCollapsed();
                 router.exit();
                 return true;
             case R.id.action_settings:
