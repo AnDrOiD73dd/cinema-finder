@@ -3,8 +3,10 @@ package com.ateam.zuml.cinemafinder.ui;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
@@ -24,6 +26,7 @@ import ru.terrakok.cicerone.commands.Command;
 public class MainActivity extends AppCompatActivity implements WidgetTuning {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.search) SearchView search;
 
     @Named(Const.MAIN_CONTAINER) @Inject NavigatorHolder navigatorHolder;
     @Named(Const.MAIN_CONTAINER) @Inject Router router;
@@ -41,13 +44,31 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
         App.getApp().getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
+        init();
 
         if (savedInstanceState == null) {
             router.navigateTo(new Screens.HomeScreen());
         }
+    }
+
+    private void init() {
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                router.navigateTo(new Screens.SearchResponseScreen(s));
+                search.clearFocus();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
     }
 
     @Override
@@ -65,12 +86,17 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     }
 
     @Override
-    public void setupToolbar(String title, boolean visible) {
+    public void setupToolbar(String title, boolean visibleHome, boolean visibleSearch) {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(title);
-            actionBar.setDisplayHomeAsUpEnabled(visible);
+            actionBar.setDisplayHomeAsUpEnabled(visibleHome);
             actionBar.setElevation(0);
+        }
+        if(visibleSearch)    {
+            search.setVisibility(View.VISIBLE);
+        }else {
+            search.setVisibility(View.GONE);
         }
     }
 

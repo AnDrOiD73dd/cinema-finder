@@ -40,4 +40,24 @@ public class Screens {
             return SettingsFragment.newInstance();
         }
     }
+
+    public static final class SearchResponseScreen extends SupportAppScreen {
+        private final String query;
+
+         SearchResponseScreen(String query) {
+            this.query = query;
+        }
+
+        @Override
+        public Fragment getFragment()   {
+            return SearchResponseFragment.newInstance(query);
+        }
+    }
+
+    public static final class DetailMovieScreen extends SupportAppScreen {
+        @Override
+        public Fragment getFragment()   {
+            return DetailMovieFragment.newInstance();
+        }
+    }
 }

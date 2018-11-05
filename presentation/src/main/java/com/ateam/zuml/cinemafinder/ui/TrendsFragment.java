@@ -44,7 +44,7 @@ public class TrendsFragment extends MvpAppCompatFragment implements TrendsView {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.trends), false);
+            widgetTuning.setupToolbar(getResources().getString(R.string.trends), false, true);
         }
     }
 }

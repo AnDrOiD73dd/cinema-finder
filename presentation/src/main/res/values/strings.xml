@@ -5,4 +5,12 @@
     <string name="trends">Trends</string>
     <string name="favorites">Favorites</string>
     <string name="ratings">Ratings</string>
+    <string name="search_response"> </string>
+    <string name="star">star</string>
+    <string name="poster">poster</string>
+    <string name="comma">,</string>
+    <string name="time_unit">мин.</string>
+    <string name="left_brace">(</string>
+    <string name="right_brace">)</string>
+    <string name="detail_movie">DetailMovie</string>
 </resources>
