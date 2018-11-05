@@ -16,8 +16,7 @@ public final class PersonInfo {
     @Nullable private final String homepage;
     private final PersonImages images;
 
-    public
-    PersonInfo(final int id, @Nullable final String birthday, @Nullable final String deathday,
+    public PersonInfo(final int id, @Nullable final String birthday, @Nullable final String deathday,
                final String name, final int gender, final String biography,
                @Nullable final String placeOfBirth, @Nullable final String profilePath,
                @Nullable final String homepage, final PersonImages images) {

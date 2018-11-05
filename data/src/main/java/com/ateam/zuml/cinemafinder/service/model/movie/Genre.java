@@ -1,15 +1,15 @@
 package com.ateam.zuml.cinemafinder.service.model.movie;
 
-final class Genre {
-    private final Integer id;
+public final class Genre {
+    private final int id;
     private final String name;
 
-    public Genre(final Integer id, final String name) {
+    public Genre(final int id, final String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

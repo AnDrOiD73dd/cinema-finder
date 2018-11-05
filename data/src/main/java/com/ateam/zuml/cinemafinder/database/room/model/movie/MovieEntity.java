@@ -3,14 +3,13 @@ package com.ateam.zuml.cinemafinder.database.room.model.movie;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.Relation;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import com.ateam.zuml.cinemafinder.database.room.DateConverters;
 import com.ateam.zuml.cinemafinder.database.room.MovieStatusConverter;
-import com.ateam.zuml.cinemafinder.enums.MovieStatus;
+import com.ateam.zuml.cinemafinder.database.room.model.enums.MovieStatus;
 
 import java.util.Date;
 import java.util.List;
@@ -18,7 +17,6 @@ import java.util.List;
 @Entity(tableName = "movies", primaryKeys = "id")
 public final class MovieEntity {
 
-    @PrimaryKey
     private int id;
 
     @NonNull private final String title;
@@ -61,7 +59,7 @@ public final class MovieEntity {
     private List<ProductionCountriesEntity> productionCountries;
 
 
-    public MovieEntity(@NonNull String title, boolean adult, @NonNull String homepage,
+    public MovieEntity(int id, @NonNull String title, boolean adult, @NonNull String homepage,
                        @NonNull String overview, @NonNull String posterPath, @NonNull Date releaseDate,
                        @NonNull MovieStatus status, @NonNull String tagline, int runtime,
                        long voteAverage, int voteCount) {
@@ -82,6 +80,7 @@ public final class MovieEntity {
         return id;
     }
 
+    @NonNull
     public String getTitle() {
         return title;
     }
@@ -90,26 +89,32 @@ public final class MovieEntity {
         return adult;
     }
 
+    @NonNull
     public String getHomepage() {
         return homepage;
     }
 
+    @NonNull
     public String getOverview() {
         return overview;
     }
 
+    @NonNull
     public String getPosterPath() {
         return posterPath;
     }
 
+    @NonNull
     public Date getReleaseDate() {
         return releaseDate;
     }
 
+    @NonNull
     public MovieStatus getStatus() {
         return status;
     }
 
+    @NonNull
     public String getTagline() {
         return tagline;
     }

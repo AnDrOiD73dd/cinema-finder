@@ -1,0 +1,57 @@
+package com.ateam.zuml.cinemafinder.movies;
+
+import com.ateam.zuml.cinemafinder.mapper.CharacteristicsMapper;
+import com.ateam.zuml.cinemafinder.mapper.MovieMapper;
+import com.ateam.zuml.cinemafinder.model.MovieModel;
+import com.ateam.zuml.cinemafinder.model.characteristic.Language;
+import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
+import com.ateam.zuml.cinemafinder.model.characteristic.Region;
+import com.ateam.zuml.cinemafinder.repository.MoviesRepository;
+import com.ateam.zuml.cinemafinder.service.api.ApiService;
+
+import java.util.Arrays;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
+
+@Singleton
+public final class MoviesRepositoryImpl implements MoviesRepository {
+
+    private final ApiService apiService;
+    private final MovieMapper movieMapper;
+    private final CharacteristicsMapper characteristicsMapper;
+
+    @Inject
+    MoviesRepositoryImpl(final ApiService apiService, final MovieMapper movieMapper,
+                         final CharacteristicsMapper characteristicsMapper) {
+        this.apiService = apiService;
+        this.movieMapper = movieMapper;
+        this.characteristicsMapper = characteristicsMapper;
+    }
+
+    @Override
+    public Single<List<MovieModel>> getMoviesBySearch(final String query, final String page, final Language language,
+                                                      final Region region, final LogoSize logoSize) {
+        final String mappedLanguage = characteristicsMapper.mapLanguage(language);
+        final String mappedRegion = characteristicsMapper.mapRegion(region);
+        return apiService.getSearchMovies(mappedLanguage, query, page, mappedRegion)
+                .subscribeOn(Schedulers.io())
+                .map(response -> Arrays.asList(response.getResults()))
+                .map(movieResults -> movieMapper.mapMovieResults(movieResults, language, logoSize));
+    }
+
+    @Override
+    public Single<List<MovieModel>> getPopularMovies(final String page, final Language language,
+                                                     final Region region, final LogoSize logoSize) {
+        final String mappedLanguage = characteristicsMapper.mapLanguage(language);
+        final String mappedRegion = characteristicsMapper.mapRegion(region);
+        return apiService.getPopularMovies(mappedLanguage, page, mappedRegion)
+                .subscribeOn(Schedulers.io())
+                .map(response -> Arrays.asList(response.getResults()))
+                .map(movieResults -> movieMapper.mapMovieResults(movieResults, language, logoSize));
+    }
+}

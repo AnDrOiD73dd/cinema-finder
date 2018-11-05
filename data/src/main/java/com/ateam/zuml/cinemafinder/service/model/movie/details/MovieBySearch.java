@@ -1,19 +1,26 @@
 package com.ateam.zuml.cinemafinder.service.model.movie.details;
 
-//Get a list of the current popular movies on TMDb. This list updates daily.
-public final class PopularMovies {
+public final class MovieBySearch {
+
     private final int page;
+    private final int totalResults;
     private final int totalPages;
     private final MovieResult[] results;
 
-    public PopularMovies(final int page, final int totalPages, final MovieResult[] results) {
+    public MovieBySearch(final int page, final int totalResults, final int totalPages,
+                         final MovieResult[] results) {
         this.page = page;
+        this.totalResults = totalResults;
         this.totalPages = totalPages;
         this.results = results;
     }
 
     public int getPage() {
         return page;
+    }
+
+    public int getTotalResults() {
+        return totalResults;
     }
 
     public int getTotalPages() {

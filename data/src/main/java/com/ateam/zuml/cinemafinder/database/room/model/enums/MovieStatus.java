@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.enums;
+package com.ateam.zuml.cinemafinder.database.room.model.enums;
 
 public enum MovieStatus {
     RUMORED,

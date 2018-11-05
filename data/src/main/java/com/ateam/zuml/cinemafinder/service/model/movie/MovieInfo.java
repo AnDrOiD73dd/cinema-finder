@@ -3,11 +3,10 @@ package com.ateam.zuml.cinemafinder.service.model.movie;
 import android.support.annotation.Nullable;
 
 import com.ateam.zuml.cinemafinder.service.model.movie.video.VideoSet;
-import com.google.gson.annotations.SerializedName;
 
 //Get the primary information about a movie.
 public final class MovieInfo {
-    @SerializedName("id") private final int movieId;
+    private final int id;
     private final int budget;
     private final String title;
     private final boolean adult;
@@ -24,12 +23,12 @@ public final class MovieInfo {
     private final int voteCount;
     private final VideoSet videos;
 
-    public MovieInfo(final int movieId, final int budget, final String title, final boolean adult,
+    public MovieInfo(final int id, final int budget, final String title, final boolean adult,
                      final Genre[] genres, @Nullable final String homepage, final String overview,
                      final String posterPath, final String releaseDate, final String status,
                      final String tagline, final Country[] countries, final int runtime,
                      final long voteAverage, final int voteCount, final VideoSet videos) {
-        this.movieId = movieId;
+        this.id = id;
         this.budget = budget;
         this.title = title;
         this.adult = adult;
@@ -47,8 +46,8 @@ public final class MovieInfo {
         this.videos = videos;
     }
 
-    public int getMovieId() {
-        return movieId;
+    public int getId() {
+        return id;
     }
 
     public int getBudget() {

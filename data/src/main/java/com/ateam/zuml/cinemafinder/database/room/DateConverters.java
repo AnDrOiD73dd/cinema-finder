@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 
 import java.util.Date;
 
-public class DateConverters {
+public final class DateConverters {
     @TypeConverter
     public Date convertStoredValueToDate(Long value) {
         return new Date(value);
