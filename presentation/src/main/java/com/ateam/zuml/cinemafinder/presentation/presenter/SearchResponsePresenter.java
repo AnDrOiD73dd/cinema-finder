@@ -2,9 +2,10 @@ package com.ateam.zuml.cinemafinder.presentation.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.model.MovieModel;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchResponseView;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
-import com.ateam.zuml.cinemafinder.ui.MovieModel;
 import com.ateam.zuml.cinemafinder.ui.Screens;
 import com.ateam.zuml.cinemafinder.util.Const;
 
@@ -28,11 +29,12 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         }
 
         public void bindViewAt( SearchRowView view, int position) {
-            view.setPoster(searchList.get(position).getPosterPath());
+            //FIXME 06.11.2018 add Picasso
+            view.setPoster(R.drawable.ic_broken_image);
             view.setTitle(searchList.get(position).getTitle());
             view.setOriginalTitle(searchList.get(position).getOriginalTitle());
             view.setReleaseDate(searchList.get(position).getReleaseYear());
-            view.setGenres(searchList.get(position).getGenres());
+            view.setGenres(getStringFromArrayGenres(searchList.get(position).getGenres()));
             view.setVoteAverage(searchList.get(position).getVoteAverage());
         }
 
@@ -42,6 +44,20 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
         public void setSearchList(List<MovieModel> searchList) {
             this.searchList = searchList;
+        }
+
+        private String getStringFromArrayGenres(String[] arr) {
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < arr.length; i++) {
+                sb.append(arr[i]);
+                if(arr.length == 1 || i == (arr.length - 1)) {
+                    break;
+                }
+                sb.append(", ");
+            }
+
+            return sb.toString();
         }
     }
 
