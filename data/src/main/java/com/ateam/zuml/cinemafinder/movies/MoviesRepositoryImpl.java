@@ -2,10 +2,11 @@ package com.ateam.zuml.cinemafinder.movies;
 
 import com.ateam.zuml.cinemafinder.mapper.CharacteristicsMapper;
 import com.ateam.zuml.cinemafinder.mapper.MovieMapper;
-import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
+import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.repository.MoviesRepository;
 import com.ateam.zuml.cinemafinder.service.api.ApiService;
 
@@ -53,5 +54,14 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
                 .subscribeOn(Schedulers.io())
                 .map(response -> Arrays.asList(response.getResults()))
                 .map(movieResults -> movieMapper.mapMovieResults(movieResults, language, logoSize));
+    }
+
+    @Override
+    public Single<MovieDetailsModel> getMovieById(final String id, final Language language,
+                                                  final LogoSize logoSize) {
+        final String mappedLanguage = characteristicsMapper.mapLanguage(language);
+        return apiService.getMovieInfo(id, mappedLanguage, "")
+                .subscribeOn(Schedulers.io())
+                .map(movieInfo -> movieMapper.mapMovieDetails(movieInfo, logoSize));
     }
 }
