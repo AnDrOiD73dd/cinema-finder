@@ -24,7 +24,7 @@ public final class GetMoviesBySearchUseCase {
     }
 
     public Single<List<MovieListModel>> execute(final String query, final String page, final Language language,
-                                                final Region region, LogoSize logoSize) {
+                                                final Region region, final LogoSize logoSize) {
         return moviesRepository.getMoviesBySearch(query, page, language, region, logoSize);
     }
 }
