@@ -21,7 +21,7 @@ public final class MovieInfo {
     private final String tagline;
     private final Country[] countries;
     @Nullable private final Integer runtime;
-    private final long voteAverage;
+    private final float voteAverage;
     private final int voteCount;
     private final VideoSet videos;
 
@@ -29,7 +29,7 @@ public final class MovieInfo {
                      int revenue, final boolean adult, final Genre[] genres, @Nullable final String homepage,
                      final String overview, final String posterPath, final String releaseDate,
                      final String status, final String tagline, final Country[] countries,
-                     final int runtime, final long voteAverage, final int voteCount, final VideoSet videos) {
+                     final int runtime, final float voteAverage, final int voteCount, final VideoSet videos) {
         this.id = id;
         this.title = title;
         this.originalTitle = originalTitle;
@@ -112,7 +112,7 @@ public final class MovieInfo {
         return runtime;
     }
 
-    public long getVoteAverage() {
+    public float getVoteAverage() {
         return voteAverage;
     }
 
