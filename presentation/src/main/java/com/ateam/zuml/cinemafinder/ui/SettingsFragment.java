@@ -1,7 +1,7 @@
 package com.ateam.zuml.cinemafinder.ui;
 
-import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,17 +35,20 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        init(container.getContext());
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+        init();
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    private void init(Context context) {
+    private void init() {
         App.getApp().getAppComponent().inject(this);
         setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = ((WidgetTuning) context);
-        widgetTuning.setupToolbar(getResources().getString(R.string.settings), true);
-        widgetTuning.setSearchVisibility(false);
+
+        WidgetTuning widgetTuning = (MainActivity) getActivity();
+        if (widgetTuning != null) {
+            widgetTuning.setupToolbar(getResources().getString(R.string.settings), true);
+            widgetTuning.setSearchVisibility(false);
+        }
     }
 
     @Override
