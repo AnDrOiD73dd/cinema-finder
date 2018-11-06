@@ -38,25 +38,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_original_title_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:maxLines="1"
-            android:ellipsize="end"
-            android:maxEms="15"
-            android:layout_marginStart="@dimen/card_layout_margin"
-            android:layout_marginTop="@dimen/card_layout_margin"
-            app:layout_constraintStart_toEndOf="@id/iv_poster_search"
-            app:layout_constraintTop_toBottomOf="@id/tv_title_search" />
-
-        <TextView
             android:id="@+id/tv_left_brace_search"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/card_layout_margin"
             android:layout_marginTop="@dimen/card_layout_margin"
             android:text="@string/left_brace"
-            app:layout_constraintStart_toEndOf="@id/tv_original_title_search"
+            app:layout_constraintStart_toEndOf="@id/iv_poster_search"
             app:layout_constraintTop_toBottomOf="@id/tv_title_search" />
 
         <TextView
@@ -74,6 +62,18 @@
             android:layout_marginTop="@dimen/card_layout_margin"
             android:text="@string/right_brace"
             app:layout_constraintStart_toEndOf="@id/tv_release_date_search"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_search" />
+
+        <TextView
+            android:id="@+id/tv_original_title_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:maxEms="15"
+            android:layout_marginStart="@dimen/card_layout_margin"
+            android:layout_marginTop="@dimen/card_layout_margin"
+            app:layout_constraintStart_toEndOf="@id/tv_right_brace_search"
             app:layout_constraintTop_toBottomOf="@id/tv_title_search" />
 
         <TextView
