@@ -14,7 +14,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.model.MovieModel;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchResponseView;
 
@@ -78,14 +78,14 @@ public class SearchResponseFragment extends MvpAppCompatFragment
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<MovieModel> searchList = new ArrayList<>();
-        searchList.add(new MovieModel("1", "Какое-то названиеКакое-то названиеназваниеКакое", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр"}, "10.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieModel("2", "Какое-то название", "Второе какое-то названиеВторое какое-то название", "1000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр", "Какой-то жанр", "Какой-то жанр", "Какой-то жанр"}, "9.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieModel("3", "Какое-то название", "Второе какое-то название", "2000-05-06", new String[]{"Какой-то жанр"}, "8.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieModel("4", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр", "Какой-то жанр"}, "7.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieModel("5", "Какое-то название", "Второе какое-то название", "1000-05-06", new String[]{"Какой-то жанр"}, "6.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieModel("6", "Какое-то название", "Второе какое-то название", "2000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр"}, "5.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieModel("7", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр"}, "4.0", "R.drawable.ic_broken_image"));
+        List<MovieListModel> searchList = new ArrayList<>();
+        searchList.add(new MovieListModel("1", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр"}, "10.0", "R.drawable.ic_broken_image"));
+        searchList.add(new MovieListModel("2", "Какое-то название", "Второе какое-то название", "1000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр", "Какой-то жанр", "Какой-то жанр", "Какой-то жанр"}, "9.0", "R.drawable.ic_broken_image"));
+        searchList.add(new MovieListModel("3", "Какое-то название", "Второе какое-то название", "2000-05-06", new String[]{"Какой-то жанр"}, "8.0", "R.drawable.ic_broken_image"));
+        searchList.add(new MovieListModel("4", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр", "Какой-то жанр"}, "7.0", "R.drawable.ic_broken_image"));
+        searchList.add(new MovieListModel("5", "Какое-то название", "Второе какое-то название", "1000-05-06", new String[]{"Какой-то жанр"}, "6.0", "R.drawable.ic_broken_image"));
+        searchList.add(new MovieListModel("6", "Какое-то название", "Второе какое-то название", "2000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр"}, "5.0", "R.drawable.ic_broken_image"));
+        searchList.add(new MovieListModel("7", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр"}, "4.0", "R.drawable.ic_broken_image"));
 
         adapter = new SearchListRecyclerView(presenter.getListPresenter(searchList));
         recyclerView.setHasFixedSize(true);

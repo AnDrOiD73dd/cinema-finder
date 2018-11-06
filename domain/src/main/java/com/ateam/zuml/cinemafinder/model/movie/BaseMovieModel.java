@@ -1,8 +1,8 @@
-package com.ateam.zuml.cinemafinder.model;
+package com.ateam.zuml.cinemafinder.model.movie;
 
 import io.reactivex.annotations.Nullable;
 
-public final class MovieModel {
+public abstract class BaseMovieModel {
 
     private final String id;
     private final String title;
@@ -12,9 +12,9 @@ public final class MovieModel {
     private final String voteAverage;
     private final String posterPath;
 
-    public MovieModel(final String id, final String title, final String originalTitle,
-                      final String releaseDate, final String[] genres, final String voteAverage,
-                      final String posterPath) {
+    BaseMovieModel(final String id, final String title, final String originalTitle,
+                   final String releaseDate, final String[] genres, final String voteAverage,
+                   final String posterPath) {
         this.id = id;
         this.title = title;
         this.originalTitle = originalTitle;
