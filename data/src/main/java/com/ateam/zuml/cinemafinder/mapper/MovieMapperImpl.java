@@ -1,8 +1,10 @@
 package com.ateam.zuml.cinemafinder.mapper;
 
-import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
+import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
+import com.ateam.zuml.cinemafinder.service.model.movie.MovieInfo;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieResult;
 
 import java.util.ArrayList;
@@ -44,4 +46,24 @@ public final class MovieMapperImpl implements MovieMapper {
 
         return new MovieListModel(id, title, originalTitle, releaseDate, genres, voteAverage, posterPath);
     }
-}
+
+    @Override
+    public MovieDetailsModel mapMovieDetails(final MovieInfo movieInfo, final LogoSize logoSize) {
+        final String id = String.valueOf(movieInfo.getId());
+        final String title = movieInfo.getTitle();
+        final String originalTitle = movieInfo.getOriginalTitle();
+        final String releaseDate = movieInfo.getReleaseDate();
+        final String[] genres = characteristicsMapper.mapGenres(movieInfo.getGenres());
+        final String voteAverage = String.valueOf(movieInfo.getVoteAverage());
+        final String posterPath = characteristicsMapper.mapLogoSizeToPath(logoSize, movieInfo.getPosterPath());
+        final String tagline = movieInfo.getTagline();
+        final String overview = movieInfo.getOverview();
+        final String runtime = String.valueOf(movieInfo.getRuntime());
+        final String budget = String.valueOf(movieInfo.getBudget());
+        final String revenue = String.valueOf(movieInfo.getRevenue());
+        final String voteCount = String.valueOf(movieInfo.getVoteCount());
+
+        return new MovieDetailsModel(id, title,originalTitle,releaseDate,genres,voteAverage,
+                posterPath,tagline,overview,runtime,budget,revenue,voteCount);
+        }
+    }
