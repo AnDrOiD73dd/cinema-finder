@@ -10,6 +10,8 @@ import com.ateam.zuml.cinemafinder.service.model.movie.Genre;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.schedulers.Schedulers;
+
 @Singleton
 public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
 
@@ -23,9 +25,12 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
 
     @Inject
     CharacteristicsMapperImpl(final ApiService apiService) {
-        images = apiService.getConfiguration().blockingGet().getImages();// TODO: temporary solution. It will be replaced by cache
-        ruGenres = apiService.getGenres(mapLanguage(Language.RUSSIAN)).blockingGet().getGenres();// TODO: temporary solution. It will be replaced by cache
-        enGenres = apiService.getGenres(mapLanguage(Language.ENGLISH)).blockingGet().getGenres();// TODO: temporary solution. It will be replaced by cache
+        images = apiService.getConfiguration()
+                .subscribeOn(Schedulers.io()).blockingGet().getImages();// TODO: temporary solution. It will be replaced by cache
+        ruGenres = apiService.getGenres(mapLanguage(Language.RUSSIAN))
+                .subscribeOn(Schedulers.io()).blockingGet().getGenres();// TODO: temporary solution. It will be replaced by cache
+        enGenres = apiService.getGenres(mapLanguage(Language.ENGLISH))
+                .subscribeOn(Schedulers.io()).blockingGet().getGenres();// TODO: temporary solution. It will be replaced by cache
     }
 
     @Override
