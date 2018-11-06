@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_layout_margin">5dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
+    <dimen name="card_padding">5dp</dimen>
+    <dimen name="card_corner_radius">5dp</dimen>
+    <dimen name="elevation_toolbar">4dp</dimen>
+</resources>

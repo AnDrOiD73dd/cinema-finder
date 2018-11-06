@@ -6,9 +6,10 @@ import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
-import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
-import com.ateam.zuml.cinemafinder.ui.HomeFragment;
+import com.ateam.zuml.cinemafinder.presentation.presenter.MainContainerPresenter;
+import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
 import com.ateam.zuml.cinemafinder.ui.MainActivity;
+import com.ateam.zuml.cinemafinder.ui.MainContainerFragment;
 
 import javax.inject.Singleton;
 
@@ -33,7 +34,9 @@ public interface AppComponent {
 
     void inject(MainActivity activity);
 
-    void inject(HomeFragment fragment);
+    void inject(MainContainerFragment fragment);
 
-    void inject(HomePresenter presenter);
+    void inject(MainContainerPresenter presenter);
+
+    void inject(SearchResponsePresenter presenter);
 }

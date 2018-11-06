@@ -9,14 +9,14 @@ public class Screens {
     public static final class HomeScreen extends SupportAppScreen {
         @Override
         public Fragment getFragment()   {
-            return HomeFragment.newInstance();
+            return MainContainerFragment.newInstance();
         }
     }
 
     public static final class TrendsScreen extends SupportAppScreen {
         @Override
         public Fragment getFragment()   {
-            return TrendsFragment.newInstance();
+            return HomeFragment.newInstance();
         }
     }
 
@@ -38,6 +38,26 @@ public class Screens {
         @Override
         public Fragment getFragment()   {
             return SettingsFragment.newInstance();
+        }
+    }
+
+    public static final class SearchResponseScreen extends SupportAppScreen {
+        private final String query;
+
+         SearchResponseScreen(String query) {
+            this.query = query;
+        }
+
+        @Override
+        public Fragment getFragment()   {
+            return SearchResponseFragment.newInstance(query);
+        }
+    }
+
+    public static final class DetailMovieScreen extends SupportAppScreen {
+        @Override
+        public Fragment getFragment()   {
+            return DetailMovieFragment.newInstance();
         }
     }
 }

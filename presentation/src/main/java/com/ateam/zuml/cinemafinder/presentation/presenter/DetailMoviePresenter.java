@@ -1,11 +1,9 @@
 package com.ateam.zuml.cinemafinder.presentation.presenter;
 
-
-import com.ateam.zuml.cinemafinder.presentation.view.TrendsView;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.ateam.zuml.cinemafinder.presentation.view.DetailMovieView;
 
 @InjectViewState
-public class TrendsPresenter extends MvpPresenter<TrendsView> {
-
+public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
 }

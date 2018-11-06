@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_trends"
-        android:icon="@drawable/ic_whatshot"
-        android:title="@string/trends"
+        android:icon="@drawable/bnv_home_selector"
+        android:title="@string/home"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_favorites"
-        android:icon="@drawable/ic_favorite_border"
+        android:icon="@drawable/bnv_favorites_selector"
         android:title="@string/favorites"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_ratings"
-        android:icon="@drawable/ic_trending_up"
+        android:icon="@drawable/bnv_ratings_selector"
         android:title="@string/ratings"
         app:showAsAction="ifRoom" />
 </menu>

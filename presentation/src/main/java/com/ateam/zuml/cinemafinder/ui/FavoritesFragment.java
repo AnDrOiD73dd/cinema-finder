@@ -45,6 +45,7 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
         WidgetTuning widgetTuning = (MainActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
+            widgetTuning.setSearchVisibility(true);
         }
     }
 }

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_search"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/card_layout_margin"
+    android:elevation="@dimen/card_elevation"
+    android:padding="@dimen/card_padding"
+    app:cardCornerRadius="@dimen/card_corner_radius">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/card_layout_margin">
+
+        <ImageView
+            android:id="@+id/iv_poster_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/poster"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_layout_margin"
+            android:fontFamily="@font/product_sans_bold"
+            app:layout_constraintLeft_toRightOf="@id/iv_poster_search"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_original_title_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_layout_margin"
+            android:layout_marginTop="@dimen/card_layout_margin"
+            app:layout_constraintStart_toEndOf="@id/iv_poster_search"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_search" />
+
+        <TextView
+            android:id="@+id/tv_left_brace_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_layout_margin"
+            android:layout_marginTop="@dimen/card_layout_margin"
+            android:text="@string/left_brace"
+            app:layout_constraintStart_toEndOf="@id/tv_original_title_search"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_search" />
+
+        <TextView
+            android:id="@+id/tv_release_date_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/card_layout_margin"
+            app:layout_constraintStart_toEndOf="@id/tv_left_brace_search"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_search" />
+
+        <TextView
+            android:id="@+id/tv_right_brace_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/card_layout_margin"
+            android:text="@string/right_brace"
+            app:layout_constraintStart_toEndOf="@id/tv_release_date_search"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_search" />
+
+        <TextView
+            android:id="@+id/tv_genres_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_layout_margin"
+            app:layout_constraintStart_toEndOf="@id/iv_poster_search"
+            app:layout_constraintTop_toBottomOf="@id/tv_release_date_search" />
+
+        <ImageView
+            android:id="@+id/iv_vote_average_search"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/card_layout_margin"
+            android:contentDescription="@string/star"
+            android:src="@drawable/ic_star"
+            app:layout_constraintStart_toEndOf="@id/iv_poster_search"
+            app:layout_constraintTop_toBottomOf="@id/tv_genres_search" />
+
+        <TextView
+            android:id="@+id/tv_vote_average_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/card_layout_margin"
+            app:layout_constraintBottom_toBottomOf="@id/iv_vote_average_search"
+            app:layout_constraintStart_toEndOf="@id/iv_vote_average_search"
+            app:layout_constraintTop_toTopOf="@id/iv_vote_average_search" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.design.card.MaterialCardView>
