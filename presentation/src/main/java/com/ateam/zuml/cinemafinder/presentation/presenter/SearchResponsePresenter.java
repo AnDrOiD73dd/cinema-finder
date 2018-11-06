@@ -61,7 +61,9 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         }
     }
 
-    @Named(Const.MAIN_CONTAINER) @Inject Router router;
+    @Named(Const.MAIN_CONTAINER)
+    @Inject
+    Router router;
 
     private SearchListPresenter listPresenter;
 
@@ -78,5 +80,10 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     public void showDetailsInfo() {
         getViewState().closeSearch();
         router.navigateTo(new Screens.DetailMovieScreen());
+    }
+
+    public void onBackPressed() {
+        getViewState().closeSearch();
+        router.exit();
     }
 }

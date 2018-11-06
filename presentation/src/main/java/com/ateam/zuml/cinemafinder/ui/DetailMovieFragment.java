@@ -9,13 +9,22 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.DetailMoviePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.DetailMovieView;
 
-public class DetailMovieFragment extends MvpAppCompatFragment implements DetailMovieView {
+public class DetailMovieFragment extends MvpAppCompatFragment implements DetailMovieView, BackButtonListener {
 
     @InjectPresenter DetailMoviePresenter presenter;
+
+    @ProvidePresenter
+    DetailMoviePresenter provideDetailMoviePresenter() {
+        DetailMoviePresenter presenter = new DetailMoviePresenter();
+        App.getApp().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public static DetailMovieFragment newInstance() {
         DetailMovieFragment fragment = new DetailMovieFragment();
@@ -39,5 +48,11 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
             widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true);
             widgetTuning.setSearchVisibility(true);
         }
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
     }
 }
