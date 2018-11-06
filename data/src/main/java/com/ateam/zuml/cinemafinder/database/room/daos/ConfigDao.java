@@ -18,7 +18,7 @@ public interface ConfigDao {
     void insert(ConfigurationEntity entity);
 
     @Update
-    void update(ConfigurationEntity movie);
+    void update(ConfigurationEntity entity);
 
     @Query("SELECT * FROM variables")
     Single<ConfigurationEntity> getConfig();
