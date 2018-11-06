@@ -2,6 +2,7 @@ package com.ateam.zuml.cinemafinder.di.application;
 
 import android.content.Context;
 
+import com.ateam.zuml.cinemafinder.database.room.ListConverter;
 import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
@@ -39,4 +40,6 @@ public interface AppComponent {
     void inject(MainContainerPresenter presenter);
 
     void inject(SearchResponsePresenter presenter);
+
+    void inject(ListConverter typeConverter);
 }

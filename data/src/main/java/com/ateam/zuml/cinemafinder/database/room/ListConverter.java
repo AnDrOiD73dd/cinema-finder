@@ -10,9 +10,11 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class ListConverter {
 
-    Gson gson = new Gson();
+    @Inject Gson gson;
 
     @TypeConverter
     public List<String> convertStoredValueToList(String value) {
