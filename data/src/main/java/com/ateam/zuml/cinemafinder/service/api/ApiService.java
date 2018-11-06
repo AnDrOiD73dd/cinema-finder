@@ -34,7 +34,7 @@ public interface ApiService {
      * https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&query=Iron%20Man&page=1&include_adult=false&region=en-US
      * https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&query=Matrix&page=1&include_adult=false&region=en-US
      */
-    @GET("/search/movie?api_key=" + ACCESS_TOKEN)
+    @GET("search/movie?api_key=" + ACCESS_TOKEN)
     Single<MovieBySearch> getSearchMovies(@Query("language") String language,
                                           @Query("query") String query,
                                           @Query("page") String page,
@@ -53,7 +53,7 @@ public interface ApiService {
      * https://api.themoviedb.org/3/movie/534?api_key=<<api_key>>&language=ru-ru
      * https://api.themoviedb.org/3/movie/534?api_key=<<api_key>>&language=en-US&append_to_response=videos,images
      */
-    @GET("/movie/{movie_id}?api_key=" + ACCESS_TOKEN)
+    @GET("movie/{movie_id}?api_key=" + ACCESS_TOKEN)
     Single<MovieInfo> getMovieInfo(@Path("movie_id") String movieId,
                                    @Query("language") String language,
                                    @Query("append_to_response") String additionalData);
@@ -70,7 +70,7 @@ public interface ApiService {
      * Example:
      * https://api.themoviedb.org/3/movie/now_playing?api_key=<<api_key>>&language=ru-RU&page=1&region=ru
      */
-    @GET("/movie/now_playing?api_key=" + ACCESS_TOKEN)
+    @GET("movie/now_playing?api_key=" + ACCESS_TOKEN)
     Single<NowPlayingMovies> getNowPlayingMovies(@Query("language") String language,
                                                  @Query("page") String page,
                                                  @Query("region") String region);
@@ -87,7 +87,7 @@ public interface ApiService {
      * Example:
      * https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=ru-RU&page=1&region=ru
      */
-    @GET("/movie/popular?api_key=" + ACCESS_TOKEN)
+    @GET("movie/popular?api_key=" + ACCESS_TOKEN)
     Single<PopularMovies> getPopularMovies(@Query("language") String language,
                                            @Query("page") String page,
                                            @Query("region") String region);
@@ -104,7 +104,7 @@ public interface ApiService {
      * Examples:
      * https://api.themoviedb.org/3/movie/{movie_id}/credits?api_key=<<api_key>>
      */
-    @GET("/movie/{movie_id}/credits?api_key=" + ACCESS_TOKEN)
+    @GET("movie/{movie_id}/credits?api_key=" + ACCESS_TOKEN)
     Single<Credits> getMovieCredits(@Path("movie_id") int movieId);
 
     /*
@@ -120,7 +120,7 @@ public interface ApiService {
      * Examples:
      * https://api.themoviedb.org/3/tv/{tv_id}/credits?api_key=<<api_key>>&language=en-US
      */
-    @GET("/tv/{tv_id}/credits?api_key=" + ACCESS_TOKEN)
+    @GET("tv/{tv_id}/credits?api_key=" + ACCESS_TOKEN)
     Single<Credits> getTVCredits(@Path("tv_id") int tvId,
                                  @Query("language") String language);
 
@@ -138,7 +138,7 @@ public interface ApiService {
      * Examples:
      * https://api.themoviedb.org/3/tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits?api_key=<<api_key>>
      */
-    @GET("/tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits?api_key=" + ACCESS_TOKEN)
+    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits?api_key=" + ACCESS_TOKEN)
     Single<Credits> getTVEpisodeCredits(@Path("tv_id") int tvId,
                                         @Path("season_number") int seasonNumber,
                                         @Path("episode_number") int episodeNumber);
@@ -156,7 +156,7 @@ public interface ApiService {
      * https://api.themoviedb.org/3/person/{person_id}?api_key=<<api_key>>&language=en-US
      * https://api.themoviedb.org/3/person/6885?api_key=6951767fd82df6dc250442aa410c968e&language=en-US&append_to_response=images
      */
-    @GET("/person/{person_id}?api_key=" + ACCESS_TOKEN)
+    @GET("person/{person_id}?api_key=" + ACCESS_TOKEN)
     Single<PersonInfo> getPeople(@Path("person_id") int personId,
                                  @Query("language") String language,
                                  @Query("append_to_response") String additionalData);
@@ -171,7 +171,7 @@ public interface ApiService {
      * Examples:
      * https://api.themoviedb.org/3/genre/movie/list?api_key=<<api_key>>&language=en-US
      */
-    @GET("/genre/movie/list?api_key=" + ACCESS_TOKEN)
+    @GET("genre/movie/list?api_key=" + ACCESS_TOKEN)
     Single<GenresList> getGenres(@Query("language") String language);
 
     /*
@@ -184,6 +184,6 @@ public interface ApiService {
      * Examples:
      * https://api.themoviedb.org/3/configuration?api_key=<<api_key>>
      */
-    @GET("/configuration?api_key=" + ACCESS_TOKEN)
+    @GET("configuration?api_key=" + ACCESS_TOKEN)
     Single<Configuration> getConfiguration();
 }
