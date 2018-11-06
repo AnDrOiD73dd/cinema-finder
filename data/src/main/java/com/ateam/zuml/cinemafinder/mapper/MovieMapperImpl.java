@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.mapper;
 
-import com.ateam.zuml.cinemafinder.model.MovieModel;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieResult;
@@ -22,18 +22,18 @@ public final class MovieMapperImpl implements MovieMapper {
     }
 
     @Override
-    public List<MovieModel> mapMovieResults(final List<MovieResult> movieResults, final Language language,
-                                            final LogoSize logoSize) {
-        final List<MovieModel> movieModels = new ArrayList<>(movieResults.size());
+    public List<MovieListModel> mapMovieResults(final List<MovieResult> movieResults, final Language language,
+                                                final LogoSize logoSize) {
+        final List<MovieListModel> movieListModels = new ArrayList<>(movieResults.size());
         for (final MovieResult result : movieResults) {
-            movieModels.add(mapMovieResult(result, language, logoSize));
+            movieListModels.add(mapMovieResult(result, language, logoSize));
         }
-        return movieModels;
+        return movieListModels;
     }
 
     @Override
-    public MovieModel mapMovieResult(final MovieResult movieResult, final Language language,
-                                     final LogoSize logoSize) {
+    public MovieListModel mapMovieResult(final MovieResult movieResult, final Language language,
+                                         final LogoSize logoSize) {
         final String id = String.valueOf(movieResult.getId());
         final String title = movieResult.getTitle();
         final String originalTitle = movieResult.getOriginalTitle();
@@ -42,6 +42,6 @@ public final class MovieMapperImpl implements MovieMapper {
         final String voteAverage = String.valueOf(movieResult.getVoteAverage());
         final String posterPath = characteristicsMapper.mapLogoSizeToPath(logoSize, movieResult.getPosterPath());
 
-        return new MovieModel(id, title, originalTitle, releaseDate, genres, voteAverage, posterPath);
+        return new MovieListModel(id, title, originalTitle, releaseDate, genres, voteAverage, posterPath);
     }
 }
