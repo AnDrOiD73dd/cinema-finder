@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.interactor.movie;
 
-import com.ateam.zuml.cinemafinder.model.MovieModel;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
@@ -23,8 +23,8 @@ public final class GetMoviesBySearchUseCase {
         this.moviesRepository = moviesRepository;
     }
 
-    public Single<List<MovieModel>> execute(final String query, final String page, final Language language,
-                                            final Region region, LogoSize logoSize) {
+    public Single<List<MovieListModel>> execute(final String query, final String page, final Language language,
+                                                final Region region, final LogoSize logoSize) {
         return moviesRepository.getMoviesBySearch(query, page, language, region, logoSize);
     }
 }

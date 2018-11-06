@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +27,15 @@ import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 
-public class MainContainerFragment extends MvpAppCompatFragment implements MainContainerView {
+public class MainContainerFragment extends MvpAppCompatFragment implements MainContainerView, BackButtonListener {
 
     private Navigator navigator;
 
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
 
-    @Named(Const.CHILD_CONTAINER) @Inject NavigatorHolder navigatorHolder;
+    @Named(Const.CHILD_CONTAINER)
+    @Inject
+    NavigatorHolder navigatorHolder;
 
     @InjectPresenter MainContainerPresenter presenter;
 
@@ -88,5 +91,16 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
             navigator = new SupportAppNavigator(getActivity(), getChildFragmentManager(), R.id.child_container);
         }
         return navigator;
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        Fragment fragment = getChildFragmentManager().findFragmentById(R.id.child_container);
+        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
+            return true;
+        } else {
+            presenter.onBackPressed();
+            return true;
+        }
     }
 }

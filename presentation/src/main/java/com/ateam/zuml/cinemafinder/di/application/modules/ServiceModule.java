@@ -23,7 +23,7 @@ public final class ServiceModule {
     @Named("baseUrl")
     @Provides
     String provideBaseUrl() {
-        return "https://api.themoviedb.org/3";
+        return "https://api.themoviedb.org/3/";
     }
 
     @Singleton

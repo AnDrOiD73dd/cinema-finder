@@ -11,13 +11,22 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.HomeView;
 
-public class HomeFragment extends MvpAppCompatFragment implements HomeView {
+public class HomeFragment extends MvpAppCompatFragment implements HomeView, BackButtonListener {
 
-    @InjectPresenter HomePresenter homePresenter;
+    @InjectPresenter HomePresenter presenter;
+
+    @ProvidePresenter
+    HomePresenter provideHomePresenter() {
+        HomePresenter presenter = new HomePresenter();
+        App.getApp().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public static HomeFragment newInstance() {
         HomeFragment fragment = new HomeFragment();
@@ -47,5 +56,11 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView {
             widgetTuning.setupToolbar(getResources().getString(R.string.home), false);
             widgetTuning.setSearchVisibility(true);
         }
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
     }
 }

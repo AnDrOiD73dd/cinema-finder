@@ -61,7 +61,6 @@ public class SearchListRecyclerView extends RecyclerView.Adapter<SearchListRecyc
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-
             itemView.setOnClickListener(v -> itemClickListener.onItemClick(v, getAdapterPosition()));
         }
 

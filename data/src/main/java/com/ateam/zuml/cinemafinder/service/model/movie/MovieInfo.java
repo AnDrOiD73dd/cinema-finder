@@ -7,8 +7,10 @@ import com.ateam.zuml.cinemafinder.service.model.movie.video.VideoSet;
 //Get the primary information about a movie.
 public final class MovieInfo {
     private final int id;
-    private final int budget;
     private final String title;
+    private final String originalTitle;
+    private final int budget;
+    private final int revenue;
     private final boolean adult;
     private final Genre[] genres;
     @Nullable private final String homepage;
@@ -19,18 +21,20 @@ public final class MovieInfo {
     private final String tagline;
     private final Country[] countries;
     @Nullable private final Integer runtime;
-    private final long voteAverage;
+    private final float voteAverage;
     private final int voteCount;
     private final VideoSet videos;
 
-    public MovieInfo(final int id, final int budget, final String title, final boolean adult,
-                     final Genre[] genres, @Nullable final String homepage, final String overview,
-                     final String posterPath, final String releaseDate, final String status,
-                     final String tagline, final Country[] countries, final int runtime,
-                     final long voteAverage, final int voteCount, final VideoSet videos) {
+    public MovieInfo(final int id, final String title, final String originalTitle, final int budget,
+                     int revenue, final boolean adult, final Genre[] genres, @Nullable final String homepage,
+                     final String overview, final String posterPath, final String releaseDate,
+                     final String status, final String tagline, final Country[] countries,
+                     final int runtime, final float voteAverage, final int voteCount, final VideoSet videos) {
         this.id = id;
-        this.budget = budget;
         this.title = title;
+        this.originalTitle = originalTitle;
+        this.budget = budget;
+        this.revenue = revenue;
         this.adult = adult;
         this.genres = genres;
         this.homepage = homepage;
@@ -50,12 +54,20 @@ public final class MovieInfo {
         return id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public String getOriginalTitle() {
+        return originalTitle;
+    }
+
     public int getBudget() {
         return budget;
     }
 
-    public String getTitle() {
-        return title;
+    public int getRevenue() {
+        return revenue;
     }
 
     public boolean isAdult() {
@@ -100,7 +112,7 @@ public final class MovieInfo {
         return runtime;
     }
 
-    public long getVoteAverage() {
+    public float getVoteAverage() {
         return voteAverage;
     }
 

@@ -3,7 +3,7 @@ package com.ateam.zuml.cinemafinder.presentation.presenter;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.model.MovieModel;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchResponseView;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
 import com.ateam.zuml.cinemafinder.ui.Screens;
@@ -22,7 +22,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
     public final class SearchListPresenter  {
 
-        private List<MovieModel> searchList;
+        private List<MovieListModel> searchList;
 
         SearchListPresenter() {
             this.searchList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             return searchList.size();
         }
 
-        public void setSearchList(List<MovieModel> searchList) {
+        public void setSearchList(List<MovieListModel> searchList) {
             this.searchList = searchList;
         }
 
@@ -61,7 +61,9 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         }
     }
 
-    @Named(Const.MAIN_CONTAINER) @Inject Router router;
+    @Named(Const.MAIN_CONTAINER)
+    @Inject
+    Router router;
 
     private SearchListPresenter listPresenter;
 
@@ -69,7 +71,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         this.listPresenter = new SearchListPresenter();
     }
 
-    public SearchListPresenter getListPresenter(List<MovieModel> searchList) {
+    public SearchListPresenter getListPresenter(List<MovieListModel> searchList) {
         //TODO 06.11.2018 stub
         listPresenter.setSearchList(searchList);
         return listPresenter;
@@ -78,5 +80,10 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     public void showDetailsInfo() {
         getViewState().closeSearch();
         router.navigateTo(new Screens.DetailMovieScreen());
+    }
+
+    public void onBackPressed() {
+        getViewState().closeSearch();
+        router.exit();
     }
 }
