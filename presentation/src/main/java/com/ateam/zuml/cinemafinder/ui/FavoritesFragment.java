@@ -11,13 +11,22 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.FavoritesView;
 
-public class FavoritesFragment extends MvpAppCompatFragment implements FavoritesView {
+public class FavoritesFragment extends MvpAppCompatFragment implements FavoritesView, BackButtonListener {
 
-    @InjectPresenter FavoritesPresenter favoritesPresenter;
+    @InjectPresenter FavoritesPresenter presenter;
+
+    @ProvidePresenter
+    FavoritesPresenter provideFavoritesPresenter() {
+        FavoritesPresenter presenter = new FavoritesPresenter();
+        App.getApp().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public static FavoritesFragment newInstance() {
         FavoritesFragment fragment = new FavoritesFragment();
@@ -47,5 +56,11 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
             widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
             widgetTuning.setSearchVisibility(true);
         }
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
     }
 }

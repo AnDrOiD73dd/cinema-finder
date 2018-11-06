@@ -11,13 +11,22 @@ import android.view.ViewGroup;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
+import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.RatingsView;
 
-public class RatingsFragment extends MvpAppCompatFragment implements RatingsView {
+public class RatingsFragment extends MvpAppCompatFragment implements RatingsView, BackButtonListener {
 
-    @InjectPresenter RatingsPresenter ratingsPresenter;
+    @InjectPresenter RatingsPresenter presenter;
+
+    @ProvidePresenter
+    RatingsPresenter provideRatingsPresenter() {
+        RatingsPresenter presenter = new RatingsPresenter();
+        App.getApp().getAppComponent().inject(presenter);
+        return presenter;
+    }
 
     public static RatingsFragment newInstance() {
         RatingsFragment fragment = new RatingsFragment();
@@ -47,5 +56,11 @@ public class RatingsFragment extends MvpAppCompatFragment implements RatingsView
             widgetTuning.setupToolbar(getResources().getString(R.string.ratings), false);
             widgetTuning.setSearchVisibility(true);
         }
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
     }
 }
