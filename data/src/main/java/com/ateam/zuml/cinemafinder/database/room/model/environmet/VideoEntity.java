@@ -26,27 +26,21 @@ public final class VideoEntity {
     private final int movieId;
 
     @ColumnInfo(name = "language_id")
-    @NonNull
-    private final String languageId;
+    @NonNull private final String languageId;
 
     @ColumnInfo(name = "country_id")
-    @NonNull
-    private final String countryId;
+    @NonNull private final String countryId;
 
     @ColumnInfo(name = "video_key")
-    @NonNull
-    private final String videoKey;
+    @NonNull private final String videoKey;
 
-    @NonNull
-    private final String name;
+    @NonNull private final String name;
 
     @ColumnInfo(name = "site_name")
-    @NonNull
-    private final String siteName;
+    @NonNull private final String siteName;
 
-    @NonNull
     @TypeConverters(VideoTypeConverter.class)
-    private final VideoType type;
+    @NonNull private final VideoType type;
 
     public VideoEntity(int id, int movieId, @NonNull String languageId, @NonNull String countryId,
                        @NonNull String videoKey, @NonNull String name, @NonNull String siteName,

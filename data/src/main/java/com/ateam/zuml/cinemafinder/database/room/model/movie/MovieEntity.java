@@ -3,6 +3,7 @@ package com.ateam.zuml.cinemafinder.database.room.model.movie;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.Relation;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
@@ -14,7 +15,7 @@ import com.ateam.zuml.cinemafinder.database.room.model.enums.MovieStatus;
 import java.util.Date;
 import java.util.List;
 
-@Entity(tableName = "movies", primaryKeys = "id")
+@Entity(tableName = "movies", primaryKeys = "id", indices = @Index(value = "id"))
 public final class MovieEntity {
 
     private int id;
@@ -63,6 +64,7 @@ public final class MovieEntity {
                        @NonNull String overview, @NonNull String posterPath, @NonNull Date releaseDate,
                        @NonNull MovieStatus status, @NonNull String tagline, int runtime,
                        long voteAverage, int voteCount) {
+        this.id = id;
         this.title = title;
         this.adult = adult;
         this.homepage = homepage;

@@ -23,13 +23,11 @@ public final class MovieCollectionEntity {
     private final int movieId;
 
     @ColumnInfo(name = "backdrop_path")
-    @NonNull
-    private final String backdropPath;
+    @NonNull private final String backdropPath;
 
     @ColumnInfo(name = "collection_type")
     @TypeConverters(MovieCollectionConverter.class)
-    @NonNull
-    private final MovieCollectionType collectionType;
+    @NonNull private final MovieCollectionType collectionType;
 
 
     public MovieCollectionEntity(int movieId,
