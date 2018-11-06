@@ -3,6 +3,7 @@ package com.ateam.zuml.cinemafinder.mapper;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
+import com.ateam.zuml.cinemafinder.service.model.movie.Genre;
 
 public interface CharacteristicsMapper {
 
@@ -13,4 +14,6 @@ public interface CharacteristicsMapper {
     String mapLogoSizeToPath(final LogoSize logoSize, final String logoPath);
 
     String[] mapGenres(final int[] genresIds, final Language language);
+
+    String[] mapGenres(final Genre[] genres);
 }

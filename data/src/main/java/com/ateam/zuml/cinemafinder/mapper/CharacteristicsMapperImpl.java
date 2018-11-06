@@ -103,4 +103,13 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
         }
         return resultGenres;
     }
+
+    @Override
+    public String[] mapGenres(final Genre[] genres) {
+        final String[] resultGenres = new String[genres.length];
+        for (int i = 0; i < genres.length; i++) {
+            resultGenres[i] = genres[i].getName();
+        }
+        return resultGenres;
+    }
 }
