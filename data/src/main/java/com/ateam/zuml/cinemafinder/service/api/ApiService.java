@@ -54,7 +54,7 @@ public interface ApiService {
      * https://api.themoviedb.org/3/movie/534?api_key=<<api_key>>&language=en-US&append_to_response=videos,images
      */
     @GET("/movie/{movie_id}?api_key=" + ACCESS_TOKEN)
-    Single<MovieInfo> getMovieInfo(@Path("movie_id") int movieId,
+    Single<MovieInfo> getMovieInfo(@Path("movie_id") String movieId,
                                    @Query("language") String language,
                                    @Query("append_to_response") String additionalData);
 
