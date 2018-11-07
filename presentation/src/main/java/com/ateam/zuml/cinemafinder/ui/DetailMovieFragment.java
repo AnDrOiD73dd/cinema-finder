@@ -113,8 +113,8 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     }
 
     @Override
-    public void setSubTitle(String originalTitleText) {
-        subTitleView.setText(originalTitleText);
+    public void setSubTitle(String subTitleText) {
+        subTitleView.setText(subTitleText);
     }
 
     @Override

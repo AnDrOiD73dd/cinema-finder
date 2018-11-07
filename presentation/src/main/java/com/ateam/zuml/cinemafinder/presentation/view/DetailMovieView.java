@@ -14,7 +14,7 @@ public interface DetailMovieView extends MvpView {
 
     void setTitle(String titleText);
 
-    void setSubTitle(String originalTitleText);
+    void setSubTitle(String subTitleText);
 
     void setGenresList(String genresList);
 
