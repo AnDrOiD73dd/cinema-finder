@@ -10,4 +10,6 @@
     <color name="purple500">#6200EE</color>
     <color name="amber500">#FFC107</color>
     <color name="red500">#F44336</color>
+
+    <color name="favorite_color">#FFF44336</color>
 </resources>
