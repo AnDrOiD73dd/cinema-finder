@@ -22,6 +22,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 public class DetailMovieFragment extends MvpAppCompatFragment implements DetailMovieView {
 
     public static final String KEY_MOVIE_ID = "key_movie_id";
@@ -151,17 +152,17 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
 
     @Override
     public void setVoteCount(String voteCount) {
-        voteCountView.setText(String.format(Locale.getDefault(), "(%s)", voteCount));
+        voteCountView.setText(voteCount);
     }
 
     @Override
     public void setBudget(String budget) {
-        budgetView.setText(String.format(Locale.getDefault(), "%s $", budget));
+        budgetView.setText(budget);
     }
 
     @Override
     public void setRevenue(String revenue) {
-        revenueView.setText(String.format(Locale.getDefault(), "%s $", revenue));
+        revenueView.setText(revenue);
     }
 
     @Override

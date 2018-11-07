@@ -6,6 +6,8 @@ import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.presentation.view.DetailMovieView;
 import com.ateam.zuml.cinemafinder.util.StringUtil;
 
+import java.util.Locale;
+
 import javax.inject.Inject;
 
 
@@ -36,12 +38,12 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
         getViewState().hideProgressBar();
         getViewState().setTitle("Title");
         getViewState().setOriginalTitle("Original title");
-        String[] genresList = new String[] {"Genre 1", "Genre 2", "Genre 3"};
+        String[] genresList = new String[]{"Genre 1", "Genre 2", "Genre 3"};
         getViewState().setGenresList(stringUtil.getStringFromArrayGenres(genresList));
         getViewState().setReleaseYear("2016");
         getViewState().setRuntime("120");
         getViewState().setVoteAverage("7.8");
-        getViewState().setVoteCount("3476");
+        getViewState().setVoteCount(String.format(Locale.getDefault(), "(%s)", "3476"));
         getViewState().setBudget("63 000 000");
         getViewState().setRevenue("750 000 000");
         getViewState().setReleaseDate("2015-09-22");
@@ -58,9 +60,9 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
         getViewState().setReleaseYear(movieDetailsModel.getReleaseYear());
         getViewState().setRuntime(movieDetailsModel.getRuntime());
         getViewState().setVoteAverage(movieDetailsModel.getVoteAverage());
-        getViewState().setVoteCount(movieDetailsModel.getVoteCount());
-        getViewState().setBudget(movieDetailsModel.getBudget());
-        getViewState().setRevenue(movieDetailsModel.getRevenue());
+        getViewState().setVoteCount(String.format(Locale.getDefault(), "(%s)", movieDetailsModel.getVoteCount()));
+        getViewState().setBudget(String.format(Locale.getDefault(), "%s $", movieDetailsModel.getBudget()));
+        getViewState().setRevenue(String.format(Locale.getDefault(), "%s $", movieDetailsModel.getRevenue()));
         getViewState().setReleaseDate(movieDetailsModel.getReleaseDate());
         getViewState().setTagline(movieDetailsModel.getTagline());
         getViewState().setOverview(movieDetailsModel.getOverview());
