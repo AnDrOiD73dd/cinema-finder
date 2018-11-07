@@ -90,8 +90,7 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
         } catch (ArrayIndexOutOfBoundsException e) {
             size = images.getLogoSizes()[0];
         }
-        //TODO 07.11.2018 added "/"
-        return baseUrl + size + "/" + logoPath.substring(1);
+        return baseUrl + size + logoPath;
     }
 
     @Override
