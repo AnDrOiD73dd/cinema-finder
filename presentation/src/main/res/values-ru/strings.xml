@@ -12,7 +12,7 @@
     <string name="right_brace">)</string>
     <string name="home">Главная</string>
     <string name="search_hint">Введите название фильма</string>
-    <string name="movie_details_minutes">мин</string>
+    <string name="movie_details_minutes">мин.</string>
     <string name="movie_details_budget_title">Бюджет:</string>
     <string name="movie_details_revenue_title">Доход:</string>
     <string name="movie_details_release_date">Дата премьеры:</string>
