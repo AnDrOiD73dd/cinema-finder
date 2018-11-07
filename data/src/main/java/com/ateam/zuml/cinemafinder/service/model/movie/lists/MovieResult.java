@@ -1,5 +1,8 @@
-package com.ateam.zuml.cinemafinder.service.model.movie.details;
+package com.ateam.zuml.cinemafinder.service.model.movie.lists;
 
+/**
+ * Part of {@link MoviesList}, {@link MoviesListWithDates}
+ */
 public final class MovieResult {
 
     private final int voteCount;
@@ -18,10 +21,10 @@ public final class MovieResult {
     private final String releaseDate;
 
     public MovieResult(final int voteCount, final int id, final boolean video, final float voteAverage,
-                final String title, final float popularity, final String posterPath,
-                final String originalLanguage, final String originalTitle, final int[] genreIds,
-                final String backdropPath, final boolean adult, final String overview,
-                final String releaseDate) {
+                       final String title, final float popularity, final String posterPath,
+                       final String originalLanguage, final String originalTitle, final int[] genreIds,
+                       final String backdropPath, final boolean adult, final String overview,
+                       final String releaseDate) {
         this.voteCount = voteCount;
         this.id = id;
         this.video = video;

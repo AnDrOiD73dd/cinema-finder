@@ -1,26 +1,24 @@
 package com.ateam.zuml.cinemafinder.service.model.person.credits;
 
-import android.support.annotation.Nullable;
-
-import com.google.gson.annotations.SerializedName;
-
-// Part of other objects: Credits
-
+/**
+ * Part of the {@link Credits}
+ */
 final class Crew {
+
+    final private int id;
     private final String creditId;
     private final String department;
-    @Nullable final private Integer gender;
-    @SerializedName("id") final private int peopleId;
+    final private Integer gender;
     private final String job;
     private final String name;
     private final String profilePath;
 
-    public Crew(final String creditId, final String department, final int gender, final int peopleId,
+    public Crew(final String creditId, final String department, final int gender, final int id,
                 final String job, final String name, final String profilePath) {
         this.creditId = creditId;
         this.department = department;
         this.gender = gender;
-        this.peopleId = peopleId;
+        this.id = id;
         this.job = job;
         this.name = name;
         this.profilePath = profilePath;
@@ -34,13 +32,12 @@ final class Crew {
         return department;
     }
 
-    @Nullable
     public Integer getGender() {
         return gender;
     }
 
-    public int getPeopleId() {
-        return peopleId;
+    public int getId() {
+        return id;
     }
 
     public String getJob() {

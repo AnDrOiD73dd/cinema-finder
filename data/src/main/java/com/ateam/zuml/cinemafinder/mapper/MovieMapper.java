@@ -4,8 +4,8 @@ import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
-import com.ateam.zuml.cinemafinder.service.model.movie.MovieInfo;
-import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieResult;
+import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieInfo;
+import com.ateam.zuml.cinemafinder.service.model.movie.lists.MovieResult;
 
 import java.util.List;
 

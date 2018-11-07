@@ -3,7 +3,7 @@ package com.ateam.zuml.cinemafinder.mapper;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
-import com.ateam.zuml.cinemafinder.service.model.movie.Genre;
+import com.ateam.zuml.cinemafinder.service.model.common.genre.Genre;
 
 public interface CharacteristicsMapper {
 

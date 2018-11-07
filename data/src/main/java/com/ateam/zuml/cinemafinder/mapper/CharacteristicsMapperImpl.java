@@ -5,7 +5,7 @@ import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.service.api.ApiService;
 import com.ateam.zuml.cinemafinder.service.model.configuration.Images;
-import com.ateam.zuml.cinemafinder.service.model.movie.Genre;
+import com.ateam.zuml.cinemafinder.service.model.common.genre.Genre;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

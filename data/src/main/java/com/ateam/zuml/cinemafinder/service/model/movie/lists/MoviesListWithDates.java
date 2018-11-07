@@ -1,16 +1,19 @@
-package com.ateam.zuml.cinemafinder.service.model.movie.details;
+package com.ateam.zuml.cinemafinder.service.model.movie.lists;
 
-// Get a list of movies in theatres.
-// This is a release type query that looks for all movies
-//      that have a release type of 2 or 3 within the specified date range.
-public final class NowPlayingMovies {
+import com.ateam.zuml.cinemafinder.service.api.ApiService;
+
+/**
+ * Result for {@link ApiService#getNowPlayingMovies(String, String, String)}
+ */
+public final class MoviesListWithDates {
+
     private final int page;
     private final int totalPages;
     private final DateRange dates;
     private final MovieResult[] results;
 
-    public NowPlayingMovies(final int page, final int totalPages, final DateRange dates,
-                            final MovieResult[] results) {
+    public MoviesListWithDates(final int page, final int totalPages, final DateRange dates,
+                               final MovieResult[] results) {
         this.page = page;
         this.totalPages = totalPages;
         this.dates = dates;
