@@ -3,6 +3,7 @@ package com.ateam.zuml.cinemafinder.di.application;
 import android.content.Context;
 
 import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
+import com.ateam.zuml.cinemafinder.di.application.modules.ImageLoaderModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
@@ -13,8 +14,10 @@ import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.MainContainerPresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
+import com.ateam.zuml.cinemafinder.ui.DetailMovieFragment;
 import com.ateam.zuml.cinemafinder.ui.MainActivity;
 import com.ateam.zuml.cinemafinder.ui.MainContainerFragment;
+import com.ateam.zuml.cinemafinder.ui.SearchResponseFragment;
 import com.ateam.zuml.cinemafinder.ui.SettingsFragment;
 
 import javax.inject.Singleton;
@@ -22,13 +25,13 @@ import javax.inject.Singleton;
 import dagger.BindsInstance;
 import dagger.Component;
 
-
 @Singleton
 @Component(modules = {
         DataModule.class,
         MapperModule.class,
         NavigationModule.class,
         ServiceModule.class,
+        ImageLoaderModule.class,
         UtilsModule.class})
 public interface AppComponent {
 
@@ -56,7 +59,11 @@ public interface AppComponent {
 
     void inject(RatingsPresenter presenter);
 
+    void inject(SearchResponseFragment fragment);
+
     void inject(SearchResponsePresenter presenter);
+
+    void inject(DetailMovieFragment fragment);
 
     void inject(DetailMoviePresenter presenter);
 }

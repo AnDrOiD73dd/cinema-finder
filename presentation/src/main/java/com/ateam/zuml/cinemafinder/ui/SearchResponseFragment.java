@@ -8,18 +8,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchResponseView;
+import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,16 +30,21 @@ public class SearchResponseFragment extends MvpAppCompatFragment
     private static final String QUERY_EXTRA_KEY = "query_extra_key";
 
     private SearchResultAdapter adapter;
-    private String query;
 
     @BindView(R.id.rv_search_response) RecyclerView recyclerView;
 
+    @Inject ImageLoader<ImageView> imageLoader;
+
     @InjectPresenter SearchResponsePresenter presenter;
-    private List<MovieListModel> searchList;
 
     @ProvidePresenter
     SearchResponsePresenter provideSearchResponsePresenter() {
-        SearchResponsePresenter presenter = new SearchResponsePresenter();
+        Bundle bundle = getArguments();
+        String movieTitle = "";
+        if (bundle != null && bundle.containsKey(QUERY_EXTRA_KEY)) {
+            movieTitle = bundle.getString(QUERY_EXTRA_KEY);
+        }
+        SearchResponsePresenter presenter = new SearchResponsePresenter(movieTitle);
         App.getApp().getAppComponent().inject(presenter);
         return presenter;
     }
@@ -71,39 +76,31 @@ public class SearchResponseFragment extends MvpAppCompatFragment
     }
 
     private void init(View v) {
-        if (getArguments() != null) {
-            this.query = getArguments().getString(QUERY_EXTRA_KEY);
-        }
-
+        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, v);
 
+        adapter = new SearchResultAdapter(presenter.getListPresenter(), imageLoader);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        searchList = new ArrayList<>();
-        searchList.add(new MovieListModel("1", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр"}, "10.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieListModel("2", "Какое-то название", "Второе какое-то название", "1000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр", "Какой-то жанр", "Какой-то жанр", "Какой-то жанр"}, "9.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieListModel("3", "Какое-то название", "Второе какое-то название", "2000-05-06", new String[]{"Какой-то жанр"}, "8.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieListModel("4", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр", "Какой-то жанр"}, "7.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieListModel("5", "Какое-то название", "Второе какое-то название", "1000-05-06", new String[]{"Какой-то жанр"}, "6.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieListModel("6", "Какое-то название", "Второе какое-то название", "2000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр"}, "5.0", "R.drawable.ic_broken_image"));
-        searchList.add(new MovieListModel("7", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр"}, "4.0", "R.drawable.ic_broken_image"));
-
-        adapter = new SearchResultAdapter(presenter.getListPresenter(searchList));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);
     }
 
     @Override
-    public void onItemClick(View view, int position) {
-        presenter.showDetailsInfo(searchList.get(position).getId());
+    public void onItemClick(int position) {
+        presenter.showDetailsInfo(position);
     }
 
     @Override
-    public void closeSearch()   {
+    public void closeSearch() {
         if (getActivity() != null) {
             ((WidgetTuning) getActivity()).closeSearch();
         }
+    }
+
+    @Override
+    public void updateSearchList() {
+        adapter.refreshView();
     }
 
     @Override

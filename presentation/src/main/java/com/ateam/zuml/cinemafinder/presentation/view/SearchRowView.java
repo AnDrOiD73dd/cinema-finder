@@ -2,7 +2,7 @@ package com.ateam.zuml.cinemafinder.presentation.view;
 
 public interface SearchRowView {
 
-    void setPoster(int path);
+    void setPoster(String posterPath);
 
     void setTitle(String title);
 

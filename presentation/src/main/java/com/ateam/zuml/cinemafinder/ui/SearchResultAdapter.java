@@ -10,22 +10,27 @@ import android.widget.TextView;
 
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
+import com.ateam.zuml.cinemafinder.presentation.view.SearchListView;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
+import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
+public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder>
+        implements SearchListView {
 
+    private ImageLoader<ImageView> imageLoader;
     private SearchResponsePresenter.SearchListPresenter presenter;
     private OnItemClickListener itemClickListener;
 
-    SearchResultAdapter(SearchResponsePresenter.SearchListPresenter presenter) {
+    SearchResultAdapter(SearchResponsePresenter.SearchListPresenter presenter, ImageLoader<ImageView> imageLoader) {
         this.presenter = presenter;
+        this.imageLoader = imageLoader;
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(int position);
     }
 
     void setOnItemClickListener(OnItemClickListener itemClickListener) {
@@ -49,6 +54,11 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         return presenter.getSearchCount();
     }
 
+    @Override
+    public void refreshView() {
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder implements SearchRowView {
 
         @BindView(R.id.iv_poster_search) ImageView poster;
@@ -61,12 +71,12 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(v -> itemClickListener.onItemClick(v, getAdapterPosition()));
+            itemView.setOnClickListener(v -> itemClickListener.onItemClick(getAdapterPosition()));
         }
 
         @Override
-        public void setPoster(int path) {
-            this.poster.setImageResource(path);
+        public void setPoster(String posterPath) {
+            imageLoader.loadInto(posterPath, poster);
         }
 
         @Override
