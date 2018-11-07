@@ -41,7 +41,7 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
             case ENGLISH:
                 return EN_LANGUAGE;
             default:
-                throw new IllegalArgumentException("Illegal language type");
+                return EN_LANGUAGE;
         }
     }
 
@@ -53,7 +53,7 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
             case ENGLISH:
                 return EN_REGION;
             default:
-                throw new IllegalArgumentException("Illegal region type");
+                return EN_REGION;
         }
     }
 
