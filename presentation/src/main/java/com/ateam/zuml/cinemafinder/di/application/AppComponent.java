@@ -6,6 +6,7 @@ import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
+import com.ateam.zuml.cinemafinder.presentation.presenter.DetailMoviePresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.MainContainerPresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
 import com.ateam.zuml.cinemafinder.ui.MainActivity;
@@ -26,12 +27,12 @@ public interface AppComponent {
 
     @Component.Builder
     interface Builder {
-        AppComponent build();
 
+        AppComponent build();
         @BindsInstance
         Builder with(final Context context);
-    }
 
+    }
     void inject(MainActivity activity);
 
     void inject(MainContainerFragment fragment);
@@ -39,4 +40,6 @@ public interface AppComponent {
     void inject(MainContainerPresenter presenter);
 
     void inject(SearchResponsePresenter presenter);
+
+    void inject(DetailMoviePresenter presenter);
 }

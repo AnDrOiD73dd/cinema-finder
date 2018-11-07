@@ -35,6 +35,7 @@ public class SearchResponseFragment extends MvpAppCompatFragment
     @BindView(R.id.rv_search_response) RecyclerView recyclerView;
 
     @InjectPresenter SearchResponsePresenter presenter;
+    private List<MovieListModel> searchList;
 
     @ProvidePresenter
     SearchResponsePresenter provideSearchResponsePresenter() {
@@ -78,7 +79,7 @@ public class SearchResponseFragment extends MvpAppCompatFragment
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        List<MovieListModel> searchList = new ArrayList<>();
+        searchList = new ArrayList<>();
         searchList.add(new MovieListModel("1", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр"}, "10.0", "R.drawable.ic_broken_image"));
         searchList.add(new MovieListModel("2", "Какое-то название", "Второе какое-то название", "1000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр", "Какой-то жанр", "Какой-то жанр", "Какой-то жанр"}, "9.0", "R.drawable.ic_broken_image"));
         searchList.add(new MovieListModel("3", "Какое-то название", "Второе какое-то название", "2000-05-06", new String[]{"Какой-то жанр"}, "8.0", "R.drawable.ic_broken_image"));
@@ -95,7 +96,7 @@ public class SearchResponseFragment extends MvpAppCompatFragment
 
     @Override
     public void onItemClick(View view, int position) {
-        presenter.showDetailsInfo();
+        presenter.showDetailsInfo(searchList.get(position).getId());
     }
 
     @Override

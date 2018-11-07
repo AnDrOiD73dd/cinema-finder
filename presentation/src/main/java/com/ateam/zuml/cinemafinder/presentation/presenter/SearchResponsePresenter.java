@@ -20,7 +20,7 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
-    public final class SearchListPresenter  {
+    public final class SearchListPresenter {
 
         private List<MovieListModel> searchList;
 
@@ -28,7 +28,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             this.searchList = new ArrayList<>();
         }
 
-        public void bindViewAt( SearchRowView view, int position) {
+        public void bindViewAt(SearchRowView view, int position) {
             //FIXME 06.11.2018 add Picasso
             view.setPoster(R.drawable.ic_broken_image);
             view.setTitle(searchList.get(position).getTitle());
@@ -51,7 +51,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
             for (int i = 0; i < arr.length; i++) {
                 sb.append(arr[i]);
-                if(arr.length == 1 || i == (arr.length - 1)) {
+                if (arr.length == 1 || i == (arr.length - 1)) {
                     break;
                 }
                 sb.append(", ");
@@ -61,7 +61,9 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         }
     }
 
-    @Named(Const.MAIN_CONTAINER) @Inject Router router;
+    @Named(Const.MAIN_CONTAINER)
+    @Inject
+    Router router;
 
     private SearchListPresenter listPresenter;
 
@@ -75,8 +77,8 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         return listPresenter;
     }
 
-    public void showDetailsInfo() {
+    public void showDetailsInfo(String movieId) {
         getViewState().closeSearch();
-        router.navigateTo(new Screens.DetailMovieScreen());
+        router.navigateTo(new Screens.DetailMovieScreen(movieId));
     }
 }

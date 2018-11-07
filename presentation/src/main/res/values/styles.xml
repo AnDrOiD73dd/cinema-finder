@@ -14,4 +14,30 @@
         <item name="itemIconTint">@color/bnv_color_selector</item>
         <item name="itemTextColor">@color/bnv_color_selector</item>
     </style>
+
+    <style name="DetailsTitleTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/text_size_26_sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="DetailsSubTitleTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">@dimen/text_size_16_sp</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="DetailsCommonTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textSize">@dimen/text_size_14_sp</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:layout_marginTop">@dimen/movie_details_delimiter_margin</item>
+        <item name="android:layout_marginStart">@dimen/movie_details_delimiter_margin</item>
+    </style>
+
+    <style name="DetailsSecondaryTextAppearance" parent="@android:style/TextAppearance">
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">@dimen/text_size_12_sp</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:layout_marginTop">@dimen/movie_details_delimiter_margin</item>
+        <item name="android:layout_marginStart">@dimen/movie_details_delimiter_margin</item>
+    </style>
 </resources>
