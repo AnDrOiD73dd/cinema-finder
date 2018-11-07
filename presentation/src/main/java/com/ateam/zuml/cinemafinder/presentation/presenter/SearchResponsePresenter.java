@@ -7,7 +7,7 @@ import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchResponseView;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
 import com.ateam.zuml.cinemafinder.ui.Screens;
-import com.ateam.zuml.cinemafinder.util.Const;
+import com.ateam.zuml.cinemafinder.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         }
     }
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
 

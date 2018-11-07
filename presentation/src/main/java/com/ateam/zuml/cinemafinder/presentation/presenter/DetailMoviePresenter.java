@@ -1,12 +1,19 @@
 package com.ateam.zuml.cinemafinder.presentation.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
+import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.presentation.view.DetailMovieView;
+import com.ateam.zuml.cinemafinder.util.StringUtil;
+
+import javax.inject.Inject;
+
 
 @InjectViewState
-public class DetailMoviePresenter extends BasePresenter<DetailMovieView> {
+public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
 
+    @Inject
+    StringUtil stringUtil;
     private final String movieId;
 
     public DetailMoviePresenter(String movieId) {
@@ -29,7 +36,8 @@ public class DetailMoviePresenter extends BasePresenter<DetailMovieView> {
         getViewState().hideProgressBar();
         getViewState().setTitle("Title");
         getViewState().setOriginalTitle("Original title");
-        getViewState().setGenresList("Genre 1, genre 2, genre 3");
+        String[] genresList = new String[] {"Genre 1", "Genre 2", "Genre 3"};
+        getViewState().setGenresList(stringUtil.getStringFromArrayGenres(genresList));
         getViewState().setReleaseYear("2016");
         getViewState().setRuntime("120");
         getViewState().setVoteAverage("7.8");
@@ -46,7 +54,7 @@ public class DetailMoviePresenter extends BasePresenter<DetailMovieView> {
         getViewState().setTitle(movieDetailsModel.getTitle());
         getViewState().setOriginalTitle(movieDetailsModel.getOriginalTitle());
         getViewState().setPoster(movieDetailsModel.getPosterPath());  // TODO: load image over ImageLoader
-        getViewState().setGenresList(getStringFromArrayGenres(movieDetailsModel.getGenres()));
+        getViewState().setGenresList(stringUtil.getStringFromArrayGenres(movieDetailsModel.getGenres()));
         getViewState().setReleaseYear(movieDetailsModel.getReleaseYear());
         getViewState().setRuntime(movieDetailsModel.getRuntime());
         getViewState().setVoteAverage(movieDetailsModel.getVoteAverage());

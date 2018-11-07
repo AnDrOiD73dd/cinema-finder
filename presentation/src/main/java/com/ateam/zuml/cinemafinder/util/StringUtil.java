@@ -1,11 +1,11 @@
-package com.ateam.zuml.cinemafinder.presentation.presenter;
+package com.ateam.zuml.cinemafinder.util;
 
-import com.arellomobile.mvp.MvpPresenter;
-import com.arellomobile.mvp.MvpView;
+public class StringUtil {
 
-public abstract class BasePresenter<T extends MvpView> extends MvpPresenter<T> {
+    public StringUtil() {
+    }
 
-    protected String getStringFromArrayGenres(String[] arr) {
+    public String getStringFromArrayGenres(String[] arr) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < arr.length; i++) {

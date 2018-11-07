@@ -1,7 +1,7 @@
 package com.ateam.zuml.cinemafinder.di.application.modules;
 
 import com.ateam.zuml.cinemafinder.util.CiceroneHolder;
-import com.ateam.zuml.cinemafinder.util.Const;
+import com.ateam.zuml.cinemafinder.util.Constants;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -14,13 +14,13 @@ import ru.terrakok.cicerone.Router;
 @Module
 public final class NavigationModule {
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Provides
     String getMainContainer() {
         return "main_container";
     }
 
-    @Named(Const.CHILD_CONTAINER)
+    @Named(Constants.CHILD_CONTAINER)
     @Provides
     String getHomeContainer() {
         return "child_container";
@@ -32,35 +32,35 @@ public final class NavigationModule {
         return new CiceroneHolder();
     }
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Singleton
     @Provides
     Router provideMainRouter(CiceroneHolder ciceroneHolder,
-                             @Named(Const.MAIN_CONTAINER) String containerName) {
+                             @Named(Constants.MAIN_CONTAINER) String containerName) {
         return ciceroneHolder.getCicerone(containerName).getRouter();
     }
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Singleton
     @Provides
     NavigatorHolder provideMainNavigatorHolder(CiceroneHolder ciceroneHolder,
-                                               @Named(Const.MAIN_CONTAINER) String containerName) {
+                                               @Named(Constants.MAIN_CONTAINER) String containerName) {
         return ciceroneHolder.getCicerone(containerName).getNavigatorHolder();
     }
 
-    @Named(Const.CHILD_CONTAINER)
+    @Named(Constants.CHILD_CONTAINER)
     @Singleton
     @Provides
     Router provideChildRouter(CiceroneHolder ciceroneHolder,
-                              @Named(Const.CHILD_CONTAINER) String containerName) {
+                              @Named(Constants.CHILD_CONTAINER) String containerName) {
         return ciceroneHolder.getCicerone(containerName).getRouter();
     }
 
-    @Named(Const.CHILD_CONTAINER)
+    @Named(Constants.CHILD_CONTAINER)
     @Singleton
     @Provides
     NavigatorHolder provideChildNavigatorHolder(CiceroneHolder ciceroneHolder,
-                                                @Named(Const.CHILD_CONTAINER) String containerName) {
+                                                @Named(Constants.CHILD_CONTAINER) String containerName) {
         return ciceroneHolder.getCicerone(containerName).getNavigatorHolder();
     }
 }
