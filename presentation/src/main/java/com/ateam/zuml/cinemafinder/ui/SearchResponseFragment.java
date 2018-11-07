@@ -25,11 +25,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchResponseFragment extends MvpAppCompatFragment
-        implements SearchListRecyclerView.OnItemClickListener, SearchResponseView {
+        implements SearchResultAdapter.OnItemClickListener, SearchResponseView {
 
     private static final String QUERY_EXTRA_KEY = "query_extra_key";
 
-    private SearchListRecyclerView adapter;
+    private SearchResultAdapter adapter;
     private String query;
 
     @BindView(R.id.rv_search_response) RecyclerView recyclerView;
@@ -88,7 +88,7 @@ public class SearchResponseFragment extends MvpAppCompatFragment
         searchList.add(new MovieListModel("6", "Какое-то название", "Второе какое-то название", "2000-05-06", new String[]{"Какой-то жанр", "Какой-то жанр"}, "5.0", "R.drawable.ic_broken_image"));
         searchList.add(new MovieListModel("7", "Какое-то название", "Второе какое-то название", "3000-05-06", new String[]{"Какой-то жанр"}, "4.0", "R.drawable.ic_broken_image"));
 
-        adapter = new SearchListRecyclerView(presenter.getListPresenter(searchList));
+        adapter = new SearchResultAdapter(presenter.getListPresenter(searchList));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(this);

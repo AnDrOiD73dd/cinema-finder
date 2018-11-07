@@ -15,12 +15,12 @@ import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchListRecyclerView extends RecyclerView.Adapter<SearchListRecyclerView.ViewHolder> {
+public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
 
     private SearchResponsePresenter.SearchListPresenter presenter;
     private OnItemClickListener itemClickListener;
 
-    SearchListRecyclerView(SearchResponsePresenter.SearchListPresenter presenter) {
+    SearchResultAdapter(SearchResponsePresenter.SearchListPresenter presenter) {
         this.presenter = presenter;
     }
 
@@ -34,7 +34,7 @@ public class SearchListRecyclerView extends RecyclerView.Adapter<SearchListRecyc
 
     @NonNull
     @Override
-    public SearchListRecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public SearchResultAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.search_item, viewGroup, false));
     }
