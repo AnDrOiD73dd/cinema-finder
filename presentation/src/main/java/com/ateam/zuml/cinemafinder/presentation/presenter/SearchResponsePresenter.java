@@ -88,12 +88,13 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         }
 
         public void bindViewAt(SearchRowView view, int position) {
-            view.setPoster(searchList.get(position).getPosterPath());
-            view.setTitle(searchList.get(position).getTitle());
-            view.setOriginalTitle(searchList.get(position).getOriginalTitle());
-            view.setReleaseDate(searchList.get(position).getReleaseYear());
-            view.setGenres(stringUtil.getStringFromArrayGenres(searchList.get(position).getGenres()));
-            view.setVoteAverage(searchList.get(position).getVoteAverage());
+            MovieListModel movieListModel = searchList.get(position);
+            view.setPoster(movieListModel.getPosterPath());
+            view.setTitle(movieListModel.getTitle());
+            view.setOriginalTitle(movieListModel.getOriginalTitle());
+            view.setReleaseDate(movieListModel.getReleaseYear());
+            view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
+            view.setVoteAverage(movieListModel.getVoteAverage());
         }
 
         public int getSearchCount() {
