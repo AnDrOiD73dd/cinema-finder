@@ -15,25 +15,29 @@
         <item name="itemTextColor">@color/bnv_color_selector</item>
     </style>
 
-    <style name="DetailsTitleTextAppearance" parent="@android:style/TextAppearance">
+    <style name="ProductSans" parent="@android:style/TextAppearance">
+        <item name="fontFamily">@font/product_sans</item>
+    </style>
+
+    <style name="ProductSans.DetailsTitleTextAppearance">
         <item name="android:textSize">@dimen/text_size_26_sp</item>
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="DetailsSubTitleTextAppearance" parent="@android:style/TextAppearance">
+    <style name="ProductSans.DetailsSubTitleTextAppearance">
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">@dimen/text_size_16_sp</item>
         <item name="android:textColor">@color/gray</item>
     </style>
 
-    <style name="DetailsCommonTextAppearance" parent="@android:style/TextAppearance">
+    <style name="ProductSans.DetailsCommonTextAppearance">
         <item name="android:textSize">@dimen/text_size_14_sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:layout_marginTop">@dimen/movie_details_delimiter_margin</item>
         <item name="android:layout_marginStart">@dimen/movie_details_delimiter_margin</item>
     </style>
 
-    <style name="DetailsSecondaryTextAppearance" parent="@android:style/TextAppearance">
+    <style name="ProductSans.DetailsSecondaryTextAppearance">
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">@dimen/text_size_12_sp</item>
         <item name="android:textColor">@color/gray</item>
