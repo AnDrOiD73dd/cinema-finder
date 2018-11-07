@@ -16,4 +16,5 @@
     <string name="movie_details_budget_title">Budget:</string>
     <string name="movie_details_revenue_title">Revenue:</string>
     <string name="movie_details_release_date">Release date:</string>
+    <string name="movie_details_error_message">An error occurred while loading movie information.</string>
 </resources>

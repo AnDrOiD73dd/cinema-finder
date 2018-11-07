@@ -16,4 +16,5 @@
     <string name="movie_details_budget_title">Бюджет:</string>
     <string name="movie_details_revenue_title">Доход:</string>
     <string name="movie_details_release_date">Дата премьеры:</string>
+    <string name="movie_details_error_message">Произошла ошибка при загрузке информации о фильме.</string>
 </resources>
