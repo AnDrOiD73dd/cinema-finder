@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/movie_detail_root"
     android:layout_width="match_parent"
@@ -12,28 +11,16 @@
         style="@style/ProductSans.DetailsTitleTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/tv_movie_original_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_movie_original_title"
+        android:id="@+id/tv_movie_subtitle"
         style="@style/ProductSans.DetailsSubTitleTextAppearance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/tv_movie_release_year"
-        app:layout_constraintRight_toLeftOf="@id/tv_movie_release_year"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
-
-    <TextView
-        android:id="@+id/tv_movie_release_year"
-        style="@style/ProductSans.DetailsSubTitleTextAppearance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/movie_details_delimiter_margin"
-        app:layout_constraintStart_toEndOf="@id/tv_movie_original_title"
         app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
 
     <ImageView
@@ -42,7 +29,7 @@
         android:layout_height="@dimen/movie_details_poster_height"
         android:layout_marginTop="@dimen/movie_details_delimiter_margin"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_original_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_movie_subtitle" />
 
     <TextView
         android:id="@+id/tv_movie_genres_list"
@@ -50,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toEndOf="@id/iv_movie_poster"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_original_title" />
+        app:layout_constraintTop_toBottomOf="@id/tv_movie_subtitle" />
 
     <TextView
         android:id="@+id/tv_movie_runtime"

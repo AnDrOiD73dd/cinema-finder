@@ -56,10 +56,10 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     private void onLoadSuccess(MovieDetailsModel movieDetailsModel) {
         getViewState().hideProgressBar();
         getViewState().setTitle(movieDetailsModel.getTitle());
-        getViewState().setOriginalTitle(movieDetailsModel.getOriginalTitle());
+        getViewState().setSubTitle(String.format(Locale.getDefault(), "%s (%s)",
+                movieDetailsModel.getOriginalTitle(), movieDetailsModel.getReleaseYear()));
         getViewState().setPoster(movieDetailsModel.getPosterPath());
         getViewState().setGenresList(stringUtil.getStringFromArrayGenres(movieDetailsModel.getGenres()));
-        getViewState().setReleaseYear(movieDetailsModel.getReleaseYear());
         getViewState().setRuntime(movieDetailsModel.getRuntime());
         getViewState().setVoteAverage(movieDetailsModel.getVoteAverage());
         getViewState().setVoteCount(String.format(Locale.getDefault(), "(%s)", movieDetailsModel.getVoteCount()));
