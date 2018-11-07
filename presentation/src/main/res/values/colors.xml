@@ -6,6 +6,7 @@
     <color name="colorBaseIcons">@color/black</color>
 
     <color name="black">#000000</color>
+    <color name="gray">#aaa</color>
     <color name="white">#FFFFFF</color>
     <color name="purple500">#6200EE</color>
     <color name="amber500">#FFC107</color>
