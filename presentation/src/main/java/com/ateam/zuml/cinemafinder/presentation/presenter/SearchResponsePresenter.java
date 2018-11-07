@@ -67,7 +67,32 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         public void setSearchList(List<MovieListModel> searchList) {
             this.searchList = searchList;
         }
+
+
+    @Named(Const.MAIN_CONTAINER)
+    @Inject
+    Router router;
+
+    private SearchListPresenter listPresenter;
+
+    public SearchResponsePresenter() {
+        this.listPresenter = new SearchListPresenter();
     }
 
+    public SearchListPresenter getListPresenter(List<MovieListModel> searchList) {
+        //TODO 06.11.2018 stub
+        listPresenter.setSearchList(searchList);
+        return listPresenter;
+    }
+
+    public void showDetailsInfo() {
+        getViewState().closeSearch();
+        router.navigateTo(new Screens.DetailMovieScreen());
+    }
+
+    public void onBackPressed() {
+        getViewState().closeSearch();
+        router.exit();
+    }
 }
 

@@ -4,12 +4,12 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.presentation.view.DetailMovieView;
+import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.StringUtil;
-
 import java.util.Locale;
-
 import javax.inject.Inject;
-
+import javax.inject.Named;
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
@@ -17,6 +17,10 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     @Inject
     StringUtil stringUtil;
     private final String movieId;
+    
+    @Named(Const.MAIN_CONTAINER)
+    @Inject
+    Router router;
 
     public DetailMoviePresenter(String movieId) {
         this.movieId = movieId;
@@ -71,5 +75,8 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     private void onLoadFailed() {
         getViewState().hideProgressBar();
         getViewState().showError();
+
+    public void onBackPressed() {
+        router.exit();
     }
 }

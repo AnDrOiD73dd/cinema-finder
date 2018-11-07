@@ -18,7 +18,13 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
 
     private int currentPageId;
 
-    @Named(Constants.CHILD_CONTAINER) @Inject Router router;
+    @Named(Const.CHILD_CONTAINER)
+    @Inject
+    Router localRouter;
+
+    @Named(Const.MAIN_CONTAINER)
+    @Inject
+    Router globalRouter;
 
     public boolean showFragment(int itemId) {
         if(currentPageId == itemId) {
@@ -28,18 +34,22 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
         switch (itemId) {
             case R.id.action_trends:
                 currentPageId = itemId;
-                router.replaceScreen(new Screens.TrendsScreen());
+                localRouter.replaceScreen(new Screens.TrendsScreen());
                 return true;
             case R.id.action_favorites:
                 currentPageId = itemId;
-                router.replaceScreen(new Screens.FavoritesScreen());
+                localRouter.replaceScreen(new Screens.FavoritesScreen());
                 return true;
             case R.id.action_ratings:
                 currentPageId = itemId;
-                router.replaceScreen(new Screens.RatingsScreen());
+                localRouter.replaceScreen(new Screens.RatingsScreen());
                 return true;
             default:
                 return false;
         }
+    }
+
+    public void onBackPressed() {
+        globalRouter.exit();
     }
 }

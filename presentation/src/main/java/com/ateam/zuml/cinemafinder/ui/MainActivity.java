@@ -1,16 +1,22 @@
 package com.ateam.zuml.cinemafinder.ui;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.util.Constants;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -28,8 +34,13 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.search) SearchView search;
 
-    @Named(Constants.MAIN_CONTAINER) @Inject NavigatorHolder navigatorHolder;
-    @Named(Constants.MAIN_CONTAINER) @Inject Router router;
+    @Named(Const.MAIN_CONTAINER)
+    @Inject
+    NavigatorHolder navigatorHolder;
+
+    @Named(Const.MAIN_CONTAINER)
+    @Inject
+    Router router;
 
     private Navigator navigator = new SupportAppNavigator(this, R.id.main_container) {
         @Override
@@ -52,6 +63,12 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     }
 
     private void init() {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.gray500));
+        }
+
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -119,5 +136,22 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     public void onPause() {
         navigatorHolder.removeNavigator();
         super.onPause();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = null;
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment f : fragments) {
+            if (f.isVisible()) {
+                fragment = f;
+                break;
+            }
+        }
+        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
+            return;
+        } else {
+            router.exit();
+        }
     }
 }

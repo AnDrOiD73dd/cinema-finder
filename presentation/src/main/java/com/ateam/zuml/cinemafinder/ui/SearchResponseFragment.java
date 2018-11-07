@@ -25,7 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SearchResponseFragment extends MvpAppCompatFragment
-        implements SearchResultAdapter.OnItemClickListener, SearchResponseView {
+        implements SearchResultAdapter.OnItemClickListener, SearchResponseView, BackButtonListener {
 
     private static final String QUERY_EXTRA_KEY = "query_extra_key";
 
@@ -104,5 +104,11 @@ public class SearchResponseFragment extends MvpAppCompatFragment
         if (getActivity() != null) {
             ((WidgetTuning) getActivity()).closeSearch();
         }
+    }
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
     }
 }

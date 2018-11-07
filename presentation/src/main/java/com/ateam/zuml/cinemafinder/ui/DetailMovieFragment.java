@@ -24,8 +24,7 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
-public class DetailMovieFragment extends MvpAppCompatFragment implements DetailMovieView {
+public class DetailMovieFragment extends MvpAppCompatFragment implements DetailMovieView, BackButtonListener {
 
     public static final String KEY_MOVIE_ID = "key_movie_id";
 
@@ -101,7 +100,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
         }
     }
 
-    // #################################### START DetailMovieView ####################################
+    // #################################### DetailMovieView ####################################
 
     @Override
     public void showProgressBar() {
@@ -194,6 +193,11 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
         descriptionView.setText(overviewText);
     }
 
-    // #################################### END DetailMovieView ####################################
+    // #################################### BackButtonListener ####################################
 
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
+    }
 }
