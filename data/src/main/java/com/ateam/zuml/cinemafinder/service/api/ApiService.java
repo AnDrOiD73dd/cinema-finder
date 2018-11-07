@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.service.api;
 
+import com.ateam.zuml.cinemafinder.BuildConfig;
 import com.ateam.zuml.cinemafinder.service.model.configuration.Configuration;
 import com.ateam.zuml.cinemafinder.service.model.movie.GenresList;
 import com.ateam.zuml.cinemafinder.service.model.movie.MovieInfo;
@@ -16,7 +17,7 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    String ACCESS_TOKEN = "6951767fd82df6dc250442aa410c968e";
+    String ACCESS_TOKEN = BuildConfig.ACCESS_TOKEN;
 
     // String BASE_ADDRESS = "https://api.themoviedb.org/3"
 
