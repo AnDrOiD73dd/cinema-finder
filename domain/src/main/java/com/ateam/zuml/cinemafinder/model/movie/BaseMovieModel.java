@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.model.movie;
 
-import io.reactivex.annotations.Nullable;
+import static com.ateam.zuml.cinemafinder.utils.CommonConstants.EMPTY_STRING;
 
 public abstract class BaseMovieModel {
 
@@ -40,17 +40,14 @@ public abstract class BaseMovieModel {
         return releaseDate;
     }
 
-    @Nullable
     public String getReleaseYear() {
         return getPartOfReleaseDate(0);
     }
 
-    @Nullable
     public String getReleaseMonth() {
         return getPartOfReleaseDate(1);
     }
 
-    @Nullable
     public String getReleaseDay() {
         return getPartOfReleaseDate(2);
     }
@@ -71,7 +68,7 @@ public abstract class BaseMovieModel {
         try {
             return releaseDate.split("-")[part];
         } catch (ArrayIndexOutOfBoundsException e) {
-            return null;
+            return EMPTY_STRING;
         }
     }
 }
