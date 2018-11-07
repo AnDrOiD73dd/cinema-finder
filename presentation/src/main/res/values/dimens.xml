@@ -5,4 +5,14 @@
     <dimen name="card_padding">5dp</dimen>
     <dimen name="card_corner_radius">5dp</dimen>
     <dimen name="elevation_toolbar">4dp</dimen>
+
+    <dimen name="movie_details_delimiter_margin">4dp</dimen>
+    <dimen name="movie_details_layout_padding">8dp</dimen>
+    <dimen name="movie_details_poster_width">152dp</dimen>
+    <dimen name="movie_details_poster_height">250dp</dimen>
+
+    <dimen name="text_size_26_sp">26sp</dimen>
+    <dimen name="text_size_16_sp">16sp</dimen>
+    <dimen name="text_size_14_sp">14sp</dimen>
+    <dimen name="text_size_12_sp">12sp</dimen>
 </resources>

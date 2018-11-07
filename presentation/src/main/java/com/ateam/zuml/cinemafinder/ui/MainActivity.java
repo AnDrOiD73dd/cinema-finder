@@ -14,7 +14,7 @@ import android.view.WindowManager;
 
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.util.Const;
+import com.ateam.zuml.cinemafinder.util.Constants;
 
 import java.util.List;
 
@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.search) SearchView search;
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Inject
     NavigatorHolder navigatorHolder;
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
 

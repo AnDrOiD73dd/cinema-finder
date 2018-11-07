@@ -6,7 +6,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.view.MainContainerView;
 import com.ateam.zuml.cinemafinder.ui.Screens;
-import com.ateam.zuml.cinemafinder.util.Const;
+import com.ateam.zuml.cinemafinder.util.Constants;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,11 +18,11 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
 
     private int currentPageId;
 
-    @Named(Const.CHILD_CONTAINER)
+    @Named(Constants.CHILD_CONTAINER)
     @Inject
     Router localRouter;
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router globalRouter;
 

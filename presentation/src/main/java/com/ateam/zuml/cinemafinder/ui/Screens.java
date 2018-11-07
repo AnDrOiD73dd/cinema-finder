@@ -55,9 +55,15 @@ public class Screens {
     }
 
     public static final class DetailMovieScreen extends SupportAppScreen {
+        private final String movieId;
+
+        public DetailMovieScreen(String movieId) {
+            this.movieId = movieId;
+        }
+
         @Override
         public Fragment getFragment()   {
-            return DetailMovieFragment.newInstance();
+            return DetailMovieFragment.newInstance(movieId);
         }
     }
 }

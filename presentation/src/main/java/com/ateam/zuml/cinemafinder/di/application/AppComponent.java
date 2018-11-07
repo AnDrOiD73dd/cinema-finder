@@ -6,6 +6,7 @@ import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
+import com.ateam.zuml.cinemafinder.di.application.modules.UtilsModule;
 import com.ateam.zuml.cinemafinder.presentation.presenter.DetailMoviePresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
@@ -21,20 +22,24 @@ import javax.inject.Singleton;
 import dagger.BindsInstance;
 import dagger.Component;
 
+
 @Singleton
 @Component(modules = {
         DataModule.class,
         MapperModule.class,
         NavigationModule.class,
-        ServiceModule.class})
+        ServiceModule.class,
+        UtilsModule.class})
 public interface AppComponent {
 
     @Component.Builder
     interface Builder {
+
         AppComponent build();
 
         @BindsInstance
         Builder with(final Context context);
+
     }
 
     void inject(MainActivity activity);

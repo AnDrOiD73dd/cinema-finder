@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">ZUML: Поиск фильмов</string>
+    <string name="search">Поиск</string>
+    <string name="settings">Настройки</string>
+    <string name="favorites">Избранное</string>
+    <string name="ratings">Рейтинги</string>
+    <string name="search_response"> </string>
+    <string name="star">Звезда</string>
+    <string name="poster">Постер</string>
+    <string name="comma">,</string>
+    <string name="left_brace">(</string>
+    <string name="right_brace">)</string>
+    <string name="home">Главная</string>
+    <string name="search_hint">Введите название фильма</string>
+    <string name="movie_details_minutes">мин</string>
+    <string name="movie_details_budget_title">Бюджет:</string>
+    <string name="movie_details_revenue_title">Доход:</string>
+    <string name="movie_details_release_date">Дата премьеры:</string>
+    <string name="movie_details_error_message">Произошла ошибка при загрузке информации о фильме.</string>
+</resources>

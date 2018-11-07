@@ -16,7 +16,7 @@ import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.MainContainerPresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.MainContainerView;
-import com.ateam.zuml.cinemafinder.util.Const;
+import com.ateam.zuml.cinemafinder.util.Constants;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -33,7 +33,7 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
 
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
 
-    @Named(Const.CHILD_CONTAINER)
+    @Named(Constants.CHILD_CONTAINER)
     @Inject
     NavigatorHolder navigatorHolder;
 
