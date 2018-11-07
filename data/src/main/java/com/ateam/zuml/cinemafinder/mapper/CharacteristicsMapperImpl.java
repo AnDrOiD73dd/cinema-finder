@@ -12,6 +12,8 @@ import javax.inject.Singleton;
 
 import io.reactivex.schedulers.Schedulers;
 
+import static com.ateam.zuml.cinemafinder.utils.CommonConstants.EMPTY_STRING;
+
 @Singleton
 public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
 
@@ -98,13 +100,7 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
         final Genre[] genres = language == Language.RUSSIAN ? ruGenres : enGenres;
         final String[] resultGenres = new String[genresIds.length];
         for (int i = 0; i < genresIds.length; i++) {
-            for (final Genre genre : genres) {
-                final int supposedGenre = genre.getId();
-                if (genresIds[i] == supposedGenre) {
-                    resultGenres[i] = genre.getName();
-                    break;
-                }
-            }
+            resultGenres[i] = getGenreNameFromId(genresIds[i], genres);
         }
         return resultGenres;
     }
@@ -116,5 +112,14 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
             resultGenres[i] = genres[i].getName();
         }
         return resultGenres;
+    }
+
+    private String getGenreNameFromId(final int genreId, final Genre[] genres) {
+        for (final Genre genre : genres) {
+            if (genreId == genre.getId()) {
+                return genre.getName();
+            }
+        }
+        return EMPTY_STRING;
     }
 }
