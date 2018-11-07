@@ -62,12 +62,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
 
     @ProvidePresenter
     public DetailMoviePresenter provideDetailMoviePresenter() {
-        Bundle bundle = getArguments();
-        String movieId = "";
-        if (bundle != null && bundle.containsKey(KEY_MOVIE_ID)) {
-            movieId = bundle.getString(KEY_MOVIE_ID);
-        }
-        DetailMoviePresenter presenter = new DetailMoviePresenter(movieId);
+        DetailMoviePresenter presenter = new DetailMoviePresenter(getMovieId());
         App.getApp().getAppComponent().inject(presenter);
         return presenter;
     }
@@ -190,5 +185,14 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
+    }
+
+    private String getMovieId()  {
+        Bundle bundle = getArguments();
+        String movieId = "";
+        if (bundle != null && bundle.containsKey(KEY_MOVIE_ID)) {
+            movieId = bundle.getString(KEY_MOVIE_ID);
+        }
+        return movieId;
     }
 }

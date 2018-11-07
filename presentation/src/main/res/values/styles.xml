@@ -28,7 +28,7 @@
     <style name="ProductSans.DetailsSubTitleTextAppearance">
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">@dimen/text_size_16_sp</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray500</item>
     </style>
 
     <style name="ProductSans.DetailsCommonTextAppearance">
@@ -41,7 +41,7 @@
     <style name="ProductSans.DetailsSecondaryTextAppearance">
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">@dimen/text_size_12_sp</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray500</item>
         <item name="android:layout_marginTop">@dimen/movie_details_delimiter_margin</item>
         <item name="android:layout_marginStart">@dimen/movie_details_delimiter_margin</item>
     </style>

@@ -36,14 +36,13 @@
         app:layout_constraintStart_toEndOf="@id/tv_movie_original_title"
         app:layout_constraintTop_toBottomOf="@id/tv_movie_title" />
 
-    <android.support.v7.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/iv_movie_poster"
         android:layout_width="@dimen/movie_details_poster_width"
         android:layout_height="@dimen/movie_details_poster_height"
         android:layout_marginTop="@dimen/movie_details_delimiter_margin"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_movie_original_title"
-        app:srcCompat="@drawable/ic_outline_photo_24px" />
+        app:layout_constraintTop_toBottomOf="@id/tv_movie_original_title" />
 
     <TextView
         android:id="@+id/tv_movie_genres_list"

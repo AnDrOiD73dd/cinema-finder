@@ -39,12 +39,7 @@ public class SearchResponseFragment extends MvpAppCompatFragment
 
     @ProvidePresenter
     SearchResponsePresenter provideSearchResponsePresenter() {
-        Bundle bundle = getArguments();
-        String movieTitle = "";
-        if (bundle != null && bundle.containsKey(QUERY_EXTRA_KEY)) {
-            movieTitle = bundle.getString(QUERY_EXTRA_KEY);
-        }
-        SearchResponsePresenter presenter = new SearchResponsePresenter(movieTitle);
+        SearchResponsePresenter presenter = new SearchResponsePresenter(getMovieTitle());
         App.getApp().getAppComponent().inject(presenter);
         return presenter;
     }
@@ -107,5 +102,14 @@ public class SearchResponseFragment extends MvpAppCompatFragment
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
+    }
+
+    private String getMovieTitle()  {
+        Bundle bundle = getArguments();
+        String movieTitle = "";
+        if (bundle != null && bundle.containsKey(QUERY_EXTRA_KEY)) {
+            movieTitle = bundle.getString(QUERY_EXTRA_KEY);
+        }
+        return movieTitle;
     }
 }

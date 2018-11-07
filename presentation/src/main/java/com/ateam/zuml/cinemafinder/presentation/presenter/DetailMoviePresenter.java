@@ -48,6 +48,7 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     @SuppressLint("CheckResult")
     private void load(String movieId) {
         useCase.execute(movieId, Language.RUSSIAN, LogoSize.ORIGINAL)
+                //TODO 07.11.2018 add SchedulersProvider
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
     }

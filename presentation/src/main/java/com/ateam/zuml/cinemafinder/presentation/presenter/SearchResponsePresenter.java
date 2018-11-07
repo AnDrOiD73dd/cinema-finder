@@ -55,6 +55,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     private void loadData(String movie) {
         //TODO 07.11.2018 optimize query
         useCase.execute(movie, "1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_154)
+                //TODO 07.11.2018 add SchedulersProvider
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(movieListModels -> {
                     listPresenter.searchList = movieListModels;
