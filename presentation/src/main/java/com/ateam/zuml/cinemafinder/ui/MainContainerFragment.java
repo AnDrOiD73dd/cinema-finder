@@ -33,7 +33,7 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
 
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
 
-    @Named(Const.CHILD_CONTAINER)
+    @Named(Constants.CHILD_CONTAINER)
     @Inject
     NavigatorHolder navigatorHolder;
 

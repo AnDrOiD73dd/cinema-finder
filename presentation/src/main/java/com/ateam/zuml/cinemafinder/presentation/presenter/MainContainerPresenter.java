@@ -18,11 +18,11 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
 
     private int currentPageId;
 
-    @Named(Const.CHILD_CONTAINER)
+    @Named(Constants.CHILD_CONTAINER)
     @Inject
     Router localRouter;
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router globalRouter;
 

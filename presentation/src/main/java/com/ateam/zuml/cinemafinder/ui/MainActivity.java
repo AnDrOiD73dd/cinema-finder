@@ -34,11 +34,11 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.search) SearchView search;
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Inject
     NavigatorHolder navigatorHolder;
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
 

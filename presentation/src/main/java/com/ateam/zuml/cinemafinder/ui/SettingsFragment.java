@@ -9,16 +9,17 @@ import android.view.ViewGroup;
 
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.util.Const;
+import com.ateam.zuml.cinemafinder.util.Constants;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import ru.terrakok.cicerone.Router;
 
+
 public class SettingsFragment extends PreferenceFragmentCompat implements BackButtonListener {
 
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
 

@@ -23,8 +23,10 @@ import ru.terrakok.cicerone.Router;
 public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
     @Named(Constants.MAIN_CONTAINER)
-    @Inject Router router;
-    @Inject StringUtil stringUtil;
+    @Inject
+    Router router;
+    @Inject
+    StringUtil stringUtil;
 
     private SearchListPresenter listPresenter;
 
@@ -43,7 +45,13 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         router.navigateTo(new Screens.DetailMovieScreen(movieId));
     }
 
+    public void onBackPressed() {
+        getViewState().closeSearch();
+        router.exit();
+    }
+
     public final class SearchListPresenter {
+
         private List<MovieListModel> searchList;
 
         SearchListPresenter() {
@@ -67,32 +75,6 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         public void setSearchList(List<MovieListModel> searchList) {
             this.searchList = searchList;
         }
-
-
-    @Named(Const.MAIN_CONTAINER)
-    @Inject
-    Router router;
-
-    private SearchListPresenter listPresenter;
-
-    public SearchResponsePresenter() {
-        this.listPresenter = new SearchListPresenter();
-    }
-
-    public SearchListPresenter getListPresenter(List<MovieListModel> searchList) {
-        //TODO 06.11.2018 stub
-        listPresenter.setSearchList(searchList);
-        return listPresenter;
-    }
-
-    public void showDetailsInfo() {
-        getViewState().closeSearch();
-        router.navigateTo(new Screens.DetailMovieScreen());
-    }
-
-    public void onBackPressed() {
-        getViewState().closeSearch();
-        router.exit();
     }
 }
 

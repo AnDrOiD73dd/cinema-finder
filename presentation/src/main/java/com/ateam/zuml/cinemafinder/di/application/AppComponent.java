@@ -22,6 +22,7 @@ import javax.inject.Singleton;
 import dagger.BindsInstance;
 import dagger.Component;
 
+
 @Singleton
 @Component(modules = {
         DataModule.class,
@@ -35,10 +36,12 @@ public interface AppComponent {
     interface Builder {
 
         AppComponent build();
+
         @BindsInstance
         Builder with(final Context context);
 
     }
+
     void inject(MainActivity activity);
 
     void inject(MainContainerFragment fragment);

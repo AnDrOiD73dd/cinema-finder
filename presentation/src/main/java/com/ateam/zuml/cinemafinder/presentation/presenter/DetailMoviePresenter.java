@@ -18,7 +18,7 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     StringUtil stringUtil;
     private final String movieId;
     
-    @Named(Const.MAIN_CONTAINER)
+    @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
 
@@ -75,6 +75,7 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     private void onLoadFailed() {
         getViewState().hideProgressBar();
         getViewState().showError();
+    }
 
     public void onBackPressed() {
         router.exit();
