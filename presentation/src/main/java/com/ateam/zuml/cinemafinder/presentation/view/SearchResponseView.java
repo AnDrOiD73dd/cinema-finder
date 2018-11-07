@@ -4,4 +4,6 @@ import com.arellomobile.mvp.MvpView;
 
 public interface SearchResponseView extends MvpView {
     void closeSearch();
+
+    void updateSearchList();
 }

@@ -90,7 +90,7 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
         } catch (ArrayIndexOutOfBoundsException e) {
             size = images.getLogoSizes()[0];
         }
-        return baseUrl + size + logoPath.substring(1);
+        return baseUrl + size + logoPath;
     }
 
     @Override
@@ -101,7 +101,7 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
             for (final Genre genre : genres) {
                 final int supposedGenre = genre.getId();
                 if (genresIds[i] == supposedGenre) {
-                    resultGenres[i] = String.valueOf(supposedGenre);
+                    resultGenres[i] = genre.getName();
                     break;
                 }
             }

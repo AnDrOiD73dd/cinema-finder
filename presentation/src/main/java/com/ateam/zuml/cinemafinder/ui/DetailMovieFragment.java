@@ -9,6 +9,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -18,8 +19,11 @@ import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.DetailMoviePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.DetailMovieView;
+import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
 
 import java.util.Locale;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,39 +32,25 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
 
     public static final String KEY_MOVIE_ID = "key_movie_id";
 
-    @InjectPresenter
-    DetailMoviePresenter presenter;
+    @Inject ImageLoader<ImageView> imageLoader;
 
-    @BindView(R.id.movie_detail_root)
-    ConstraintLayout rootView;
-    @BindView(R.id.tv_movie_title)
-    TextView titleView;
-    @BindView(R.id.tv_movie_original_title)
-    TextView originalTitleView;
-    @BindView(R.id.tv_movie_release_year)
-    TextView yearView;
-    @BindView(R.id.iv_movie_poster)
-    AppCompatImageView posterView;
-    @BindView(R.id.tv_movie_genres_list)
-    TextView genresListView;
-    @BindView(R.id.tv_movie_runtime)
-    TextView runtimeView;
-    @BindView(R.id.tv_movie_vote_average)
-    TextView voteAverageView;
-    @BindView(R.id.tv_movie_vote_count)
-    TextView voteCountView;
-    @BindView(R.id.tv_movie_budget)
-    TextView budgetView;
-    @BindView(R.id.tv_movie_revenue)
-    TextView revenueView;
-    @BindView(R.id.tv_movie_release_date)
-    TextView releaseDateView;
-    @BindView(R.id.tv_movie_tagline)
-    TextView taglineView;
-    @BindView(R.id.tv_movie_adult)
-    TextView adultView;
-    @BindView(R.id.tv_movie_overview)
-    TextView descriptionView;
+    @InjectPresenter DetailMoviePresenter presenter;
+
+    @BindView(R.id.movie_detail_root) ConstraintLayout rootView;
+    @BindView(R.id.tv_movie_title) TextView titleView;
+    @BindView(R.id.tv_movie_original_title) TextView originalTitleView;
+    @BindView(R.id.tv_movie_release_year) TextView yearView;
+    @BindView(R.id.iv_movie_poster) AppCompatImageView posterView;
+    @BindView(R.id.tv_movie_genres_list) TextView genresListView;
+    @BindView(R.id.tv_movie_runtime) TextView runtimeView;
+    @BindView(R.id.tv_movie_vote_average) TextView voteAverageView;
+    @BindView(R.id.tv_movie_vote_count) TextView voteCountView;
+    @BindView(R.id.tv_movie_budget) TextView budgetView;
+    @BindView(R.id.tv_movie_revenue) TextView revenueView;
+    @BindView(R.id.tv_movie_release_date) TextView releaseDateView;
+    @BindView(R.id.tv_movie_tagline) TextView taglineView;
+    @BindView(R.id.tv_movie_adult) TextView adultView;
+    @BindView(R.id.tv_movie_overview) TextView descriptionView;
 
     public static DetailMovieFragment newInstance(String movieId) {
         DetailMovieFragment fragment = new DetailMovieFragment();
@@ -72,12 +62,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
 
     @ProvidePresenter
     public DetailMoviePresenter provideDetailMoviePresenter() {
-        Bundle bundle = getArguments();
-        String movieId = "";
-        if (bundle != null && bundle.containsKey(KEY_MOVIE_ID)) {
-            movieId = bundle.getString(KEY_MOVIE_ID);
-        }
-        DetailMoviePresenter presenter = new DetailMoviePresenter(movieId);
+        DetailMoviePresenter presenter = new DetailMoviePresenter(getMovieId());
         App.getApp().getAppComponent().inject(presenter);
         return presenter;
     }
@@ -86,6 +71,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail_movie, container, false);
+        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
         setupToolbar();
         return view;
@@ -119,7 +105,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
 
     @Override
     public void setPoster(String imagePath) {
-
+        imageLoader.loadInto(imagePath, posterView);
     }
 
     @Override
@@ -199,5 +185,14 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
+    }
+
+    private String getMovieId()  {
+        Bundle bundle = getArguments();
+        String movieId = "";
+        if (bundle != null && bundle.containsKey(KEY_MOVIE_ID)) {
+            movieId = bundle.getString(KEY_MOVIE_ID);
+        }
+        return movieId;
     }
 }
