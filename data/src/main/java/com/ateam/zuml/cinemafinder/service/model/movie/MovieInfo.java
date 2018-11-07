@@ -20,7 +20,7 @@ public final class MovieInfo {
     private final String status;  //Allowed Values: Rumored, Planned, In Production, Post Production, Released, Canceled
     private final String tagline;
     private final Country[] countries;
-    @Nullable private final Integer runtime;
+    private final int runtime;
     private final float voteAverage;
     private final int voteCount;
     private final VideoSet videos;
@@ -107,8 +107,7 @@ public final class MovieInfo {
         return countries;
     }
 
-    @Nullable
-    public Integer getRuntime() {
+    public int getRuntime() {
         return runtime;
     }
 
