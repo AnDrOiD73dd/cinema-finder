@@ -20,11 +20,11 @@ import butterknife.ButterKnife;
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder>
         implements SearchListView {
 
-    private ImageLoader<ImageView> imageLoader;
+    private ImageLoader imageLoader;
     private SearchResponsePresenter.SearchListPresenter presenter;
     private OnItemClickListener itemClickListener;
 
-    SearchResultAdapter(SearchResponsePresenter.SearchListPresenter presenter, ImageLoader<ImageView> imageLoader) {
+    SearchResultAdapter(SearchResponsePresenter.SearchListPresenter presenter, ImageLoader imageLoader) {
         this.presenter = presenter;
         this.imageLoader = imageLoader;
     }

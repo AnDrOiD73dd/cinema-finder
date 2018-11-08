@@ -40,7 +40,7 @@ public class SearchResponseFragment extends MvpAppCompatFragment
     @BindView(R.id.rv_search_response) RecyclerView recyclerView;
     @BindView(R.id.tv_no_search_results) TextView noSearchResultsView;
 
-    @Inject ImageLoader<ImageView> imageLoader;
+    @Inject ImageLoader imageLoader;
 
     @InjectPresenter SearchResponsePresenter presenter;
 

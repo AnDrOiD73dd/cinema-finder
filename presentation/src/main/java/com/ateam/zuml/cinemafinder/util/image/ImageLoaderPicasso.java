@@ -6,7 +6,15 @@ import android.widget.ImageView;
 import com.ateam.zuml.cinemafinder.R;
 import com.squareup.picasso.Picasso;
 
-public class ImageLoaderPicasso implements ImageLoader<ImageView> {
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+@Singleton
+public class ImageLoaderPicasso implements ImageLoader {
+
+    @Inject
+    ImageLoaderPicasso() {
+    }
 
     @Override
     public void loadInto(@Nullable String url, ImageView container) {

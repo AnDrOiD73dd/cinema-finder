@@ -33,7 +33,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
 
     public static final String KEY_MOVIE_ID = "key_movie_id";
 
-    @Inject ImageLoader<ImageView> imageLoader;
+    @Inject ImageLoader imageLoader;
 
     @InjectPresenter DetailMoviePresenter presenter;
 
