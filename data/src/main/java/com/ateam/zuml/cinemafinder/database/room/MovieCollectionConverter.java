@@ -13,7 +13,7 @@ public final class MovieCollectionConverter {
                 return entity;
             }
         }
-        return null;
+        return MovieCollectionType.NO_COLLECTION;
     }
 
     @TypeConverter

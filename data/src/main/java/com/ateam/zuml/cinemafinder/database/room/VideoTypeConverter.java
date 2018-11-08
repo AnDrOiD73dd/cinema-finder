@@ -13,7 +13,7 @@ public final class VideoTypeConverter {
                 return entity;
             }
         }
-        return null;
+        return VideoType.CLIP;
     }
 
     @TypeConverter

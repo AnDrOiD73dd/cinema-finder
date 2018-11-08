@@ -6,5 +6,6 @@ public enum MovieStatus {
     IN_PRODUCTION,
     POST_PRODUCTION,
     RELEASED,
-    CANCELED
+    CANCELED,
+    NONE
 }
