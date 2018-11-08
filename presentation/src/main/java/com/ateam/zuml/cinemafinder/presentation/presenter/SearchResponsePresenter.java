@@ -96,9 +96,9 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         public void bindViewAt(SearchRowView view, int position) {
             MovieListModel movieListModel = searchList.get(position);
 
-            if(movieListModel.getPosterPath().isEmpty()) {
+            if (movieListModel.getPosterPath().isEmpty()) {
                 view.setPoster(stringUtil.getStabUrl());
-            }else {
+            } else {
                 view.setPoster(movieListModel.getPosterPath());
             }
 

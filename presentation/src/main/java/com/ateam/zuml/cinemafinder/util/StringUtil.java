@@ -19,7 +19,7 @@ public final class StringUtil {
         return sb.toString();
     }
 
-    public String addBrackets(String s)    {
+    public String addBrackets(String s) {
         return "(" + s + ")";
     }
 

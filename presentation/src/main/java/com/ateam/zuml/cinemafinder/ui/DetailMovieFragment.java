@@ -183,7 +183,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
         return true;
     }
 
-    private String getMovieId()  {
+    private String getMovieId() {
         Bundle bundle = getArguments();
         String movieId = "";
         if (bundle != null && bundle.containsKey(KEY_MOVIE_ID)) {
