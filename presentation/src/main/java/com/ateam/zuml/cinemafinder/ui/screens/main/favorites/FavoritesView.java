@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.presentation.view;
+package com.ateam.zuml.cinemafinder.ui.screens.main.favorites;
 
 import com.arellomobile.mvp.MvpView;
 

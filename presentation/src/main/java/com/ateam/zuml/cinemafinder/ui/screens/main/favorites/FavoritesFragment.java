@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui;
+package com.ateam.zuml.cinemafinder.ui.screens.main.favorites;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,8 +14,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.presentation.presenter.FavoritesPresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.FavoritesView;
+import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 
@@ -51,6 +50,14 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
         inflater.inflate(R.menu.menu_main, menu);
     }
 
+    // #################################### BackButtonListener ####################################
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
+    }
+
     private void init() {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (AppActivity) getActivity();
@@ -58,11 +65,5 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
             widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
             widgetTuning.setSearchVisibility(true);
         }
-    }
-
-    @Override
-    public boolean onBackPressed() {
-        presenter.onBackPressed();
-        return true;
     }
 }
