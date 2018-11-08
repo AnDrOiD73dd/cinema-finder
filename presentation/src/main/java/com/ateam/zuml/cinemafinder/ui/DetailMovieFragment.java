@@ -38,8 +38,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
 
     @BindView(R.id.movie_detail_root) ConstraintLayout rootView;
     @BindView(R.id.tv_movie_title) TextView titleView;
-    @BindView(R.id.tv_movie_original_title) TextView originalTitleView;
-    @BindView(R.id.tv_movie_release_year) TextView yearView;
+    @BindView(R.id.tv_movie_subtitle) TextView subTitleView;
     @BindView(R.id.iv_movie_poster) AppCompatImageView posterView;
     @BindView(R.id.tv_movie_genres_list) TextView genresListView;
     @BindView(R.id.tv_movie_runtime) TextView runtimeView;
@@ -114,13 +113,8 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     }
 
     @Override
-    public void setOriginalTitle(String originalTitleText) {
-        originalTitleView.setText(originalTitleText);
-    }
-
-    @Override
-    public void setReleaseYear(String year) {
-        yearView.setText(year);
+    public void setSubTitle(String subTitleText) {
+        subTitleView.setText(subTitleText);
     }
 
     @Override

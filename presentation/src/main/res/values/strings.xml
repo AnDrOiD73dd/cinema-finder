@@ -12,7 +12,7 @@
     <string name="right_brace">)</string>
     <string name="home">Home</string>
     <string name="search_hint">Enter movie title</string>
-    <string name="movie_details_minutes">min</string>
+    <string name="movie_details_minutes">min.</string>
     <string name="movie_details_budget_title">Budget:</string>
     <string name="movie_details_revenue_title">Revenue:</string>
     <string name="movie_details_release_date">Release date:</string>
