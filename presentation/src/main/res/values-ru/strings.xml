@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">ZUML: Поиск фильмов</string>
     <string name="search">Поиск</string>
     <string name="settings">Настройки</string>
     <string name="favorites">Избранное</string>

@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">ZUML: Cinema Finder</string>
     <string name="search">Search</string>
     <string name="settings">Settings</string>
     <string name="favorites">Favorites</string>
