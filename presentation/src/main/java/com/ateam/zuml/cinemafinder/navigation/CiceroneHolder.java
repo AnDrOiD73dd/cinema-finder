@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.util;
+package com.ateam.zuml.cinemafinder.navigation;
 
 import java.util.HashMap;
 

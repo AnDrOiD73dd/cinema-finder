@@ -14,6 +14,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.navigation.CustomNavigator;
 import com.ateam.zuml.cinemafinder.presentation.presenter.MainContainerPresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.MainContainerView;
 import com.ateam.zuml.cinemafinder.util.Constants;
@@ -25,11 +26,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
-import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 
 public class MainContainerFragment extends MvpAppCompatFragment implements MainContainerView, BackButtonListener {
 
-    private Navigator navigator;
+    private CustomNavigator navigator;
 
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
 
@@ -87,7 +87,7 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
 
     private Navigator getNavigator() {
         if (navigator == null) {
-            navigator = new SupportAppNavigator(getActivity(), getChildFragmentManager(), R.id.child_container);
+            navigator = new CustomNavigator(getActivity(), getChildFragmentManager(), R.id.child_container);
         }
         return navigator;
     }
