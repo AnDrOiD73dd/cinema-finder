@@ -110,6 +110,11 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     }
 
     @Override
+    public void setPosterPlaceholder() {
+        imageLoader.loadInto(getResources().getString(R.string.stub_url), posterView);
+    }
+
+    @Override
     public void setTitle(String titleText) {
         titleView.setText(titleText);
     }

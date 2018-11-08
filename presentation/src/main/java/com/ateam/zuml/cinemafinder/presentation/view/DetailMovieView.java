@@ -12,6 +12,8 @@ public interface DetailMovieView extends MvpView {
 
     void setPoster(String imagePath);
 
+    void setPosterPlaceholder();
+
     void setTitle(String titleText);
 
     void setSubTitle(String subTitleText);

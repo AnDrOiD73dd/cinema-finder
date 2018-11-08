@@ -97,7 +97,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             MovieListModel movieListModel = searchList.get(position);
 
             if (movieListModel.getPosterPath().isEmpty()) {
-                view.setPoster(stringUtil.getStabUrl());
+                view.setPosterPlaceholder();
             } else {
                 view.setPoster(movieListModel.getPosterPath());
             }

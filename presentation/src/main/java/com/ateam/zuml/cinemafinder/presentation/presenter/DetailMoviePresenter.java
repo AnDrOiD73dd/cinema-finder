@@ -58,7 +58,7 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
                 movieDetailsModel.getOriginalTitle(), movieDetailsModel.getReleaseYear()));
 
         if(movieDetailsModel.getPosterPath().isEmpty()) {
-            getViewState().setPoster(stringUtil.getStabUrl());
+            getViewState().setPosterPlaceholder();
         }else {
             getViewState().setPoster(movieDetailsModel.getPosterPath());
         }

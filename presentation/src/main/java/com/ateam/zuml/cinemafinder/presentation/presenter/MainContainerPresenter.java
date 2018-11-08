@@ -32,7 +32,7 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
     Router globalRouter;
 
 
-    public void showHomeScreen() {
+    public void onHomeScreenSelected() {
         if(currentScreen == BottomScreens.HOME) {
             return;
         }
@@ -40,7 +40,7 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
         localRouter.replaceScreen(new Screens.HomeScreen());
     }
 
-    public void showFavoritesScreen() {
+    public void onFavoritesScreenSelected() {
         if(currentScreen == BottomScreens.FAVORITES) {
             return;
         }
@@ -48,7 +48,7 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
         localRouter.replaceScreen(new Screens.FavoritesScreen());
     }
 
-    public void showRatingsScreen() {
+    public void onRatingsScreenSelected() {
         if(currentScreen == BottomScreens.RATINGS) {
             return;
         }

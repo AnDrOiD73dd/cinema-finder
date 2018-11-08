@@ -22,8 +22,4 @@ public final class StringUtil {
     public String addBrackets(String s) {
         return "(" + s + ")";
     }
-
-    public String getStabUrl() {
-        return "-";
-    }
 }

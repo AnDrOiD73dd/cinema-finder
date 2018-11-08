@@ -13,7 +13,7 @@ public final class SchedulersModule {
 
     @Singleton
     @Provides
-    SchedulersProvider providerSchedulersProvider() {
+    SchedulersProvider provideSchedulersProvider() {
         return new SchedulersProviderImpl();
     }
 }

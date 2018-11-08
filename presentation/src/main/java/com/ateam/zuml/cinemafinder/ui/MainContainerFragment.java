@@ -106,13 +106,13 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
     private boolean showScreen(int itemId) {
         switch (itemId) {
             case R.id.action_home:
-                presenter.showHomeScreen();
+                presenter.onHomeScreenSelected();
                 return true;
             case R.id.action_favorites:
-                presenter.showFavoritesScreen();
+                presenter.onFavoritesScreenSelected();
                 return true;
             case R.id.action_ratings:
-                presenter.showRatingsScreen();
+                presenter.onRatingsScreenSelected();
                 return true;
             default:
                 return false;

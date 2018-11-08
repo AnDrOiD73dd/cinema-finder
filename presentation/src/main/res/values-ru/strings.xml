@@ -15,4 +15,5 @@
     <string name="movie_details_error_message">Произошла ошибка при загрузке информации о фильме</string>
     <string name="search_response_error_message">При загрузке информации поиска произошла ошибка</string>
     <string name="search_response_no_results">Нет результатов поиска</string>
+    <string name="stub_url">-</string>
 </resources>

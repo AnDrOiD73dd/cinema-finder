@@ -80,6 +80,11 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         }
 
         @Override
+        public void setPosterPlaceholder() {
+            imageLoader.loadInto("-", posterView);
+        }
+
+        @Override
         public void setTitle(String title) {
             this.titleView.setText(title);
         }
