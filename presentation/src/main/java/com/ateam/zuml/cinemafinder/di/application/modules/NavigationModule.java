@@ -26,12 +26,6 @@ public final class NavigationModule {
         return "child_container";
     }
 
-    @Singleton
-    @Provides
-    CiceroneHolder provideNavigationHolder() {
-        return new CiceroneHolder();
-    }
-
     @Named(Constants.MAIN_CONTAINER)
     @Singleton
     @Provides

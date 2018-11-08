@@ -2,13 +2,19 @@ package com.ateam.zuml.cinemafinder.navigation;
 
 import java.util.HashMap;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import ru.terrakok.cicerone.Cicerone;
 import ru.terrakok.cicerone.Router;
 
+@Singleton
 public class CiceroneHolder {
+
     private HashMap<String, Cicerone<Router>> containers;
 
-    public CiceroneHolder() {
+    @Inject
+    CiceroneHolder() {
         containers = new HashMap<>();
     }
 
