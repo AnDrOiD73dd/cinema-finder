@@ -148,9 +148,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
                 break;
             }
         }
-        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
-            return;
-        } else {
+        if (!(fragment instanceof BackButtonListener) || !((BackButtonListener) fragment).onBackPressed()) {
             router.exit();
         }
     }
