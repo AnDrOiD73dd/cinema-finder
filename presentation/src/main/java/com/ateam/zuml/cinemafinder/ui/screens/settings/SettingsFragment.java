@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui;
+package com.ateam.zuml.cinemafinder.ui.screens.settings;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.Constants;
@@ -43,6 +44,14 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    // #################################### BackButtonListener ####################################
+
+    @Override
+    public boolean onBackPressed() {
+        router.exit();
+        return true;
+    }
+
     private void init() {
         App.getApp().getAppComponent().inject(this);
         setHasOptionsMenu(true);
@@ -52,11 +61,5 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
             widgetTuning.setupToolbar(getResources().getString(R.string.settings), true);
             widgetTuning.setSearchVisibility(false);
         }
-    }
-
-    @Override
-    public boolean onBackPressed() {
-        router.exit();
-        return true;
     }
 }
