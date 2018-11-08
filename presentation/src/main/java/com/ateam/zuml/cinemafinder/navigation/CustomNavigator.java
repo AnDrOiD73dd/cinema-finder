@@ -25,18 +25,18 @@ import ru.terrakok.cicerone.commands.Replace;
  * Feature {@link BackTo} works only for fragments.<br>
  * Recommendation: most useful for Single-Activity application.
  */
-public class MainNavigator implements Navigator {
+public class CustomNavigator implements Navigator {
 
     private final Activity activity;
     private final FragmentManager fragmentManager;
     private final int containerId;
     private LinkedList<String> localStackCopy;
 
-    public MainNavigator(FragmentActivity activity, int containerId) {
+    public CustomNavigator(FragmentActivity activity, int containerId) {
         this(activity, activity.getSupportFragmentManager(), containerId);
     }
 
-    public MainNavigator(FragmentActivity activity, FragmentManager fragmentManager, int containerId) {
+    public CustomNavigator(FragmentActivity activity, FragmentManager fragmentManager, int containerId) {
         this.activity = activity;
         this.fragmentManager = fragmentManager;
         this.containerId = containerId;

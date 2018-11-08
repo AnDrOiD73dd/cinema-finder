@@ -14,7 +14,7 @@ import android.view.WindowManager;
 
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.navigation.MainNavigator;
+import com.ateam.zuml.cinemafinder.navigation.CustomNavigator;
 import com.ateam.zuml.cinemafinder.util.Constants;
 
 import java.util.List;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @Inject
     Router router;
 
-    private Navigator navigator = new MainNavigator(this, R.id.main_container) {
+    private Navigator navigator = new CustomNavigator(this, R.id.main_container) {
         @Override
         public void applyCommands(Command[] commands) {
             super.applyCommands(commands);
