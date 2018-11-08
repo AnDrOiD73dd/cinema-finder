@@ -2,7 +2,7 @@ package com.ateam.zuml.cinemafinder.navigation;
 
 import android.support.v4.app.Fragment;
 
-import com.ateam.zuml.cinemafinder.ui.DetailMovieFragment;
+import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMovieFragment;
 import com.ateam.zuml.cinemafinder.ui.FavoritesFragment;
 import com.ateam.zuml.cinemafinder.ui.HomeFragment;
 import com.ateam.zuml.cinemafinder.ui.MainContainerFragment;

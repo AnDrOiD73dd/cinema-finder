@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.presentation.presenter;
+package com.ateam.zuml.cinemafinder.ui.screens.details;
 
 import android.annotation.SuppressLint;
 
@@ -8,7 +8,6 @@ import com.ateam.zuml.cinemafinder.interactor.movie.GetMovieDetailsUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
-import com.ateam.zuml.cinemafinder.presentation.view.DetailMovieView;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
@@ -28,12 +27,12 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     Router router;
 
     @Inject StringUtils stringUtil;
-    @Inject GetMovieDetailsUseCase useCase;
+    @Inject GetMovieDetailsUseCase detailsUseCase;
     @Inject SchedulersProvider schedulers;
 
     private final String movieId;
 
-    public DetailMoviePresenter(String movieId) {
+    DetailMoviePresenter(String movieId) {
         this.movieId = movieId;
     }
 
@@ -46,7 +45,7 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     @SuppressLint("CheckResult")
     private void load(String movieId) {
         getViewState().showLoading();
-        useCase.execute(movieId, Language.RUSSIAN, LogoSize.ORIGINAL)
+        detailsUseCase.execute(movieId, Language.RUSSIAN, LogoSize.ORIGINAL)
                 .observeOn(schedulers.ui())
                 .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
     }

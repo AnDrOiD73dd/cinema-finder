@@ -31,7 +31,7 @@ import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.commands.Command;
 
-public class AppActivity extends AppCompatActivity implements WidgetTuning {
+public final class AppActivity extends AppCompatActivity implements WidgetTuning {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.search) SearchView searchView;

@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui;
+package com.ateam.zuml.cinemafinder.ui.screens.details;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -17,8 +17,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.presentation.presenter.DetailMoviePresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.DetailMovieView;
+import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
@@ -30,7 +29,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailMovieFragment extends MvpAppCompatFragment implements DetailMovieView, BackButtonListener {
+public final class DetailMovieFragment extends MvpAppCompatFragment implements DetailMovieView, BackButtonListener {
 
     public static final String KEY_MOVIE_ID = "key_movie_id";
 
@@ -69,23 +68,15 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
         return presenter;
     }
 
-    @Nullable
+    @NonNull
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail_movie, container, false);
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
         setupToolbar();
         return view;
-    }
-
-    private void setupToolbar() {
-        setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (AppActivity) getActivity();
-        if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true);
-            widgetTuning.setSearchVisibility(true);
-        }
     }
 
     // #################################### DetailMovieView ####################################
@@ -187,6 +178,15 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
+    }
+
+    private void setupToolbar() {
+        setHasOptionsMenu(true);
+        WidgetTuning widgetTuning = (AppActivity) getActivity();
+        if (widgetTuning != null) {
+            widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true);
+            widgetTuning.setSearchVisibility(true);
+        }
     }
 
     private String getMovieId() {
