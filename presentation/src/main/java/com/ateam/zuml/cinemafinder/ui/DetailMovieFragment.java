@@ -81,7 +81,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
 
     private void setupToolbar() {
         setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (MainActivity) getActivity();
+        WidgetTuning widgetTuning = (AppActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true);
             widgetTuning.setSearchVisibility(true);

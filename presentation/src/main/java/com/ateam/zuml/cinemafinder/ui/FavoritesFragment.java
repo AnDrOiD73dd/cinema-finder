@@ -53,7 +53,7 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
 
     private void init() {
         setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (MainActivity) getActivity();
+        WidgetTuning widgetTuning = (AppActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
             widgetTuning.setSearchVisibility(true);

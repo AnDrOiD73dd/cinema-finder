@@ -53,7 +53,7 @@ public class RatingsFragment extends MvpAppCompatFragment implements RatingsView
 
     private void init() {
         setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (MainActivity) getActivity();
+        WidgetTuning widgetTuning = (AppActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.ratings), false);
             widgetTuning.setSearchVisibility(true);

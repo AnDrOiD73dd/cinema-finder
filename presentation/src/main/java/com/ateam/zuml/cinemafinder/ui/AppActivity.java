@@ -31,7 +31,7 @@ import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.commands.Command;
 
-public class MainActivity extends AppCompatActivity implements WidgetTuning {
+public class AppActivity extends AppCompatActivity implements WidgetTuning {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.search) SearchView searchView;
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @Inject
     Router router;
 
-    private CustomNavigator navigator = new CustomNavigator(this, R.id.main_container) {
+    private final CustomNavigator navigator = new CustomNavigator(this, R.id.main_container) {
         @Override
         public void applyCommands(Command[] commands) {
             super.applyCommands(commands);
@@ -61,6 +61,75 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
 
         if (savedInstanceState == null) {
             router.navigateTo(new Screens.MainContainerScreen());
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        navigatorHolder.setNavigator(navigator);
+    }
+
+    @Override
+    public void onPause() {
+        navigatorHolder.removeNavigator();
+        super.onPause();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                searchView.onActionViewCollapsed();
+                router.exit();
+                return true;
+            case R.id.action_settings:
+                router.navigateTo(new Screens.SettingsScreen());
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    // #################################### WidgetTuning ####################################
+
+    @Override
+    public void setupToolbar(String title, boolean visible) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(title);
+            actionBar.setDisplayHomeAsUpEnabled(visible);
+        }
+    }
+
+    @Override
+    public void setSearchVisibility(boolean visible) {
+        if (visible) {
+            searchView.setVisibility(View.VISIBLE);
+        } else {
+            searchView.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void closeSearch() {
+        searchView.onActionViewCollapsed();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = null;
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment f : fragments) {
+            if (f.isVisible()) {
+                fragment = f;
+                break;
+            }
+        }
+        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
+            return;
+        } else {
+            router.exit();
         }
     }
 
@@ -88,72 +157,5 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
                 return false;
             }
         });
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                searchView.onActionViewCollapsed();
-                router.exit();
-                return true;
-            case R.id.action_settings:
-                router.navigateTo(new Screens.SettingsScreen());
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    @Override
-    public void setupToolbar(String title, boolean visible) {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(title);
-            actionBar.setDisplayHomeAsUpEnabled(visible);
-        }
-    }
-
-    @Override
-    public void setSearchVisibility(boolean visible) {
-        if (visible) {
-            searchView.setVisibility(View.VISIBLE);
-        } else {
-            searchView.setVisibility(View.GONE);
-        }
-    }
-
-    @Override
-    public void closeSearch() {
-        searchView.onActionViewCollapsed();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        navigatorHolder.setNavigator(navigator);
-    }
-
-    @Override
-    public void onPause() {
-        navigatorHolder.removeNavigator();
-        super.onPause();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Fragment fragment = null;
-        List<Fragment> fragments = getSupportFragmentManager().getFragments();
-        for (Fragment f : fragments) {
-            if (f.isVisible()) {
-                fragment = f;
-                break;
-            }
-        }
-        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
-            return;
-        } else {
-            router.exit();
-        }
     }
 }

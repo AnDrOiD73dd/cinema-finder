@@ -16,7 +16,7 @@ import com.ateam.zuml.cinemafinder.presentation.presenter.MainContainerPresenter
 import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
 import com.ateam.zuml.cinemafinder.ui.DetailMovieFragment;
-import com.ateam.zuml.cinemafinder.ui.MainActivity;
+import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.MainContainerFragment;
 import com.ateam.zuml.cinemafinder.ui.SearchResponseFragment;
 import com.ateam.zuml.cinemafinder.ui.SettingsFragment;
@@ -47,7 +47,7 @@ public interface AppComponent {
 
     }
 
-    void inject(MainActivity activity);
+    void inject(AppActivity activity);
 
     void inject(MainContainerFragment fragment);
 
