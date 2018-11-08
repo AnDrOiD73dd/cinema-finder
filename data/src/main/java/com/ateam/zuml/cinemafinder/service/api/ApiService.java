@@ -2,12 +2,10 @@ package com.ateam.zuml.cinemafinder.service.api;
 
 import com.ateam.zuml.cinemafinder.BuildConfig;
 import com.ateam.zuml.cinemafinder.service.model.configuration.Configuration;
-import com.ateam.zuml.cinemafinder.service.model.movie.GenresList;
-import com.ateam.zuml.cinemafinder.service.model.movie.MovieInfo;
-import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieBySearch;
-import com.ateam.zuml.cinemafinder.service.model.movie.details.NowPlayingMovies;
-import com.ateam.zuml.cinemafinder.service.model.movie.details.PopularMovies;
-import com.ateam.zuml.cinemafinder.service.model.person.PersonInfo;
+import com.ateam.zuml.cinemafinder.service.model.common.genre.GenresList;
+import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieInfo;
+import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesList;
+import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesListWithDates;
 import com.ateam.zuml.cinemafinder.service.model.person.credits.Credits;
 
 import io.reactivex.Single;
@@ -19,9 +17,9 @@ public interface ApiService {
 
     String ACCESS_TOKEN = BuildConfig.ACCESS_TOKEN;
 
-    // String BASE_ADDRESS = "https://api.themoviedb.org/3"
-
     /*
+     * Search for movies.
+     *
      * Required:
      * String api_key - API Key
      * String query - Pass a text query to search. This value should be URI encoded.
@@ -36,12 +34,14 @@ public interface ApiService {
      * https://api.themoviedb.org/3/search/movie?api_key=<<api_key>>&language=en-US&query=Matrix&page=1&include_adult=false&region=en-US
      */
     @GET("search/movie?api_key=" + ACCESS_TOKEN)
-    Single<MovieBySearch> getSearchMovies(@Query("language") String language,
-                                          @Query("query") String query,
-                                          @Query("page") String page,
-                                          @Query("region") String region);
+    Single<MoviesList> getSearchMovies(@Query("language") String language,
+                                       @Query("query") String query,
+                                       @Query("page") String page,
+                                       @Query("region") String region);
 
     /*
+     * Get the primary information about a movie.
+     *
      * Required:
      * String api_key - API Key
      * int movie_id - Given movie ID
@@ -60,6 +60,11 @@ public interface ApiService {
                                    @Query("append_to_response") String additionalData);
 
     /*
+     * Get a list of movies in theatres. This is a release type query that looks for all movies
+     * that have a release type of 2 or 3 within the specified date range. You can optionally
+     * specify a region parameter which will narrow the search to only look for theatrical release
+     * dates within the specified country.
+     *
      * Required:
      * String api_key - API Key
      *
@@ -72,11 +77,13 @@ public interface ApiService {
      * https://api.themoviedb.org/3/movie/now_playing?api_key=<<api_key>>&language=ru-RU&page=1&region=ru
      */
     @GET("movie/now_playing?api_key=" + ACCESS_TOKEN)
-    Single<NowPlayingMovies> getNowPlayingMovies(@Query("language") String language,
-                                                 @Query("page") String page,
-                                                 @Query("region") String region);
+    Single<MoviesListWithDates> getNowPlayingMovies(@Query("language") String language,
+                                                    @Query("page") String page,
+                                                    @Query("region") String region);
 
     /*
+     * Get a list of the current popular movies on TMDb. This list updates daily.
+     *
      * Required:
      * String api_key - API Key
      *
@@ -89,9 +96,9 @@ public interface ApiService {
      * https://api.themoviedb.org/3/movie/popular?api_key=<<api_key>>&language=ru-RU&page=1&region=ru
      */
     @GET("movie/popular?api_key=" + ACCESS_TOKEN)
-    Single<PopularMovies> getPopularMovies(@Query("language") String language,
-                                           @Query("page") String page,
-                                           @Query("region") String region);
+    Single<MoviesList> getPopularMovies(@Query("language") String language,
+                                        @Query("page") String page,
+                                        @Query("region") String region);
 
     /*
      * Get the cast and crew for a movie.
@@ -109,60 +116,8 @@ public interface ApiService {
     Single<Credits> getMovieCredits(@Path("movie_id") int movieId);
 
     /*
-     * Get the credits (cast and crew) that have been added to a TV show.
+     * Get the list of official genres for movies.
      *
-     * Required:
-     * String api_key - API Key
-     * int movie_id - Given TV ID
-     *
-     * Optional:
-     * String language - Pass a ISO 639-1 value to display translated data for the fields that support it.
-     *
-     * Examples:
-     * https://api.themoviedb.org/3/tv/{tv_id}/credits?api_key=<<api_key>>&language=en-US
-     */
-    @GET("tv/{tv_id}/credits?api_key=" + ACCESS_TOKEN)
-    Single<Credits> getTVCredits(@Path("tv_id") int tvId,
-                                 @Query("language") String language);
-
-    /*
-     * Get the credits (cast, crew and guest stars) for a TV episode.
-     *
-     * Required:
-     * String api_key - API Key
-     * int movie_id - Given TV Episode ID
-     * int season_number - Given season number
-     * int episode_number - Given episode inner number
-     *
-     * Optional: none
-     *
-     * Examples:
-     * https://api.themoviedb.org/3/tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits?api_key=<<api_key>>
-     */
-    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits?api_key=" + ACCESS_TOKEN)
-    Single<Credits> getTVEpisodeCredits(@Path("tv_id") int tvId,
-                                        @Path("season_number") int seasonNumber,
-                                        @Path("episode_number") int episodeNumber);
-
-    /*
-     * Required:
-     * String api_key - API Key
-     * int movie_id - Given person ID
-     *
-     * Optional:
-     * String language - Pass a ISO 639-1 value to display translated data for the fields that support it.
-     * String append_to_response - Specify to query additional data
-     *
-     * Examples:
-     * https://api.themoviedb.org/3/person/{person_id}?api_key=<<api_key>>&language=en-US
-     * https://api.themoviedb.org/3/person/6885?api_key=6951767fd82df6dc250442aa410c968e&language=en-US&append_to_response=images
-     */
-    @GET("person/{person_id}?api_key=" + ACCESS_TOKEN)
-    Single<PersonInfo> getPeople(@Path("person_id") int personId,
-                                 @Query("language") String language,
-                                 @Query("append_to_response") String additionalData);
-
-    /*
      * Required:
      * String api_key - API Key
      *
@@ -176,9 +131,21 @@ public interface ApiService {
     Single<GenresList> getGenres(@Query("language") String language);
 
     /*
+     * Get the system wide configuration information. Some elements of the API require some
+     * knowledge of this configuration data. The purpose of this is to try and keep the actual API
+     * responses as light as possible. It is recommended you cache this data within your application
+     * and check for updates every few days.
+     *
+     * This method currently holds the data relevant to building image URLs as well as the change key map.
+     *
      * To build an image URL, you will need 3 pieces of data. The base_url, size and file_path.
      * Simply combine them all and you will have a fully qualified URL. Here’s an example URL:
+     *
      * https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
+     *
+     * The configuration method also contains the list of change keys which can be useful if you are
+     * building an app that consumes data from the change feed.
+     *
      * Required:
      * String api_key - API Key
      *

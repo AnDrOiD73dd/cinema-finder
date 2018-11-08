@@ -1,6 +1,10 @@
-package com.ateam.zuml.cinemafinder.service.model.movie.details;
+package com.ateam.zuml.cinemafinder.service.model.movie.lists;
 
+/**
+ * Part of {@link MoviesListWithDates}
+ */
 public final class DateRange {
+
     private final String minimum;
     private final String maximum;
 

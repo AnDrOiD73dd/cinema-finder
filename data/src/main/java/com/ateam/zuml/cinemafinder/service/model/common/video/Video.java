@@ -1,21 +1,24 @@
-package com.ateam.zuml.cinemafinder.service.model.movie.video;
+package com.ateam.zuml.cinemafinder.service.model.common.video;
 
 import com.google.gson.annotations.SerializedName;
 
-// Get the videos that have been added to a movie.
+/**
+ * Part of {@link VideoSet}
+ */
 public final class Video {
-    @SerializedName("id") private final int movieId;
+
     @SerializedName("iso_639_1") private final String languageId;
     @SerializedName("iso_3166_1") private final String countryId;
-    private final String key;     //video id for hosting site
+    private final int id;
+    private final String key;
     private final String name;
-    private final String site;    //hosting site as tag YouTube, Vimeo, etc..
-    private final int size;       //video quality
-    private final String type;    //Allowed Values: Trailer, Teaser, Clip, Featurette
+    private final String site;
+    private final int size;
+    private final String type;
 
-    public Video(final int movieId, final String languageId, final String countryId, final String key,
+    public Video(final int id, final String languageId, final String countryId, final String key,
                  final String name, final String site, final int size, final String type) {
-        this.movieId = movieId;
+        this.id = id;
         this.languageId = languageId;
         this.countryId = countryId;
         this.key = key;
@@ -25,8 +28,8 @@ public final class Video {
         this.type = type;
     }
 
-    public int getMovieId() {
-        return movieId;
+    public int getId() {
+        return id;
     }
 
     public String getLanguageId() {
@@ -49,10 +52,16 @@ public final class Video {
         return site;
     }
 
+    /**
+     * @return Allowed Values: 360, 480, 720, 1080
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * @return Allowed Values: Trailer, Teaser, Clip, Featurette
+     */
     public String getType() {
         return type;
     }

@@ -1,21 +1,24 @@
 package com.ateam.zuml.cinemafinder.service.model.person.credits;
 
-import com.google.gson.annotations.SerializedName;
+import com.ateam.zuml.cinemafinder.service.api.ApiService;
 
-// Get the cast and crew for a movie.
+/**
+ * Response to {@link ApiService#getMovieCredits(int)}
+ */
 public final class Credits {
-    @SerializedName("id") private final int movieId;
+
+    private final int id;
     private final Cast[] cast;
     private final Crew[] crew;
 
-    public Credits(final int movieId, final Cast[] cast, final Crew[] crew) {
-        this.movieId = movieId;
+    public Credits(final int id, final Cast[] cast, final Crew[] crew) {
+        this.id = id;
         this.cast = cast;
         this.crew = crew;
     }
 
-    public int getMovieId() {
-        return movieId;
+    public int getId() {
+        return id;
     }
 
     public Cast[] getCast() {

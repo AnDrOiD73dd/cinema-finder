@@ -1,5 +1,8 @@
 package com.ateam.zuml.cinemafinder.service.model.configuration;
 
+/**
+ * Part of  {@link Configuration}
+ */
 public final class Images {
 
     private final String baseUrl;
