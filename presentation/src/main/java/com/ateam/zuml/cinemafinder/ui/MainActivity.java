@@ -14,6 +14,7 @@ import android.view.WindowManager;
 
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.navigation.MainNavigator;
 import com.ateam.zuml.cinemafinder.util.Constants;
 
 import java.util.List;
@@ -26,7 +27,6 @@ import butterknife.ButterKnife;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
-import ru.terrakok.cicerone.android.support.SupportAppNavigator;
 import ru.terrakok.cicerone.commands.Command;
 
 public class MainActivity extends AppCompatActivity implements WidgetTuning {
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @Inject
     Router router;
 
-    private Navigator navigator = new SupportAppNavigator(this, R.id.main_container) {
+    private Navigator navigator = new MainNavigator(this, R.id.main_container) {
         @Override
         public void applyCommands(Command[] commands) {
             super.applyCommands(commands);
@@ -113,16 +113,16 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     }
 
     @Override
-    public void setSearchVisibility(boolean visible)    {
-        if(visible)    {
+    public void setSearchVisibility(boolean visible) {
+        if (visible) {
             search.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             search.setVisibility(View.GONE);
         }
     }
 
     @Override
-    public void closeSearch()   {
+    public void closeSearch() {
         search.onActionViewCollapsed();
     }
 
@@ -148,9 +148,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
                 break;
             }
         }
-        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
-            return;
-        } else {
+        if (!(fragment instanceof BackButtonListener) || !((BackButtonListener) fragment).onBackPressed()) {
             router.exit();
         }
     }
