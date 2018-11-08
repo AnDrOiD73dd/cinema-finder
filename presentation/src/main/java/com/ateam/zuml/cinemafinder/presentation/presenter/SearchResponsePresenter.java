@@ -92,7 +92,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             view.setPoster(movieListModel.getPosterPath());
             view.setTitle(movieListModel.getTitle());
             view.setOriginalTitle(movieListModel.getOriginalTitle());
-            view.setReleaseDate(movieListModel.getReleaseYear());
+            view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
             view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
             view.setVoteAverage(movieListModel.getVoteAverage());
         }
