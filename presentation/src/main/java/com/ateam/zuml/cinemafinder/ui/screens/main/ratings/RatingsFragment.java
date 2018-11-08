@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui;
+package com.ateam.zuml.cinemafinder.ui.screens.main.ratings;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,8 +14,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.RatingsView;
+import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 
@@ -23,18 +22,18 @@ public class RatingsFragment extends MvpAppCompatFragment implements RatingsView
 
     @InjectPresenter RatingsPresenter presenter;
 
-    @ProvidePresenter
-    RatingsPresenter provideRatingsPresenter() {
-        RatingsPresenter presenter = new RatingsPresenter();
-        App.getApp().getAppComponent().inject(presenter);
-        return presenter;
-    }
-
     public static RatingsFragment newInstance() {
         RatingsFragment fragment = new RatingsFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @ProvidePresenter
+    RatingsPresenter provideRatingsPresenter() {
+        RatingsPresenter presenter = new RatingsPresenter();
+        App.getApp().getAppComponent().inject(presenter);
+        return presenter;
     }
 
     @Nullable
@@ -51,6 +50,14 @@ public class RatingsFragment extends MvpAppCompatFragment implements RatingsView
         inflater.inflate(R.menu.menu_main, menu);
     }
 
+    // #################################### BackButtonListener ####################################
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
+    }
+
     private void init() {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (AppActivity) getActivity();
@@ -58,11 +65,5 @@ public class RatingsFragment extends MvpAppCompatFragment implements RatingsView
             widgetTuning.setupToolbar(getResources().getString(R.string.ratings), false);
             widgetTuning.setSearchVisibility(true);
         }
-    }
-
-    @Override
-    public boolean onBackPressed() {
-        presenter.onBackPressed();
-        return true;
     }
 }

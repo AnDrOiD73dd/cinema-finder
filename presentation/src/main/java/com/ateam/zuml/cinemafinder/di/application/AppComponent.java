@@ -13,7 +13,7 @@ import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMoviePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerPresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.ratings.RatingsPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponsePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMovieFragment;
 import com.ateam.zuml.cinemafinder.ui.AppActivity;
