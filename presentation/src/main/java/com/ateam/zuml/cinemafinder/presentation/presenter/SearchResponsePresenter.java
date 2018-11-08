@@ -51,7 +51,6 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
     @SuppressLint("CheckResult")
     private void loadData(String movie) {
-        //TODO 07.11.2018 optimize query
         getViewState().showLoading();
         useCase.execute(movie, "1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_154)
                 .observeOn(schedulers.ui())
@@ -96,7 +95,13 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
         public void bindViewAt(SearchRowView view, int position) {
             MovieListModel movieListModel = searchList.get(position);
-            view.setPoster(movieListModel.getPosterPath());
+
+            if(movieListModel.getPosterPath().isEmpty()) {
+                view.setPoster(stringUtil.getStabUrl());
+            }else {
+                view.setPoster(movieListModel.getPosterPath());
+            }
+
             view.setTitle(movieListModel.getTitle());
             view.setOriginalTitle(movieListModel.getOriginalTitle());
             view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
