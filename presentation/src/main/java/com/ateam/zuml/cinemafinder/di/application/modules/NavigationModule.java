@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.di.application.modules;
 
-import com.ateam.zuml.cinemafinder.util.CiceroneHolder;
+import com.ateam.zuml.cinemafinder.navigation.CiceroneHolder;
 import com.ateam.zuml.cinemafinder.util.Constants;
 
 import javax.inject.Named;

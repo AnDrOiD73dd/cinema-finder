@@ -24,7 +24,6 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.commands.Command;
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @Inject
     Router router;
 
-    private Navigator navigator = new CustomNavigator(this, R.id.main_container) {
+    private CustomNavigator navigator = new CustomNavigator(this, R.id.main_container) {
         @Override
         public void applyCommands(Command[] commands) {
             super.applyCommands(commands);
@@ -115,15 +114,15 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @Override
     public void setSearchVisibility(boolean visible) {
         if (visible) {
-            search.setVisibility(View.VISIBLE);
+            searchView.setVisibility(View.VISIBLE);
         } else {
-            search.setVisibility(View.GONE);
+            searchView.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void closeSearch() {
-        search.onActionViewCollapsed();
+        searchView.onActionViewCollapsed();
     }
 
     @Override
@@ -148,7 +147,9 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
                 break;
             }
         }
-        if (!(fragment instanceof BackButtonListener) || !((BackButtonListener) fragment).onBackPressed()) {
+        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
+            return;
+        } else {
             router.exit();
         }
     }
