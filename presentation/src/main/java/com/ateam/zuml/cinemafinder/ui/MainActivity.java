@@ -32,7 +32,7 @@ import ru.terrakok.cicerone.commands.Command;
 public class MainActivity extends AppCompatActivity implements WidgetTuning {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
-    @BindView(R.id.search) SearchView search;
+    @BindView(R.id.search) SearchView searchView;
 
     @Named(Constants.MAIN_CONTAINER)
     @Inject
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
         init();
 
         if (savedInstanceState == null) {
-            router.navigateTo(new Screens.HomeScreen());
+            router.navigateTo(new Screens.MainContainerScreen());
         }
     }
 
@@ -73,11 +73,11 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
                 router.navigateTo(new Screens.SearchResponseScreen(s));
-                search.clearFocus();
+                searchView.clearFocus();
                 return true;
             }
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                search.onActionViewCollapsed();
+                searchView.onActionViewCollapsed();
                 router.exit();
                 return true;
             case R.id.action_settings:
@@ -115,15 +115,15 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @Override
     public void setSearchVisibility(boolean visible)    {
         if(visible)    {
-            search.setVisibility(View.VISIBLE);
+            searchView.setVisibility(View.VISIBLE);
         }else {
-            search.setVisibility(View.GONE);
+            searchView.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void closeSearch()   {
-        search.onActionViewCollapsed();
+        searchView.onActionViewCollapsed();
     }
 
     @Override

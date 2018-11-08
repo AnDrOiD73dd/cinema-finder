@@ -61,12 +61,12 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
     class ViewHolder extends RecyclerView.ViewHolder implements SearchRowView {
 
-        @BindView(R.id.iv_poster_search) ImageView poster;
-        @BindView(R.id.tv_title_search) TextView title;
-        @BindView(R.id.tv_original_title_search) TextView originalTitle;
-        @BindView(R.id.tv_release_date_search) TextView releaseDate;
-        @BindView(R.id.tv_genres_search) TextView genres;
-        @BindView(R.id.tv_vote_average_search) TextView voteAverage;
+        @BindView(R.id.iv_poster_search) ImageView posterView;
+        @BindView(R.id.tv_title_search) TextView titleView;
+        @BindView(R.id.tv_original_title_search) TextView originalTitleView;
+        @BindView(R.id.tv_release_date_search) TextView releaseDateView;
+        @BindView(R.id.tv_genres_search) TextView genresView;
+        @BindView(R.id.tv_vote_average_search) TextView voteAverageView;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -76,32 +76,32 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
         @Override
         public void setPoster(String posterPath) {
-            imageLoader.loadInto(posterPath, poster);
+            imageLoader.loadInto(posterPath, posterView);
         }
 
         @Override
         public void setTitle(String title) {
-            this.title.setText(title);
+            this.titleView.setText(title);
         }
 
         @Override
         public void setOriginalTitle(String originalTitle) {
-            this.originalTitle.setText(originalTitle);
+            this.originalTitleView.setText(originalTitle);
         }
 
         @Override
         public void setReleaseDate(String releaseDate) {
-            this.releaseDate.setText(releaseDate);
+            this.releaseDateView.setText(releaseDate);
         }
 
         @Override
         public void setGenres(String genres) {
-            this.genres.setText(genres);
+            this.genresView.setText(genres);
         }
 
         @Override
         public void setVoteAverage(String voteAverage) {
-            this.voteAverage.setText(voteAverage);
+            this.voteAverageView.setText(voteAverage);
         }
     }
 }

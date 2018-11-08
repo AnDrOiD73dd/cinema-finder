@@ -16,7 +16,7 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
 
-    private int currentPageId;
+    private int currentScreenId;
 
     @Named(Constants.CHILD_CONTAINER)
     @Inject
@@ -27,21 +27,21 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
     Router globalRouter;
 
     public boolean showFragment(int itemId) {
-        if(currentPageId == itemId) {
+        if(currentScreenId == itemId) {
             return false;
         }
 
         switch (itemId) {
-            case R.id.action_trends:
-                currentPageId = itemId;
-                localRouter.replaceScreen(new Screens.TrendsScreen());
+            case R.id.action_home:
+                currentScreenId = itemId;
+                localRouter.replaceScreen(new Screens.HomeScreen());
                 return true;
             case R.id.action_favorites:
-                currentPageId = itemId;
+                currentScreenId = itemId;
                 localRouter.replaceScreen(new Screens.FavoritesScreen());
                 return true;
             case R.id.action_ratings:
-                currentPageId = itemId;
+                currentScreenId = itemId;
                 localRouter.replaceScreen(new Screens.RatingsScreen());
                 return true;
             default:
