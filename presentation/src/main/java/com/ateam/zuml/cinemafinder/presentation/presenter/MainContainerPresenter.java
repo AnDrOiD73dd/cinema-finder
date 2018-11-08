@@ -4,7 +4,7 @@ package com.ateam.zuml.cinemafinder.presentation.presenter;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.MainContainerView;
-import com.ateam.zuml.cinemafinder.ui.Screens;
+import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
 
 import javax.inject.Inject;

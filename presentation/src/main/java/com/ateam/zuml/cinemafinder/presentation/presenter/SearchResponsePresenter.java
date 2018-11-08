@@ -11,7 +11,7 @@ import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchResponseView;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
-import com.ateam.zuml.cinemafinder.ui.Screens;
+import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;

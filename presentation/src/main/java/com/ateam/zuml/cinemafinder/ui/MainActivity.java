@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.navigation.CustomNavigator;
+import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.Constants;

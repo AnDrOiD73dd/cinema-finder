@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.ateam.zuml.cinemafinder.ui.Screens;
-
 import java.util.LinkedList;
 
 import ru.terrakok.cicerone.Navigator;
