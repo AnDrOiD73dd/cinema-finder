@@ -5,15 +5,13 @@ import com.ateam.zuml.cinemafinder.util.SchedulersProviderImpl;
 
 import javax.inject.Singleton;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
 
 @Module
-public final class SchedulersModule {
+public interface SchedulersModule {
 
     @Singleton
-    @Provides
-    SchedulersProvider provideSchedulersProvider() {
-        return new SchedulersProviderImpl();
-    }
+    @Binds
+    SchedulersProvider provideSchedulersProvider(final SchedulersProviderImpl provider);
 }
