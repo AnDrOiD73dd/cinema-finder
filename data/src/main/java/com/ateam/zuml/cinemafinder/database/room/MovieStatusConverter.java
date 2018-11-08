@@ -13,7 +13,7 @@ public final class MovieStatusConverter {
                 return entity;
             }
         }
-        return null;
+        return MovieStatus.NONE;
     }
 
     @TypeConverter
