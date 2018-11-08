@@ -14,7 +14,7 @@ import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
 import com.ateam.zuml.cinemafinder.ui.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
-import com.ateam.zuml.cinemafinder.util.StringUtil;
+import com.ateam.zuml.cinemafinder.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     @Inject
     Router router;
 
-    @Inject StringUtil stringUtil;
+    @Inject StringUtils stringUtil;
     @Inject GetMoviesBySearchUseCase useCase;
     @Inject SchedulersProvider schedulers;
 

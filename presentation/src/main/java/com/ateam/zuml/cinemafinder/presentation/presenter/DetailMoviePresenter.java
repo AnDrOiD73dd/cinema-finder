@@ -11,7 +11,7 @@ import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.presentation.view.DetailMovieView;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
-import com.ateam.zuml.cinemafinder.util.StringUtil;
+import com.ateam.zuml.cinemafinder.util.StringUtils;
 
 import java.util.Locale;
 
@@ -27,7 +27,7 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     @Inject
     Router router;
 
-    @Inject StringUtil stringUtil;
+    @Inject StringUtils stringUtil;
     @Inject GetMovieDetailsUseCase useCase;
     @Inject SchedulersProvider schedulers;
 
@@ -57,9 +57,9 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
         getViewState().setSubTitle(String.format(Locale.getDefault(), "%s (%s)",
                 movieDetailsModel.getOriginalTitle(), movieDetailsModel.getReleaseYear()));
 
-        if(movieDetailsModel.getPosterPath().isEmpty()) {
+        if (movieDetailsModel.getPosterPath().isEmpty()) {
             getViewState().setPosterPlaceholder();
-        }else {
+        } else {
             getViewState().setPoster(movieDetailsModel.getPosterPath());
         }
 
