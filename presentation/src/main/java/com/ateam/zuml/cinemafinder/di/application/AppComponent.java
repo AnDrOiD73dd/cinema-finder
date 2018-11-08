@@ -11,7 +11,7 @@ import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.UtilsModule;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMoviePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesPresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerPresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponsePresenter;

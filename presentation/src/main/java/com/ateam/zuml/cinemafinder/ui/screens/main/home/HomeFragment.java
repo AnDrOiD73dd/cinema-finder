@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui;
+package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,8 +14,7 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.HomeView;
+import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 
@@ -51,6 +50,14 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
         inflater.inflate(R.menu.menu_main, menu);
     }
 
+    // #################################### BackButtonListener ####################################
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
+    }
+
     private void init() {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (AppActivity) getActivity();
@@ -58,11 +65,5 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
             widgetTuning.setupToolbar(getResources().getString(R.string.home), false);
             widgetTuning.setSearchVisibility(true);
         }
-    }
-
-    @Override
-    public boolean onBackPressed() {
-        presenter.onBackPressed();
-        return true;
     }
 }
