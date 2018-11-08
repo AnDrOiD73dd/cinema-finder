@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.presentation.presenter;
+package com.ateam.zuml.cinemafinder.ui.screens.search;
 
 import android.annotation.SuppressLint;
 
@@ -9,8 +9,6 @@ import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
-import com.ateam.zuml.cinemafinder.presentation.view.SearchResponseView;
-import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
@@ -38,7 +36,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     private final String movieTitle;
     private SearchListPresenter listPresenter;
 
-    public SearchResponsePresenter(String movieTitle) {
+    SearchResponsePresenter(String movieTitle) {
         this.movieTitle = movieTitle;
         this.listPresenter = new SearchListPresenter();
     }
@@ -71,7 +69,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         getViewState().showError();
     }
 
-    public void showDetailsInfo(int position) {
+    void showDetailsInfo(int position) {
         getViewState().closeSearch();
         router.navigateTo(new Screens.DetailMovieScreen(listPresenter.searchList.get(position).getId()));
     }
@@ -81,11 +79,11 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         router.exit();
     }
 
-    public SearchListPresenter getListPresenter() {
+    SearchListPresenter getListPresenter() {
         return listPresenter;
     }
 
-    public final class SearchListPresenter {
+    final class SearchListPresenter {
 
         private List<MovieListModel> searchList;
 
@@ -93,7 +91,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             this.searchList = new ArrayList<>();
         }
 
-        public void bindViewAt(SearchRowView view, int position) {
+        void bindViewAt(SearchRowView view, int position) {
             MovieListModel movieListModel = searchList.get(position);
 
             if (movieListModel.getPosterPath().isEmpty()) {
@@ -109,7 +107,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             view.setVoteAverage(movieListModel.getVoteAverage());
         }
 
-        public int getSearchCount() {
+        int getSearchCount() {
             return searchList.size();
         }
     }

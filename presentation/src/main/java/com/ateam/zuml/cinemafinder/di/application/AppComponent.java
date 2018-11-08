@@ -14,11 +14,11 @@ import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerPresenter;
 import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponsePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMovieFragment;
 import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerFragment;
-import com.ateam.zuml.cinemafinder.ui.SearchResponseFragment;
+import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponseFragment;
 import com.ateam.zuml.cinemafinder.ui.SettingsFragment;
 
 import javax.inject.Singleton;

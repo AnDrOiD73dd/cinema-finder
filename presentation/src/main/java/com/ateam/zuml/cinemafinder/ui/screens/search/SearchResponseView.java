@@ -1,8 +1,9 @@
-package com.ateam.zuml.cinemafinder.presentation.view;
+package com.ateam.zuml.cinemafinder.ui.screens.search;
 
 import com.arellomobile.mvp.MvpView;
 
 public interface SearchResponseView extends MvpView {
+
     void closeSearch();
 
     void updateSearchList();

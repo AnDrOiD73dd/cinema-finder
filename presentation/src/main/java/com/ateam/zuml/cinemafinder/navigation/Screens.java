@@ -7,7 +7,7 @@ import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesFragment;
 import com.ateam.zuml.cinemafinder.ui.HomeFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerFragment;
 import com.ateam.zuml.cinemafinder.ui.RatingsFragment;
-import com.ateam.zuml.cinemafinder.ui.SearchResponseFragment;
+import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponseFragment;
 import com.ateam.zuml.cinemafinder.ui.SettingsFragment;
 
 import ru.terrakok.cicerone.android.support.SupportAppScreen;

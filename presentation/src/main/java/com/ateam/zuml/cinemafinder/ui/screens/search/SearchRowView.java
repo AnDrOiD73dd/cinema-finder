@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.presentation.view;
+package com.ateam.zuml.cinemafinder.ui.screens.search;
 
 public interface SearchRowView {
 

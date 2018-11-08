@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui;
+package com.ateam.zuml.cinemafinder.ui.screens.search;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -9,9 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.SearchListView;
-import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
 import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
 
 import butterknife.BindView;
