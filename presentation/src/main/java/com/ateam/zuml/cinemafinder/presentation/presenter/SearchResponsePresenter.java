@@ -13,6 +13,7 @@ import com.ateam.zuml.cinemafinder.presentation.view.SearchResponseView;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchRowView;
 import com.ateam.zuml.cinemafinder.ui.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
+import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtil;
 
 import java.util.ArrayList;
@@ -21,7 +22,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import ru.terrakok.cicerone.Router;
 
 @InjectViewState
@@ -31,11 +31,9 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     @Inject
     Router router;
 
-    @Inject
-    StringUtil stringUtil;
-
-    @Inject
-    GetMoviesBySearchUseCase useCase;
+    @Inject StringUtil stringUtil;
+    @Inject GetMoviesBySearchUseCase useCase;
+    @Inject SchedulersProvider schedulers;
 
     private final String movieTitle;
     private SearchListPresenter listPresenter;
@@ -54,19 +52,24 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     @SuppressLint("CheckResult")
     private void loadData(String movie) {
         //TODO 07.11.2018 optimize query
+        getViewState().showLoading();
         useCase.execute(movie, "1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_154)
-                //TODO 07.11.2018 add SchedulersProvider
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(movieListModels -> {
-                    listPresenter.searchList = movieListModels;
-                    getViewState().updateSearchList();
-                }, throwable -> {
-                    //TODO 07.11.2018 add show error
-                });
+                .observeOn(schedulers.ui())
+                .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
     }
 
-    public SearchListPresenter getListPresenter() {
-        return listPresenter;
+    private void onLoadSuccess(List<MovieListModel> movieListModels) {
+        getViewState().hideLoading();
+        listPresenter.searchList = movieListModels;
+        getViewState().updateSearchList();
+        if (movieListModels.isEmpty()) {
+            getViewState().showNoSearchResults();
+        }
+    }
+
+    private void onLoadFailed() {
+        getViewState().hideLoading();
+        getViewState().showError();
     }
 
     public void showDetailsInfo(int position) {
@@ -77,6 +80,10 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     public void onBackPressed() {
         getViewState().closeSearch();
         router.exit();
+    }
+
+    public SearchListPresenter getListPresenter() {
+        return listPresenter;
     }
 
     public final class SearchListPresenter {

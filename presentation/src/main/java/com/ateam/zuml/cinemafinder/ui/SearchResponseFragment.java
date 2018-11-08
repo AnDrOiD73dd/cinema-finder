@@ -3,12 +3,16 @@ package com.ateam.zuml.cinemafinder.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -31,7 +35,10 @@ public class SearchResponseFragment extends MvpAppCompatFragment
 
     private SearchResultAdapter adapter;
 
+    @BindView(R.id.cl_search_response) ConstraintLayout rootView;
+    @BindView(R.id.pb_search_response) ProgressBar progressBarView;
     @BindView(R.id.rv_search_response) RecyclerView recyclerView;
+    @BindView(R.id.tv_no_search_results) TextView noSearchResultsView;
 
     @Inject ImageLoader<ImageView> imageLoader;
 
@@ -104,12 +111,37 @@ public class SearchResponseFragment extends MvpAppCompatFragment
         return true;
     }
 
-    private String getMovieTitle()  {
+    private String getMovieTitle() {
         Bundle bundle = getArguments();
         String movieTitle = "";
         if (bundle != null && bundle.containsKey(QUERY_EXTRA_KEY)) {
             movieTitle = bundle.getString(QUERY_EXTRA_KEY);
         }
         return movieTitle;
+    }
+
+    @Override
+    public void showNoSearchResults() {
+        noSearchResultsView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideNoSearchResults() {
+        noSearchResultsView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showError() {
+        Snackbar.make(rootView, R.string.search_response_error_message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showLoading() {
+        progressBarView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        progressBarView.setVisibility(View.GONE);
     }
 }

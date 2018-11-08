@@ -4,9 +4,9 @@ import com.arellomobile.mvp.MvpView;
 
 public interface DetailMovieView extends MvpView {
 
-    void showProgressBar();
+    void showLoading();
 
-    void hideProgressBar();
+    void hideLoading();
 
     void showError();
 
