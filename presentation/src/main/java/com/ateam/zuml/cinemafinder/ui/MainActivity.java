@@ -115,15 +115,15 @@ public class MainActivity extends AppCompatActivity implements WidgetTuning {
     @Override
     public void setSearchVisibility(boolean visible) {
         if (visible) {
-            searchView.setVisibility(View.VISIBLE);
+            search.setVisibility(View.VISIBLE);
         } else {
-            searchView.setVisibility(View.GONE);
+            search.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void closeSearch() {
-        searchView.onActionViewCollapsed();
+        search.onActionViewCollapsed();
     }
 
     @Override
