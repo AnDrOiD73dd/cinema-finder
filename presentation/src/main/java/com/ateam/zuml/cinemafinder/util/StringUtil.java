@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.util;
 
-public class StringUtil {
+public final class StringUtil {
 
     public StringUtil() {
     }
@@ -17,5 +17,9 @@ public class StringUtil {
         }
 
         return sb.toString();
+    }
+
+    public String addBrackets(String s) {
+        return "(" + s + ")";
     }
 }

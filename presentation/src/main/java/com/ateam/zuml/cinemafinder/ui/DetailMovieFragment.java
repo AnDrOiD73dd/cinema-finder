@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
@@ -50,6 +51,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     @BindView(R.id.tv_movie_tagline) TextView taglineView;
     @BindView(R.id.tv_movie_adult) TextView adultView;
     @BindView(R.id.tv_movie_overview) TextView descriptionView;
+    @BindView(R.id.pb_movie_detail) ProgressBar progressBarView;
 
     public static DetailMovieFragment newInstance(String movieId) {
         DetailMovieFragment fragment = new DetailMovieFragment();
@@ -88,13 +90,13 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     // #################################### DetailMovieView ####################################
 
     @Override
-    public void showProgressBar() {
-
+    public void showLoading() {
+        progressBarView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideProgressBar() {
-
+    public void hideLoading() {
+        progressBarView.setVisibility(View.GONE);
     }
 
     @Override
@@ -105,6 +107,11 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
     @Override
     public void setPoster(String imagePath) {
         imageLoader.loadInto(imagePath, posterView);
+    }
+
+    @Override
+    public void setPosterPlaceholder() {
+        imageLoader.loadInto(getResources().getString(R.string.stub_url), posterView);
     }
 
     @Override
@@ -181,7 +188,7 @@ public class DetailMovieFragment extends MvpAppCompatFragment implements DetailM
         return true;
     }
 
-    private String getMovieId()  {
+    private String getMovieId() {
         Bundle bundle = getArguments();
         String movieId = "";
         if (bundle != null && bundle.containsKey(KEY_MOVIE_ID)) {

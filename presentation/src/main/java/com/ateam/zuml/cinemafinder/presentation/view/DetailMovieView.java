@@ -4,13 +4,15 @@ import com.arellomobile.mvp.MvpView;
 
 public interface DetailMovieView extends MvpView {
 
-    void showProgressBar();
+    void showLoading();
 
-    void hideProgressBar();
+    void hideLoading();
 
     void showError();
 
     void setPoster(String imagePath);
+
+    void setPosterPlaceholder();
 
     void setTitle(String titleText);
 

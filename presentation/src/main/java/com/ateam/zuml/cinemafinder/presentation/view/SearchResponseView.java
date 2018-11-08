@@ -6,4 +6,14 @@ public interface SearchResponseView extends MvpView {
     void closeSearch();
 
     void updateSearchList();
+
+    void showNoSearchResults();
+
+    void hideNoSearchResults();
+
+    void showError();
+
+    void showLoading();
+
+    void hideLoading();
 }

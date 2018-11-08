@@ -60,8 +60,7 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
 
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
-        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem ->
-                presenter.showFragment(menuItem.getItemId()));
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> showScreen(menuItem.getItemId()));
 
         return view;
     }
@@ -70,7 +69,7 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getChildFragmentManager().findFragmentById(R.id.child_container) == null) {
-            presenter.showFragment(bottomNavigationView.getSelectedItemId());
+            showScreen(bottomNavigationView.getSelectedItemId());
         }
     }
 
@@ -101,6 +100,22 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
         } else {
             presenter.onBackPressed();
             return true;
+        }
+    }
+
+    private boolean showScreen(int itemId) {
+        switch (itemId) {
+            case R.id.action_home:
+                presenter.onHomeScreenSelected();
+                return true;
+            case R.id.action_favorites:
+                presenter.onFavoritesScreenSelected();
+                return true;
+            case R.id.action_ratings:
+                presenter.onRatingsScreenSelected();
+                return true;
+            default:
+                return false;
         }
     }
 }

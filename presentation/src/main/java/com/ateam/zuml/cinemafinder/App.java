@@ -11,7 +11,8 @@ public final class App extends Application {
 
     private AppComponent appComponent;
 
-    @Override public void onCreate() {
+    @Override
+    public void onCreate() {
         super.onCreate();
         app = this;
         appComponent = DaggerAppComponent.builder()

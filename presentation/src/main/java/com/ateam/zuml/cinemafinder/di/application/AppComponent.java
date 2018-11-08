@@ -6,6 +6,7 @@ import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ImageLoaderModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
+import com.ateam.zuml.cinemafinder.di.application.modules.SchedulersModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.UtilsModule;
 import com.ateam.zuml.cinemafinder.presentation.presenter.DetailMoviePresenter;
@@ -32,7 +33,8 @@ import dagger.Component;
         NavigationModule.class,
         ServiceModule.class,
         ImageLoaderModule.class,
-        UtilsModule.class})
+        UtilsModule.class,
+        SchedulersModule.class})
 public interface AppComponent {
 
     @Component.Builder

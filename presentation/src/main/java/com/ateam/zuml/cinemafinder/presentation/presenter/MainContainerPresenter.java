@@ -3,7 +3,6 @@ package com.ateam.zuml.cinemafinder.presentation.presenter;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.view.MainContainerView;
 import com.ateam.zuml.cinemafinder.ui.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
@@ -16,7 +15,13 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
 
-    private int currentPageId;
+    enum BottomScreens  {
+        HOME,
+        FAVORITES,
+        RATINGS
+    }
+
+    private BottomScreens currentScreen;
 
     @Named(Constants.CHILD_CONTAINER)
     @Inject
@@ -26,27 +31,29 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
     @Inject
     Router globalRouter;
 
-    public boolean showFragment(int itemId) {
-        if(currentPageId == itemId) {
-            return false;
-        }
 
-        switch (itemId) {
-            case R.id.action_trends:
-                currentPageId = itemId;
-                localRouter.replaceScreen(new Screens.TrendsScreen());
-                return true;
-            case R.id.action_favorites:
-                currentPageId = itemId;
-                localRouter.replaceScreen(new Screens.FavoritesScreen());
-                return true;
-            case R.id.action_ratings:
-                currentPageId = itemId;
-                localRouter.replaceScreen(new Screens.RatingsScreen());
-                return true;
-            default:
-                return false;
+    public void onHomeScreenSelected() {
+        if(currentScreen == BottomScreens.HOME) {
+            return;
         }
+        currentScreen = BottomScreens.HOME;
+        localRouter.replaceScreen(new Screens.HomeScreen());
+    }
+
+    public void onFavoritesScreenSelected() {
+        if(currentScreen == BottomScreens.FAVORITES) {
+            return;
+        }
+        currentScreen = BottomScreens.FAVORITES;
+        localRouter.replaceScreen(new Screens.FavoritesScreen());
+    }
+
+    public void onRatingsScreenSelected() {
+        if(currentScreen == BottomScreens.RATINGS) {
+            return;
+        }
+        currentScreen = BottomScreens.RATINGS;
+        localRouter.replaceScreen(new Screens.RatingsScreen());
     }
 
     public void onBackPressed() {
