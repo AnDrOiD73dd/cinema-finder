@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui;
+package com.ateam.zuml.cinemafinder.ui.screens.main;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,8 +15,6 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.navigation.CustomNavigator;
-import com.ateam.zuml.cinemafinder.presentation.presenter.MainContainerPresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.MainContainerView;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.util.Constants;
 
@@ -30,28 +28,28 @@ import ru.terrakok.cicerone.NavigatorHolder;
 
 public class MainContainerFragment extends MvpAppCompatFragment implements MainContainerView, BackButtonListener {
 
-    private CustomNavigator navigator;
-
-    @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
-
     @Named(Constants.CHILD_CONTAINER)
     @Inject
     NavigatorHolder navigatorHolder;
 
     @InjectPresenter MainContainerPresenter presenter;
 
-    @ProvidePresenter
-    MainContainerPresenter provideHomePresenter() {
-        MainContainerPresenter presenter = new MainContainerPresenter();
-        App.getApp().getAppComponent().inject(presenter);
-        return presenter;
-    }
+    @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
+
+    private CustomNavigator navigator;
 
     public static MainContainerFragment newInstance() {
         MainContainerFragment fragment = new MainContainerFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @ProvidePresenter
+    MainContainerPresenter provideHomePresenter() {
+        MainContainerPresenter presenter = new MainContainerPresenter();
+        App.getApp().getAppComponent().inject(presenter);
+        return presenter;
     }
 
     @Override
@@ -61,7 +59,8 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
 
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
-        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem -> showScreen(menuItem.getItemId()));
+        bottomNavigationView.setOnNavigationItemSelectedListener(menuItem ->
+                onBottomNavigationClicked(menuItem.getItemId()));
 
         return view;
     }
@@ -70,7 +69,7 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getChildFragmentManager().findFragmentById(R.id.child_container) == null) {
-            showScreen(bottomNavigationView.getSelectedItemId());
+            onBottomNavigationClicked(bottomNavigationView.getSelectedItemId());
         }
     }
 
@@ -86,13 +85,8 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
         super.onPause();
     }
 
-    private Navigator getNavigator() {
-        if (navigator == null) {
-            navigator = new CustomNavigator(getActivity(), getChildFragmentManager(), R.id.child_container);
-        }
-        return navigator;
-    }
 
+    // #################################### BackButtonListener ####################################
     @Override
     public boolean onBackPressed() {
         Fragment fragment = getChildFragmentManager().findFragmentById(R.id.child_container);
@@ -104,7 +98,14 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
         }
     }
 
-    private boolean showScreen(int itemId) {
+    private Navigator getNavigator() {
+        if (navigator == null) {
+            navigator = new CustomNavigator(getActivity(), getChildFragmentManager(), R.id.child_container);
+        }
+        return navigator;
+    }
+
+    private boolean onBottomNavigationClicked(int itemId) {
         switch (itemId) {
             case R.id.action_home:
                 presenter.onHomeScreenSelected();

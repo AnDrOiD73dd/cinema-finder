@@ -1,9 +1,8 @@
-package com.ateam.zuml.cinemafinder.presentation.presenter;
+package com.ateam.zuml.cinemafinder.ui.screens.main;
 
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.ateam.zuml.cinemafinder.presentation.view.MainContainerView;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
 
@@ -15,7 +14,7 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
 
-    enum BottomScreens  {
+    private enum BottomScreens  {
         HOME,
         FAVORITES,
         RATINGS
@@ -32,7 +31,7 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
     Router globalRouter;
 
 
-    public void onHomeScreenSelected() {
+    void onHomeScreenSelected() {
         if(currentScreen == BottomScreens.HOME) {
             return;
         }
@@ -40,7 +39,7 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
         localRouter.replaceScreen(new Screens.HomeScreen());
     }
 
-    public void onFavoritesScreenSelected() {
+    void onFavoritesScreenSelected() {
         if(currentScreen == BottomScreens.FAVORITES) {
             return;
         }
@@ -48,7 +47,7 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
         localRouter.replaceScreen(new Screens.FavoritesScreen());
     }
 
-    public void onRatingsScreenSelected() {
+    void onRatingsScreenSelected() {
         if(currentScreen == BottomScreens.RATINGS) {
             return;
         }
