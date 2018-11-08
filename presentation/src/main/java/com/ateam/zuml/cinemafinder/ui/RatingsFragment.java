@@ -16,6 +16,8 @@ import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.RatingsView;
+import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
+import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 
 public class RatingsFragment extends MvpAppCompatFragment implements RatingsView, BackButtonListener {
 

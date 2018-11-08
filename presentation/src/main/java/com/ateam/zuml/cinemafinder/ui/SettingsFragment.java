@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
+import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.Constants;
 
 import javax.inject.Inject;

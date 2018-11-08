@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -21,6 +20,8 @@ import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.SearchResponseView;
+import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
+import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
 
 import javax.inject.Inject;

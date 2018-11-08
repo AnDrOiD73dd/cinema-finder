@@ -16,6 +16,8 @@ import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.presentation.presenter.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.FavoritesView;
+import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
+import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 
 public class FavoritesFragment extends MvpAppCompatFragment implements FavoritesView, BackButtonListener {
 
