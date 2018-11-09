@@ -44,20 +44,6 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
-    }
-
-    // #################################### BackButtonListener ####################################
-
-    @Override
-    public boolean onBackPressed() {
-        presenter.onBackPressed();
-        return true;
-    }
-
     private void init() {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (AppActivity) getActivity();
@@ -65,5 +51,19 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
             widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
             widgetTuning.setSearchVisibility(true);
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    // #################################### BackButtonListener ###################################
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
     }
 }

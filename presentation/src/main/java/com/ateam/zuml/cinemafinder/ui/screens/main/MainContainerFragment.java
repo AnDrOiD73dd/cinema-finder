@@ -28,15 +28,15 @@ import ru.terrakok.cicerone.NavigatorHolder;
 
 public class MainContainerFragment extends MvpAppCompatFragment implements MainContainerView, BackButtonListener {
 
+    private CustomNavigator navigator;
+
+    @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
+
     @Named(Constants.CHILD_CONTAINER)
     @Inject
     NavigatorHolder navigatorHolder;
 
     @InjectPresenter MainContainerPresenter presenter;
-
-    @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
-
-    private CustomNavigator navigator;
 
     public static MainContainerFragment newInstance() {
         MainContainerFragment fragment = new MainContainerFragment();
@@ -73,38 +73,6 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        navigatorHolder.setNavigator(getNavigator());
-    }
-
-    @Override
-    public void onPause() {
-        navigatorHolder.removeNavigator();
-        super.onPause();
-    }
-
-
-    // #################################### BackButtonListener ####################################
-    @Override
-    public boolean onBackPressed() {
-        Fragment fragment = getChildFragmentManager().findFragmentById(R.id.child_container);
-        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
-            return true;
-        } else {
-            presenter.onBackPressed();
-            return true;
-        }
-    }
-
-    private Navigator getNavigator() {
-        if (navigator == null) {
-            navigator = new CustomNavigator(getActivity(), getChildFragmentManager(), R.id.child_container);
-        }
-        return navigator;
-    }
-
     private boolean onBottomNavigationClicked(int itemId) {
         switch (itemId) {
             case R.id.action_home:
@@ -118,6 +86,38 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
                 return true;
             default:
                 return false;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        navigatorHolder.setNavigator(getNavigator());
+    }
+
+    @Override
+    public void onPause() {
+        navigatorHolder.removeNavigator();
+        super.onPause();
+    }
+
+    private Navigator getNavigator() {
+        if (navigator == null) {
+            navigator = new CustomNavigator(getActivity(), getChildFragmentManager(), R.id.child_container);
+        }
+        return navigator;
+    }
+
+    // #################################### BackButtonListener ###################################
+
+    @Override
+    public boolean onBackPressed() {
+        Fragment fragment = getChildFragmentManager().findFragmentById(R.id.child_container);
+        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
+            return true;
+        } else {
+            presenter.onBackPressed();
+            return true;
         }
     }
 }

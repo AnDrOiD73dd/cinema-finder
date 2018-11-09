@@ -21,7 +21,7 @@ import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
-import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
+import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
 
@@ -33,16 +33,16 @@ public class SearchResponseFragment extends MvpAppCompatFragment
 
     private static final String QUERY_EXTRA_KEY = "query_extra_key";
 
-    @Inject ImageLoader imageLoader;
+    private SearchResultAdapter adapter;
 
     @BindView(R.id.cl_search_response) ConstraintLayout rootView;
     @BindView(R.id.pb_search_response) ProgressBar progressBarView;
     @BindView(R.id.rv_search_response) RecyclerView recyclerView;
     @BindView(R.id.tv_no_search_results) TextView noSearchResultsView;
 
-    @InjectPresenter SearchResponsePresenter presenter;
+    @Inject ImageLoader imageLoader;
 
-    private SearchResultAdapter adapter;
+    @InjectPresenter SearchResponsePresenter presenter;
 
     public static SearchResponseFragment newInstance(String query) {
         SearchResponseFragment fragment = new SearchResponseFragment();
@@ -59,6 +59,15 @@ public class SearchResponseFragment extends MvpAppCompatFragment
         return presenter;
     }
 
+    private String getMovieTitle() {
+        Bundle bundle = getArguments();
+        String movieTitle = "";
+        if (bundle != null && bundle.containsKey(QUERY_EXTRA_KEY)) {
+            movieTitle = bundle.getString(QUERY_EXTRA_KEY);
+        }
+        return movieTitle;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -68,14 +77,34 @@ public class SearchResponseFragment extends MvpAppCompatFragment
         return view;
     }
 
-    // #################################### SearchResultAdapter.OnItemClickListener ####################################
+    private void setupToolbar() {
+        setHasOptionsMenu(true);
+        WidgetTuning widgetTuning = (AppActivity) getActivity();
+        if (widgetTuning != null) {
+            widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true);
+            widgetTuning.setSearchVisibility(true);
+        }
+    }
+
+    private void init(View v) {
+        App.getApp().getAppComponent().inject(this);
+        ButterKnife.bind(this, v);
+
+        adapter = new SearchResultAdapter(presenter.getListPresenter(), imageLoader);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(this);
+    }
+
+    // ########################## SearchResultAdapter.OnItemClickListener ########################
 
     @Override
     public void onItemClick(int position) {
-        presenter.showDetailsInfo(position);
+        presenter.onItemClicked(position);
     }
 
-    // #################################### SearchResponseView ####################################
+    // #################################### SearchResponseView ###################################
 
     @Override
     public void closeSearch() {
@@ -114,40 +143,11 @@ public class SearchResponseFragment extends MvpAppCompatFragment
         progressBarView.setVisibility(View.GONE);
     }
 
-    // #################################### BackButtonListener ####################################
+    // #################################### BackButtonListener ###################################
 
     @Override
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
-    }
-
-    private void setupToolbar() {
-        setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (AppActivity) getActivity();
-        if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true);
-            widgetTuning.setSearchVisibility(true);
-        }
-    }
-
-    private void init(View v) {
-        App.getApp().getAppComponent().inject(this);
-        ButterKnife.bind(this, v);
-
-        adapter = new SearchResultAdapter(presenter.getListPresenter(), imageLoader);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
-        adapter.setOnItemClickListener(this);
-    }
-
-    private String getMovieTitle() {
-        Bundle bundle = getArguments();
-        String movieTitle = "";
-        if (bundle != null && bundle.containsKey(QUERY_EXTRA_KEY)) {
-            movieTitle = bundle.getString(QUERY_EXTRA_KEY);
-        }
-        return movieTitle;
     }
 }

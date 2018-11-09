@@ -44,20 +44,6 @@ public class RatingsFragment extends MvpAppCompatFragment implements RatingsView
         return view;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
-    }
-
-    // #################################### BackButtonListener ####################################
-
-    @Override
-    public boolean onBackPressed() {
-        presenter.onBackPressed();
-        return true;
-    }
-
     private void init() {
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (AppActivity) getActivity();
@@ -65,5 +51,19 @@ public class RatingsFragment extends MvpAppCompatFragment implements RatingsView
             widgetTuning.setupToolbar(getResources().getString(R.string.ratings), false);
             widgetTuning.setSearchVisibility(true);
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    // #################################### BackButtonListener ###################################
+
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
     }
 }

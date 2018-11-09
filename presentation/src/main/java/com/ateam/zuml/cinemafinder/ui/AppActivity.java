@@ -64,6 +64,32 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
         }
     }
 
+    private void init() {
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(getResources().getColor(R.color.gray500));
+        }
+
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                router.navigateTo(new Screens.SearchResponseScreen(s));
+                searchView.clearFocus();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -91,7 +117,24 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
         }
     }
 
-    // #################################### WidgetTuning ####################################
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = null;
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        for (Fragment f : fragments) {
+            if (f.isVisible()) {
+                fragment = f;
+                break;
+            }
+        }
+        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
+            return;
+        } else {
+            router.exit();
+        }
+    }
+
+    // #################################### WidgetTuning #########################################
 
     @Override
     public void setupToolbar(String title, boolean visible) {
@@ -114,48 +157,5 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
     @Override
     public void closeSearch() {
         searchView.onActionViewCollapsed();
-    }
-
-    @Override
-    public void onBackPressed() {
-        Fragment fragment = null;
-        List<Fragment> fragments = getSupportFragmentManager().getFragments();
-        for (Fragment f : fragments) {
-            if (f.isVisible()) {
-                fragment = f;
-                break;
-            }
-        }
-        if (fragment instanceof BackButtonListener && ((BackButtonListener) fragment).onBackPressed()) {
-            return;
-        } else {
-            router.exit();
-        }
-    }
-
-    private void init() {
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(getResources().getColor(R.color.gray500));
-        }
-
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                router.navigateTo(new Screens.SearchResponseScreen(s));
-                searchView.clearFocus();
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                return false;
-            }
-        });
     }
 }

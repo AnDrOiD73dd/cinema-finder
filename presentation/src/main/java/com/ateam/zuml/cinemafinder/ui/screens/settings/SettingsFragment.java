@@ -44,14 +44,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    // #################################### BackButtonListener ####################################
-
-    @Override
-    public boolean onBackPressed() {
-        router.exit();
-        return true;
-    }
-
     private void init() {
         App.getApp().getAppComponent().inject(this);
         setHasOptionsMenu(true);
@@ -61,5 +53,13 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
             widgetTuning.setupToolbar(getResources().getString(R.string.settings), true);
             widgetTuning.setSearchVisibility(false);
         }
+    }
+
+    // #################################### BackButtonListener ####################################
+
+    @Override
+    public boolean onBackPressed() {
+        router.exit();
+        return true;
     }
 }

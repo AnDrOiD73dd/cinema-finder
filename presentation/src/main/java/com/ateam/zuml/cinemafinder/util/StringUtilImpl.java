@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public final class StringUtilImpl implements StringUtils{
+public final class StringUtilImpl implements StringUtils {
 
     @Inject
     StringUtilImpl() {

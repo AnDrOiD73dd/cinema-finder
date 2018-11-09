@@ -3,9 +3,9 @@ package com.ateam.zuml.cinemafinder.navigation;
 import android.support.v4.app.Fragment;
 
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMovieFragment;
+import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomeFragment;
-import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.ratings.RatingsFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponseFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.settings.SettingsFragment;

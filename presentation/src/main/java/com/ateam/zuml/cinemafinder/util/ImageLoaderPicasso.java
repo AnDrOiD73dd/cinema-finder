@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.util.image;
+package com.ateam.zuml.cinemafinder.util;
 
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public class ImageLoaderPicasso implements ImageLoader {
+public final class ImageLoaderPicasso implements ImageLoader {
 
     @Inject
     ImageLoaderPicasso() {
