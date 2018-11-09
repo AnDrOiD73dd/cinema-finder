@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
-import com.ateam.zuml.cinemafinder.ui.Screens;
-
 import java.util.LinkedList;
 
 import ru.terrakok.cicerone.Navigator;
@@ -32,7 +30,7 @@ public class CustomNavigator implements Navigator {
     private final int containerId;
     private LinkedList<String> localStackCopy;
 
-    public CustomNavigator(FragmentActivity activity, int containerId) {
+    protected CustomNavigator(FragmentActivity activity, int containerId) {
         this(activity, activity.getSupportFragmentManager(), containerId);
     }
 
@@ -68,7 +66,7 @@ public class CustomNavigator implements Navigator {
      *
      * @param command the navigation command to apply
      */
-    protected void applyCommand(Command command) {
+    private void applyCommand(Command command) {
         if (command instanceof Forward) {
             activityForward((Forward) command);
         } else if (command instanceof Replace) {
@@ -81,7 +79,7 @@ public class CustomNavigator implements Navigator {
     }
 
 
-    protected void activityForward(Forward command) {
+    private void activityForward(Forward command) {
         SupportAppScreen screen = (SupportAppScreen) command.getScreen();
         Intent activityIntent = screen.getActivityIntent(activity);
 
@@ -94,7 +92,7 @@ public class CustomNavigator implements Navigator {
         }
     }
 
-    protected void fragmentForward(Forward command) {
+    private void fragmentForward(Forward command) {
         SupportAppScreen screen = (SupportAppScreen) command.getScreen();
         Fragment fragment = createFragment(screen);
 
@@ -126,7 +124,7 @@ public class CustomNavigator implements Navigator {
         localStackCopy.add(screen.getScreenKey());
     }
 
-    protected void fragmentBack() {
+    private void fragmentBack() {
         if (localStackCopy.size() > 0) {
             fragmentManager.popBackStack();
             localStackCopy.removeLast();
@@ -135,11 +133,11 @@ public class CustomNavigator implements Navigator {
         }
     }
 
-    protected void activityBack() {
+    private void activityBack() {
         activity.finish();
     }
 
-    protected void activityReplace(Replace command) {
+    private void activityReplace(Replace command) {
         SupportAppScreen screen = (SupportAppScreen) command.getScreen();
         Intent activityIntent = screen.getActivityIntent(activity);
 
@@ -153,7 +151,7 @@ public class CustomNavigator implements Navigator {
         }
     }
 
-    protected void fragmentReplace(Replace command) {
+    private void fragmentReplace(Replace command) {
         SupportAppScreen screen = (SupportAppScreen) command.getScreen();
         Fragment fragment = createFragment(screen);
 
@@ -195,7 +193,7 @@ public class CustomNavigator implements Navigator {
     /**
      * Performs {@link BackTo} command transition
      */
-    protected void backTo(BackTo command) {
+    private void backTo(BackTo command) {
         if (command.getScreen() == null) {
             backToRoot();
         } else {
@@ -229,10 +227,10 @@ public class CustomNavigator implements Navigator {
      * @param nextFragment        next screen fragment
      * @param fragmentTransaction fragment transaction
      */
-    protected void setupFragmentTransaction(Command command,
-                                            Fragment currentFragment,
-                                            Fragment nextFragment,
-                                            FragmentTransaction fragmentTransaction) {
+    private void setupFragmentTransaction(Command command,
+                                          Fragment currentFragment,
+                                          Fragment nextFragment,
+                                          FragmentTransaction fragmentTransaction) {
     }
 
     /**
@@ -242,7 +240,7 @@ public class CustomNavigator implements Navigator {
      * @param activityIntent activity intent
      * @return transition options
      */
-    protected Bundle createStartActivityOptions(Command command, Intent activityIntent) {
+    private Bundle createStartActivityOptions(Command command, Intent activityIntent) {
         return null;
     }
 
@@ -261,7 +259,7 @@ public class CustomNavigator implements Navigator {
      * @param screen         screen
      * @param activityIntent intent passed to start Activity for the {@code screenKey}
      */
-    protected void unexistingActivity(SupportAppScreen screen, Intent activityIntent) {
+    private void unexistingActivity(SupportAppScreen screen, Intent activityIntent) {
         // Do nothing by default
     }
 
@@ -271,7 +269,7 @@ public class CustomNavigator implements Navigator {
      * @param screen screen
      * @return instantiated fragment for the passed screen
      */
-    protected Fragment createFragment(SupportAppScreen screen) {
+    private Fragment createFragment(SupportAppScreen screen) {
         Fragment fragment = screen.getFragment();
 
         if (fragment == null) {
@@ -286,11 +284,11 @@ public class CustomNavigator implements Navigator {
      *
      * @param screen screen
      */
-    protected void backToUnexisting(SupportAppScreen screen) {
+    private void backToUnexisting(SupportAppScreen screen) {
         backToRoot();
     }
 
-    protected void errorWhileCreatingScreen(SupportAppScreen screen) {
+    private void errorWhileCreatingScreen(SupportAppScreen screen) {
         throw new RuntimeException("Can't create a screen: " + screen.getScreenKey());
     }
 }

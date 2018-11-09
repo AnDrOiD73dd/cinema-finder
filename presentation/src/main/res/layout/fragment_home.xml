@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ateam.zuml.cinemafinder.ui.MainActivity">
+    tools:context="com.ateam.zuml.cinemafinder.ui.AppActivity">
 
     <FrameLayout
         android:id="@+id/child_container"

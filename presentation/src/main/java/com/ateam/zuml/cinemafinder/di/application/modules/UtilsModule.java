@@ -1,19 +1,17 @@
 package com.ateam.zuml.cinemafinder.di.application.modules;
 
-import com.ateam.zuml.cinemafinder.util.StringUtil;
+import com.ateam.zuml.cinemafinder.util.StringUtilImpl;
+import com.ateam.zuml.cinemafinder.util.StringUtils;
 
 import javax.inject.Singleton;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
-
 
 @Module
-public final class UtilsModule {
+public interface UtilsModule {
 
     @Singleton
-    @Provides
-    StringUtil provideStringUtil() {
-        return new StringUtil();
-    }
+    @Binds
+    StringUtils provideStringUtil(final StringUtilImpl stringUtil);
 }

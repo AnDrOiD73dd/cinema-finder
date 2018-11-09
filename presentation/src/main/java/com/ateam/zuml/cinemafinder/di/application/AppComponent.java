@@ -9,17 +9,17 @@ import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.SchedulersModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.UtilsModule;
-import com.ateam.zuml.cinemafinder.presentation.presenter.DetailMoviePresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.FavoritesPresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.MainContainerPresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
-import com.ateam.zuml.cinemafinder.ui.DetailMovieFragment;
-import com.ateam.zuml.cinemafinder.ui.MainActivity;
-import com.ateam.zuml.cinemafinder.ui.MainContainerFragment;
-import com.ateam.zuml.cinemafinder.ui.SearchResponseFragment;
-import com.ateam.zuml.cinemafinder.ui.SettingsFragment;
+import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMoviePresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesPresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerPresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.ratings.RatingsPresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponsePresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMovieFragment;
+import com.ateam.zuml.cinemafinder.ui.AppActivity;
+import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerFragment;
+import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponseFragment;
+import com.ateam.zuml.cinemafinder.ui.screens.settings.SettingsFragment;
 
 import javax.inject.Singleton;
 
@@ -47,7 +47,7 @@ public interface AppComponent {
 
     }
 
-    void inject(MainActivity activity);
+    void inject(AppActivity activity);
 
     void inject(MainContainerFragment fragment);
 
