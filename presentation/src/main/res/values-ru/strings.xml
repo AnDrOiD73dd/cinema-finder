@@ -22,4 +22,5 @@
     <string name="category_title_popular">Популярные</string>
     <string name="category_title_now_playing">В прокате</string>
     <string name="category_title_upcoming">Скоро на экранах</string>
+    <string name="category_title_latest">Новые</string>
 </resources>

@@ -53,18 +53,22 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
     @SuppressLint("CheckResult")
     private void loadData() {
         getViewState().showLoading();
-        if (collection == CollectionsRow.POPULAR) {
-            useCasePopular.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
-                    .observeOn(schedulers.ui())
-                    .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
-        } else if (collection == CollectionsRow.NOW_PLAYING) {
-            useCaseNowPlaying.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
-                    .observeOn(schedulers.ui())
-                    .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
-        } else if (collection == CollectionsRow.UPCOMING) {
-            useCaseUpcoming.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
-                    .observeOn(schedulers.ui())
-                    .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+        switch (collection) {
+            case POPULAR:
+                useCasePopular.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+                        .observeOn(schedulers.ui())
+                        .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+                break;
+            case NOW_PLAYING:
+                useCaseNowPlaying.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+                        .observeOn(schedulers.ui())
+                        .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+                break;
+            case UPCOMING:
+                useCaseUpcoming.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+                        .observeOn(schedulers.ui())
+                        .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+                break;
         }
     }
 

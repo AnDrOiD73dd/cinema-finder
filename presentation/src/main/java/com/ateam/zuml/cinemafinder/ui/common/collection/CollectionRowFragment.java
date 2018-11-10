@@ -70,13 +70,7 @@ public class CollectionRowFragment extends MvpAppCompatFragment implements Colle
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if (getRowTag() == CollectionsRow.POPULAR) {
-            collectionName.setText(R.string.category_title_popular);
-        } else if (getRowTag() == CollectionsRow.NOW_PLAYING) {
-            collectionName.setText(R.string.category_title_now_playing);
-        } else if (getRowTag() == CollectionsRow.UPCOMING) {
-            collectionName.setText(R.string.category_title_upcoming);
-        }
+        collectionName.setText(getRowTag().getTitle());
     }
 
     private CollectionsRow getRowTag() {
