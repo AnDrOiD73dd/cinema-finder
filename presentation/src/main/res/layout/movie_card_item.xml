@@ -25,17 +25,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- TODO 10.11.2018 add color gray400 -->
-        <!--<ImageView-->
-                <!--android:id="@+id/iv_favorite_home_list"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="#BDBDBD"-->
-                <!--android:contentDescription="@string/favorites"-->
-                <!--android:src="@drawable/ic_favorite_fill_red"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintTop_toTopOf="parent" />-->
-
         <TextView
                 android:id="@+id/tv_card_title"
                 android:layout_width="match_parent"

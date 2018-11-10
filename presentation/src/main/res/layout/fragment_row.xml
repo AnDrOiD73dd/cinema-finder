@@ -10,9 +10,9 @@
             android:id="@+id/tv_collection_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginStart="@dimen/category_title_start_margin"
             android:textStyle="bold"
-            android:textSize="30sp"
+            android:textSize="@dimen/category_title_text_size"
             android:text="@string/category_title_popular"/>
 
     <android.support.v7.widget.RecyclerView
