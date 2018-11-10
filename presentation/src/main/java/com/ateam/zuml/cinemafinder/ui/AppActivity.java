@@ -19,6 +19,7 @@ import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.Constants;
+import com.ateam.zuml.cinemafinder.util.Logger;
 
 import java.util.List;
 
@@ -44,6 +45,8 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
     @Inject
     Router router;
 
+    @Inject Logger logger;
+
     private final CustomNavigator navigator = new CustomNavigator(this, R.id.main_container) {
         @Override
         public void applyCommands(Command[] commands) {
@@ -59,6 +62,7 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
         init();
 
         if (savedInstanceState == null) {
+            logger.d("");
             router.navigateTo(new Screens.MainContainerScreen());
         }
     }
