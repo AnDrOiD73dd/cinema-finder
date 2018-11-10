@@ -9,16 +9,14 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.AppActivity;
+import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
-import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 
-public class HomeFragment extends MvpAppCompatFragment implements HomeView, BackButtonListener {
+public class HomeFragment extends BaseFragment implements HomeView, BackButtonListener {
 
     @InjectPresenter HomePresenter presenter;
 
@@ -40,17 +38,8 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trends, container, false);
-        init();
+        setupToolbar(R.string.app_name, false);
         return view;
-    }
-
-    private void init() {
-        setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (AppActivity) getActivity();
-        if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.app_name), false);
-            widgetTuning.setSearchVisibility(true);
-        }
     }
 
     @Override

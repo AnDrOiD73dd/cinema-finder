@@ -4,6 +4,7 @@
     <string name="favorites">Избранное</string>
     <string name="ratings">Рейтинги</string>
     <string name="search_response"> </string>
+    <string name="movie_detail"> </string>
     <string name="star">Звезда</string>
     <string name="poster">Постер</string>
     <string name="home">Главная</string>

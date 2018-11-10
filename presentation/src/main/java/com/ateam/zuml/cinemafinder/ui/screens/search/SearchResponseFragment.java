@@ -13,12 +13,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.AppActivity;
+import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
@@ -28,7 +27,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SearchResponseFragment extends MvpAppCompatFragment
+public class SearchResponseFragment extends BaseFragment
         implements SearchResultAdapter.OnItemClickListener, SearchResponseView, BackButtonListener {
 
     private static final String QUERY_EXTRA_KEY = "query_extra_key";
@@ -73,17 +72,8 @@ public class SearchResponseFragment extends MvpAppCompatFragment
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_response, container, false);
         init(view);
-        setupToolbar();
+        setupToolbar(R.string.search_response, true);
         return view;
-    }
-
-    private void setupToolbar() {
-        setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (AppActivity) getActivity();
-        if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true);
-            widgetTuning.setSearchVisibility(true);
-        }
     }
 
     private void init(View v) {

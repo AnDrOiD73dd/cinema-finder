@@ -47,7 +47,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
     private void init() {
         App.getApp().getAppComponent().inject(this);
         setHasOptionsMenu(true);
-
         WidgetTuning widgetTuning = (AppActivity) getActivity();
         if (widgetTuning != null) {
             widgetTuning.setupToolbar(getResources().getString(R.string.settings), true);
