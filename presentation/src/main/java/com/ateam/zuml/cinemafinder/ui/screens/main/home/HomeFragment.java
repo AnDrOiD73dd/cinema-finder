@@ -3,7 +3,6 @@ package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.*;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -50,19 +49,18 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     // ######################################## HomeView #########################################
 
     @Override
-    public void inflateRow(CollectionsRow collection) {
-        Fragment fragment = fragmentManager.findFragmentByTag(collection.name());
-        if (fragment == null) {
-            fragmentManager.beginTransaction()
-                    .add(R.id.popular_row_container, CollectionRowFragment.newInstance(collection), collection.name())
-                    .commit();
-        } else {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.popular_row_container, CollectionRowFragment.newInstance(collection), collection.name())
-                    .commit();
-        }
+    public void inflateNowPlaying() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.now_playing_row_container, CollectionRowFragment.newInstance(CollectionsRow.NOW_PLAYING), CollectionsRow.NOW_PLAYING.name())
+                .commit();
     }
 
+    @Override
+    public void inflateUpcoming() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.upcoming_row_container, CollectionRowFragment.newInstance(CollectionsRow.UPCOMING), CollectionsRow.UPCOMING.name())
+                .commit();
+    }
     // #################################### BackButtonListener ###################################
 
     @Override
@@ -70,4 +68,5 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
         presenter.onBackPressed();
         return true;
     }
+
 }
