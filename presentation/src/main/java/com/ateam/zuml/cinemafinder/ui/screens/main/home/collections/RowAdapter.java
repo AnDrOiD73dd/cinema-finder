@@ -45,9 +45,9 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> impl
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements RowView {
-        @BindView(R.id.iv_poster_search) ImageView posterView;
-        @BindView(R.id.tv_title_search) TextView titleView;
-        @BindView(R.id.tv_vote_average_search) TextView voteAverageView;
+        @BindView(R.id.iv_card_poster) ImageView posterView;
+        @BindView(R.id.tv_card_title) TextView titleView;
+        @BindView(R.id.tv_vote_average_home_list) TextView voteAverageView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
