@@ -13,6 +13,7 @@ import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
+import io.reactivex.Single;
 import ru.terrakok.cicerone.Router;
 
 import javax.inject.Inject;
@@ -50,26 +51,25 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
         loadData();
     }
 
-    @SuppressLint("CheckResult")
     private void loadData() {
         getViewState().showLoading();
         switch (collection) {
             case POPULAR:
-                useCasePopular.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
-                        .observeOn(schedulers.ui())
-                        .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+                getCollection(useCasePopular.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300));
                 break;
             case NOW_PLAYING:
-                useCaseNowPlaying.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
-                        .observeOn(schedulers.ui())
-                        .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+                getCollection(useCaseNowPlaying.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300));
                 break;
             case UPCOMING:
-                useCaseUpcoming.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
-                        .observeOn(schedulers.ui())
-                        .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+                getCollection(useCaseUpcoming.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300));
                 break;
         }
+    }
+
+    @SuppressLint("CheckResult")
+    private void getCollection(Single<List<MovieListModel>> data) {
+        data.observeOn(schedulers.ui())
+                .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
     }
 
     private void onLoadSuccess(List<MovieListModel> movieListModels) {
