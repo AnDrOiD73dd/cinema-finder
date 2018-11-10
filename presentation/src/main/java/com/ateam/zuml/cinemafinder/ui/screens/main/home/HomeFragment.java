@@ -52,9 +52,11 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
 
     @Override
     public void inflateRow(RowCollection collection) {
-        mFragmentManager.beginTransaction()
-                .add(R.id.trends_container, RowFragment.newInstance(collection))
-                .commit();
+        if (mFragmentManager.findFragmentByTag(collection.name()) == null) {
+            mFragmentManager.beginTransaction()
+                    .add(R.id.trends_container, RowFragment.newInstance(collection), collection.name())
+                    .commit();
+        }
     }
 
     // #################################### BackButtonListener ###################################
