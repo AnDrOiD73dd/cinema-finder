@@ -23,35 +23,6 @@ import java.util.List;
 @InjectViewState
 public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
 
-    final class RowListPresenter {
-
-        private List<MovieListModel> movieList;
-
-        RowListPresenter() {
-            this.movieList = new ArrayList<>();
-        }
-
-        void bindViewAt(CollectionRowCardView view, int position) {
-            MovieListModel movieListModel = movieList.get(position);
-            if (movieListModel.getPosterPath().isEmpty()) {
-                view.setPosterPlaceholder();
-            } else {
-                view.setPoster(movieListModel.getPosterPath());
-            }
-            view.setTitle(movieListModel.getTitle());
-            view.setVoteAverage(movieListModel.getVoteAverage());
-            view.setReleaseDate(movieListModel.getReleaseYear());
-        }
-
-        int getCollectionItems() {
-            return movieList.size();
-        }
-
-        void onClickedRowItem(int position) {
-            router.navigateTo(new Screens.DetailMovieScreen(listPresenter.movieList.get(position).getId()));
-        }
-    }
-
     private CollectionsRow collection;
     private RowListPresenter listPresenter;
 
@@ -105,4 +76,34 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
         getViewState().hideLoading();
         getViewState().showError();
     }
+
+    final class RowListPresenter {
+
+        private List<MovieListModel> movieList;
+
+        RowListPresenter() {
+            this.movieList = new ArrayList<>();
+        }
+
+        void bindViewAt(CollectionRowCardView view, int position) {
+            MovieListModel movieListModel = movieList.get(position);
+            if (movieListModel.getPosterPath().isEmpty()) {
+                view.setPosterPlaceholder();
+            } else {
+                view.setPoster(movieListModel.getPosterPath());
+            }
+            view.setTitle(movieListModel.getTitle());
+            view.setVoteAverage(movieListModel.getVoteAverage());
+            view.setReleaseDate(movieListModel.getReleaseYear());
+        }
+
+        int getCollectionItems() {
+            return movieList.size();
+        }
+
+        void onClickedRowItem(int position) {
+            router.navigateTo(new Screens.DetailMovieScreen(listPresenter.movieList.get(position).getId()));
+        }
+    }
+
 }
