@@ -3,22 +3,21 @@ package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import android.support.v4.app.FragmentManager;
+import android.view.*;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.enums.RowCollection;
 import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
+import com.ateam.zuml.cinemafinder.ui.screens.main.home.collections.RowFragment;
 
 public class HomeFragment extends BaseFragment implements HomeView, BackButtonListener {
 
     @InjectPresenter HomePresenter presenter;
+    private FragmentManager fragmentManager;
 
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
@@ -29,6 +28,12 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
 
     public static HomeFragment newInstance() {
         return new HomeFragment();
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        fragmentManager = getFragmentManager();
     }
 
     @Nullable
@@ -43,6 +48,15 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    @Override
+    public void inflateRow(RowCollection collection) {
+        if (fragmentManager.findFragmentByTag(collection.name()) == null) {
+            fragmentManager.beginTransaction()
+                    .add(R.id.trends_container, RowFragment.newInstance(collection), collection.name())
+                    .commit();
+        }
     }
 
     // #################################### BackButtonListener ###################################

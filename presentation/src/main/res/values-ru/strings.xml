@@ -17,4 +17,5 @@
     <string name="search_response_error_message">При загрузке информации поиска произошла ошибка</string>
     <string name="search_response_no_results">Нет результатов поиска</string>
     <string name="stub_url">-</string>
+    <string name="category_title_popular">Популярное</string>
 </resources>
