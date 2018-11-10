@@ -4,12 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import android.view.*;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
@@ -55,11 +50,9 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
 
     @Override
     public void inflateRow(CollectionsRow collection) {
-        if (fragmentManager.findFragmentByTag(collection.name()) == null) {
             fragmentManager.beginTransaction()
-                    .add(R.id.popular_row_container, CollectionRowFragment.newInstance(collection), collection.name())
+                    .replace(R.id.popular_row_container, CollectionRowFragment.newInstance(collection), collection.name())
                     .commit();
-        }
     }
 
     // #################################### BackButtonListener ###################################
