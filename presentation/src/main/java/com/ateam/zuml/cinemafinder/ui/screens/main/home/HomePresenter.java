@@ -28,8 +28,8 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     }
 
     private void inflateCollections() {
-        getViewState().inflateRow(CollectionsRow.POPULAR);
         getViewState().inflateRow(CollectionsRow.NOW_PLAYING);
+        getViewState().inflateRow(CollectionsRow.UPCOMING);
     }
 
     public void onBackPressed() {

@@ -1,13 +1,12 @@
 package com.ateam.zuml.cinemafinder.service.api;
 
 import com.ateam.zuml.cinemafinder.BuildConfig;
-import com.ateam.zuml.cinemafinder.service.model.configuration.Configuration;
 import com.ateam.zuml.cinemafinder.service.model.common.genre.GenresList;
+import com.ateam.zuml.cinemafinder.service.model.configuration.Configuration;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieInfo;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesList;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesListWithDates;
 import com.ateam.zuml.cinemafinder.service.model.person.credits.Credits;
-
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -99,6 +98,28 @@ public interface ApiService {
     Single<MoviesList> getPopularMovies(@Query("language") String language,
                                         @Query("page") String page,
                                         @Query("region") String region);
+
+    /*
+     * Get a list of upcoming movies in theatres.
+     * This is a release type query that looks for all movies that have a release type of 2 or 3 within the
+     * specified date range.
+     *
+     * Required:
+     * String api_key - API Key
+     *
+     * Optional:
+     * String language - Pass a ISO 639-1 value to display translated data for the fields that support it.
+     * int page - Specify which page to query. minimum: 1, maximum: 1000, default: 1
+     * String region - Specify a ISO 3166-1 code to filter release dates. Must be uppercase. pattern: ^[A-Z]{2}$
+     *
+     * Example:
+     * https://api.themoviedb.org/3/movie/upcoming?api_key=<<api_key>>&language=ru-RU&page=1&region=ru
+     *
+     */
+    @GET("movie/upcoming?api_key=" + ACCESS_TOKEN)
+    Single<MoviesListWithDates> getUpcomingMovies(@Query("language") String language,
+                                                  @Query("page") String page,
+                                                  @Query("region") String region);
 
     /*
      * Get the cast and crew for a movie.

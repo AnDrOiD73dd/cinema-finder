@@ -17,9 +17,12 @@ public interface MoviesRepository {
     Single<List<MovieListModel>> getPopularMovies(final String page, final Language language,
                                                   final Region region, final LogoSize logoSize);
 
-    Single<MovieDetailsModel> getMovieById(final String id, final Language language, final LogoSize logoSize);
-
     Single<List<MovieListModel>> getNowPlayingMovies(final String page, final Language language,
                                                      final Region region, final LogoSize logoSize);
+
+    Single<List<MovieListModel>> getUpcomingMovies(final String page, final Language language,
+                                                     final Region region, final LogoSize logoSize);
+
+    Single<MovieDetailsModel> getMovieById(final String id, final Language language, final LogoSize logoSize);
 
 }

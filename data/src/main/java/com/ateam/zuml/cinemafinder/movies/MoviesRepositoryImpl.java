@@ -55,15 +55,6 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
     }
 
     @Override
-    public Single<MovieDetailsModel> getMovieById(final String id, final Language language,
-                                                  final LogoSize logoSize) {
-        final String mappedLanguage = characteristicsMapper.mapLanguage(language);
-        return apiService.getMovieInfo(id, mappedLanguage, "")
-                .subscribeOn(Schedulers.io())
-                .map(movieInfo -> movieMapper.mapMovieDetails(movieInfo, logoSize));
-    }
-
-    @Override
     public Single<List<MovieListModel>> getNowPlayingMovies(String page, Language language, Region region, LogoSize logoSize) {
         final String mappedLanguage = characteristicsMapper.mapLanguage(language);
         final String mappedRegion = characteristicsMapper.mapRegion(region);
@@ -72,4 +63,24 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
                 .map(response -> Arrays.asList(response.getMovies()))
                 .map(movieResults -> movieMapper.mapMovieResults(movieResults, language, logoSize));
     }
+
+    @Override
+    public Single<List<MovieListModel>> getUpcomingMovies(String page, Language language, Region region, LogoSize logoSize) {
+        final String mappedLanguage = characteristicsMapper.mapLanguage(language);
+        final String mappedRegion = characteristicsMapper.mapRegion(region);
+        return apiService.getUpcomingMovies(mappedLanguage, page, mappedRegion)
+                .subscribeOn(Schedulers.io())
+                .map(response -> Arrays.asList(response.getMovies()))
+                .map(movieResults -> movieMapper.mapMovieResults(movieResults, language, logoSize));
+    }
+
+    @Override
+    public Single<MovieDetailsModel> getMovieById(final String id, final Language language,
+                                                  final LogoSize logoSize) {
+        final String mappedLanguage = characteristicsMapper.mapLanguage(language);
+        return apiService.getMovieInfo(id, mappedLanguage, "")
+                .subscribeOn(Schedulers.io())
+                .map(movieInfo -> movieMapper.mapMovieDetails(movieInfo, logoSize));
+    }
+
 }

@@ -21,4 +21,5 @@
     <string name="stub_url">-</string>
     <string name="category_title_popular">Популярные</string>
     <string name="category_title_now_playing">В прокате</string>
+    <string name="category_title_upcoming">Скоро на экранах</string>
 </resources>

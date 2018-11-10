@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetNowPlayingMoviesUseCase;
-import com.ateam.zuml.cinemafinder.interactor.movie.GetPopularMoviesUseCase;
+import com.ateam.zuml.cinemafinder.interactor.movie.GetUpcomingMoviesUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
@@ -30,8 +30,9 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
     @Inject
     Router router;
 
-    @Inject GetPopularMoviesUseCase useCasePopular;
+    @Inject GetUpcomingMoviesUseCase useCasePopular;
     @Inject GetNowPlayingMoviesUseCase useCaseNowPlaying;
+    @Inject GetUpcomingMoviesUseCase useCaseUpcoming;
     @Inject SchedulersProvider schedulers;
 
     CollectionRowPresenter(CollectionsRow collection) {
@@ -58,6 +59,10 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
                     .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
         } else if (collection == CollectionsRow.NOW_PLAYING) {
             useCaseNowPlaying.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+                    .observeOn(schedulers.ui())
+                    .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+        } else if (collection == CollectionsRow.UPCOMING) {
+            useCaseUpcoming.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                     .observeOn(schedulers.ui())
                     .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
         }
