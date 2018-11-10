@@ -4,16 +4,11 @@ import android.util.Log;
 
 import java.util.Locale;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-@Singleton
 public class Logger {
 
     private String appTag;
     private boolean printFileName;
 
-    @Inject
     public Logger(String appTag, boolean printFileName) {
         this.appTag = appTag;
         this.printFileName = printFileName;
@@ -38,7 +33,6 @@ public class Logger {
         StringBuilder sb = getStringBuilder(message);
         Log.w(tag, sb.toString());
     }
-
 
     private void et(String tag, String message) {
         StringBuilder sb = getStringBuilder(message);
