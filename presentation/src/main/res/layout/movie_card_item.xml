@@ -6,7 +6,7 @@
                                     android:layout_height="wrap_content"
                                     android:clickable="true"
                                     android:elevation="@dimen/card_elevation"
-                                    android:layout_margin="10dp"
+                                    android:layout_margin="5dp"
                                     android:focusable="true"
                                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
                                     app:cardCornerRadius="@dimen/card_corner_radius">
@@ -41,9 +41,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
-                android:ems="8"
+                android:ems="6"
                 android:lines="2"
-                android:text="Название какого-то фильма, длинное название!"
+                android:layout_marginTop="@dimen/card_layout_margin"
                 app:layout_constraintBottom_toTopOf="@+id/iv_vote_average_home_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -54,7 +54,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/card_layout_margin"
-                android:text="2009"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_vote_average_home_list"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/iv_vote_average_home_list" />
@@ -75,7 +74,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/card_layout_margin"
-                android:text="5.5"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_vote_average_home_list"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/iv_vote_average_home_list" />

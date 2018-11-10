@@ -8,4 +8,6 @@ public interface RowView {
     void setTitle(String title);
 
     void setVoteAverage(String voteAverage);
+
+    void setReleaseDate(String releaseDate);
 }

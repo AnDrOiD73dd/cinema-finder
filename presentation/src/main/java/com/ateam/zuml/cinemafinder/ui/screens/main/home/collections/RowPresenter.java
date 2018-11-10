@@ -84,6 +84,7 @@ public class RowPresenter extends MvpPresenter<RowCollectionView> {
             }
             view.setTitle(movieListModel.getTitle());
             view.setVoteAverage(movieListModel.getVoteAverage());
+            view.setReleaseDate(movieListModel.getReleaseYear());
         }
 
         public int getCollectionItems() {

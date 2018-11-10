@@ -47,6 +47,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> impl
     class ViewHolder extends RecyclerView.ViewHolder implements RowView {
         @BindView(R.id.iv_card_poster) ImageView posterView;
         @BindView(R.id.tv_card_title) TextView titleView;
+        @BindView(R.id.tv_release_date_home_list) TextView releaseDateView;
         @BindView(R.id.tv_vote_average_home_list) TextView voteAverageView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -68,6 +69,11 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> impl
         @Override
         public void setTitle(String title) {
             this.titleView.setText(title);
+        }
+
+        @Override
+        public void setReleaseDate(String releaseDate) {
+            this.releaseDateView.setText(releaseDate);
         }
 
         @Override
