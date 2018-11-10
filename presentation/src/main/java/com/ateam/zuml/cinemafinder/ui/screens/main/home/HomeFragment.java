@@ -17,7 +17,7 @@ import com.ateam.zuml.cinemafinder.ui.screens.main.home.collections.RowFragment;
 public class HomeFragment extends BaseFragment implements HomeView, BackButtonListener {
 
     @InjectPresenter HomePresenter presenter;
-    private FragmentManager mFragmentManager;
+    private FragmentManager fragmentManager;
 
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
@@ -33,7 +33,7 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mFragmentManager = getFragmentManager();
+        fragmentManager = getFragmentManager();
     }
 
     @Nullable
@@ -52,8 +52,8 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
 
     @Override
     public void inflateRow(RowCollection collection) {
-        if (mFragmentManager.findFragmentByTag(collection.name()) == null) {
-            mFragmentManager.beginTransaction()
+        if (fragmentManager.findFragmentByTag(collection.name()) == null) {
+            fragmentManager.beginTransaction()
                     .add(R.id.trends_container, RowFragment.newInstance(collection), collection.name())
                     .commit();
         }
