@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetPopularMoviesUseCase;
 import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 import com.ateam.zuml.cinemafinder.util.Constants;
+import com.ateam.zuml.cinemafinder.util.Logger;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 
 import javax.inject.Inject;
@@ -21,6 +22,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     @Inject GetPopularMoviesUseCase useCase;
     @Inject SchedulersProvider schedulers;
+    @Inject Logger logger;
 
     @Override
     public void onFirstViewAttach() {
@@ -29,6 +31,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     }
 
     private void inflateCollections() {
+        logger.d("");
         getViewState().inflateRow(CollectionsRow.POPULAR);
     }
 
