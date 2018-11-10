@@ -9,16 +9,14 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.AppActivity;
+import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
-import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 
-public class HomeFragment extends MvpAppCompatFragment implements HomeView, BackButtonListener {
+public class HomeFragment extends BaseFragment implements HomeView, BackButtonListener {
 
     @InjectPresenter HomePresenter presenter;
 
@@ -30,17 +28,14 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     }
 
     public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new HomeFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_trends, container, false);
-        init();
+        setupToolbar(R.string.app_name, false);
         return view;
     }
 
@@ -50,20 +45,11 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
         inflater.inflate(R.menu.menu_main, menu);
     }
 
-    // #################################### BackButtonListener ####################################
+    // #################################### BackButtonListener ###################################
 
     @Override
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
-    }
-
-    private void init() {
-        setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (AppActivity) getActivity();
-        if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.home), false);
-            widgetTuning.setSearchVisibility(true);
-        }
     }
 }

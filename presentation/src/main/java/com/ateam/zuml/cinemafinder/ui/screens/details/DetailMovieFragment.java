@@ -12,15 +12,13 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.AppActivity;
+import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
-import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
-import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
+import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import java.util.Locale;
 
@@ -29,13 +27,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public final class DetailMovieFragment extends MvpAppCompatFragment implements DetailMovieView, BackButtonListener {
+public final class DetailMovieFragment extends BaseFragment implements DetailMovieView, BackButtonListener {
 
     public static final String KEY_MOVIE_ID = "key_movie_id";
-
-    @Inject ImageLoader imageLoader;
-
-    @InjectPresenter DetailMoviePresenter presenter;
 
     @BindView(R.id.movie_detail_root) ConstraintLayout rootView;
     @BindView(R.id.tv_movie_title) TextView titleView;
@@ -53,6 +47,10 @@ public final class DetailMovieFragment extends MvpAppCompatFragment implements D
     @BindView(R.id.tv_movie_overview) TextView descriptionView;
     @BindView(R.id.pb_movie_detail) ProgressBar progressBarView;
 
+    @Inject ImageLoader imageLoader;
+
+    @InjectPresenter DetailMoviePresenter presenter;
+
     public static DetailMovieFragment newInstance(String movieId) {
         DetailMovieFragment fragment = new DetailMovieFragment();
         Bundle args = new Bundle();
@@ -68,6 +66,15 @@ public final class DetailMovieFragment extends MvpAppCompatFragment implements D
         return presenter;
     }
 
+    private String getMovieId() {
+        Bundle bundle = getArguments();
+        String movieId = "";
+        if (bundle != null && bundle.containsKey(KEY_MOVIE_ID)) {
+            movieId = bundle.getString(KEY_MOVIE_ID);
+        }
+        return movieId;
+    }
+
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -75,11 +82,11 @@ public final class DetailMovieFragment extends MvpAppCompatFragment implements D
         View view = inflater.inflate(R.layout.fragment_detail_movie, container, false);
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
-        setupToolbar();
+        setupToolbar(R.string.movie_detail, true);
         return view;
     }
 
-    // #################################### DetailMovieView ####################################
+    // #################################### DetailMovieView ######################################
 
     @Override
     public void showLoading() {
@@ -178,23 +185,5 @@ public final class DetailMovieFragment extends MvpAppCompatFragment implements D
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
-    }
-
-    private void setupToolbar() {
-        setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (AppActivity) getActivity();
-        if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.search_response), true);
-            widgetTuning.setSearchVisibility(true);
-        }
-    }
-
-    private String getMovieId() {
-        Bundle bundle = getArguments();
-        String movieId = "";
-        if (bundle != null && bundle.containsKey(KEY_MOVIE_ID)) {
-            movieId = bundle.getString(KEY_MOVIE_ID);
-        }
-        return movieId;
     }
 }

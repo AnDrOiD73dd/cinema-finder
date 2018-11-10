@@ -27,10 +27,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
     Router router;
 
     public static SettingsFragment newInstance() {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new SettingsFragment();
     }
 
     @Override
@@ -44,22 +41,21 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
+    private void init() {
+        App.getApp().getAppComponent().inject(this);
+        setHasOptionsMenu(true);
+        WidgetTuning widgetTuning = (AppActivity) getActivity();
+        if (widgetTuning != null) {
+            widgetTuning.setupToolbar(getResources().getString(R.string.settings), true);
+            widgetTuning.setSearchVisibility(false);
+        }
+    }
+
     // #################################### BackButtonListener ####################################
 
     @Override
     public boolean onBackPressed() {
         router.exit();
         return true;
-    }
-
-    private void init() {
-        App.getApp().getAppComponent().inject(this);
-        setHasOptionsMenu(true);
-
-        WidgetTuning widgetTuning = (AppActivity) getActivity();
-        if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.settings), true);
-            widgetTuning.setSearchVisibility(false);
-        }
     }
 }

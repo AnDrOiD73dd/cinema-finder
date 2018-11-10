@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
+import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,6 +50,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     public int getItemCount() {
         return presenter.getSearchCount();
     }
+
+    // #################################### SearchListView #######################################
 
     @Override
     public void refreshView() {

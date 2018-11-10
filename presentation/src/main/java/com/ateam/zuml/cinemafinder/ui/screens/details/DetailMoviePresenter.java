@@ -22,6 +22,8 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
 
+    private final String movieId;
+
     @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
@@ -29,8 +31,6 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     @Inject StringUtils stringUtil;
     @Inject GetMovieDetailsUseCase detailsUseCase;
     @Inject SchedulersProvider schedulers;
-
-    private final String movieId;
 
     DetailMoviePresenter(String movieId) {
         this.movieId = movieId;

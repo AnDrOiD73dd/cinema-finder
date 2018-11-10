@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.util.image;
+package com.ateam.zuml.cinemafinder.util;
 
 import android.support.annotation.Nullable;
 import android.widget.ImageView;

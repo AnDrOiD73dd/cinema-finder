@@ -25,6 +25,39 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
+    final class SearchListPresenter {
+
+        private List<MovieListModel> searchList;
+
+        SearchListPresenter() {
+            this.searchList = new ArrayList<>();
+        }
+
+        void bindViewAt(SearchRowView view, int position) {
+            MovieListModel movieListModel = searchList.get(position);
+
+            if (movieListModel.getPosterPath().isEmpty()) {
+                view.setPosterPlaceholder();
+            } else {
+                view.setPoster(movieListModel.getPosterPath());
+            }
+
+            view.setTitle(movieListModel.getTitle());
+            view.setOriginalTitle(movieListModel.getOriginalTitle());
+            view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
+            view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
+            view.setVoteAverage(movieListModel.getVoteAverage());
+        }
+
+        int getSearchCount() {
+            return searchList.size();
+        }
+    }
+
+    private final String movieTitle;
+
+    private SearchListPresenter listPresenter;
+
     @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
@@ -33,12 +66,13 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     @Inject GetMoviesBySearchUseCase useCase;
     @Inject SchedulersProvider schedulers;
 
-    private final String movieTitle;
-    private SearchListPresenter listPresenter;
-
     SearchResponsePresenter(String movieTitle) {
         this.movieTitle = movieTitle;
         this.listPresenter = new SearchListPresenter();
+    }
+
+    SearchListPresenter getListPresenter() {
+        return listPresenter;
     }
 
     @Override
@@ -69,7 +103,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         getViewState().showError();
     }
 
-    void showDetailsInfo(int position) {
+    void onItemClicked(int position) {
         getViewState().closeSearch();
         router.navigateTo(new Screens.DetailMovieScreen(listPresenter.searchList.get(position).getId()));
     }
@@ -78,38 +112,4 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         getViewState().closeSearch();
         router.exit();
     }
-
-    SearchListPresenter getListPresenter() {
-        return listPresenter;
-    }
-
-    final class SearchListPresenter {
-
-        private List<MovieListModel> searchList;
-
-        SearchListPresenter() {
-            this.searchList = new ArrayList<>();
-        }
-
-        void bindViewAt(SearchRowView view, int position) {
-            MovieListModel movieListModel = searchList.get(position);
-
-            if (movieListModel.getPosterPath().isEmpty()) {
-                view.setPosterPlaceholder();
-            } else {
-                view.setPoster(movieListModel.getPosterPath());
-            }
-
-            view.setTitle(movieListModel.getTitle());
-            view.setOriginalTitle(movieListModel.getOriginalTitle());
-            view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
-            view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
-            view.setVoteAverage(movieListModel.getVoteAverage());
-        }
-
-        int getSearchCount() {
-            return searchList.size();
-        }
-    }
 }
-

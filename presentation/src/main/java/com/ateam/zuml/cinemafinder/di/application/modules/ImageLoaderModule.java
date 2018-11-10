@@ -1,7 +1,7 @@
 package com.ateam.zuml.cinemafinder.di.application.modules;
 
-import com.ateam.zuml.cinemafinder.util.image.ImageLoader;
-import com.ateam.zuml.cinemafinder.util.image.ImageLoaderPicasso;
+import com.ateam.zuml.cinemafinder.util.ImageLoader;
+import com.ateam.zuml.cinemafinder.util.ImageLoaderPicasso;
 
 import javax.inject.Singleton;
 

@@ -96,6 +96,7 @@ public class CustomNavigator implements Navigator {
         SupportAppScreen screen = (SupportAppScreen) command.getScreen();
         Fragment fragment = createFragment(screen);
 
+        //Custom navigation
         if (screen.getScreenKey().equals(Screens.SearchResponseScreen.class.getCanonicalName())) {
             if (localStackCopy.getLast().equals(Screens.SearchResponseScreen.class.getCanonicalName())) {
                 fragmentReplace(new Replace(screen));

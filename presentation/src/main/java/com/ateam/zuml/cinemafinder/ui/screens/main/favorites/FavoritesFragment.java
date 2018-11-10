@@ -9,16 +9,14 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.AppActivity;
+import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
-import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 
-public class FavoritesFragment extends MvpAppCompatFragment implements FavoritesView, BackButtonListener {
+public class FavoritesFragment extends BaseFragment implements FavoritesView, BackButtonListener {
 
     @InjectPresenter FavoritesPresenter presenter;
 
@@ -30,17 +28,14 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
     }
 
     public static FavoritesFragment newInstance() {
-        FavoritesFragment fragment = new FavoritesFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new FavoritesFragment();
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
-        init();
+        setupToolbar(R.string.favorites, false);
         return view;
     }
 
@@ -50,20 +45,11 @@ public class FavoritesFragment extends MvpAppCompatFragment implements Favorites
         inflater.inflate(R.menu.menu_main, menu);
     }
 
-    // #################################### BackButtonListener ####################################
+    // #################################### BackButtonListener ###################################
 
     @Override
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
-    }
-
-    private void init() {
-        setHasOptionsMenu(true);
-        WidgetTuning widgetTuning = (AppActivity) getActivity();
-        if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.favorites), false);
-            widgetTuning.setSearchVisibility(true);
-        }
     }
 }
