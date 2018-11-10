@@ -1,6 +1,7 @@
 package com.ateam.zuml.cinemafinder.ui.common.collection;
 
 import android.annotation.SuppressLint;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetNowPlayingMoviesUseCase;
@@ -12,20 +13,20 @@ import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 import com.ateam.zuml.cinemafinder.util.Constants;
+import com.ateam.zuml.cinemafinder.util.Logger;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
-import io.reactivex.Single;
-import ru.terrakok.cicerone.Router;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import io.reactivex.Single;
+import ru.terrakok.cicerone.Router;
+
 @InjectViewState
 public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
-
-    private CollectionsRow collection;
-    private RowListPresenter listPresenter;
 
     @Named(Constants.MAIN_CONTAINER)
     @Inject
@@ -35,14 +36,14 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
     @Inject GetNowPlayingMoviesUseCase useCaseNowPlaying;
     @Inject GetUpcomingMoviesUseCase useCaseUpcoming;
     @Inject SchedulersProvider schedulers;
+    @Inject Logger logger;
+
+    private CollectionsRow collection;
+    private RowListPresenter listPresenter;
 
     CollectionRowPresenter(CollectionsRow collection) {
         this.collection = collection;
         this.listPresenter = new RowListPresenter();
-    }
-
-    RowListPresenter getListPresenter() {
-        return listPresenter;
     }
 
     @Override
@@ -52,6 +53,7 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
     }
 
     private void loadData() {
+        logger.d("");
         getViewState().showLoading();
         switch (collection) {
             case POPULAR:
@@ -73,6 +75,7 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
     }
 
     private void onLoadSuccess(List<MovieListModel> movieListModels) {
+        logger.d("");
         getViewState().hideLoading();
         listPresenter.movieList = movieListModels;
         getViewState().updateCollectionRow();
@@ -82,8 +85,13 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
     }
 
     private void onLoadFailed() {
+        logger.d("");
         getViewState().hideLoading();
         getViewState().showError();
+    }
+
+    RowListPresenter getListPresenter() {
+        return listPresenter;
     }
 
     final class RowListPresenter {
