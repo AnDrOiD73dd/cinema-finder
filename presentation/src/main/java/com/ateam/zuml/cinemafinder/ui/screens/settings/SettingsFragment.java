@@ -27,10 +27,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
     Router router;
 
     public static SettingsFragment newInstance() {
-        SettingsFragment fragment = new SettingsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new SettingsFragment();
     }
 
     @Override

@@ -21,10 +21,7 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
     @InjectPresenter RatingsPresenter presenter;
 
     public static RatingsFragment newInstance() {
-        RatingsFragment fragment = new RatingsFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new RatingsFragment();
     }
 
     @ProvidePresenter

@@ -28,10 +28,7 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     }
 
     public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new HomeFragment();
     }
 
     @Nullable

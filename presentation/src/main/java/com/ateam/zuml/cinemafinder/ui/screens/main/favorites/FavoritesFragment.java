@@ -28,10 +28,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
     }
 
     public static FavoritesFragment newInstance() {
-        FavoritesFragment fragment = new FavoritesFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new FavoritesFragment();
     }
 
     @Nullable

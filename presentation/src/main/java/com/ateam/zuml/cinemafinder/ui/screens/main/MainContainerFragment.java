@@ -39,10 +39,7 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
     @InjectPresenter MainContainerPresenter presenter;
 
     public static MainContainerFragment newInstance() {
-        MainContainerFragment fragment = new MainContainerFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
+        return new MainContainerFragment();
     }
 
     @ProvidePresenter
