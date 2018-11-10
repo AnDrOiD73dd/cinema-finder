@@ -54,7 +54,7 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     // ######################################## HomeView #########################################
 
     @Override
-    public void inflatePopularRow(CollectionsRow collection) {
+    public void inflateRow(CollectionsRow collection) {
         if (fragmentManager.findFragmentByTag(collection.name()) == null) {
             fragmentManager.beginTransaction()
                     .add(R.id.popular_row_container, CollectionRowFragment.newInstance(collection), collection.name())

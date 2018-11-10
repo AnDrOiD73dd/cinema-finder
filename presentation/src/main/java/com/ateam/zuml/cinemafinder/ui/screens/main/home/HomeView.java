@@ -4,5 +4,5 @@ import com.arellomobile.mvp.MvpView;
 import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 
 public interface HomeView extends MvpView {
-    void inflatePopularRow(CollectionsRow collection);
+    void inflateRow(CollectionsRow collection);
 }
