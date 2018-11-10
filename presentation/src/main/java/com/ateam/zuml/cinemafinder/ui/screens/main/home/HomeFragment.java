@@ -48,7 +48,7 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (AppActivity) getActivity();
         if (widgetTuning != null) {
-            widgetTuning.setupToolbar(getResources().getString(R.string.home), false);
+            widgetTuning.setupToolbar(getResources().getString(R.string.app_name), false);
             widgetTuning.setSearchVisibility(true);
         }
     }

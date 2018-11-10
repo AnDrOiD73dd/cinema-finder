@@ -59,6 +59,7 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
 
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
+
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem ->
                 onBottomNavigationClicked(menuItem.getItemId()));
 

@@ -54,7 +54,6 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        App.getApp().getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
 
         init();
@@ -65,15 +64,16 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
     }
 
     private void init() {
+        setContentView(R.layout.activity_main);
+        App.getApp().getAppComponent().inject(this);
+        ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
+
         if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP_MR1) {
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(getResources().getColor(R.color.gray500));
         }
-
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
