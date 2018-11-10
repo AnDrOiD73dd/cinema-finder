@@ -5,8 +5,6 @@
     <dimen name="movie_card_padding">5dp</dimen>
     <dimen name="movie_card_corner_radius">5dp</dimen>
     <dimen name="movie_card_margin">5dp</dimen>
-    <dimen name="movie_card_title_ems">6</dimen>
-    <dimen name="movie_card_title_lines">2</dimen>
 
     <dimen name="elevation_toolbar">4dp</dimen>
 
@@ -23,4 +21,5 @@
 
     <dimen name="category_title_text_size">30sp</dimen>
     <dimen name="category_title_start_margin">10dp</dimen>
+    <dimen name="collection_row_padding">8dp</dimen>
 </resources>

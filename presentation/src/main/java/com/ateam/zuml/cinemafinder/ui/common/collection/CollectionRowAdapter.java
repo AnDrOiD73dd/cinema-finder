@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.screens.main.home.collections;
+package com.ateam.zuml.cinemafinder.ui.common.collection;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,17 +7,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
-public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> implements RowListView {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdapter.ViewHolder>
+        implements CollectionRowListView {
 
     private ImageLoader imageLoader;
-    private RowPresenter.RowListPresenter presenter;
+    private CollectionRowPresenter.RowListPresenter presenter;
 
-    public RowAdapter(RowPresenter.RowListPresenter presenter, ImageLoader imageLoader) {
+    CollectionRowAdapter(CollectionRowPresenter.RowListPresenter presenter, ImageLoader imageLoader) {
         this.presenter = presenter;
         this.imageLoader = imageLoader;
     }
@@ -26,7 +29,7 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> impl
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.movie_card_item, viewGroup, false));
+                .inflate(R.layout.collection_row_item, viewGroup, false));
     }
 
     @Override
@@ -45,12 +48,13 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> impl
     }
 
     class ViewHolder extends RecyclerView.ViewHolder implements RowView {
+
         @BindView(R.id.iv_card_poster) ImageView posterView;
         @BindView(R.id.tv_card_title) TextView titleView;
         @BindView(R.id.tv_release_date_home_list) TextView releaseDateView;
         @BindView(R.id.tv_vote_average_home_list) TextView voteAverageView;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> onClickRowItem());
@@ -81,8 +85,8 @@ public class RowAdapter extends RecyclerView.Adapter<RowAdapter.ViewHolder> impl
             this.voteAverageView.setText(voteAverage);
         }
 
-        public void onClickRowItem() {
-            presenter.showDetailsInfo(getAdapterPosition());
+        void onClickRowItem() {
+            presenter.onClickedRowItem(getAdapterPosition());
         }
     }
 }
