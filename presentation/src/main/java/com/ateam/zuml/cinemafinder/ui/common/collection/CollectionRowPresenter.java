@@ -1,9 +1,9 @@
 package com.ateam.zuml.cinemafinder.ui.common.collection;
 
 import android.annotation.SuppressLint;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.ateam.zuml.cinemafinder.interactor.movie.GetNowPlayingMoviesUseCase;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetPopularMoviesUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
@@ -13,14 +13,12 @@ import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
-
-import java.util.ArrayList;
-import java.util.List;
+import ru.terrakok.cicerone.Router;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import ru.terrakok.cicerone.Router;
+import java.util.ArrayList;
+import java.util.List;
 
 @InjectViewState
 public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
@@ -33,7 +31,7 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
             this.movieList = new ArrayList<>();
         }
 
-        void bindViewAt(RowView view, int position) {
+        void bindViewAt(CollectionRowCardView view, int position) {
             MovieListModel movieListModel = movieList.get(position);
             if (movieListModel.getPosterPath().isEmpty()) {
                 view.setPosterPlaceholder();
@@ -61,7 +59,8 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
     @Inject
     Router router;
 
-    @Inject GetPopularMoviesUseCase useCase;
+    @Inject GetPopularMoviesUseCase useCasePopular;
+    @Inject GetNowPlayingMoviesUseCase useCaseNowPlaying;
     @Inject SchedulersProvider schedulers;
 
     CollectionRowPresenter(CollectionsRow collection) {
@@ -83,7 +82,11 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
     private void loadData() {
         getViewState().showLoading();
         if (collection == CollectionsRow.POPULAR) {
-            useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+            useCasePopular.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+                    .observeOn(schedulers.ui())
+                    .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+        } else if (collection == CollectionsRow.NOW_PLAYING) {
+            useCaseNowPlaying.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                     .observeOn(schedulers.ui())
                     .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
         }

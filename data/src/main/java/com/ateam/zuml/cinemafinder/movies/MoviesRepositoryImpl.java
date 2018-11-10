@@ -9,15 +9,13 @@ import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.repository.MoviesRepository;
 import com.ateam.zuml.cinemafinder.service.api.ApiService;
-
-import java.util.Arrays;
-import java.util.List;
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import io.reactivex.Single;
-import io.reactivex.schedulers.Schedulers;
+import java.util.Arrays;
+import java.util.List;
 
 @Singleton
 public final class MoviesRepositoryImpl implements MoviesRepository {
@@ -63,5 +61,15 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
         return apiService.getMovieInfo(id, mappedLanguage, "")
                 .subscribeOn(Schedulers.io())
                 .map(movieInfo -> movieMapper.mapMovieDetails(movieInfo, logoSize));
+    }
+
+    @Override
+    public Single<List<MovieListModel>> getNowPlayingMovies(String page, Language language, Region region, LogoSize logoSize) {
+        final String mappedLanguage = characteristicsMapper.mapLanguage(language);
+        final String mappedRegion = characteristicsMapper.mapRegion(region);
+        return apiService.getNowPlayingMovies(mappedLanguage, page, mappedRegion)
+                .subscribeOn(Schedulers.io())
+                .map(response -> Arrays.asList(response.getMovies()))
+                .map(movieResults -> movieMapper.mapMovieResults(movieResults, language, logoSize));
     }
 }

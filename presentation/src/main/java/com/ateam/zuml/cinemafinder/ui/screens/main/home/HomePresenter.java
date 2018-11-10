@@ -6,11 +6,10 @@ import com.ateam.zuml.cinemafinder.interactor.movie.GetPopularMoviesUseCase;
 import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
+import ru.terrakok.cicerone.Router;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class HomePresenter extends MvpPresenter<HomeView> {
@@ -30,6 +29,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     private void inflateCollections() {
         getViewState().inflateRow(CollectionsRow.POPULAR);
+        getViewState().inflateRow(CollectionsRow.NOW_PLAYING);
     }
 
     public void onBackPressed() {
