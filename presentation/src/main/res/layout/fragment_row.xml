@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/cl_row_collection"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/card_layout_margin"
+        tools:context=".ui.RowFragment">
+
+    <TextView
+            android:id="@+id/tv_collection_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="@string/category_title_popular"/>
+
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_row_collection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_collection_name"/>
+
+    <ProgressBar
+            android:id="@+id/pb_search_response"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+            android:id="@+id/tv_no_search_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/search_response_no_results"
+            android:visibility="gone" />
+
+</android.support.constraint.ConstraintLayout>

@@ -3,23 +3,21 @@ package com.ateam.zuml.cinemafinder.ui;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import android.support.v4.app.FragmentManager;
+import android.view.*;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.enums.RowCollection;
 import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
 import com.ateam.zuml.cinemafinder.presentation.view.HomeView;
 
 public class HomeFragment extends MvpAppCompatFragment implements HomeView, BackButtonListener {
 
     @InjectPresenter HomePresenter presenter;
+    private FragmentManager mFragmentManager;
 
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
@@ -33,6 +31,12 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFragmentManager = getFragmentManager();
     }
 
     @Nullable
@@ -62,5 +66,12 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
+    }
+
+    @Override
+    public void inflateRow(RowCollection collection) {
+        mFragmentManager.beginTransaction()
+                .add(R.id.trends_container, RowFragment.newInstance(collection))
+                .commit();
     }
 }

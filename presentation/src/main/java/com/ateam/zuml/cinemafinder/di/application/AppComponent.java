@@ -1,30 +1,13 @@
 package com.ateam.zuml.cinemafinder.di.application;
 
 import android.content.Context;
-
-import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.ImageLoaderModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.SchedulersModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.UtilsModule;
-import com.ateam.zuml.cinemafinder.presentation.presenter.DetailMoviePresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.FavoritesPresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.HomePresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.MainContainerPresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.RatingsPresenter;
-import com.ateam.zuml.cinemafinder.presentation.presenter.SearchResponsePresenter;
-import com.ateam.zuml.cinemafinder.ui.DetailMovieFragment;
-import com.ateam.zuml.cinemafinder.ui.MainActivity;
-import com.ateam.zuml.cinemafinder.ui.MainContainerFragment;
-import com.ateam.zuml.cinemafinder.ui.SearchResponseFragment;
-import com.ateam.zuml.cinemafinder.ui.SettingsFragment;
-
-import javax.inject.Singleton;
-
+import com.ateam.zuml.cinemafinder.di.application.modules.*;
+import com.ateam.zuml.cinemafinder.presentation.presenter.*;
+import com.ateam.zuml.cinemafinder.ui.*;
 import dagger.BindsInstance;
 import dagger.Component;
+
+import javax.inject.Singleton;
 
 @Singleton
 @Component(modules = {
@@ -68,4 +51,8 @@ public interface AppComponent {
     void inject(DetailMovieFragment fragment);
 
     void inject(DetailMoviePresenter presenter);
+
+    void inject(RowFragment fragment);
+
+    void inject(RowPresenter presenter);
 }
