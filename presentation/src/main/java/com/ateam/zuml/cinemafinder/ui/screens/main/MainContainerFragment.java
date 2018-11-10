@@ -52,7 +52,7 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container,
                              final Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_container, container, false);
 
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);

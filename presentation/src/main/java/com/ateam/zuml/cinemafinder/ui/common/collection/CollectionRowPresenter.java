@@ -1,41 +1,80 @@
-package com.ateam.zuml.cinemafinder.ui.screens.main.home.collections;
+package com.ateam.zuml.cinemafinder.ui.common.collection;
 
 import android.annotation.SuppressLint;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.ateam.zuml.cinemafinder.enums.RowCollection;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetPopularMoviesUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
+import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
-import ru.terrakok.cicerone.Router;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import ru.terrakok.cicerone.Router;
+
 @InjectViewState
-public class RowPresenter extends MvpPresenter<RowCollectionView> {
+public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
+
+    final class RowListPresenter {
+
+        private List<MovieListModel> movieList;
+
+        RowListPresenter() {
+            this.movieList = new ArrayList<>();
+        }
+
+        void bindViewAt(RowView view, int position) {
+            MovieListModel movieListModel = movieList.get(position);
+            if (movieListModel.getPosterPath().isEmpty()) {
+                view.setPosterPlaceholder();
+            } else {
+                view.setPoster(movieListModel.getPosterPath());
+            }
+            view.setTitle(movieListModel.getTitle());
+            view.setVoteAverage(movieListModel.getVoteAverage());
+            view.setReleaseDate(movieListModel.getReleaseYear());
+        }
+
+        int getCollectionItems() {
+            return movieList.size();
+        }
+
+        void onClickedRowItem(int position) {
+            router.navigateTo(new Screens.DetailMovieScreen(listPresenter.movieList.get(position).getId()));
+        }
+    }
+
+    private CollectionsRow collection;
+    private RowListPresenter listPresenter;
+
     @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
+
     @Inject GetPopularMoviesUseCase useCase;
     @Inject SchedulersProvider schedulers;
-    private RowCollection collection;
-    private RowListPresenter listPresenter;
 
-    public RowPresenter(RowCollection collection) {
+    CollectionRowPresenter(CollectionsRow collection) {
         this.collection = collection;
         this.listPresenter = new RowListPresenter();
     }
 
+    RowListPresenter getListPresenter() {
+        return listPresenter;
+    }
+
     @Override
-    public void attachView(RowCollectionView view) {
+    public void attachView(CollectionRowView view) {
         super.attachView(view);
         loadData();
     }
@@ -43,7 +82,7 @@ public class RowPresenter extends MvpPresenter<RowCollectionView> {
     @SuppressLint("CheckResult")
     private void loadData() {
         getViewState().showLoading();
-        if (collection == RowCollection.POPULAR) {
+        if (collection == CollectionsRow.POPULAR) {
             useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                     .observeOn(schedulers.ui())
                     .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
@@ -62,37 +101,5 @@ public class RowPresenter extends MvpPresenter<RowCollectionView> {
     private void onLoadFailed() {
         getViewState().hideLoading();
         getViewState().showError();
-    }
-
-    public RowListPresenter getListPresenter() {
-        return listPresenter;
-    }
-
-    public final class RowListPresenter {
-        private List<MovieListModel> movieList;
-
-        public RowListPresenter() {
-            this.movieList = new ArrayList<>();
-        }
-
-        public void bindViewAt(RowView view, int position) {
-            MovieListModel movieListModel = movieList.get(position);
-            if (movieListModel.getPosterPath().isEmpty()) {
-                view.setPosterPlaceholder();
-            } else {
-                view.setPoster(movieListModel.getPosterPath());
-            }
-            view.setTitle(movieListModel.getTitle());
-            view.setVoteAverage(movieListModel.getVoteAverage());
-            view.setReleaseDate(movieListModel.getReleaseYear());
-        }
-
-        public int getCollectionItems() {
-            return movieList.size();
-        }
-
-        public void showDetailsInfo(int position) {
-            router.navigateTo(new Screens.DetailMovieScreen(listPresenter.movieList.get(position).getId()));
-        }
     }
 }

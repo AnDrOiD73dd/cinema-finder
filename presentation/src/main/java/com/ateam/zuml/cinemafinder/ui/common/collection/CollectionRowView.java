@@ -1,8 +1,9 @@
-package com.ateam.zuml.cinemafinder.ui.screens.main.home.collections;
+package com.ateam.zuml.cinemafinder.ui.common.collection;
 
 import com.arellomobile.mvp.MvpView;
 
-public interface RowCollectionView extends MvpView {
+public interface CollectionRowView extends MvpView {
+
     void showError();
 
     void showLoading();

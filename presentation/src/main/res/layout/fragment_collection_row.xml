@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cl_row_collection"
+    android:id="@+id/cl_collection_row"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/movie_card_layout_margin">
 
     <TextView
-        android:id="@+id/tv_collection_name"
+        android:id="@+id/tv_collection_row_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/category_title_start_margin"
@@ -16,15 +17,15 @@
         android:textStyle="bold" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_row_collection"
+        android:id="@+id/rv_collection_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
-        android:padding="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_collection_name" />
+        android:padding="@dimen/collection_row_padding"
+        app:layout_constraintTop_toBottomOf="@+id/tv_collection_row_name" />
 
     <ProgressBar
-        android:id="@+id/pb_search_response"
+        android:id="@+id/pb_collection_row"
         style="?android:attr/progressBarStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,6 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/search_response_no_results"
+        android:text="@string/collection_row_no_results"
         android:visibility="gone" />
 </android.support.constraint.ConstraintLayout>

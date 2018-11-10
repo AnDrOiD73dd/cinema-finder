@@ -1,6 +1,7 @@
-package com.ateam.zuml.cinemafinder.ui.screens.main.home.collections;
+package com.ateam.zuml.cinemafinder.ui.common.collection;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,42 +11,45 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.enums.RowCollection;
+import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
 
-public class RowFragment extends MvpAppCompatFragment implements RowCollectionView {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class CollectionRowFragment extends MvpAppCompatFragment implements CollectionRowView {
 
     private final static String COLLECTION_TAG = "CollectionType";
-    private RowAdapter adapter;
 
-    @BindView(R.id.cl_row_collection) ConstraintLayout rootView;
-    @BindView(R.id.pb_search_response) ProgressBar progressBarView;
-    @BindView(R.id.rv_row_collection) RecyclerView recyclerView;
+    private CollectionRowAdapter adapter;
+
+    @BindView(R.id.cl_collection_row) ConstraintLayout rootView;
+    @BindView(R.id.pb_collection_row) ProgressBar progressBarView;
+    @BindView(R.id.rv_collection_row) RecyclerView recyclerView;
     @BindView(R.id.tv_no_search_results) TextView noSearchResultsView;
-    @BindView(R.id.tv_collection_name) TextView collectionName;
+    @BindView(R.id.tv_collection_row_name) TextView collectionName;
 
     @Inject ImageLoader imageLoader;
 
-    @InjectPresenter RowPresenter presenter;
+    @InjectPresenter CollectionRowPresenter presenter;
 
     @ProvidePresenter
-    RowPresenter provideRowPresenter() {
-        RowPresenter presenter = new RowPresenter((RowCollection) getArguments().getSerializable(COLLECTION_TAG));
+    CollectionRowPresenter provideRowPresenter() {
+        CollectionRowPresenter presenter = new CollectionRowPresenter(getRowTag());
         App.getApp().getAppComponent().inject(presenter);
         return presenter;
     }
 
-    public static RowFragment newInstance(RowCollection collection) {
-        RowFragment fragment = new RowFragment();
+    public static CollectionRowFragment newInstance(CollectionsRow collection) {
+        CollectionRowFragment fragment = new CollectionRowFragment();
         Bundle args = new Bundle();
         args.putSerializable(COLLECTION_TAG, collection);
         fragment.setArguments(args);
@@ -53,8 +57,8 @@ public class RowFragment extends MvpAppCompatFragment implements RowCollectionVi
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_row, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_collection_row, container, false);
         init(view);
         return view;
     }
@@ -62,18 +66,30 @@ public class RowFragment extends MvpAppCompatFragment implements RowCollectionVi
     private void init(View v) {
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, v);
-        adapter = new RowAdapter(presenter.getListPresenter(), imageLoader);
+
+        adapter = new CollectionRowAdapter(presenter.getListPresenter(), imageLoader);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
-        if (getArguments().getSerializable(COLLECTION_TAG) == RowCollection.POPULAR) {
+
+        if (getRowTag() == CollectionsRow.POPULAR) {
             collectionName.setText(R.string.category_title_popular);
         }
     }
 
+    private CollectionsRow getRowTag() {
+        if (getArguments() != null) {
+            return (CollectionsRow) getArguments().getSerializable(COLLECTION_TAG);
+        } else {
+            return CollectionsRow.NONE;
+        }
+    }
+
+    // ##################################### CollectionRowView ###################################
+
     @Override
     public void showError() {
-        Snackbar.make(rootView, R.string.search_response_error_message, Snackbar.LENGTH_LONG).show();
+        Snackbar.make(rootView, R.string.collection_row_error_message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

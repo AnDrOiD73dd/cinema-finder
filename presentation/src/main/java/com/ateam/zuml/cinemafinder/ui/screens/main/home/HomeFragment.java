@@ -4,20 +4,26 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.view.*;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.enums.RowCollection;
 import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
-import com.ateam.zuml.cinemafinder.ui.screens.main.home.collections.RowFragment;
+import com.ateam.zuml.cinemafinder.ui.common.collection.CollectionRowFragment;
+import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 
 public class HomeFragment extends BaseFragment implements HomeView, BackButtonListener {
 
-    @InjectPresenter HomePresenter presenter;
     private FragmentManager fragmentManager;
+
+    @InjectPresenter HomePresenter presenter;
 
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
@@ -30,17 +36,12 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
         return new HomeFragment();
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        fragmentManager = getFragmentManager();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_trends, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         setupToolbar(R.string.app_name, false);
+        fragmentManager = getFragmentManager();
         return view;
     }
 
@@ -50,11 +51,13 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
         inflater.inflate(R.menu.menu_main, menu);
     }
 
+    // ######################################## HomeView #########################################
+
     @Override
-    public void inflateRow(RowCollection collection) {
+    public void inflateRow(CollectionsRow collection) {
         if (fragmentManager.findFragmentByTag(collection.name()) == null) {
             fragmentManager.beginTransaction()
-                    .add(R.id.trends_container, RowFragment.newInstance(collection), collection.name())
+                    .add(R.id.popular_row_container, CollectionRowFragment.newInstance(collection), collection.name())
                     .commit();
         }
     }

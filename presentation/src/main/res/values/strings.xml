@@ -16,6 +16,8 @@
     <string name="movie_details_error_message">An error occurred while loading movie information</string>
     <string name="search_response_error_message">An error occurred while loading search information</string>
     <string name="search_response_no_results">No search results</string>
+    <string name="collection_row_error_message">An error occurred while loading search information</string>
+    <string name="collection_row_no_results">No search results</string>
     <string name="stub_url">-</string>
     <string name="category_title_popular">Popular</string>
 </resources>
