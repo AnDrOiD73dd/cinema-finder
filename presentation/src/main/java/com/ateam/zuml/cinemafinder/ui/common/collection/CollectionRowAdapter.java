@@ -7,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.util.ImageLoader;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdapter.ViewHolder>
         implements CollectionRowListView {
@@ -47,7 +45,7 @@ public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdap
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements RowView {
+    class ViewHolder extends RecyclerView.ViewHolder implements CollectionRowCardView {
 
         @BindView(R.id.iv_card_poster) ImageView posterView;
         @BindView(R.id.tv_card_title) TextView titleView;

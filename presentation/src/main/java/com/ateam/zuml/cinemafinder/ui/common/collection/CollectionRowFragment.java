@@ -11,7 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -21,9 +22,6 @@ import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class CollectionRowFragment extends MvpAppCompatFragment implements CollectionRowView {
 
@@ -72,9 +70,7 @@ public class CollectionRowFragment extends MvpAppCompatFragment implements Colle
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
 
-        if (getRowTag() == CollectionsRow.POPULAR) {
-            collectionName.setText(R.string.category_title_popular);
-        }
+        collectionName.setText(getRowTag().getTitle());
     }
 
     private CollectionsRow getRowTag() {

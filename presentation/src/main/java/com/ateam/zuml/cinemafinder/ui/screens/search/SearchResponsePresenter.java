@@ -1,7 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.search;
 
 import android.annotation.SuppressLint;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetMoviesBySearchUseCase;
@@ -13,46 +12,15 @@ import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
+import ru.terrakok.cicerone.Router;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import ru.terrakok.cicerone.Router;
+import java.util.ArrayList;
+import java.util.List;
 
 @InjectViewState
 public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
-
-    final class SearchListPresenter {
-
-        private List<MovieListModel> searchList;
-
-        SearchListPresenter() {
-            this.searchList = new ArrayList<>();
-        }
-
-        void bindViewAt(SearchRowView view, int position) {
-            MovieListModel movieListModel = searchList.get(position);
-
-            if (movieListModel.getPosterPath().isEmpty()) {
-                view.setPosterPlaceholder();
-            } else {
-                view.setPoster(movieListModel.getPosterPath());
-            }
-
-            view.setTitle(movieListModel.getTitle());
-            view.setOriginalTitle(movieListModel.getOriginalTitle());
-            view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
-            view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
-            view.setVoteAverage(movieListModel.getVoteAverage());
-        }
-
-        int getSearchCount() {
-            return searchList.size();
-        }
-    }
 
     private final String movieTitle;
 
@@ -111,5 +79,34 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     public void onBackPressed() {
         getViewState().closeSearch();
         router.exit();
+    }
+
+    final class SearchListPresenter {
+
+        private List<MovieListModel> searchList;
+
+        SearchListPresenter() {
+            this.searchList = new ArrayList<>();
+        }
+
+        void bindViewAt(SearchRowView view, int position) {
+            MovieListModel movieListModel = searchList.get(position);
+
+            if (movieListModel.getPosterPath().isEmpty()) {
+                view.setPosterPlaceholder();
+            } else {
+                view.setPoster(movieListModel.getPosterPath());
+            }
+
+            view.setTitle(movieListModel.getTitle());
+            view.setOriginalTitle(movieListModel.getOriginalTitle());
+            view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
+            view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
+            view.setVoteAverage(movieListModel.getVoteAverage());
+        }
+
+        int getSearchCount() {
+            return searchList.size();
+        }
     }
 }

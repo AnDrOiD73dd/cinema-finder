@@ -12,15 +12,18 @@ import javax.inject.Singleton;
 import java.util.List;
 
 @Singleton
-public final class GetNowPlayingMoviesUseCase {
+public final class GetUpcomingMoviesUseCase {
     private final MoviesRepository moviesRepository;
 
     @Inject
-    GetNowPlayingMoviesUseCase(final MoviesRepository moviesRepository) {
+    GetUpcomingMoviesUseCase(final MoviesRepository moviesRepository) {
         this.moviesRepository = moviesRepository;
     }
 
     public Single<List<MovieListModel>> execute(final String page, final Language language,
                                                 final Region region, final LogoSize logoSize) {
-        return moviesRepository.getNowPlayingMovies(page, language, region, logoSize);
-    }}
+        return moviesRepository.getUpcomingMovies(page, language, region, logoSize);
+    }
+
+
+}

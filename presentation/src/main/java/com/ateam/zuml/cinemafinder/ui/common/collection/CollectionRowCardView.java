@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.common.collection;
 
-public interface RowView {
+public interface CollectionRowCardView {
 
     void setPoster(String posterPath);
 

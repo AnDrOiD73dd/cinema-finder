@@ -20,4 +20,7 @@
     <string name="collection_row_no_results">No search results</string>
     <string name="stub_url">-</string>
     <string name="category_title_popular">Popular</string>
+    <string name="category_title_now_playing">Now Playing</string>
+    <string name="category_title_upcoming">Upcoming</string>
+    <string name="category_title_latest">Latest</string>
 </resources>

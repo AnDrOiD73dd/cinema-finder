@@ -4,7 +4,8 @@ import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.ateam.zuml.cinemafinder.interactor.movie.GetPopularMoviesUseCase;
+import com.ateam.zuml.cinemafinder.interactor.movie.GetNowPlayingMoviesUseCase;
+import com.ateam.zuml.cinemafinder.interactor.movie.GetUpcomingMoviesUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
@@ -21,21 +22,24 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import io.reactivex.Single;
 import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
 
-    private CollectionsRow collection;
-    private RowListPresenter listPresenter;
-
     @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
 
-    @Inject GetPopularMoviesUseCase useCase;
+    @Inject GetUpcomingMoviesUseCase useCasePopular;
+    @Inject GetNowPlayingMoviesUseCase useCaseNowPlaying;
+    @Inject GetUpcomingMoviesUseCase useCaseUpcoming;
     @Inject SchedulersProvider schedulers;
     @Inject Logger logger;
+
+    private CollectionsRow collection;
+    private RowListPresenter listPresenter;
 
     CollectionRowPresenter(CollectionsRow collection) {
         this.collection = collection;
@@ -48,15 +52,26 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
         loadData();
     }
 
-    @SuppressLint("CheckResult")
     private void loadData() {
         logger.d("");
         getViewState().showLoading();
-        if (collection == CollectionsRow.POPULAR) {
-            useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
-                    .observeOn(schedulers.ui())
-                    .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
+        switch (collection) {
+            case POPULAR:
+                getCollection(useCasePopular.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300));
+                break;
+            case NOW_PLAYING:
+                getCollection(useCaseNowPlaying.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300));
+                break;
+            case UPCOMING:
+                getCollection(useCaseUpcoming.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300));
+                break;
         }
+    }
+
+    @SuppressLint("CheckResult")
+    private void getCollection(Single<List<MovieListModel>> data) {
+        data.observeOn(schedulers.ui())
+                .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
     }
 
     private void onLoadSuccess(List<MovieListModel> movieListModels) {
@@ -87,7 +102,7 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
             this.movieList = new ArrayList<>();
         }
 
-        void bindViewAt(RowView view, int position) {
+        void bindViewAt(CollectionRowCardView view, int position) {
             MovieListModel movieListModel = movieList.get(position);
             if (movieListModel.getPosterPath().isEmpty()) {
                 view.setPosterPlaceholder();
@@ -107,4 +122,5 @@ public class CollectionRowPresenter extends MvpPresenter<CollectionRowView> {
             router.navigateTo(new Screens.DetailMovieScreen(listPresenter.movieList.get(position).getId()));
         }
     }
+
 }

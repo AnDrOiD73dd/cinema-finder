@@ -49,12 +49,18 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     // ######################################## HomeView #########################################
 
     @Override
-    public void inflateRow(CollectionsRow collection) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.popular_row_container, CollectionRowFragment.newInstance(collection), collection.name())
-                    .commit();
+    public void inflateNowPlaying() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.now_playing_row_container, CollectionRowFragment.newInstance(CollectionsRow.NOW_PLAYING), CollectionsRow.NOW_PLAYING.name())
+                .commit();
     }
 
+    @Override
+    public void inflateUpcoming() {
+        fragmentManager.beginTransaction()
+                .replace(R.id.upcoming_row_container, CollectionRowFragment.newInstance(CollectionsRow.UPCOMING), CollectionsRow.UPCOMING.name())
+                .commit();
+    }
     // #################################### BackButtonListener ###################################
 
     @Override
@@ -62,4 +68,5 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
         presenter.onBackPressed();
         return true;
     }
+
 }

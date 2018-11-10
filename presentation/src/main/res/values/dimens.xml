@@ -19,7 +19,6 @@
     <dimen name="text_size_14_sp">14sp</dimen>
     <dimen name="text_size_12_sp">12sp</dimen>
 
-    <dimen name="category_title_text_size">30sp</dimen>
+    <dimen name="category_title_text_size">25sp</dimen>
     <dimen name="category_title_start_margin">10dp</dimen>
-    <dimen name="collection_row_padding">8dp</dimen>
 </resources>
