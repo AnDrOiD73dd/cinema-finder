@@ -10,14 +10,34 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <FrameLayout
-                android:id="@+id/now_playing_row_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_now_playing_row_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/category_title_start_margin"
+            android:text="@string/category_title_now_playing"
+            android:textSize="@dimen/category_title_text_size"
+            android:textStyle="bold" />
 
-        <FrameLayout
-                android:id="@+id/upcoming_row_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_now_playing_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false" />
+
+        <TextView
+            android:id="@+id/tv_upcoming_row_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/category_title_start_margin"
+            android:text="@string/category_title_upcoming"
+            android:textSize="@dimen/category_title_text_size"
+            android:textStyle="bold" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_upcoming_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false" />
     </LinearLayout>
 </ScrollView>

@@ -11,17 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.util.CollectionsRow;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class CollectionRowFragment extends MvpAppCompatFragment implements CollectionRowView {
 
@@ -42,7 +43,6 @@ public class CollectionRowFragment extends MvpAppCompatFragment implements Colle
     @ProvidePresenter
     CollectionRowPresenter provideRowPresenter() {
         CollectionRowPresenter presenter = new CollectionRowPresenter(getRowTag());
-        App.getApp().getAppComponent().inject(presenter);
         return presenter;
     }
 
@@ -62,10 +62,9 @@ public class CollectionRowFragment extends MvpAppCompatFragment implements Colle
     }
 
     private void init(View v) {
-        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, v);
 
-        adapter = new CollectionRowAdapter(presenter.getListPresenter(), imageLoader);
+//        adapter = new CollectionRowAdapter(presenter.getListPresenter(), imageLoader);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);

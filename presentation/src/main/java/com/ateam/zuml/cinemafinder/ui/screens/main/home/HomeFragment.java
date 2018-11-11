@@ -3,20 +3,37 @@ package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.view.*;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
-import com.ateam.zuml.cinemafinder.ui.common.collection.CollectionRowFragment;
-import com.ateam.zuml.cinemafinder.util.CollectionsRow;
+import com.ateam.zuml.cinemafinder.ui.common.collection.CollectionRowAdapter;
+import com.ateam.zuml.cinemafinder.util.ImageLoader;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment implements HomeView, BackButtonListener {
 
-    private FragmentManager fragmentManager;
+    private CollectionRowAdapter nowPlayingAdapter;
+    private CollectionRowAdapter upcomingAdapter;
+
+    @BindView(R.id.rv_now_playing_row) RecyclerView nowPlayingRecyclerView;
+    @BindView(R.id.rv_upcoming_row) RecyclerView upcomingRecyclerView;
+
+    @Inject ImageLoader imageLoader;
 
     @InjectPresenter HomePresenter presenter;
 
@@ -35,9 +52,24 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        init(view);
+        setupRecyclerView(nowPlayingRecyclerView, nowPlayingAdapter);
+        setupRecyclerView(upcomingRecyclerView, upcomingAdapter);
         setupToolbar(R.string.app_name, false);
-        fragmentManager = getFragmentManager();
         return view;
+    }
+
+    private void init(View v) {
+        App.getApp().getAppComponent().inject(this);
+        ButterKnife.bind(this, v);
+        nowPlayingAdapter = new CollectionRowAdapter(presenter.getListPresenter(), imageLoader);
+        upcomingAdapter = new CollectionRowAdapter(presenter.getListPresenter(), imageLoader);
+    }
+
+    private void setupRecyclerView(RecyclerView recyclerView, CollectionRowAdapter adapter) {
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -49,18 +81,15 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     // ######################################## HomeView #########################################
 
     @Override
-    public void inflateNowPlaying() {
-        fragmentManager.beginTransaction()
-                .replace(R.id.now_playing_row_container, CollectionRowFragment.newInstance(CollectionsRow.NOW_PLAYING), CollectionsRow.NOW_PLAYING.name())
-                .commit();
+    public void updateNowPlayingRow() {
+        nowPlayingAdapter.refreshView();
     }
 
     @Override
-    public void inflateUpcoming() {
-        fragmentManager.beginTransaction()
-                .replace(R.id.upcoming_row_container, CollectionRowFragment.newInstance(CollectionsRow.UPCOMING), CollectionsRow.UPCOMING.name())
-                .commit();
+    public void updateUpcomingRow() {
+        upcomingAdapter.refreshView();
     }
+
     // #################################### BackButtonListener ###################################
 
     @Override
@@ -68,5 +97,4 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
         presenter.onBackPressed();
         return true;
     }
-
 }

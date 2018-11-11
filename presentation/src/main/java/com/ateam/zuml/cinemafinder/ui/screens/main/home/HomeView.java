@@ -4,7 +4,7 @@ import com.arellomobile.mvp.MvpView;
 
 public interface HomeView extends MvpView {
 
-    void inflateNowPlaying();
+    void updateNowPlayingRow();
 
-    void inflateUpcoming();
+    void updateUpcomingRow();
 }
