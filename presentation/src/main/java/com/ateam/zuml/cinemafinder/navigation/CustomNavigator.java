@@ -97,16 +97,8 @@ public class CustomNavigator implements Navigator {
         Fragment fragment = createFragment(screen);
 
         //Custom navigation
-        if (screen.getScreenKey().equals(Screens.SearchResponseScreen.class.getCanonicalName())) {
-            if (localStackCopy.getLast().equals(Screens.SearchResponseScreen.class.getCanonicalName())) {
-                fragmentReplace(new Replace(screen));
-                return;
-            }
-            if (localStackCopy.getLast().equals(Screens.DetailMovieScreen.class.getCanonicalName())) {
-                fragmentBack();
-                fragmentReplace(new Replace(screen));
-                return;
-            }
+        if (isInnerSearchScreenTransition(screen)) {
+            return;
         }
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -123,6 +115,43 @@ public class CustomNavigator implements Navigator {
                 .addToBackStack(screen.getScreenKey())
                 .commit();
         localStackCopy.add(screen.getScreenKey());
+    }
+
+    private boolean isInnerSearchScreenTransition(SupportAppScreen screen) {
+        if (screen.getScreenKey().equals(getSearchScreenName())) {
+            if (getLastScreen().equals(getSearchScreenName()) ||
+                    (getLastScreen().equals(getDetailsScreenName()) &&
+                            getPenultimateScreen().equals(getMainScreenName()))) {
+                fragmentReplace(new Replace(screen));
+                return true;
+            }
+            if (getLastScreen().equals(getDetailsScreenName())) {
+                fragmentBack();
+                fragmentReplace(new Replace(screen));
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private String getLastScreen() {
+        return localStackCopy.getLast();
+    }
+
+    private String getPenultimateScreen() {
+        return localStackCopy.get(localStackCopy.size() - 2);
+    }
+
+    private String getSearchScreenName() {
+        return Screens.SearchResponseScreen.class.getCanonicalName();
+    }
+
+    private String getDetailsScreenName() {
+        return Screens.DetailMovieScreen.class.getCanonicalName();
+    }
+
+    private String getMainScreenName() {
+        return Screens.MainContainerScreen.class.getCanonicalName();
     }
 
     private void fragmentBack() {
