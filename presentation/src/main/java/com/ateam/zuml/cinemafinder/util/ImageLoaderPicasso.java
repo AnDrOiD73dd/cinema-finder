@@ -19,9 +19,16 @@ public final class ImageLoaderPicasso implements ImageLoader {
     @Override
     public void loadInto(@Nullable String url, ImageView container) {
         Picasso.get()
-                .load(url)
+                .load(checkUrl(url))
                 .placeholder(R.drawable.ic_image)
                 .error(R.drawable.ic_broken_image)
                 .into(container);
+    }
+
+    private String checkUrl(String url) {
+        if (url == null || url.isEmpty()) {
+            return "-";
+        }
+        return url;
     }
 }

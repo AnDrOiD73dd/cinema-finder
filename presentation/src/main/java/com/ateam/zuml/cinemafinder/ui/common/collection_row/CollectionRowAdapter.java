@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.common.collection;
+package com.ateam.zuml.cinemafinder.ui.common.collection_row;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,18 +7,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
+import com.ateam.zuml.cinemafinder.util.ImageLoader;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdapter.ViewHolder>
         implements CollectionRowListView {
 
     private ImageLoader imageLoader;
-    private CollectionRowPresenter.RowListPresenter presenter;
+    private HomePresenter.RowListPresenter presenter;
 
-    CollectionRowAdapter(CollectionRowPresenter.RowListPresenter presenter, ImageLoader imageLoader) {
+    public CollectionRowAdapter(HomePresenter.RowListPresenter presenter, ImageLoader imageLoader) {
         this.presenter = presenter;
         this.imageLoader = imageLoader;
     }

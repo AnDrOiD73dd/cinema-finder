@@ -10,13 +10,12 @@ import com.ateam.zuml.cinemafinder.di.application.modules.SchedulersModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.UtilsModule;
 import com.ateam.zuml.cinemafinder.ui.AppActivity;
-import com.ateam.zuml.cinemafinder.ui.common.collection.CollectionRowFragment;
-import com.ateam.zuml.cinemafinder.ui.common.collection.CollectionRowPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMovieFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMoviePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesPresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomeFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.ratings.RatingsPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponseFragment;
@@ -57,6 +56,8 @@ public interface AppComponent {
 
     void inject(SettingsFragment fragment);
 
+    void inject(HomeFragment fragment);
+
     void inject(HomePresenter presenter);
 
     void inject(FavoritesPresenter presenter);
@@ -70,8 +71,4 @@ public interface AppComponent {
     void inject(DetailMovieFragment fragment);
 
     void inject(DetailMoviePresenter presenter);
-
-    void inject(CollectionRowFragment fragment);
-
-    void inject(CollectionRowPresenter presenter);
 }

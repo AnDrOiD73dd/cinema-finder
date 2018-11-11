@@ -55,13 +55,7 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
         getViewState().setTitle(movieDetailsModel.getTitle());
         getViewState().setSubTitle(String.format(Locale.getDefault(), "%s (%s)",
                 movieDetailsModel.getOriginalTitle(), movieDetailsModel.getReleaseYear()));
-
-        if (movieDetailsModel.getPosterPath().isEmpty()) {
-            getViewState().setPosterPlaceholder();
-        } else {
-            getViewState().setPoster(movieDetailsModel.getPosterPath());
-        }
-
+        getViewState().setPoster(movieDetailsModel.getPosterPath());
         getViewState().setGenresList(stringUtil.getStringFromArrayGenres(movieDetailsModel.getGenres()));
         getViewState().setRuntime(movieDetailsModel.getRuntime());
         getViewState().setVoteAverage(movieDetailsModel.getVoteAverage());

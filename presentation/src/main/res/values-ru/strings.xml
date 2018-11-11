@@ -18,9 +18,6 @@
     <string name="search_response_no_results">Нет результатов поиска</string>
     <string name="collection_row_error_message">При загрузке информации поиска произошла ошибка</string>
     <string name="collection_row_no_results">Нет результатов поиска</string>
-    <string name="stub_url">-</string>
-    <string name="category_title_popular">Популярные</string>
     <string name="category_title_now_playing">В прокате</string>
     <string name="category_title_upcoming">Скоро на экранах</string>
-    <string name="category_title_latest">Новые</string>
 </resources>

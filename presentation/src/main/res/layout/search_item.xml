@@ -74,7 +74,7 @@
         <ImageView
             android:id="@+id/iv_vote_average_search"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/movie_card_layout_margin"
             android:contentDescription="@string/star"
             android:src="@drawable/ic_star"
