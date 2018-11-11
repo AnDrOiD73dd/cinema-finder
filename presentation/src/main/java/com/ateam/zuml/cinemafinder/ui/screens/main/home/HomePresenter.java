@@ -32,7 +32,11 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     @Named(Constants.CHILD_CONTAINER)
     @Inject
-    Router router;
+    Router localRouter;
+
+    @Named(Constants.MAIN_CONTAINER)
+    @Inject
+    Router globalRouter;
 
     @Inject GetNowPlayingMoviesUseCase useCaseNowPlaying;
     @Inject GetUpcomingMoviesUseCase useCaseUpcoming;
@@ -106,7 +110,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     }
 
     public void onBackPressed() {
-        router.exit();
+        localRouter.exit();
     }
 
     RowListPresenter getNowPlayingPresenter() {
@@ -142,7 +146,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         }
 
         public void onClickedRowItem(int position) {
-            router.navigateTo(new Screens.DetailMovieScreen(movieList.get(position).getId()));
+            globalRouter.navigateTo(new Screens.DetailMovieScreen(movieList.get(position).getId()));
         }
     }
 }
