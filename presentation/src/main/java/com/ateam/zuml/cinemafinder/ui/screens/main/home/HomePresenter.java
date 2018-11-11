@@ -11,7 +11,7 @@ import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
-import com.ateam.zuml.cinemafinder.ui.common.collection.CollectionRowCardView;
+import com.ateam.zuml.cinemafinder.ui.common.collection_row.CollectionRowCardView;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.Logger;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
@@ -27,7 +27,8 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class HomePresenter extends MvpPresenter<HomeView> {
 
-    private RowListPresenter listPresenter;
+    private RowListPresenter nowPlayingPresenter;
+    private RowListPresenter upcomingPresenter;
 
     @Named(Constants.CHILD_CONTAINER)
     @Inject
@@ -39,7 +40,8 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     @Inject Logger logger;
 
     public HomePresenter() {
-        this.listPresenter = new RowListPresenter();
+        this.nowPlayingPresenter = new RowListPresenter();
+        this.upcomingPresenter = new RowListPresenter();
     }
 
     @Override
@@ -52,6 +54,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     @SuppressLint("CheckResult")
     private void loadNowPlayingData() {
         logger.d("");
+        getViewState().showNowPlayingLoading();
         useCaseNowPlaying
                 .execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
@@ -61,6 +64,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     @SuppressLint("CheckResult")
     private void loadUpcomingData() {
         logger.d("");
+        getViewState().showUpcomingLoading();
         useCaseUpcoming
                 .execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
@@ -69,30 +73,48 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     private void onNowPlayingLoadSuccess(List<MovieListModel> movieListModels) {
         logger.d("");
-        listPresenter.movieList = movieListModels;
+        getViewState().hideNowPlayingLoading();
+        nowPlayingPresenter.movieList = movieListModels;
         getViewState().updateNowPlayingRow();
+        if (movieListModels.isEmpty()) {
+            getViewState().showNoInNowPlaying();
+        }
     }
 
     private void onUpcomingLoadSuccess(List<MovieListModel> movieListModels) {
         logger.d("");
-        listPresenter.movieList = movieListModels;
+        getViewState().hideUpcomingLoading();
+        upcomingPresenter.movieList = movieListModels;
         getViewState().updateUpcomingRow();
+        if (movieListModels.isEmpty()) {
+            getViewState().showNoInUpcoming();
+        }
     }
 
     private void onNowPlayingLoadFailed() {
         logger.d("");
+        getViewState().hideNowPlayingLoading();
+        getViewState().showNoInNowPlaying();
+        getViewState().showError();
     }
 
     private void onUpcomingLoadFailed() {
         logger.d("");
+        getViewState().hideUpcomingLoading();
+        getViewState().showNoInUpcoming();
+        getViewState().showError();
     }
 
     public void onBackPressed() {
         router.exit();
     }
 
-    RowListPresenter getListPresenter() {
-        return listPresenter;
+    RowListPresenter getNowPlayingPresenter() {
+        return nowPlayingPresenter;
+    }
+
+    RowListPresenter getUpcomingPresenter() {
+        return upcomingPresenter;
     }
 
     public final class RowListPresenter {
@@ -120,7 +142,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         }
 
         public void onClickedRowItem(int position) {
-            router.navigateTo(new Screens.DetailMovieScreen(listPresenter.movieList.get(position).getId()));
+            router.navigateTo(new Screens.DetailMovieScreen(movieList.get(position).getId()));
         }
     }
 }

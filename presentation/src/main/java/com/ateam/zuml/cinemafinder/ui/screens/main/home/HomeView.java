@@ -7,4 +7,18 @@ public interface HomeView extends MvpView {
     void updateNowPlayingRow();
 
     void updateUpcomingRow();
+
+    void showNowPlayingLoading();
+
+    void hideNowPlayingLoading();
+
+    void showUpcomingLoading();
+
+    void hideUpcomingLoading();
+
+    void showNoInNowPlaying();
+
+    void showNoInUpcoming();
+
+    void showError();
 }

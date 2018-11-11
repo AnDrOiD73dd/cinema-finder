@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.common.collection;
+package com.ateam.zuml.cinemafinder.ui.common.collection_row;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
