@@ -4,4 +4,9 @@ import com.arellomobile.mvp.MvpView;
 
 public interface FavoritesView extends MvpView {
 
+    void updateItemsList();
+
+    void itemRemoved(int position);
+
+    void showLoadingError();
 }

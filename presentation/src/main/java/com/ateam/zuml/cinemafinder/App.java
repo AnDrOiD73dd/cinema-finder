@@ -1,6 +1,7 @@
 package com.ateam.zuml.cinemafinder;
 
 import android.app.Application;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.ateam.zuml.cinemafinder.di.application.AppComponent;
 import com.ateam.zuml.cinemafinder.di.application.DaggerAppComponent;
@@ -15,6 +16,7 @@ public final class App extends Application {
     public void onCreate() {
         super.onCreate();
         app = this;
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
         appComponent = DaggerAppComponent.builder()
                 .with(getApplicationContext())
                 .build();

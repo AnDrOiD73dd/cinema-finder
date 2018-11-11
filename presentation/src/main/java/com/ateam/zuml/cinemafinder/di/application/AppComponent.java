@@ -14,6 +14,7 @@ import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMovieFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMoviePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerPresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomeFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
@@ -45,22 +46,25 @@ public interface AppComponent {
 
         @BindsInstance
         Builder with(final Context context);
-
     }
 
     void inject(AppActivity activity);
 
-    void inject(MainContainerFragment fragment);
+    void inject(DetailMovieFragment fragment);
 
-    void inject(MainContainerPresenter presenter);
+    void inject(DetailMoviePresenter presenter);
 
-    void inject(SettingsFragment fragment);
+    void inject(FavoritesFragment favoritesFragment);
+
+    void inject(FavoritesPresenter presenter);
 
     void inject(HomeFragment fragment);
 
     void inject(HomePresenter presenter);
 
-    void inject(FavoritesPresenter presenter);
+    void inject(MainContainerFragment fragment);
+
+    void inject(MainContainerPresenter presenter);
 
     void inject(RatingsPresenter presenter);
 
@@ -68,7 +72,5 @@ public interface AppComponent {
 
     void inject(SearchResponsePresenter presenter);
 
-    void inject(DetailMovieFragment fragment);
-
-    void inject(DetailMoviePresenter presenter);
+    void inject(SettingsFragment fragment);
 }
