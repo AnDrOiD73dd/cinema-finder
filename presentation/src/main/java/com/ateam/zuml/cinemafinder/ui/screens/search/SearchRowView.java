@@ -4,8 +4,6 @@ public interface SearchRowView {
 
     void setPoster(String posterPath);
 
-    void setPosterPlaceholder();
-
     void setTitle(String title);
 
     void setOriginalTitle(String originalTitle);

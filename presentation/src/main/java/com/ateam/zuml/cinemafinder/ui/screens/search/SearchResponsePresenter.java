@@ -1,6 +1,7 @@
 package com.ateam.zuml.cinemafinder.ui.screens.search;
 
 import android.annotation.SuppressLint;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetMoviesBySearchUseCase;
@@ -12,12 +13,14 @@ import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
-import ru.terrakok.cicerone.Router;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.List;
+
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
@@ -37,10 +40,6 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     SearchResponsePresenter(String movieTitle) {
         this.movieTitle = movieTitle;
         this.listPresenter = new SearchListPresenter();
-    }
-
-    SearchListPresenter getListPresenter() {
-        return listPresenter;
     }
 
     @Override
@@ -81,6 +80,10 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         router.exit();
     }
 
+    SearchListPresenter getListPresenter() {
+        return listPresenter;
+    }
+
     final class SearchListPresenter {
 
         private List<MovieListModel> searchList;
@@ -91,13 +94,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
         void bindViewAt(SearchRowView view, int position) {
             MovieListModel movieListModel = searchList.get(position);
-
-            if (movieListModel.getPosterPath().isEmpty()) {
-                view.setPosterPlaceholder();
-            } else {
-                view.setPoster(movieListModel.getPosterPath());
-            }
-
+            view.setPoster(movieListModel.getPosterPath());
             view.setTitle(movieListModel.getTitle());
             view.setOriginalTitle(movieListModel.getOriginalTitle());
             view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
