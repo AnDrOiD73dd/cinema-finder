@@ -122,7 +122,7 @@ public final class MovieMapperImpl implements MovieMapper {
 
     private String getPosterPath(final String path) {
         final String[] splitPath = path.split("/");
-        final String logoPath = splitPath[splitPath.length - 1];
+        final String logoPath = "/" + splitPath[splitPath.length - 1];
         return characteristicsMapper.mapLogoSizeToPath(LogoSize.W_154, logoPath);
     }
 }
