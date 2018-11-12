@@ -94,6 +94,11 @@ public class SearchResponseFragment extends BaseFragment
         presenter.onItemClicked(position);
     }
 
+    @Override
+    public void onFavoritesClick(boolean isChecked, int position) {
+        presenter.onFavoritesClicked(isChecked, position);
+    }
+
     // #################################### SearchResponseView ###################################
 
     @Override

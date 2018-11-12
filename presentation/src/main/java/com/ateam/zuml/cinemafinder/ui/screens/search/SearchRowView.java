@@ -13,4 +13,6 @@ public interface SearchRowView {
     void setGenres(String genres);
 
     void setVoteAverage(String voteAverage);
+
+    void setToggleFavorites(boolean isFavorite);
 }

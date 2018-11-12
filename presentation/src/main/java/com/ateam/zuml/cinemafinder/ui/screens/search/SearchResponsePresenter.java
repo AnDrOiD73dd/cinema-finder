@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
+import com.ateam.zuml.cinemafinder.interactor.favorites.RemoveFavoriteMovieUseCase;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetMoviesBySearchUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
@@ -34,7 +36,9 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     Router router;
 
     @Inject StringUtils stringUtil;
-    @Inject GetMoviesBySearchUseCase useCase;
+    @Inject GetMoviesBySearchUseCase useCaseGetMoviesBySearch;
+    @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
+    @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
     @Inject SchedulersProvider schedulers;
 
     SearchResponsePresenter(String movieTitle) {
@@ -51,7 +55,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     @SuppressLint("CheckResult")
     private void loadData(String movie) {
         getViewState().showLoading();
-        useCase.execute(movie, "1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_154)
+        useCaseGetMoviesBySearch.execute(movie, "1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_154)
                 .observeOn(schedulers.ui())
                 .subscribe(this::onLoadSuccess, throwable -> onLoadFailed());
     }
@@ -73,6 +77,14 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     void onItemClicked(int position) {
         getViewState().closeSearch();
         router.navigateTo(new Screens.DetailMovieScreen(listPresenter.searchList.get(position).getId()));
+    }
+
+    void onFavoritesClicked(boolean isChecked, int position) {
+        if (isChecked) {
+            useCaseAddFavoriteMovie.execute(listPresenter.searchList.get(position));
+        } else {
+            useCaseRemoveFavoriteMovie.execute(listPresenter.searchList.get(position).getId());
+        }
     }
 
     public void onBackPressed() {
@@ -100,6 +112,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
             view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
             view.setVoteAverage(movieListModel.getVoteAverage());
+            view.setToggleFavorites(false);
         }
 
         int getSearchCount() {

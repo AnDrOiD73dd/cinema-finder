@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
@@ -28,6 +29,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+
+        void onFavoritesClick(boolean isChecked, int position);
     }
 
     void setOnItemClickListener(OnItemClickListener itemClickListener) {
@@ -66,11 +69,14 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         @BindView(R.id.tv_release_date_search) TextView releaseDateView;
         @BindView(R.id.tv_genres_search) TextView genresView;
         @BindView(R.id.tv_vote_average_search) TextView voteAverageView;
+        @BindView(R.id.tb_favorites_search) ToggleButton toggleFavorites;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> itemClickListener.onItemClick(getAdapterPosition()));
+            toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) ->
+                    itemClickListener.onFavoritesClick(isChecked, getAdapterPosition()));
         }
 
         @Override
@@ -101,6 +107,15 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         @Override
         public void setVoteAverage(String voteAverage) {
             this.voteAverageView.setText(voteAverage);
+        }
+
+        @Override
+        public void setToggleFavorites(boolean isFavorite) {
+            if (isFavorite) {
+                toggleFavorites.setChecked(true);
+            } else {
+                toggleFavorites.setChecked(false);
+            }
         }
     }
 }

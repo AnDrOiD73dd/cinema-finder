@@ -55,7 +55,7 @@
             android:layout_marginEnd="@dimen/movie_card_layout_margin"
             android:layout_marginBottom="@dimen/movie_card_layout_margin"
             android:contentDescription="@string/star"
-            android:src="@drawable/ic_star"
+            app:srcCompat="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tv_vote_average_home_list" />
 

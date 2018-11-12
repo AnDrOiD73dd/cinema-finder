@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
+import com.ateam.zuml.cinemafinder.interactor.favorites.GetFavoriteMoviesUseCase;
+import com.ateam.zuml.cinemafinder.interactor.favorites.RemoveFavoriteMovieUseCase;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.repository.FavoritesRepository;
 import com.ateam.zuml.cinemafinder.util.Constants;
@@ -32,6 +34,8 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
     @Inject
     Router globalRouter;
 
+    @Inject GetFavoriteMoviesUseCase useCaseGetMovies;
+    @Inject RemoveFavoriteMovieUseCase useCaseRemoveMovie;
     @Inject FavoritesRepository repository;
     @Inject SchedulersProvider schedulers;
 
@@ -49,24 +53,9 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
 
     @SuppressLint("CheckResult")
     private void loadData() {
-//        repository.getAllMovies(LogoSize.W_154)
-//                .observeOn(schedulers.ui())
-//                .subscribe(movieDetailsModels -> favoriteListPresenter.favoritesList = movieDetailsModels);
-
-        List<MovieDetailsModel> movieDetailsModels = new ArrayList<>();
-        movieDetailsModels.add(new MovieDetailsModel("1", "Название", "Второе название",
-                "2000-01-01", new String[]{"Жанр1", "Жанра2", "Жанр3"}, "5.5",
-                "-", "Дедлайн-боль", "Мы делили апельсин...",
-                "233", "дёшего", "ушли в ноль", "666", true));
-        movieDetailsModels.add(new MovieDetailsModel("1", "Название", "Второе название",
-                "2000-01-01", new String[]{"Жанр1", "Жанра2", "Жанр3"}, "5.5",
-                "-", "Дедлайн-боль", "Мы делили апельсин...",
-                "233", "дёшего", "ушли в ноль", "666", true));
-        movieDetailsModels.add(new MovieDetailsModel("1", "Название", "Второе название",
-                "2000-01-01", new String[]{"Жанр1", "Жанра2", "Жанр3"}, "5.5",
-                "-", "Дедлайн-боль", "Мы делили апельсин...",
-                "233", "дёшего", "ушли в ноль", "666", true));
-        favoriteListPresenter.favoritesList = movieDetailsModels;
+        useCaseGetMovies.execute()
+                .observeOn(schedulers.ui())
+                .subscribe(movieListModels -> favoriteListPresenter.favoritesList = movieListModels);
         getViewState().updateItemsList();
     }
 
@@ -76,6 +65,7 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
     }
 
     void onRemoveItemClicked(int position) {
+        useCaseRemoveMovie.execute(favoriteListPresenter.favoritesList.get(position).getId());
         favoriteListPresenter.favoritesList.remove(position);
         getViewState().showNotifyingMessage();
         getViewState().itemRemoved(position);
@@ -91,20 +81,20 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
 
     final class FavoritesListPresenter {
 
-        private List<MovieDetailsModel> favoritesList;
+        private List<MovieListModel> favoritesList;
 
         FavoritesListPresenter() {
             this.favoritesList = new ArrayList<>();
         }
 
         void bindViewAt(FavoriteRowView view, int position) {
-            MovieDetailsModel movieDetailsModel = favoritesList.get(position);
-            view.setPoster(movieDetailsModel.getPosterPath());
-            view.setTitle(movieDetailsModel.getTitle());
-            view.setOriginalTitle(movieDetailsModel.getOriginalTitle());
-            view.setReleaseDate(movieDetailsModel.getReleaseYear());
-            view.setGenres(stringUtil.getStringFromArrayGenres(movieDetailsModel.getGenres()));
-            view.setVoteAverage(movieDetailsModel.getVoteAverage());
+            MovieListModel movieListModel = favoritesList.get(position);
+            view.setPoster(movieListModel.getPosterPath());
+            view.setTitle(movieListModel.getTitle());
+            view.setOriginalTitle(movieListModel.getOriginalTitle());
+            view.setReleaseDate(movieListModel.getReleaseYear());
+            view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
+            view.setVoteAverage(movieListModel.getVoteAverage());
         }
 
         int getItemsCount() {
