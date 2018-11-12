@@ -22,6 +22,6 @@ public interface FavoritesDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(final FavoriteEntity entity);
 
-    @Delete
-    void delete(final FavoriteEntity entity);
+    @Query("DELETE FROM favorites WHERE movieId = :movieId")
+    void delete(final String movieId);
 }

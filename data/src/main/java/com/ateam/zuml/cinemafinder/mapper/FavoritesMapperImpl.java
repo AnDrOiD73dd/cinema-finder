@@ -17,9 +17,4 @@ public final class FavoritesMapperImpl implements FavoritesMapper {
     public FavoriteEntity mapMovieListModel(final BaseMovieModel movieModel) {
         return new FavoriteEntity(movieModel.getId());
     }
-
-    @Override
-    public FavoriteEntity mapModelId(final String id) {
-        return new FavoriteEntity(id);
-    }
 }

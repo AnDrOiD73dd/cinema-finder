@@ -60,7 +60,7 @@ public class FavoritesRepositoryImpl implements FavoritesRepository {
 
     @Override
     public Completable removeMovie(final String id) {
-        return Completable.fromAction(() -> favoritesDao.delete(favoritesMapper.mapModelId(id)))
+        return Completable.fromAction(() -> favoritesDao.delete(id))
                 .subscribeOn(Schedulers.io());
     }
 }

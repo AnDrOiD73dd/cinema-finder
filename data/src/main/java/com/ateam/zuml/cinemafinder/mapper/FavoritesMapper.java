@@ -6,6 +6,4 @@ import com.ateam.zuml.cinemafinder.model.movie.BaseMovieModel;
 public interface FavoritesMapper {
 
     FavoriteEntity mapMovieListModel(final BaseMovieModel movieModel);
-
-    FavoriteEntity mapModelId(final String id);
 }
