@@ -1,10 +1,15 @@
 package com.ateam.zuml.cinemafinder.ui.screens.main.favorites;
 
+import android.annotation.SuppressLint;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
+import com.ateam.zuml.cinemafinder.repository.FavoritesRepository;
 import com.ateam.zuml.cinemafinder.util.Constants;
+import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
 
 import java.util.ArrayList;
@@ -28,6 +33,9 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
     @Inject
     Router globalRouter;
 
+    @Inject FavoritesRepository repository;
+    @Inject SchedulersProvider schedulers;
+
     @Inject StringUtils stringUtil;
 
     public FavoritesPresenter() {
@@ -40,8 +48,12 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
         loadData();
     }
 
+    @SuppressLint("CheckResult")
     private void loadData() {
-
+        repository.getAllMovies(LogoSize.W_154)
+                .observeOn(schedulers.ui())
+                .subscribe(movieDetailsModels -> favoriteListPresenter.favoritesList = movieDetailsModels);
+        getViewState().updateItemsList();
     }
 
     public void onItemClicked(int position) {

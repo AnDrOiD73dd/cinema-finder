@@ -92,14 +92,14 @@
 
         <ImageView
             android:id="@+id/iv_remove_favorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/favorite_remove_icon_size"
+            android:layout_height="@dimen/favorite_remove_icon_size"
             android:layout_marginEnd="@dimen/movie_card_layout_margin"
             android:contentDescription="@string/content_description_remove_favorite_item"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:srcCompat="@drawable/ic_delete" />
+            app:srcCompat="@drawable/ic_favorite_fill" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

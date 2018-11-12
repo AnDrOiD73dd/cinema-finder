@@ -16,8 +16,8 @@ import io.reactivex.Single;
 @Dao
 public interface FavoritesDao {
 
-    @Query("SELECT * FROM movies WHERE id = :id;")
-    Single<List<MovieEntity>> getAllMoviesByFavoriteId(int id);
+    @Query("SELECT * FROM movies WHERE id IN (SELECT movieId FROM favorites);")
+    Single<List<MovieEntity>> getAllMoviesByFavoriteId();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(FavoriteEntity entity);

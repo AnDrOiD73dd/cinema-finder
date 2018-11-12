@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.repository;
 
+import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import io.reactivex.Single;
 
 public interface FavoritesRepository {
 
-    Single<List<MovieDetailsModel>> getAllMovies(int movieId);
+    Single<List<MovieDetailsModel>> getAllMovies(final LogoSize logoSize);
 
     void addMovie(MovieDetailsModel movieDetailsModel);
 

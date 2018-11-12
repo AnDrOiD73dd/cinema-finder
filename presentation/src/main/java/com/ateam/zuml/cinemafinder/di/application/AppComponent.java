@@ -3,6 +3,7 @@ package com.ateam.zuml.cinemafinder.di.application;
 import android.content.Context;
 
 import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
+import com.ateam.zuml.cinemafinder.di.application.modules.FavoritesRepositoryModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.ImageLoaderModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
@@ -36,7 +37,8 @@ import dagger.Component;
         ServiceModule.class,
         ImageLoaderModule.class,
         UtilsModule.class,
-        SchedulersModule.class})
+        SchedulersModule.class,
+        FavoritesRepositoryModule.class})
 public interface AppComponent {
 
     @Component.Builder

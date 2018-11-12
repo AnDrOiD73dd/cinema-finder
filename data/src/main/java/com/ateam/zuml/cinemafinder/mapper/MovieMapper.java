@@ -1,5 +1,7 @@
 package com.ateam.zuml.cinemafinder.mapper;
 
+import com.ateam.zuml.cinemafinder.database.room.model.favorite.FavoriteEntity;
+import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
@@ -18,4 +20,9 @@ public interface MovieMapper {
                                   final LogoSize logoSize);
 
     MovieDetailsModel mapMovieDetails(final MovieInfo movieInfo, final LogoSize logoSize);
+
+    List<MovieDetailsModel> mapMovieDetailsFromMovieEntity(final List<MovieEntity> movieEntities,
+                                                           final LogoSize logoSize);
+
+    FavoriteEntity mapFavoriteEntityFromMovieDetailsModel(final MovieDetailsModel movieDetailsModel);
 }

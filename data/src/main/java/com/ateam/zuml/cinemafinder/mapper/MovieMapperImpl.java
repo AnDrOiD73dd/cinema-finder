@@ -1,5 +1,7 @@
 package com.ateam.zuml.cinemafinder.mapper;
 
+import com.ateam.zuml.cinemafinder.database.room.model.favorite.FavoriteEntity;
+import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
@@ -72,5 +74,41 @@ public final class MovieMapperImpl implements MovieMapper {
 
         return new MovieDetailsModel(id, title, originalTitle, releaseDate, genres, voteAverage,
                 posterPath, tagline, overview, runtime, budget, revenue, voteCount, adult);
+    }
+
+    @Override
+    public List<MovieDetailsModel> mapMovieDetailsFromMovieEntity(List<MovieEntity> movieEntities, final LogoSize logoSize) {
+        final List<MovieDetailsModel> movieDetailsModels = new ArrayList<>(movieEntities.size());
+
+        for (final MovieEntity entity : movieEntities) {
+            final String id = String.valueOf(entity.getId());
+            final String title = entity.getTitle();
+//            final String originalTitle = entity.getOriginalTitle();
+//            final String releaseDate = entity.getReleaseDate();
+//            final String[] genres = characteristicsMapper.mapGenres(entity.getGenres());
+            final String voteAverage = entity.getVoteAverage() < 0.1f ? EMPTY_STRING :
+                    String.valueOf(entity.getVoteAverage());
+            final String posterPath = entity.getPosterPath() == null ? EMPTY_STRING :
+                    characteristicsMapper.mapLogoSizeToPath(logoSize, entity.getPosterPath());
+            final String tagline = entity.getTagline() == null ? EMPTY_STRING : entity.getTagline();
+            final String overview = entity.getOverview() == null ? EMPTY_STRING : entity.getOverview();
+            final String runtime = entity.getRuntime() == 0 ? EMPTY_STRING : String.valueOf(entity.getRuntime());
+//            final String budget = entity.getBudget() == 0 ? EMPTY_STRING : String.valueOf(entity.getBudget());
+//            final String revenue = entity.getRevenue() == 0 ? EMPTY_STRING : String.valueOf(entity.getRevenue());
+            final String voteCount = entity.getVoteCount() == 0 ? EMPTY_STRING : String.valueOf(entity.getVoteCount());
+            final boolean adult = entity.isAdult();
+
+//            movieDetailsModels.add(new MovieDetailsModel(id, title, originalTitle, releaseDate, genres, voteAverage,
+//                    posterPath, tagline, overview, runtime, budget, revenue, voteCount, adult));
+            movieDetailsModels.add(new MovieDetailsModel(id, title, " ", " ", new String[]{"1", "2"}, voteAverage,
+                    posterPath, tagline, overview, runtime, " ", " ", voteCount, adult));
+        }
+
+        return movieDetailsModels;
+    }
+
+    @Override
+    public FavoriteEntity mapFavoriteEntityFromMovieDetailsModel(final MovieDetailsModel movieDetailsModel) {
+        return new FavoriteEntity(1, Integer.parseInt(movieDetailsModel.getId()));
     }
 }
