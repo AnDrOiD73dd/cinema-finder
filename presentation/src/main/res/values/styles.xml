@@ -45,4 +45,9 @@
         <item name="android:layout_marginTop">@dimen/movie_details_delimiter_margin</item>
         <item name="android:layout_marginStart">@dimen/movie_details_delimiter_margin</item>
     </style>
+
+    <style name="AppTheme.Launcher">
+        <item name="android:windowBackground">@drawable/launch_screen</item>
+    </style>
+
 </resources>
