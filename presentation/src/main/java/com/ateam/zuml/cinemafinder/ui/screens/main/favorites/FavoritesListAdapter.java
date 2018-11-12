@@ -19,7 +19,7 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
 
     private ImageLoader imageLoader;
     private FavoritesPresenter.FavoritesListPresenter presenter;
-    private FavoritesListAdapter.OnItemClickListener itemClickListener;
+    private OnItemClickListener itemClickListener;
 
     FavoritesListAdapter(FavoritesPresenter.FavoritesListPresenter presenter, ImageLoader imageLoader) {
         this.presenter = presenter;
@@ -27,12 +27,13 @@ public class FavoritesListAdapter extends RecyclerView.Adapter<FavoritesListAdap
     }
 
     public interface OnItemClickListener {
+
         void onItemClick(int position);
 
         void onRemoveItemClick(int position);
     }
 
-    void setOnItemClickListener(FavoritesListAdapter.OnItemClickListener itemClickListener) {
+    void setOnItemClickListener(OnItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 

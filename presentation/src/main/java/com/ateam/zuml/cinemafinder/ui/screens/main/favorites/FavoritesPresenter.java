@@ -3,7 +3,6 @@ package com.ateam.zuml.cinemafinder.ui.screens.main.favorites;
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
-import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
@@ -19,13 +18,17 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
 
+    private final FavoritesListPresenter favoriteListPresenter;
+
     @Named(Constants.CHILD_CONTAINER)
     @Inject
-    Router router;
+    Router localRouter;
+
+    @Named(Constants.MAIN_CONTAINER)
+    @Inject
+    Router globalRouter;
 
     @Inject StringUtils stringUtil;
-
-    private final FavoritesListPresenter favoriteListPresenter;
 
     public FavoritesPresenter() {
         this.favoriteListPresenter = new FavoritesListPresenter();
@@ -41,22 +44,22 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
 
     }
 
-    public void onBackPressed() {
-        router.exit();
-    }
-
-    public FavoritesListPresenter getListPresenter() {
-        return favoriteListPresenter;
-    }
-
     public void onItemClicked(int position) {
-        router.navigateTo(new Screens.DetailMovieScreen(favoriteListPresenter.favoritesList
+        globalRouter.navigateTo(new Screens.DetailMovieScreen(favoriteListPresenter.favoritesList
                 .get(position).getId()));
     }
 
     public void onRemoveItemClick(int position) {
         favoriteListPresenter.favoritesList.remove(position);
         getViewState().itemRemoved(position);
+    }
+
+    public void onBackPressed() {
+        localRouter.exit();
+    }
+
+    FavoritesListPresenter getListPresenter() {
+        return favoriteListPresenter;
     }
 
     final class FavoritesListPresenter {

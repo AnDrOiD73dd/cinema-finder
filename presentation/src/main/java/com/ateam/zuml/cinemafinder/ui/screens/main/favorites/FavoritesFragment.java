@@ -28,13 +28,14 @@ import butterknife.ButterKnife;
 
 public class FavoritesFragment extends BaseFragment implements FavoritesView, BackButtonListener {
 
-    @InjectPresenter FavoritesPresenter presenter;
-
-    @Inject ImageLoader imageLoader;
+    private FavoritesListAdapter adapter;
 
     @BindView(R.id.favorite_root) ConstraintLayout rootView;
     @BindView(R.id.rv_favorites_list) RecyclerView favoritesListView;
-    private FavoritesListAdapter adapter;
+
+    @Inject ImageLoader imageLoader;
+
+    @InjectPresenter FavoritesPresenter presenter;
 
     @ProvidePresenter
     FavoritesPresenter provideFavoritesPresenter() {
@@ -51,14 +52,18 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_favorites, container, false);
+        init(view);
+        return view;
+    }
+
+    private void init(View v) {
         App.getApp().getAppComponent().inject(this);
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this, v);
         setupToolbar(R.string.favorites, false);
         adapter = new FavoritesListAdapter(presenter.getListPresenter(), imageLoader);
         favoritesListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         favoritesListView.setAdapter(adapter);
         adapter.setOnItemClickListener(favoriteItemClickListener);
-        return view;
     }
 
     @Override

@@ -21,5 +21,4 @@
 
     <dimen name="category_title_text_size">25sp</dimen>
     <dimen name="category_title_start_margin">10dp</dimen>
-    <dimen name="favorite_remove_icon_size">36dp</dimen>
 </resources>

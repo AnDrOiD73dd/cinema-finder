@@ -1,21 +1,20 @@
-package com.ateam.zuml.cinemafinder.database.room.model.environmet;
+package com.ateam.zuml.cinemafinder.database.room.model.favorite;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
 
 import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "favorites")
-public class FavoriteEntity {
+public final class FavoriteEntity {
 
     @PrimaryKey
     private final int id;
 
     @SerializedName("movie_id")
-    @NonNull private final int movieId;
+    private final int movieId;
 
-    public FavoriteEntity(int id, @NonNull int movieId) {
+    public FavoriteEntity(int id, int movieId) {
         this.id = id;
         this.movieId = movieId;
     }
@@ -24,7 +23,6 @@ public class FavoriteEntity {
         return id;
     }
 
-    @NonNull
     public int getMovieId() {
         return movieId;
     }

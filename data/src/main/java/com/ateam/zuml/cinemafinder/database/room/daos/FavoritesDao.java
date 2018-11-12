@@ -6,7 +6,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
-import com.ateam.zuml.cinemafinder.database.room.model.environmet.FavoriteEntity;
+import com.ateam.zuml.cinemafinder.database.room.model.favorite.FavoriteEntity;
+import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
 
 import java.util.List;
 
@@ -15,12 +16,18 @@ import io.reactivex.Single;
 @Dao
 public interface FavoritesDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Query("SELECT * FROM movies WHERE id = :id;")
+    Single<List<MovieEntity>> getAllMoviesByFavoriteId(int id);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(FavoriteEntity entity);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    void insertAllMovies(List<FavoriteEntity> entities);
 
     @Delete
     void delete(FavoriteEntity entity);
 
-    @Query("SELECT * FROM favorites")
-    Single<List<FavoriteEntity>> getAll();
+    @Query("DELETE FROM favorites")
+    void deleteAllMovies();
 }
