@@ -20,4 +20,8 @@
     <string name="collection_row_no_results">Нет результатов поиска</string>
     <string name="category_title_now_playing">В прокате</string>
     <string name="category_title_upcoming">Скоро на экранах</string>
+    <string name="pref_adult_title">Скрыть фильмы \"только для взрослых\"</string>
+    <string name="pref_adult_summ">Не отображать в списках фильмы, которые помечены как \"для взрослых\". Данное
+        ограничение не распространяется на фильмы с возрастным рейтингом \"18+\"
+    </string>
 </resources>

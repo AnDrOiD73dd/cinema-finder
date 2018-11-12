@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="Preferences">
-        <Preference android:title="Preferences" />
-    </PreferenceCategory>
+    <CheckBoxPreference
+            android:key="pref_adult"
+            android:title="@string/pref_adult_title"
+            android:summary="@string/pref_adult_summ"
+            android:defaultValue="false"/>
 </PreferenceScreen>
