@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.ateam.zuml.cinemafinder.database.room.MovieDatabase;
 import com.ateam.zuml.cinemafinder.database.room.daos.FavoritesDao;
+import com.ateam.zuml.cinemafinder.database.room.daos.MoviesDao;
 
 import javax.inject.Singleton;
 
@@ -26,5 +27,11 @@ public final class DatabaseModule {
     @Provides
     FavoritesDao provideFavoritesDao(final MovieDatabase database) {
         return database.getFavoritesDao();
+    }
+
+    @Singleton
+    @Provides
+    MoviesDao provideMoviesDao(final MovieDatabase database) {
+        return database.getMovieDao();
     }
 }
