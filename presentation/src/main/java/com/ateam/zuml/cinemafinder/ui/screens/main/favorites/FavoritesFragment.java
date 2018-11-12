@@ -105,7 +105,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
     }
 
     @Override
-    public void showNotifyingMessage() {
-        Snackbar.make(rootView, R.string.removed_favorite_item, Snackbar.LENGTH_LONG).show();
+    public void showNotifyingMessage(String msg) {
+        Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG).show();
     }
 }

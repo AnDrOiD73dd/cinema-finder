@@ -17,4 +17,6 @@ public interface SearchResponseView extends MvpView {
     void showLoading();
 
     void hideLoading();
+
+    void showNotifyingMessage(String msg);
 }

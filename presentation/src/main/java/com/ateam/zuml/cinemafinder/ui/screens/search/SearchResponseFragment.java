@@ -129,6 +129,11 @@ public class SearchResponseFragment extends BaseFragment
     }
 
     @Override
+    public void showNotifyingMessage(String msg) {
+        Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showLoading() {
         progressBarView.setVisibility(View.VISIBLE);
     }

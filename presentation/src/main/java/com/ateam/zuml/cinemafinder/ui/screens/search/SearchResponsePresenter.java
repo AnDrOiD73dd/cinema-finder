@@ -79,11 +79,21 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
         router.navigateTo(new Screens.DetailMovieScreen(listPresenter.searchList.get(position).getId()));
     }
 
+    //TODO 13.11.2018 add resources class
+    @SuppressLint("CheckResult")
     void onFavoritesClicked(boolean isChecked, int position) {
         if (isChecked) {
-            useCaseAddFavoriteMovie.execute(listPresenter.searchList.get(position));
+            useCaseAddFavoriteMovie
+                    .execute(listPresenter.searchList.get(position))
+                    .observeOn(schedulers.ui())
+                    .subscribe(() -> getViewState().showNotifyingMessage("Item added in favorites"),
+                            throwable -> getViewState().showNotifyingMessage("Error adding to favorites"));
         } else {
-            useCaseRemoveFavoriteMovie.execute(listPresenter.searchList.get(position).getId());
+            useCaseRemoveFavoriteMovie
+                    .execute(listPresenter.searchList.get(position).getId())
+                    .observeOn(schedulers.ui())
+                    .subscribe(() -> getViewState().showNotifyingMessage("Item removed from favorites"),
+                            throwable -> getViewState().showNotifyingMessage("Error removing from favorites"));
         }
     }
 

@@ -55,8 +55,10 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
     private void loadData() {
         useCaseGetMovies.execute()
                 .observeOn(schedulers.ui())
-                .subscribe(movieListModels -> favoriteListPresenter.favoritesList = movieListModels);
-        getViewState().updateItemsList();
+                .subscribe(movieListModels -> {
+                    favoriteListPresenter.favoritesList = movieListModels;
+                    getViewState().updateItemsList();
+                });
     }
 
     void onItemClicked(int position) {
@@ -64,11 +66,18 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
                 .get(position).getId()));
     }
 
+    //TODO 13.11.2018 add resources class
+    @SuppressLint("CheckResult")
     void onRemoveItemClicked(int position) {
-        useCaseRemoveMovie.execute(favoriteListPresenter.favoritesList.get(position).getId());
-        favoriteListPresenter.favoritesList.remove(position);
-        getViewState().showNotifyingMessage();
-        getViewState().itemRemoved(position);
+        useCaseRemoveMovie
+                .execute(favoriteListPresenter.favoritesList.get(position).getId())
+                .observeOn(schedulers.ui())
+                .subscribe(() -> {
+                            getViewState().showNotifyingMessage("Item removed from favorites");
+                            favoriteListPresenter.favoritesList.remove(position);
+                            getViewState().itemRemoved(position);
+                        },
+                        throwable -> getViewState().showNotifyingMessage("Error removing from favorites"));
     }
 
     public void onBackPressed() {
