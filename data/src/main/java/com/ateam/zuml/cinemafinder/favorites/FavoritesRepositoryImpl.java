@@ -45,7 +45,6 @@ public class FavoritesRepositoryImpl implements FavoritesRepository {
     @Override
     public Completable addMovie(final BaseMovieModel movieModel) {
         return Completable.fromAction(() -> {
-            favoritesDao.insert(favoritesMapper.mapMovieListModel(movieModel));
             final int id = Integer.parseInt(movieModel.getId());
             final Disposable disposable = moviesDao.getMovieById(id)
                     .subscribe(movieEntity -> {
@@ -54,6 +53,7 @@ public class FavoritesRepositoryImpl implements FavoritesRepository {
                             },
                             () -> moviesDao.insert(movieMapper.mapMovieModel(movieModel)));
             disposable.dispose();
+            favoritesDao.insert(favoritesMapper.mapMovieListModel(movieModel));
         })
                 .subscribeOn(Schedulers.io());
     }
