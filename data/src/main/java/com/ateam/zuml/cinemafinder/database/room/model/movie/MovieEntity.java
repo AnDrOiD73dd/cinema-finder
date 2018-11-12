@@ -3,8 +3,14 @@ package com.ateam.zuml.cinemafinder.database.room.model.movie;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
+
+import com.ateam.zuml.cinemafinder.database.room.ListConverter;
+
+import java.util.List;
 
 @Entity(tableName = "movies")
+@TypeConverters(ListConverter.class)
 public final class MovieEntity {
 
     @PrimaryKey
@@ -17,11 +23,11 @@ public final class MovieEntity {
     private final String releaseDate;
     @ColumnInfo(name = "vote_average")
     private final int voteAverage;
-    private String[] genres;
+    private List<String> genres;
 
     public MovieEntity(final int id, final String title, final String originalTitle,
                        final String posterPath, final String releaseDate, final int voteAverage,
-                       final String[] genres) {
+                       final List<String> genres) {
         this.id = id;
         this.title = title;
         this.originalTitle = originalTitle;
@@ -55,7 +61,7 @@ public final class MovieEntity {
         return voteAverage;
     }
 
-    public String[] getGenres() {
+    public List<String> getGenres() {
         return genres;
     }
 }
