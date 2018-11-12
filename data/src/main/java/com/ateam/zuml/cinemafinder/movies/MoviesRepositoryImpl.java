@@ -82,6 +82,6 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
         final String mappedLanguage = characteristicsMapper.mapLanguage(language);
         return apiService.getMovieInfo(id, mappedLanguage, "")
                 .subscribeOn(Schedulers.io())
-                .map(movieInfo -> movieMapper.mapMovieDetails(movieInfo, logoSize));
+                .map(movieInfo -> movieMapper.mapMovieInfo(movieInfo, logoSize));
     }
 }
