@@ -2,6 +2,8 @@ package com.ateam.zuml.cinemafinder.di.modules;
 
 import com.ateam.zuml.cinemafinder.mapper.CharacteristicsMapper;
 import com.ateam.zuml.cinemafinder.mapper.CharacteristicsMapperImpl;
+import com.ateam.zuml.cinemafinder.mapper.FavoritesMapper;
+import com.ateam.zuml.cinemafinder.mapper.FavoritesMapperImpl;
 import com.ateam.zuml.cinemafinder.mapper.MovieMapper;
 import com.ateam.zuml.cinemafinder.mapper.MovieMapperImpl;
 
@@ -20,4 +22,8 @@ public interface MapperModule {
     @Singleton
     @Binds
     CharacteristicsMapper provideCharacteristicsMapper(final CharacteristicsMapperImpl mapper);
+
+    @Singleton
+    @Binds
+    FavoritesMapper provideFavoritesMapper(final FavoritesMapperImpl mapper);
 }
