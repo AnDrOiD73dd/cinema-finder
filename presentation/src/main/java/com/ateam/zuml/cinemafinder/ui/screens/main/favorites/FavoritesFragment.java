@@ -80,7 +80,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
 
         @Override
         public void onRemoveItemClick(int position) {
-            presenter.onRemoveItemClick(position);
+            presenter.onRemoveItemClicked(position);
         }
     };
 
@@ -105,7 +105,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
     }
 
     @Override
-    public void showLoadingError() {
-        Snackbar.make(rootView, R.string.movie_details_error_message, Snackbar.LENGTH_LONG).show();
+    public void showNotifyingMessage() {
+        Snackbar.make(rootView, R.string.removed_favorite_item, Snackbar.LENGTH_LONG).show();
     }
 }

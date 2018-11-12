@@ -8,5 +8,5 @@ public interface FavoritesView extends MvpView {
 
     void itemRemoved(int position);
 
-    void showLoadingError();
+    void showNotifyingMessage();
 }

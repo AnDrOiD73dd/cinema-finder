@@ -21,4 +21,5 @@
     <string name="category_title_now_playing">В прокате</string>
     <string name="category_title_upcoming">Скоро на экранах</string>
     <string name="content_description_remove_favorite_item">Удалить элемент из списка избранного</string>
+    <string name="removed_favorite_item">Элемент удален из избранного</string>
 </resources>

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
-import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.repository.FavoritesRepository;
@@ -38,7 +37,7 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
 
     @Inject StringUtils stringUtil;
 
-    public FavoritesPresenter() {
+    FavoritesPresenter() {
         this.favoriteListPresenter = new FavoritesListPresenter();
     }
 
@@ -50,19 +49,35 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
 
     @SuppressLint("CheckResult")
     private void loadData() {
-        repository.getAllMovies(LogoSize.W_154)
-                .observeOn(schedulers.ui())
-                .subscribe(movieDetailsModels -> favoriteListPresenter.favoritesList = movieDetailsModels);
+//        repository.getAllMovies(LogoSize.W_154)
+//                .observeOn(schedulers.ui())
+//                .subscribe(movieDetailsModels -> favoriteListPresenter.favoritesList = movieDetailsModels);
+
+        List<MovieDetailsModel> movieDetailsModels = new ArrayList<>();
+        movieDetailsModels.add(new MovieDetailsModel("1", "Название", "Второе название",
+                "2000-01-01", new String[]{"Жанр1", "Жанра2", "Жанр3"}, "5.5",
+                "-", "Дедлайн-боль", "Мы делили апельсин...",
+                "233", "дёшего", "ушли в ноль", "666", true));
+        movieDetailsModels.add(new MovieDetailsModel("1", "Название", "Второе название",
+                "2000-01-01", new String[]{"Жанр1", "Жанра2", "Жанр3"}, "5.5",
+                "-", "Дедлайн-боль", "Мы делили апельсин...",
+                "233", "дёшего", "ушли в ноль", "666", true));
+        movieDetailsModels.add(new MovieDetailsModel("1", "Название", "Второе название",
+                "2000-01-01", new String[]{"Жанр1", "Жанра2", "Жанр3"}, "5.5",
+                "-", "Дедлайн-боль", "Мы делили апельсин...",
+                "233", "дёшего", "ушли в ноль", "666", true));
+        favoriteListPresenter.favoritesList = movieDetailsModels;
         getViewState().updateItemsList();
     }
 
-    public void onItemClicked(int position) {
+    void onItemClicked(int position) {
         globalRouter.navigateTo(new Screens.DetailMovieScreen(favoriteListPresenter.favoritesList
                 .get(position).getId()));
     }
 
-    public void onRemoveItemClick(int position) {
+    void onRemoveItemClicked(int position) {
         favoriteListPresenter.favoritesList.remove(position);
+        getViewState().showNotifyingMessage();
         getViewState().itemRemoved(position);
     }
 
