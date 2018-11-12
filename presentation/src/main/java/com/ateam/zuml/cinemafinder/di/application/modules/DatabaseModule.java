@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.di.application.modules;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.ateam.zuml.cinemafinder.database.room.MovieDatabase;
