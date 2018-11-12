@@ -11,7 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.navigation.CustomNavigator;
@@ -20,17 +21,13 @@ import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.Logger;
-
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.commands.Command;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.List;
 
 public final class AppActivity extends AppCompatActivity implements WidgetTuning {
 
@@ -57,6 +54,7 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
         init();
