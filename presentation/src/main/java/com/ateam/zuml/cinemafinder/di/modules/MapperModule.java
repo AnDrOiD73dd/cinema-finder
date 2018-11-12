@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.di.application.modules;
+package com.ateam.zuml.cinemafinder.di.modules;
 
 import com.ateam.zuml.cinemafinder.mapper.CharacteristicsMapper;
 import com.ateam.zuml.cinemafinder.mapper.CharacteristicsMapperImpl;
