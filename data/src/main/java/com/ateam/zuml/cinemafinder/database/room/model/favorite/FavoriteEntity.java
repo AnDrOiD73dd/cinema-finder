@@ -15,21 +15,23 @@ import com.google.gson.annotations.SerializedName;
 public final class FavoriteEntity {
 
     @PrimaryKey(autoGenerate = true)
-    private final int id;
-
+    private int id;
     @SerializedName("movie_id")
-    private final int movieId;
+    private final String movieId;
 
-    public FavoriteEntity(final int id, final int movieId) {
-        this.id = id;
+    public FavoriteEntity(final String movieId) {
         this.movieId = movieId;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getMovieId() {
+    public String getMovieId() {
         return movieId;
     }
 }

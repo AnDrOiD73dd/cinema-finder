@@ -22,11 +22,11 @@ public final class MovieEntity {
     @ColumnInfo(name = "release_data")
     private final String releaseDate;
     @ColumnInfo(name = "vote_average")
-    private final int voteAverage;
+    private final String voteAverage;
     private List<String> genres;
 
     public MovieEntity(final int id, final String title, final String originalTitle,
-                       final String posterPath, final String releaseDate, final int voteAverage,
+                       final String posterPath, final String releaseDate, final String voteAverage,
                        final List<String> genres) {
         this.id = id;
         this.title = title;
@@ -57,7 +57,7 @@ public final class MovieEntity {
         return releaseDate;
     }
 
-    public int getVoteAverage() {
+    public String getVoteAverage() {
         return voteAverage;
     }
 
