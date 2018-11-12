@@ -25,8 +25,8 @@ import com.ateam.zuml.cinemafinder.database.room.model.movie.ProductionCountries
 
 public abstract class MovieDatabase extends RoomDatabase {
 
-    public abstract MovieDao movieDao();
-    public abstract ConfigDao configDao();
-    public abstract FavoritesDao favoritesDao();
+    public abstract MovieDao getMovieDao();
+    public abstract ConfigDao getConfigDao();
+    public abstract FavoritesDao getFavoritesDao();
 
 }
