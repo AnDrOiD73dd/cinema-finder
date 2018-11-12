@@ -5,6 +5,8 @@ import com.ateam.zuml.cinemafinder.repository.FavoritesRepository;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Completable;
+
 @Singleton
 public final class RemoveFavoriteMovieUseCase {
 
@@ -15,7 +17,7 @@ public final class RemoveFavoriteMovieUseCase {
         this.favoritesRepository = favoritesRepository;
     }
 
-    public void execute()   {
-
+    public Completable execute() {
+        return Completable.complete();
     }
 }
