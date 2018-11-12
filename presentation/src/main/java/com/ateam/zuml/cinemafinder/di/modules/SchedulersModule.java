@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.di.application.modules;
+package com.ateam.zuml.cinemafinder.di.modules;
 
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.SchedulersProviderImpl;

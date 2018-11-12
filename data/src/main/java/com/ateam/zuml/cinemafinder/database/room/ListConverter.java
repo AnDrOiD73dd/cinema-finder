@@ -10,7 +10,7 @@ import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.List;
 
-public class ListConverter {
+public final class ListConverter {
 
     private final Gson gson = new Gson();
 

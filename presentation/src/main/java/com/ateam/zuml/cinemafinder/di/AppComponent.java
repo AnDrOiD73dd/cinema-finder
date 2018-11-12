@@ -1,16 +1,15 @@
-package com.ateam.zuml.cinemafinder.di.application;
+package com.ateam.zuml.cinemafinder.di;
 
 import android.content.Context;
 
-import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.DatabaseModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.FavoritesRepositoryModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.ImageLoaderModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.SchedulersModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.UtilsModule;
+import com.ateam.zuml.cinemafinder.di.modules.DataModule;
+import com.ateam.zuml.cinemafinder.di.modules.DatabaseModule;
+import com.ateam.zuml.cinemafinder.di.modules.ImageLoaderModule;
+import com.ateam.zuml.cinemafinder.di.modules.MapperModule;
+import com.ateam.zuml.cinemafinder.di.modules.NavigationModule;
+import com.ateam.zuml.cinemafinder.di.modules.SchedulersModule;
+import com.ateam.zuml.cinemafinder.di.modules.ServiceModule;
+import com.ateam.zuml.cinemafinder.di.modules.UtilsModule;
 import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMovieFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMoviePresenter;
@@ -39,7 +38,6 @@ import dagger.Component;
         ImageLoaderModule.class,
         UtilsModule.class,
         SchedulersModule.class,
-        FavoritesRepositoryModule.class,
         DatabaseModule.class})
 public interface AppComponent {
 

@@ -17,7 +17,7 @@ public final class RemoveFavoriteMovieUseCase {
         this.favoritesRepository = favoritesRepository;
     }
 
-    public Completable execute(final int movieId) {
+    public Completable execute(final String movieId) {
         return favoritesRepository.removeMovie(movieId);
     }
 }

@@ -17,17 +17,11 @@ import io.reactivex.Single;
 public interface FavoritesDao {
 
     @Query("SELECT * FROM movies WHERE id IN (SELECT movieId FROM favorites);")
-    Single<List<MovieEntity>> getAllMoviesByFavoriteId();
+    Single<List<MovieEntity>> getAllFavoriteMovies();
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insert(FavoriteEntity entity);
-
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertAllMovies(List<FavoriteEntity> entities);
+    void insert(final FavoriteEntity entity);
 
     @Delete
-    void delete(FavoriteEntity entity);
-
-    @Query("DELETE FROM favorites")
-    void deleteAllMovies();
+    void delete(final FavoriteEntity entity);
 }

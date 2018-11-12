@@ -17,7 +17,7 @@ import io.reactivex.Flowable;
 import io.reactivex.Maybe;
 
 @Dao
-public interface MovieDao {
+public interface MoviesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(MovieEntity movie);

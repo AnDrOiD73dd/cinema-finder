@@ -3,8 +3,8 @@ package com.ateam.zuml.cinemafinder;
 import android.app.Application;
 import android.support.v7.app.AppCompatDelegate;
 
-import com.ateam.zuml.cinemafinder.di.application.AppComponent;
-import com.ateam.zuml.cinemafinder.di.application.DaggerAppComponent;
+import com.ateam.zuml.cinemafinder.di.AppComponent;
+import com.ateam.zuml.cinemafinder.di.DaggerAppComponent;
 
 public final class App extends Application {
 

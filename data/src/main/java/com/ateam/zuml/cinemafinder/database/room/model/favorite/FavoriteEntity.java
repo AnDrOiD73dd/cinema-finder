@@ -1,29 +1,37 @@
 package com.ateam.zuml.cinemafinder.database.room.model.favorite;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.ForeignKey;
+import android.arch.persistence.room.Index;
 import android.arch.persistence.room.PrimaryKey;
 
+import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
 import com.google.gson.annotations.SerializedName;
 
-@Entity(tableName = "favorites")
+@Entity(tableName = "favorites",
+        indices = @Index(value = {"movieId"}),
+        foreignKeys = @ForeignKey(entity = MovieEntity.class, parentColumns = "id",
+                childColumns = "movieId", onDelete = ForeignKey.CASCADE))
 public final class FavoriteEntity {
 
-    @PrimaryKey
-    private final int id;
-
+    @PrimaryKey(autoGenerate = true)
+    private int id;
     @SerializedName("movie_id")
-    private final int movieId;
+    private final String movieId;
 
-    public FavoriteEntity(int id, int movieId) {
-        this.id = id;
+    public FavoriteEntity(final String movieId) {
         this.movieId = movieId;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {
         return id;
     }
 
-    public int getMovieId() {
+    public String getMovieId() {
         return movieId;
     }
 }
