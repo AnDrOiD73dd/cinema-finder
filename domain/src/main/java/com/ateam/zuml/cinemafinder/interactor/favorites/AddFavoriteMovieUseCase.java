@@ -1,5 +1,7 @@
 package com.ateam.zuml.cinemafinder.interactor.favorites;
 
+import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.repository.FavoritesRepository;
 
 import javax.inject.Inject;
@@ -17,7 +19,11 @@ public final class AddFavoriteMovieUseCase {
         this.favoritesRepository = favoritesRepository;
     }
 
-    public Completable execute() {
-        return Completable.complete();
+    public Completable execute(final MovieListModel movieListModel) {
+        return favoritesRepository.addMovie(movieListModel);
+    }
+
+    public Completable execute(final MovieDetailsModel movieDetailsModel) {
+        return favoritesRepository.addMovie(movieDetailsModel);
     }
 }

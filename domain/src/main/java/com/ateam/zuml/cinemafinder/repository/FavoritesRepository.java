@@ -1,21 +1,20 @@
 package com.ateam.zuml.cinemafinder.repository;
 
-import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 
 import java.util.List;
 
+import io.reactivex.Completable;
 import io.reactivex.Single;
 
 public interface FavoritesRepository {
 
-    Single<List<MovieDetailsModel>> getAllMovies(final LogoSize logoSize);
+    Single<List<MovieListModel>> getAllMovies();
 
-    void addMovie(MovieDetailsModel movieDetailsModel);
+    Completable addMovie(final MovieListModel movieDetailsModel);
 
-    void addAllMovies(List<MovieDetailsModel> movieDetailsModels);
+    Completable addMovie(final MovieDetailsModel movieDetailsModel);
 
-    void removeMovie(MovieDetailsModel movieDetailsModel);
-
-    void removeAllMovies(List<MovieDetailsModel> movieDetailsModels);
+    Completable removeMovie(final int id);
 }

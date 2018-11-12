@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.interactor.favorites;
 
-import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
+import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.repository.FavoritesRepository;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public final class GetFavoriteMoviesUseCase {
         this.favoritesRepository = favoritesRepository;
     }
 
-    public Single<List<MovieDetailsModel>> execute()   {
-        return null;
+    public Single<List<MovieListModel>> execute() {
+        return favoritesRepository.getAllMovies();
     }
 }
