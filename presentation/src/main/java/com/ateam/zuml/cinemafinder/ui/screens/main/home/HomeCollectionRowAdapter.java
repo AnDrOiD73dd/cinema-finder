@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.common.collection_row;
+package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,19 +10,20 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
+import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
+import com.ateam.zuml.cinemafinder.ui.common.CollectionRowListView;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdapter.ViewHolder>
+public class HomeCollectionRowAdapter extends RecyclerView.Adapter<HomeCollectionRowAdapter.ViewHolder>
         implements CollectionRowListView {
 
     private ImageLoader imageLoader;
     private HomePresenter.RowListPresenter presenter;
 
-    public CollectionRowAdapter(HomePresenter.RowListPresenter presenter, ImageLoader imageLoader) {
+    HomeCollectionRowAdapter(HomePresenter.RowListPresenter presenter, ImageLoader imageLoader) {
         this.presenter = presenter;
         this.imageLoader = imageLoader;
     }
@@ -61,6 +62,7 @@ public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdap
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> onClickRowItem());
+            toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> onFavoritesClick(isChecked));
         }
 
         @Override
@@ -94,6 +96,10 @@ public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdap
 
         void onClickRowItem() {
             presenter.onClickedRowItem(getAdapterPosition());
+        }
+
+        void onFavoritesClick(boolean isChecked) {
+            presenter.onFavoritesClicked(isChecked, getAdapterPosition());
         }
     }
 }

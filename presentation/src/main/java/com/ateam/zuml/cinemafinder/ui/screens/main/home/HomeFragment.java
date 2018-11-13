@@ -21,7 +21,6 @@ import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
-import com.ateam.zuml.cinemafinder.ui.common.collection_row.CollectionRowAdapter;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
@@ -31,8 +30,8 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment implements HomeView, BackButtonListener {
 
-    private CollectionRowAdapter nowPlayingAdapter;
-    private CollectionRowAdapter upcomingAdapter;
+    private HomeCollectionRowAdapter nowPlayingAdapter;
+    private HomeCollectionRowAdapter upcomingAdapter;
 
     @BindView(R.id.home_root) LinearLayout rootView;
     @BindView(R.id.tv_now_playing_row_name) TextView nowPlayingTitleView;
@@ -73,11 +72,11 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     private void init(View v) {
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, v);
-        nowPlayingAdapter = new CollectionRowAdapter(presenter.getNowPlayingPresenter(), imageLoader);
-        upcomingAdapter = new CollectionRowAdapter(presenter.getUpcomingPresenter(), imageLoader);
+        nowPlayingAdapter = new HomeCollectionRowAdapter(presenter.getNowPlayingPresenter(), imageLoader);
+        upcomingAdapter = new HomeCollectionRowAdapter(presenter.getUpcomingPresenter(), imageLoader);
     }
 
-    private void setupRecyclerView(RecyclerView recyclerView, CollectionRowAdapter adapter) {
+    private void setupRecyclerView(RecyclerView recyclerView, HomeCollectionRowAdapter adapter) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);
@@ -89,8 +88,7 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
         inflater.inflate(R.menu.menu_main, menu);
     }
 
-    // ######################################## HomeView #########################################
-
+    //region ### HomeView ###
     @Override
     public void updateNowPlayingRow() {
         nowPlayingAdapter.refreshView();
@@ -136,15 +134,16 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     }
 
     @Override
-    public void showError() {
-        Snackbar.make(rootView, R.string.collection_row_error_message, Snackbar.LENGTH_LONG).show();
+    public void showNotifyingMessage(String msg) {
+        Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG).show();
     }
+    //endregion
 
-    // #################################### BackButtonListener ###################################
-
+    //region ### BackButtonListener ###
     @Override
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
     }
+    //endregion
 }

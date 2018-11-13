@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.common.collection_row.CollectionRowCardView;
-import com.ateam.zuml.cinemafinder.ui.common.collection_row.CollectionRowListView;
+import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
+import com.ateam.zuml.cinemafinder.ui.common.CollectionRowListView;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import butterknife.BindView;

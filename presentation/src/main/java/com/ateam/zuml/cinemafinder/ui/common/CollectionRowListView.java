@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.common.collection_row;
+package com.ateam.zuml.cinemafinder.ui.common;
 
 public interface CollectionRowListView {
     void refreshView();

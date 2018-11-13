@@ -12,7 +12,7 @@ import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
-import com.ateam.zuml.cinemafinder.ui.common.collection_row.CollectionRowCardView;
+import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 
@@ -191,6 +191,7 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
             view.setTitle(movieListModel.getTitle());
             view.setVoteAverage(movieListModel.getVoteAverage());
             view.setReleaseDate(movieListModel.getReleaseYear());
+            view.setToggleFavorites(false);
         }
 
         int getCollectionItems() {
