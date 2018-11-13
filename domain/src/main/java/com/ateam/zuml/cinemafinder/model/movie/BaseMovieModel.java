@@ -11,10 +11,11 @@ public abstract class BaseMovieModel {
     private final String[] genres;
     private final String voteAverage;
     private final String posterPath;
+    private final boolean isFavorite;
 
     BaseMovieModel(final String id, final String title, final String originalTitle,
                    final String releaseDate, final String[] genres, final String voteAverage,
-                   final String posterPath) {
+                   final String posterPath, boolean isFavorite) {
         this.id = id;
         this.title = title;
         this.originalTitle = originalTitle;
@@ -22,6 +23,7 @@ public abstract class BaseMovieModel {
         this.genres = genres;
         this.voteAverage = voteAverage;
         this.posterPath = posterPath;
+        this.isFavorite = isFavorite;
     }
 
     public String getId() {
@@ -62,6 +64,10 @@ public abstract class BaseMovieModel {
 
     public String getPosterPath() {
         return posterPath;
+    }
+
+    public boolean isFavorite() {
+        return isFavorite;
     }
 
     private String getPartOfReleaseDate(int part) {
