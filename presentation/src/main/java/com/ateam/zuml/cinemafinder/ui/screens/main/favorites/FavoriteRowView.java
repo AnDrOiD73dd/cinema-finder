@@ -1,6 +1,6 @@
-package com.ateam.zuml.cinemafinder.ui.screens.search;
+package com.ateam.zuml.cinemafinder.ui.screens.main.favorites;
 
-public interface SearchRowView {
+public interface FavoriteRowView {
 
     void setPoster(String posterPath);
 
@@ -13,6 +13,4 @@ public interface SearchRowView {
     void setGenres(String genres);
 
     void setVoteAverage(String voteAverage);
-
-    void setToggleFavorites(boolean isFavorite);
 }

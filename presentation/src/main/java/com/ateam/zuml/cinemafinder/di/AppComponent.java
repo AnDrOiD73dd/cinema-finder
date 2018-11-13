@@ -1,19 +1,21 @@
-package com.ateam.zuml.cinemafinder.di.application;
+package com.ateam.zuml.cinemafinder.di;
 
 import android.content.Context;
 
-import com.ateam.zuml.cinemafinder.di.application.modules.DataModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.ImageLoaderModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.MapperModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.NavigationModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.SchedulersModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.ServiceModule;
-import com.ateam.zuml.cinemafinder.di.application.modules.UtilsModule;
+import com.ateam.zuml.cinemafinder.di.modules.DataModule;
+import com.ateam.zuml.cinemafinder.di.modules.DatabaseModule;
+import com.ateam.zuml.cinemafinder.di.modules.ImageLoaderModule;
+import com.ateam.zuml.cinemafinder.di.modules.MapperModule;
+import com.ateam.zuml.cinemafinder.di.modules.NavigationModule;
+import com.ateam.zuml.cinemafinder.di.modules.SchedulersModule;
+import com.ateam.zuml.cinemafinder.di.modules.ServiceModule;
+import com.ateam.zuml.cinemafinder.di.modules.UtilsModule;
 import com.ateam.zuml.cinemafinder.ui.AppActivity;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMovieFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.details.DetailMoviePresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.MainContainerPresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomeFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
@@ -35,7 +37,8 @@ import dagger.Component;
         ServiceModule.class,
         ImageLoaderModule.class,
         UtilsModule.class,
-        SchedulersModule.class})
+        SchedulersModule.class,
+        DatabaseModule.class})
 public interface AppComponent {
 
     @Component.Builder
@@ -45,22 +48,25 @@ public interface AppComponent {
 
         @BindsInstance
         Builder with(final Context context);
-
     }
 
     void inject(AppActivity activity);
 
-    void inject(MainContainerFragment fragment);
+    void inject(DetailMovieFragment fragment);
 
-    void inject(MainContainerPresenter presenter);
+    void inject(DetailMoviePresenter presenter);
 
-    void inject(SettingsFragment fragment);
+    void inject(FavoritesFragment fragment);
+
+    void inject(FavoritesPresenter presenter);
 
     void inject(HomeFragment fragment);
 
     void inject(HomePresenter presenter);
 
-    void inject(FavoritesPresenter presenter);
+    void inject(MainContainerFragment fragment);
+
+    void inject(MainContainerPresenter presenter);
 
     void inject(RatingsPresenter presenter);
 
@@ -68,7 +74,5 @@ public interface AppComponent {
 
     void inject(SearchResponsePresenter presenter);
 
-    void inject(DetailMovieFragment fragment);
-
-    void inject(DetailMoviePresenter presenter);
+    void inject(SettingsFragment fragment);
 }

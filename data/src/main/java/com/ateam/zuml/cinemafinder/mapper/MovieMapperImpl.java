@@ -1,13 +1,16 @@
 package com.ateam.zuml.cinemafinder.mapper;
 
+import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
+import com.ateam.zuml.cinemafinder.model.movie.BaseMovieModel;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieInfo;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MovieResult;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -52,7 +55,7 @@ public final class MovieMapperImpl implements MovieMapper {
     }
 
     @Override
-    public MovieDetailsModel mapMovieDetails(final MovieInfo movieInfo, final LogoSize logoSize) {
+    public MovieDetailsModel mapMovieInfo(final MovieInfo movieInfo, final LogoSize logoSize) {
         final String id = String.valueOf(movieInfo.getId());
         final String title = movieInfo.getTitle();
         final String originalTitle = movieInfo.getOriginalTitle();
@@ -72,5 +75,54 @@ public final class MovieMapperImpl implements MovieMapper {
 
         return new MovieDetailsModel(id, title, originalTitle, releaseDate, genres, voteAverage,
                 posterPath, tagline, overview, runtime, budget, revenue, voteCount, adult);
+    }
+
+    @Override
+    public List<MovieListModel> mapMovieEntities(final List<MovieEntity> movieEntities) {
+        final List<MovieListModel> movieListModels = new ArrayList<>(movieEntities.size());
+        for (final MovieEntity movieEntity : movieEntities) {
+            movieListModels.add(mapMovieEntity(movieEntity));
+        }
+        return movieListModels;
+    }
+
+    @Override
+    public MovieListModel mapMovieEntity(final MovieEntity movieEntity) {
+        final String id = String.valueOf(movieEntity.getId());
+        final String title = movieEntity.getTitle();
+        final String originalTitle = movieEntity.getOriginalTitle();
+        final String releaseDate = movieEntity.getReleaseDate();
+        final String[] genres = getGenres(movieEntity.getGenres());
+        final String voteAverage = movieEntity.getVoteAverage();
+        final String posterPath = movieEntity.getPosterPath();
+
+        return new MovieListModel(id, title, originalTitle, releaseDate, genres, voteAverage, posterPath);
+    }
+
+    private String[] getGenres(final List<String> genres) {
+        final String[] result = new String[genres.size()];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = genres.get(i);
+        }
+        return result;
+    }
+
+    @Override
+    public MovieEntity mapMovieModel(final BaseMovieModel movieModel) {
+        final int id = Integer.parseInt(movieModel.getId());
+        final String title = movieModel.getTitle();
+        final String originalTitle = movieModel.getOriginalTitle();
+        final String releaseDate = movieModel.getReleaseDate();
+        final List<String> genres = Arrays.asList(movieModel.getGenres());
+        final String voteAverage = movieModel.getVoteAverage();
+        final String posterPath = getPosterPath(movieModel.getPosterPath());
+
+        return new MovieEntity(id, title, originalTitle, posterPath, releaseDate, voteAverage, genres);
+    }
+
+    private String getPosterPath(final String path) {
+        final String[] splitPath = path.split("/");
+        final String logoPath = "/" + splitPath[splitPath.length - 1];
+        return characteristicsMapper.mapLogoSizeToPath(LogoSize.W_154, logoPath);
     }
 }

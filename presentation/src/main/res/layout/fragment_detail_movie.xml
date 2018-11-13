@@ -75,7 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/movie_details_delimiter_margin"
-            android:src="@drawable/ic_star"
+            app:srcCompat="@drawable/ic_star"
             app:layout_constraintStart_toEndOf="@id/tv_movie_vote_count"
             app:layout_constraintTop_toBottomOf="@id/tv_movie_runtime" />
 

@@ -94,6 +94,11 @@ public class SearchResponseFragment extends BaseFragment
         presenter.onItemClicked(position);
     }
 
+    @Override
+    public void onFavoritesClick(boolean isChecked, int position) {
+        presenter.onFavoritesClicked(isChecked, position);
+    }
+
     // #################################### SearchResponseView ###################################
 
     @Override
@@ -121,6 +126,11 @@ public class SearchResponseFragment extends BaseFragment
     @Override
     public void showError() {
         Snackbar.make(rootView, R.string.search_response_error_message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showNotifyingMessage(String msg) {
+        Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
