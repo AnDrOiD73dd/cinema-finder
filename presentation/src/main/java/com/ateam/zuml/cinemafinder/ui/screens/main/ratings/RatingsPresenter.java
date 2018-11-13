@@ -216,8 +216,11 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
                 useCaseAddFavoriteMovie
                         .execute(movieList.get(position))
                         .observeOn(schedulers.ui())
-                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+                        .subscribe(() -> {
+                                },
                                 throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
+//                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+//                            throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
             } else {
                 useCaseRemoveFavoriteMovie
                         .execute(movieList.get(position).getId())
