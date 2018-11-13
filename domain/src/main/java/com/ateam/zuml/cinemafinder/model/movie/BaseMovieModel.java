@@ -15,7 +15,7 @@ public abstract class BaseMovieModel {
 
     BaseMovieModel(final String id, final String title, final String originalTitle,
                    final String releaseDate, final String[] genres, final String voteAverage,
-                   final String posterPath, boolean isFavorite) {
+                   final String posterPath, final boolean isFavorite) {
         this.id = id;
         this.title = title;
         this.originalTitle = originalTitle;

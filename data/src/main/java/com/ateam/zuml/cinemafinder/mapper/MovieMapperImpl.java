@@ -26,7 +26,7 @@ public final class MovieMapperImpl implements MovieMapper {
     private final FavoritesDao favoritesDao;
 
     @Inject
-    MovieMapperImpl(final CharacteristicsMapper characteristicsMapper, FavoritesDao favoritesDao) {
+    MovieMapperImpl(final CharacteristicsMapper characteristicsMapper, final FavoritesDao favoritesDao) {
         this.characteristicsMapper = characteristicsMapper;
         this.favoritesDao = favoritesDao;
     }
