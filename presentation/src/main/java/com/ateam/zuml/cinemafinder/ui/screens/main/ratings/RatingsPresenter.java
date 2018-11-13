@@ -6,7 +6,10 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
 import com.ateam.zuml.cinemafinder.interactor.favorites.RemoveFavoriteMovieUseCase;
-import com.ateam.zuml.cinemafinder.interactor.movie.GetPopularMoviesUseCase;
+import com.ateam.zuml.cinemafinder.interactor.movie.ratings.GetActionRatingsUseCase;
+import com.ateam.zuml.cinemafinder.interactor.movie.ratings.GetAnimationRatingsUseCase;
+import com.ateam.zuml.cinemafinder.interactor.movie.ratings.GetComedyRatingsUseCase;
+import com.ateam.zuml.cinemafinder.interactor.movie.ratings.GetTopRatingsUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
@@ -41,7 +44,10 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
     @Inject
     Router globalRouter;
 
-    @Inject GetPopularMoviesUseCase useCase;
+    @Inject GetTopRatingsUseCase useCaseGetTopRatings;
+    @Inject GetActionRatingsUseCase useCaseGetActionRatings;
+    @Inject GetComedyRatingsUseCase useCaseGetComedyRatings;
+    @Inject GetAnimationRatingsUseCase useCaseGetAnimationRatings;
     @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
     @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
     @Inject SchedulersProvider schedulers;
@@ -66,7 +72,7 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
     @SuppressLint("CheckResult")
     private void loadTopMoviesData() {
         getViewState().showTopMoviesLoading();
-        useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+        useCaseGetTopRatings.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
                 .subscribe(this::onTopMoviesLoadSuccess, throwable -> onTopMoviesLoadFailed());
     }
@@ -74,7 +80,7 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
     @SuppressLint("CheckResult")
     private void loadTopActionsData() {
         getViewState().showTopActionsLoading();
-        useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+        useCaseGetActionRatings.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
                 .subscribe(this::onTopActionsLoadSuccess, throwable -> onTopActionsLoadFailed());
     }
@@ -82,7 +88,7 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
     @SuppressLint("CheckResult")
     private void loadTopComediesData() {
         getViewState().showTopComediesLoading();
-        useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+        useCaseGetComedyRatings.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
                 .subscribe(this::onTopComediesLoadSuccess, throwable -> onTopComediesLoadFailed());
     }
@@ -90,7 +96,7 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
     @SuppressLint("CheckResult")
     private void loadTopAnimationsData() {
         getViewState().showTopAnimationsLoading();
-        useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
+        useCaseGetAnimationRatings.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
                 .subscribe(this::onTopAnimationsLoadSuccess, throwable -> onTopAnimationsLoadFailed());
     }
