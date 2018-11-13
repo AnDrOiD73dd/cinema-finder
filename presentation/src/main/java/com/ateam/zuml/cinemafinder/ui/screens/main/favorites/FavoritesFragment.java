@@ -3,16 +3,13 @@ package com.ateam.zuml.cinemafinder.ui.screens.main.favorites;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
+import android.view.*;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
@@ -23,14 +20,11 @@ import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-
 public class FavoritesFragment extends BaseFragment implements FavoritesView, BackButtonListener {
 
     private FavoritesListAdapter adapter;
 
-    @BindView(R.id.favorite_root) ConstraintLayout rootView;
+    @BindView(R.id.favorite_root) CoordinatorLayout rootView;
     @BindView(R.id.rv_favorites_list) RecyclerView favoritesListView;
 
     @Inject ImageLoader imageLoader;
