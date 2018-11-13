@@ -31,7 +31,7 @@
             android:layout_height="@dimen/search_favorite_icon_size"
             android:layout_marginTop="@dimen/movie_card_layout_margin"
             android:layout_marginEnd="@dimen/movie_card_layout_margin"
-            android:background="@drawable/favorite_ripple"
+            android:background="@drawable/favorite_color_ripple"
             android:textOff=""
             android:textOn=""
             app:layout_constraintEnd_toEndOf="parent"

@@ -95,7 +95,7 @@
             android:layout_width="@dimen/search_favorite_icon_size"
             android:layout_height="@dimen/search_favorite_icon_size"
             android:layout_marginEnd="@dimen/movie_card_layout_margin"
-            android:background="@drawable/check_favorites"
+            android:background="@drawable/favorite_gray_ripple"
             android:textOff=""
             android:textOn=""
             app:layout_constraintBottom_toBottomOf="parent"
