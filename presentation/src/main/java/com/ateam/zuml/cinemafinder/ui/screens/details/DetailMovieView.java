@@ -8,7 +8,9 @@ public interface DetailMovieView extends MvpView {
 
     void hideLoading();
 
-    void showError();
+    void showNotifyingMessage(String msg);
+
+    void setToggleFavorites(boolean isFavorite);
 
     void setPoster(String imagePath);
 

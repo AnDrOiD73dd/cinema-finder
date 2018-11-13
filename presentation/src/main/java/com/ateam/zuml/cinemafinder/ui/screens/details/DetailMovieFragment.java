@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
@@ -32,6 +33,7 @@ public final class DetailMovieFragment extends BaseFragment implements DetailMov
     public static final String KEY_MOVIE_ID = "key_movie_id";
 
     @BindView(R.id.movie_detail_root) ConstraintLayout rootView;
+    @BindView(R.id.tb_movie_detail) ToggleButton toggleFavorites;
     @BindView(R.id.tv_movie_title) TextView titleView;
     @BindView(R.id.tv_movie_subtitle) TextView subTitleView;
     @BindView(R.id.iv_movie_poster) AppCompatImageView posterView;
@@ -80,14 +82,18 @@ public final class DetailMovieFragment extends BaseFragment implements DetailMov
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail_movie, container, false);
-        App.getApp().getAppComponent().inject(this);
-        ButterKnife.bind(this, view);
+        init(view);
         setupToolbar(R.string.movie_detail, true);
         return view;
     }
 
-    // #################################### DetailMovieView ######################################
+    private void init(View view) {
+        App.getApp().getAppComponent().inject(this);
+        ButterKnife.bind(this, view);
+        toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> presenter.onFavoritesClick(isChecked));
+    }
 
+    //region ### DetailMovieView ###
     @Override
     public void showLoading() {
         progressBarView.setVisibility(View.VISIBLE);
@@ -99,8 +105,17 @@ public final class DetailMovieFragment extends BaseFragment implements DetailMov
     }
 
     @Override
-    public void showError() {
-        Snackbar.make(rootView, R.string.movie_details_error_message, Snackbar.LENGTH_LONG).show();
+    public void showNotifyingMessage(String msg) {
+        Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setToggleFavorites(boolean isFavorite) {
+        if (isFavorite) {
+            toggleFavorites.setChecked(true);
+        } else {
+            toggleFavorites.setChecked(false);
+        }
     }
 
     @Override
@@ -173,12 +188,13 @@ public final class DetailMovieFragment extends BaseFragment implements DetailMov
     public void setOverview(String overviewText) {
         descriptionView.setText(overviewText);
     }
+    //endregion
 
-    // #################################### BackButtonListener ####################################
-
+    //region ### BackButtonListener ###
     @Override
     public boolean onBackPressed() {
         presenter.onBackPressed();
         return true;
     }
+    //endregion
 }
