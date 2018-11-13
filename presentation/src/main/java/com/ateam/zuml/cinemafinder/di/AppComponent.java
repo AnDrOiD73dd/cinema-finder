@@ -19,6 +19,7 @@ import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomeFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.ratings.RatingsFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.ratings.RatingsPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponseFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponsePresenter;
@@ -67,6 +68,8 @@ public interface AppComponent {
     void inject(MainContainerFragment fragment);
 
     void inject(MainContainerPresenter presenter);
+
+    void inject(RatingsFragment fragment);
 
     void inject(RatingsPresenter presenter);
 
