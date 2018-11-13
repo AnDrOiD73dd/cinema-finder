@@ -158,7 +158,7 @@ public interface ApiService {
      * &sort_by=vote_average.desc&page=1&vote_count.gte=5&with_genres=28
      *
      */
-    @GET("movie/top_rated?api_key=" + ACCESS_TOKEN + "&sort_by=vote_average.desc&vote_count.gte=10")
+    @GET("discover/movie?api_key=" + ACCESS_TOKEN + "&sort_by=vote_average.desc&vote_count.gte=10")
     Single<MoviesList> getTopRatedByGenreMovies(@Query("language") String language,
                                                          @Query("page") String page,
                                                          @Query("region") String region,
