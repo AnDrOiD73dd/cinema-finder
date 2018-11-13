@@ -14,6 +14,7 @@ import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
 import com.ateam.zuml.cinemafinder.util.Constants;
+import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
     @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
     @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
     @Inject SchedulersProvider schedulers;
+    @Inject ResourceManager resource;
 
     RatingsPresenter() {
         this.firstPresenter = new RatingsRowListPresenter();
