@@ -12,10 +12,10 @@ public final class MovieDetailsModel extends BaseMovieModel {
 
     public MovieDetailsModel(final String id, final String title, final String originalTitle,
                              final String releaseDate, final String[] genres, final String voteAverage,
-                             final String posterPath, final String tagline, final String overview,
-                             final String runtime, final String budget, final String revenue,
-                             final String voteCount, final boolean adult) {
-        super(id, title, originalTitle, releaseDate, genres, voteAverage, posterPath);
+                             final String posterPath, final boolean isFavorite, final String tagline,
+                             final String overview, final String runtime, final String budget,
+                             final String revenue, final String voteCount, final boolean adult) {
+        super(id, title, originalTitle, releaseDate, genres, voteAverage, posterPath, isFavorite);
         this.tagline = tagline;
         this.overview = overview;
         this.runtime = runtime;

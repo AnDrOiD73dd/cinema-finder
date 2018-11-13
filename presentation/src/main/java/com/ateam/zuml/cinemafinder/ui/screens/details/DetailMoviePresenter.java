@@ -61,7 +61,7 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     private void onLoadSuccess(MovieDetailsModel movieDetailsModel) {
         this.currentMovie = movieDetailsModel;
         getViewState().hideLoading();
-        getViewState().setToggleFavorites(false);
+        getViewState().setToggleFavorites(movieDetailsModel.isFavorite());
         getViewState().setTitle(movieDetailsModel.getTitle());
         getViewState().setSubTitle(String.format(Locale.getDefault(), "%s (%s)",
                 movieDetailsModel.getOriginalTitle(), movieDetailsModel.getReleaseYear()));
@@ -89,11 +89,14 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
             useCaseAddFavoriteMovie
                     .execute(currentMovie)
                     .observeOn(schedulers.ui())
-                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+                    .subscribe(() -> {
+                            },
                             throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
+//                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+//                            throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
         } else {
             useCaseRemoveFavoriteMovie
-                    .execute(movieId)
+                    .execute(currentMovie.getId())
                     .observeOn(schedulers.ui())
                     .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
                             throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));

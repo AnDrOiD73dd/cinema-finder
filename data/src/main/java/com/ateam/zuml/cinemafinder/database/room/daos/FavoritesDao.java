@@ -19,6 +19,9 @@ public interface FavoritesDao {
     @Query("SELECT * FROM movies WHERE id IN (SELECT movieId FROM favorites);")
     Single<List<MovieEntity>> getAllFavoriteMovies();
 
+    @Query("SELECT * FROM favorites WHERE movieId = :movieId;")
+    FavoriteEntity getFavoriteMovie(final String movieId);
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(final FavoriteEntity entity);
 

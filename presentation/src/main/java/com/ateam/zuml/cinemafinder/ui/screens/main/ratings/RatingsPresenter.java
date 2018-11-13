@@ -199,7 +199,7 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
             view.setTitle(movieListModel.getTitle());
             view.setVoteAverage(movieListModel.getVoteAverage());
             view.setReleaseDate(movieListModel.getReleaseYear());
-            view.setToggleFavorites(false);
+            view.setToggleFavorites(movieListModel.isFavorite());
         }
 
         int getCollectionItems() {
@@ -216,8 +216,11 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
                 useCaseAddFavoriteMovie
                         .execute(movieList.get(position))
                         .observeOn(schedulers.ui())
-                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+                        .subscribe(() -> {
+                                },
                                 throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
+//                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+//                            throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
             } else {
                 useCaseRemoveFavoriteMovie
                         .execute(movieList.get(position).getId())

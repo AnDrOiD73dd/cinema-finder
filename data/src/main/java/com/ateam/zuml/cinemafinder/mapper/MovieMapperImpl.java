@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.mapper;
 
+import com.ateam.zuml.cinemafinder.database.room.daos.FavoritesDao;
 import com.ateam.zuml.cinemafinder.database.room.model.movie.MovieEntity;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
@@ -22,10 +23,12 @@ import static com.ateam.zuml.cinemafinder.utils.CommonConstants.EMPTY_STRING;
 public final class MovieMapperImpl implements MovieMapper {
 
     private final CharacteristicsMapper characteristicsMapper;
+    private final FavoritesDao favoritesDao;
 
     @Inject
-    MovieMapperImpl(final CharacteristicsMapper characteristicsMapper) {
+    MovieMapperImpl(final CharacteristicsMapper characteristicsMapper, final FavoritesDao favoritesDao) {
         this.characteristicsMapper = characteristicsMapper;
+        this.favoritesDao = favoritesDao;
     }
 
     @Override
@@ -50,8 +53,10 @@ public final class MovieMapperImpl implements MovieMapper {
                 String.valueOf(movieResult.getVoteAverage());
         final String posterPath = movieResult.getPosterPath() == null ? EMPTY_STRING :
                 characteristicsMapper.mapLogoSizeToPath(logoSize, movieResult.getPosterPath());
+        final boolean isFavorite = favoritesDao.getFavoriteMovie(id) != null;
 
-        return new MovieListModel(id, title, originalTitle, releaseDate, genres, voteAverage, posterPath);
+        return new MovieListModel(id, title, originalTitle, releaseDate, genres, voteAverage,
+                posterPath, isFavorite);
     }
 
     @Override
@@ -65,6 +70,7 @@ public final class MovieMapperImpl implements MovieMapper {
                 String.valueOf(movieInfo.getVoteAverage());
         final String posterPath = movieInfo.getPosterPath() == null ? EMPTY_STRING :
                 characteristicsMapper.mapLogoSizeToPath(logoSize, movieInfo.getPosterPath());
+        final boolean isFavorite = favoritesDao.getFavoriteMovie(id) != null;
         final String tagline = movieInfo.getTagline() == null ? EMPTY_STRING : movieInfo.getTagline();
         final String overview = movieInfo.getOverview() == null ? EMPTY_STRING : movieInfo.getOverview();
         final String runtime = movieInfo.getRuntime() == 0 ? EMPTY_STRING : String.valueOf(movieInfo.getRuntime());
@@ -74,7 +80,7 @@ public final class MovieMapperImpl implements MovieMapper {
         final boolean adult = movieInfo.isAdult();
 
         return new MovieDetailsModel(id, title, originalTitle, releaseDate, genres, voteAverage,
-                posterPath, tagline, overview, runtime, budget, revenue, voteCount, adult);
+                posterPath, isFavorite, tagline, overview, runtime, budget, revenue, voteCount, adult);
     }
 
     @Override
@@ -95,8 +101,10 @@ public final class MovieMapperImpl implements MovieMapper {
         final String[] genres = getGenres(movieEntity.getGenres());
         final String voteAverage = movieEntity.getVoteAverage();
         final String posterPath = movieEntity.getPosterPath();
+        final boolean isFavorite = favoritesDao.getFavoriteMovie(id) != null;
 
-        return new MovieListModel(id, title, originalTitle, releaseDate, genres, voteAverage, posterPath);
+        return new MovieListModel(id, title, originalTitle, releaseDate, genres, voteAverage,
+                posterPath, isFavorite);
     }
 
     private String[] getGenres(final List<String> genres) {

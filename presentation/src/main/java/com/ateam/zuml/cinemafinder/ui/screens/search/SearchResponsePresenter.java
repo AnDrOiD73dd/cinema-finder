@@ -87,8 +87,11 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             useCaseAddFavoriteMovie
                     .execute(listPresenter.searchList.get(position))
                     .observeOn(schedulers.ui())
-                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+                    .subscribe(() -> {
+                            },
                             throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
+//                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+//                            throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
         } else {
             useCaseRemoveFavoriteMovie
                     .execute(listPresenter.searchList.get(position).getId())
@@ -123,7 +126,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
             view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
             view.setVoteAverage(movieListModel.getVoteAverage());
-            view.setToggleFavorites(false);
+            view.setToggleFavorites(movieListModel.isFavorite());
         }
 
         int getSearchCount() {
