@@ -197,8 +197,8 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
     }
 
     @Override
-    public void showError() {
-        Snackbar.make(rootView, R.string.collection_row_error_message, Snackbar.LENGTH_LONG).show();
+    public void showNotifyingMessage(String msg) {
+        Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG).show();
     }
     //endregion
 

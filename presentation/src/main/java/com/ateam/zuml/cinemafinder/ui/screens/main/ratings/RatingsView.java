@@ -36,5 +36,5 @@ public interface RatingsView extends MvpView {
 
     void showNoInFourth();
 
-    void showError();
+    void showNotifyingMessage(String msg);
 }

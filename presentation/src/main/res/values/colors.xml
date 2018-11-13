@@ -7,9 +7,9 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="gray300">#E0E0E0</color>
     <color name="gray500">#9E9E9E</color>
     <color name="gray550">#818181</color>
     <color name="purple500">#6200EE</color>
     <color name="amber500">#FFC107</color>
-    <color name="red500">#F44336</color>
 </resources>

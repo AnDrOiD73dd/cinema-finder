@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.ui.common.collection_row.CollectionRowCardView;
@@ -55,21 +56,18 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
         @BindView(R.id.tv_card_title) TextView titleView;
         @BindView(R.id.tv_release_date_home_list) TextView releaseDateView;
         @BindView(R.id.tv_vote_average_home_list) TextView voteAverageView;
+        @BindView(R.id.tb_card_favorites) ToggleButton toggleFavorites;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> onClickRowItem());
+            toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> onFavoritesClick(isChecked));
         }
 
         @Override
         public void setPoster(String posterPath) {
             imageLoader.loadInto(posterPath, posterView);
-        }
-
-        @Override
-        public void setPosterPlaceholder() {
-            imageLoader.loadInto("-", posterView);
         }
 
         @Override
@@ -87,8 +85,21 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
             this.voteAverageView.setText(voteAverage);
         }
 
+        @Override
+        public void setToggleFavorites(boolean isFavorite) {
+            if (isFavorite) {
+                toggleFavorites.setChecked(true);
+            } else {
+                toggleFavorites.setChecked(false);
+            }
+        }
+
         void onClickRowItem() {
             presenter.onClickedRowItem(getAdapterPosition());
+        }
+
+        void onFavoritesClick(boolean isChecked) {
+            presenter.onFavoritesClicked(isChecked, getAdapterPosition());
         }
     }
 }

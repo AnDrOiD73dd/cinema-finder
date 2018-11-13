@@ -131,11 +131,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
         public void bindViewAt(CollectionRowCardView view, int position) {
             MovieListModel movieListModel = movieList.get(position);
-            if (movieListModel.getPosterPath().isEmpty()) {
-                view.setPosterPlaceholder();
-            } else {
-                view.setPoster(movieListModel.getPosterPath());
-            }
+            view.setPoster(movieListModel.getPosterPath());
             view.setTitle(movieListModel.getTitle());
             view.setVoteAverage(movieListModel.getVoteAverage());
             view.setReleaseDate(movieListModel.getReleaseYear());

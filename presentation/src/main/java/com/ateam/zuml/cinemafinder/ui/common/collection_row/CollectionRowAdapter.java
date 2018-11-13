@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
@@ -54,6 +55,7 @@ public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdap
         @BindView(R.id.tv_card_title) TextView titleView;
         @BindView(R.id.tv_release_date_home_list) TextView releaseDateView;
         @BindView(R.id.tv_vote_average_home_list) TextView voteAverageView;
+        @BindView(R.id.tb_card_favorites) ToggleButton toggleFavorites;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,11 +66,6 @@ public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdap
         @Override
         public void setPoster(String posterPath) {
             imageLoader.loadInto(posterPath, posterView);
-        }
-
-        @Override
-        public void setPosterPlaceholder() {
-            imageLoader.loadInto("-", posterView);
         }
 
         @Override
@@ -84,6 +81,15 @@ public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdap
         @Override
         public void setVoteAverage(String voteAverage) {
             this.voteAverageView.setText(voteAverage);
+        }
+
+        @Override
+        public void setToggleFavorites(boolean isFavorite) {
+            if (isFavorite) {
+                toggleFavorites.setChecked(true);
+            } else {
+                toggleFavorites.setChecked(false);
+            }
         }
 
         void onClickRowItem() {

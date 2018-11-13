@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
+import com.ateam.zuml.cinemafinder.interactor.favorites.RemoveFavoriteMovieUseCase;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetPopularMoviesUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
@@ -39,6 +41,8 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
     Router globalRouter;
 
     @Inject GetPopularMoviesUseCase useCase;
+    @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
+    @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
     @Inject SchedulersProvider schedulers;
 
     RatingsPresenter() {
@@ -125,28 +129,32 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
         }
     }
 
+    //TODO 13.11.2018 add resources class
     private void onFirstLoadFailed() {
         getViewState().hideFirstLoading();
         getViewState().showNoInFirst();
-        getViewState().showError();
+        getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
+    //TODO 13.11.2018 add resources class
     private void onSecondLoadFailed() {
         getViewState().hideSecondLoading();
         getViewState().showNoInSecond();
-        getViewState().showError();
+        getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
+    //TODO 13.11.2018 add resources class
     private void onThirdLoadFailed() {
         getViewState().hideThirdLoading();
         getViewState().showNoInThird();
-        getViewState().showError();
+        getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
+    //TODO 13.11.2018 add resources class
     private void onFourthLoadFailed() {
         getViewState().hideFourthLoading();
         getViewState().showNoInFourth();
-        getViewState().showError();
+        getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
     public void onBackPressed() {
@@ -169,7 +177,7 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
         return fourthPresenter;
     }
 
-    public final class RatingsRowListPresenter {
+    final class RatingsRowListPresenter {
 
         private List<MovieListModel> movieList;
 
@@ -177,24 +185,38 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
             this.movieList = new ArrayList<>();
         }
 
-        public void bindViewAt(CollectionRowCardView view, int position) {
+        void bindViewAt(CollectionRowCardView view, int position) {
             MovieListModel movieListModel = movieList.get(position);
-            if (movieListModel.getPosterPath().isEmpty()) {
-                view.setPosterPlaceholder();
-            } else {
-                view.setPoster(movieListModel.getPosterPath());
-            }
+            view.setPoster(movieListModel.getPosterPath());
             view.setTitle(movieListModel.getTitle());
             view.setVoteAverage(movieListModel.getVoteAverage());
             view.setReleaseDate(movieListModel.getReleaseYear());
         }
 
-        public int getCollectionItems() {
+        int getCollectionItems() {
             return movieList.size();
         }
 
-        public void onClickedRowItem(int position) {
+        void onClickedRowItem(int position) {
             globalRouter.navigateTo(new Screens.DetailMovieScreen(movieList.get(position).getId()));
+        }
+
+        //TODO 13.11.2018 add resources class
+        @SuppressLint("CheckResult")
+        void onFavoritesClicked(boolean isChecked, int position) {
+            if (isChecked) {
+                useCaseAddFavoriteMovie
+                        .execute(movieList.get(position))
+                        .observeOn(schedulers.ui())
+                        .subscribe(() -> getViewState().showNotifyingMessage("Item added in favorites"),
+                                throwable -> getViewState().showNotifyingMessage("Error adding to favorites"));
+            } else {
+                useCaseRemoveFavoriteMovie
+                        .execute(movieList.get(position).getId())
+                        .observeOn(schedulers.ui())
+                        .subscribe(() -> getViewState().showNotifyingMessage("Item removed from favorites"),
+                                throwable -> getViewState().showNotifyingMessage("Error removing from favorites"));
+            }
         }
     }
 }
