@@ -51,11 +51,11 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
         }
     }
 
-    // #################################### BackButtonListener ####################################
-
+    //region ### BackButtonListener ###
     @Override
     public boolean onBackPressed() {
         router.exit();
         return true;
     }
+    //endregion
 }
