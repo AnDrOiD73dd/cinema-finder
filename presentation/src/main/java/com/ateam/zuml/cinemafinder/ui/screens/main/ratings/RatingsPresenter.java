@@ -199,7 +199,7 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
             view.setTitle(movieListModel.getTitle());
             view.setVoteAverage(movieListModel.getVoteAverage());
             view.setReleaseDate(movieListModel.getReleaseYear());
-            view.setToggleFavorites(false);
+            view.setToggleFavorites(movieListModel.isFavorite());
         }
 
         int getCollectionItems() {

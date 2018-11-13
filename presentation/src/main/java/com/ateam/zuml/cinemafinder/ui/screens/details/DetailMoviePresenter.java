@@ -61,7 +61,7 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     private void onLoadSuccess(MovieDetailsModel movieDetailsModel) {
         this.currentMovie = movieDetailsModel;
         getViewState().hideLoading();
-        getViewState().setToggleFavorites(false);
+        getViewState().setToggleFavorites(movieDetailsModel.isFavorite());
         getViewState().setTitle(movieDetailsModel.getTitle());
         getViewState().setSubTitle(String.format(Locale.getDefault(), "%s (%s)",
                 movieDetailsModel.getOriginalTitle(), movieDetailsModel.getReleaseYear()));

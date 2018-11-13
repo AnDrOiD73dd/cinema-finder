@@ -123,7 +123,7 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
             view.setReleaseDate(stringUtil.addBrackets(movieListModel.getReleaseYear()));
             view.setGenres(stringUtil.getStringFromArrayGenres(movieListModel.getGenres()));
             view.setVoteAverage(movieListModel.getVoteAverage());
-            view.setToggleFavorites(false);
+            view.setToggleFavorites(movieListModel.isFavorite());
         }
 
         int getSearchCount() {
