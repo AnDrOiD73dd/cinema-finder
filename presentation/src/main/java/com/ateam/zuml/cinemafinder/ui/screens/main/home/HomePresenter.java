@@ -16,6 +16,7 @@ import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.Logger;
+import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
     @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
     @Inject SchedulersProvider schedulers;
+    @Inject ResourceManager resource;
     @Inject Logger logger;
 
     public HomePresenter() {
@@ -152,21 +154,20 @@ public class HomePresenter extends MvpPresenter<HomeView> {
             globalRouter.navigateTo(new Screens.DetailMovieScreen(movieList.get(position).getId()));
         }
 
-        //TODO 13.11.2018 add resources class
         @SuppressLint("CheckResult")
         void onFavoritesClicked(boolean isChecked, int position) {
             if (isChecked) {
                 useCaseAddFavoriteMovie
                         .execute(movieList.get(position))
                         .observeOn(schedulers.ui())
-                        .subscribe(() -> getViewState().showNotifyingMessage("Item added in favorites"),
-                                throwable -> getViewState().showNotifyingMessage("Error adding to favorites"));
+                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+                                throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
             } else {
                 useCaseRemoveFavoriteMovie
                         .execute(movieList.get(position).getId())
                         .observeOn(schedulers.ui())
-                        .subscribe(() -> getViewState().showNotifyingMessage("Item removed from favorites"),
-                                throwable -> getViewState().showNotifyingMessage("Error removing from favorites"));
+                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
+                                throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
             }
         }
     }

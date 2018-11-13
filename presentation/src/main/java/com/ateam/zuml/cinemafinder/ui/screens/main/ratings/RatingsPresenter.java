@@ -204,21 +204,20 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
             globalRouter.navigateTo(new Screens.DetailMovieScreen(movieList.get(position).getId()));
         }
 
-        //TODO 13.11.2018 add resources class
         @SuppressLint("CheckResult")
         void onFavoritesClicked(boolean isChecked, int position) {
             if (isChecked) {
                 useCaseAddFavoriteMovie
                         .execute(movieList.get(position))
                         .observeOn(schedulers.ui())
-                        .subscribe(() -> getViewState().showNotifyingMessage("Item added in favorites"),
-                                throwable -> getViewState().showNotifyingMessage("Error adding to favorites"));
+                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+                                throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
             } else {
                 useCaseRemoveFavoriteMovie
                         .execute(movieList.get(position).getId())
                         .observeOn(schedulers.ui())
-                        .subscribe(() -> getViewState().showNotifyingMessage("Item removed from favorites"),
-                                throwable -> getViewState().showNotifyingMessage("Error removing from favorites"));
+                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
+                                throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
             }
         }
     }

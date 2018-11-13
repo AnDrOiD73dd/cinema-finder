@@ -25,5 +25,9 @@
     <string name="category_title_third">Third</string>
     <string name="category_title_fourth">Fourth</string>
     <string name="content_description_remove_favorite_item">Remove item from favorites</string>
+
+    <string name="added_favorite_item">Item added in favorites</string>
+    <string name="error_add_favorite_item">Error adding to favorites</string>
     <string name="removed_favorite_item">Item removed from favorites</string>
+    <string name="error_remove_favorite_item">Error removing from favorites</string>
 </resources>

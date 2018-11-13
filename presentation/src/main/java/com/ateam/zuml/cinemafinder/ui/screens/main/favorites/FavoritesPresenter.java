@@ -10,6 +10,7 @@ import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.repository.FavoritesRepository;
 import com.ateam.zuml.cinemafinder.util.Constants;
+import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
 
@@ -38,6 +39,7 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
     @Inject RemoveFavoriteMovieUseCase useCaseRemoveMovie;
     @Inject FavoritesRepository repository;
     @Inject SchedulersProvider schedulers;
+    @Inject ResourceManager resource;
 
     @Inject StringUtils stringUtil;
 
@@ -66,18 +68,17 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
                 .get(position).getId()));
     }
 
-    //TODO 13.11.2018 add resources class
     @SuppressLint("CheckResult")
     void onRemoveItemClicked(int position) {
         useCaseRemoveMovie
                 .execute(favoriteListPresenter.favoritesList.get(position).getId())
                 .observeOn(schedulers.ui())
                 .subscribe(() -> {
-                            getViewState().showNotifyingMessage("Item removed from favorites");
+                            getViewState().showNotifyingMessage(resource.getRemovedFromFavorites());
                             favoriteListPresenter.favoritesList.remove(position);
                             getViewState().itemRemoved(position);
                         },
-                        throwable -> getViewState().showNotifyingMessage("Error removing from favorites"));
+                        throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
     }
 
     public void onBackPressed() {

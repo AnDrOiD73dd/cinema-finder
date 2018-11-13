@@ -2,5 +2,11 @@ package com.ateam.zuml.cinemafinder.util;
 
 public interface ResourceManager {
 
-    String getPackageName();
+    String getAddedInFavorites();
+
+    String getErrorAddInFavorites();
+
+    String getRemovedFromFavorites();
+
+    String getErrorRemoveFromFavorites();
 }
