@@ -32,7 +32,7 @@ public final class MoviesListWithDates {
         return dates;
     }
 
-    public MovieResult[] getMovies() {
+    public MovieResult[] getResults() {
         return results;
     }
 }

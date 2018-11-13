@@ -7,6 +7,7 @@ import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieInfo;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesList;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesListWithDates;
 import com.ateam.zuml.cinemafinder.service.model.person.credits.Credits;
+
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -122,6 +123,48 @@ public interface ApiService {
                                                   @Query("region") String region);
 
     /*
+     * Get the top rated movies on TMDb.
+     *
+     * Required:
+     * String api_key - API Key
+     *
+     * Optional:
+     * String language - Pass a ISO 639-1 value to display translated data for the fields that support it.
+     * int page - Specify which page to query. minimum: 1, maximum: 1000, default: 1
+     * String region - Specify a ISO 3166-1 code to filter release dates. Must be uppercase. pattern: ^[A-Z]{2}$
+     *
+     * Example:
+     * https://api.themoviedb.org/3/movie/top_rated?api_key=<<api_key>>&language=ru-RU&page=1&region=ru
+     *
+     */
+    @GET("movie/top_rated?api_key=" + ACCESS_TOKEN)
+    Single<MoviesList> getTopRatedMovies(@Query("language") String language,
+                                                  @Query("page") String page,
+                                                  @Query("region") String region);
+
+    /*
+     * Get the top rated movies by genre on TMDb.
+     *
+     * Required:
+     * String api_key - API Key
+     *
+     * Optional:
+     * String language - Pass a ISO 639-1 value to display translated data for the fields that support it.
+     * int page - Specify which page to query. minimum: 1, maximum: 1000, default: 1
+     * String region - Specify a ISO 3166-1 code to filter release dates. Must be uppercase. pattern: ^[A-Z]{2}$
+     *
+     * Example:
+     * https://api.themoviedb.org/3/discover/movie?api_key=<<api_key>>&language=ru-RU&region=ru
+     * &sort_by=vote_average.desc&page=1&vote_count.gte=5&with_genres=28
+     *
+     */
+    @GET("discover/movie?api_key=" + ACCESS_TOKEN + "&sort_by=vote_average.desc&vote_count.gte=10")
+    Single<MoviesList> getTopRatedByGenreMovies(@Query("language") String language,
+                                                         @Query("page") String page,
+                                                         @Query("region") String region,
+                                                         @Query("with_genres") String genreId);
+
+    /*
      * Get the cast and crew for a movie.
      *
      * Required:
@@ -175,4 +218,6 @@ public interface ApiService {
      */
     @GET("configuration?api_key=" + ACCESS_TOKEN)
     Single<Configuration> getConfiguration();
+
+
 }

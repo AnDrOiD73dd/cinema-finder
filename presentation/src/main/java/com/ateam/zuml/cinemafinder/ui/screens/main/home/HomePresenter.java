@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
+import com.ateam.zuml.cinemafinder.interactor.favorites.RemoveFavoriteMovieUseCase;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetNowPlayingMoviesUseCase;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetUpcomingMoviesUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
@@ -11,9 +13,10 @@ import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
-import com.ateam.zuml.cinemafinder.ui.common.collection_row.CollectionRowCardView;
+import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.Logger;
+import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 
 import java.util.ArrayList;
@@ -40,7 +43,10 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     @Inject GetNowPlayingMoviesUseCase useCaseNowPlaying;
     @Inject GetUpcomingMoviesUseCase useCaseUpcoming;
+    @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
+    @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
     @Inject SchedulersProvider schedulers;
+    @Inject ResourceManager resource;
     @Inject Logger logger;
 
     public HomePresenter() {
@@ -95,18 +101,20 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         }
     }
 
+    //TODO 13.11.2018 add resources class
     private void onNowPlayingLoadFailed() {
         logger.d("");
         getViewState().hideNowPlayingLoading();
         getViewState().showNoInNowPlaying();
-        getViewState().showError();
+        getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
+    //TODO 13.11.2018 add resources class
     private void onUpcomingLoadFailed() {
         logger.d("");
         getViewState().hideUpcomingLoading();
         getViewState().showNoInUpcoming();
-        getViewState().showError();
+        getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
     public void onBackPressed() {
@@ -121,32 +129,46 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         return upcomingPresenter;
     }
 
-    public final class RowListPresenter {
+    final class RowListPresenter {
 
         private List<MovieListModel> movieList;
 
-        public RowListPresenter() {
+        RowListPresenter() {
             this.movieList = new ArrayList<>();
         }
 
-        public void bindViewAt(CollectionRowCardView view, int position) {
+        void bindViewAt(CollectionRowCardView view, int position) {
             MovieListModel movieListModel = movieList.get(position);
-            if (movieListModel.getPosterPath().isEmpty()) {
-                view.setPosterPlaceholder();
-            } else {
-                view.setPoster(movieListModel.getPosterPath());
-            }
+            view.setPoster(movieListModel.getPosterPath());
             view.setTitle(movieListModel.getTitle());
             view.setVoteAverage(movieListModel.getVoteAverage());
             view.setReleaseDate(movieListModel.getReleaseYear());
+            view.setToggleFavorites(false);
         }
 
-        public int getCollectionItems() {
+        int getCollectionItems() {
             return movieList.size();
         }
 
-        public void onClickedRowItem(int position) {
+        void onClickedRowItem(int position) {
             globalRouter.navigateTo(new Screens.DetailMovieScreen(movieList.get(position).getId()));
+        }
+
+        @SuppressLint("CheckResult")
+        void onFavoritesClicked(boolean isChecked, int position) {
+            if (isChecked) {
+                useCaseAddFavoriteMovie
+                        .execute(movieList.get(position))
+                        .observeOn(schedulers.ui())
+                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+                                throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
+            } else {
+                useCaseRemoveFavoriteMovie
+                        .execute(movieList.get(position).getId())
+                        .observeOn(schedulers.ui())
+                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
+                                throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
+            }
         }
     }
 }

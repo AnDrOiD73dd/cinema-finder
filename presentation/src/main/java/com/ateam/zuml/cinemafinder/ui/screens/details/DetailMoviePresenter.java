@@ -4,11 +4,14 @@ import android.annotation.SuppressLint;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
+import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
+import com.ateam.zuml.cinemafinder.interactor.favorites.RemoveFavoriteMovieUseCase;
 import com.ateam.zuml.cinemafinder.interactor.movie.GetMovieDetailsUseCase;
 import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.util.Constants;
+import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
 
@@ -24,13 +27,18 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
 
     private final String movieId;
 
+    private MovieDetailsModel currentMovie;
+
     @Named(Constants.MAIN_CONTAINER)
     @Inject
     Router router;
 
     @Inject StringUtils stringUtil;
     @Inject GetMovieDetailsUseCase detailsUseCase;
+    @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
+    @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
     @Inject SchedulersProvider schedulers;
+    @Inject ResourceManager resource;
 
     DetailMoviePresenter(String movieId) {
         this.movieId = movieId;
@@ -51,7 +59,9 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
     }
 
     private void onLoadSuccess(MovieDetailsModel movieDetailsModel) {
+        this.currentMovie = movieDetailsModel;
         getViewState().hideLoading();
+        getViewState().setToggleFavorites(false);
         getViewState().setTitle(movieDetailsModel.getTitle());
         getViewState().setSubTitle(String.format(Locale.getDefault(), "%s (%s)",
                 movieDetailsModel.getOriginalTitle(), movieDetailsModel.getReleaseYear()));
@@ -67,9 +77,27 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
         getViewState().setOverview(movieDetailsModel.getOverview());
     }
 
+    //TODO 13.11.2018 add resources class
     private void onLoadFailed() {
         getViewState().hideLoading();
-        getViewState().showError();
+        getViewState().showNotifyingMessage("An error occurred while loading movie information");
+    }
+
+    @SuppressLint("CheckResult")
+    void onFavoritesClick(boolean isChecked) {
+        if (isChecked) {
+            useCaseAddFavoriteMovie
+                    .execute(currentMovie)
+                    .observeOn(schedulers.ui())
+                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
+                            throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
+        } else {
+            useCaseRemoveFavoriteMovie
+                    .execute(movieId)
+                    .observeOn(schedulers.ui())
+                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
+                            throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
+        }
     }
 
     public void onBackPressed() {

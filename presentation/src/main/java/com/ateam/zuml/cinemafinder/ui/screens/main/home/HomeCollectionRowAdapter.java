@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.common.collection_row;
+package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -7,21 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
+import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
+import com.ateam.zuml.cinemafinder.ui.common.CollectionRowListView;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdapter.ViewHolder>
+public class HomeCollectionRowAdapter extends RecyclerView.Adapter<HomeCollectionRowAdapter.ViewHolder>
         implements CollectionRowListView {
 
     private ImageLoader imageLoader;
     private HomePresenter.RowListPresenter presenter;
 
-    public CollectionRowAdapter(HomePresenter.RowListPresenter presenter, ImageLoader imageLoader) {
+    HomeCollectionRowAdapter(HomePresenter.RowListPresenter presenter, ImageLoader imageLoader) {
         this.presenter = presenter;
         this.imageLoader = imageLoader;
     }
@@ -54,21 +56,18 @@ public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdap
         @BindView(R.id.tv_card_title) TextView titleView;
         @BindView(R.id.tv_release_date_home_list) TextView releaseDateView;
         @BindView(R.id.tv_vote_average_home_list) TextView voteAverageView;
+        @BindView(R.id.tb_card_favorites) ToggleButton toggleFavorites;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> onClickRowItem());
+            toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> onFavoritesClick(isChecked));
         }
 
         @Override
         public void setPoster(String posterPath) {
             imageLoader.loadInto(posterPath, posterView);
-        }
-
-        @Override
-        public void setPosterPlaceholder() {
-            imageLoader.loadInto("-", posterView);
         }
 
         @Override
@@ -86,8 +85,21 @@ public class CollectionRowAdapter extends RecyclerView.Adapter<CollectionRowAdap
             this.voteAverageView.setText(voteAverage);
         }
 
+        @Override
+        public void setToggleFavorites(boolean isFavorite) {
+            if (isFavorite) {
+                toggleFavorites.setChecked(true);
+            } else {
+                toggleFavorites.setChecked(false);
+            }
+        }
+
         void onClickRowItem() {
             presenter.onClickedRowItem(getAdapterPosition());
+        }
+
+        void onFavoritesClick(boolean isChecked) {
+            presenter.onFavoritesClicked(isChecked, getAdapterPosition());
         }
     }
 }

@@ -20,5 +20,5 @@ public interface HomeView extends MvpView {
 
     void showNoInUpcoming();
 
-    void showError();
+    void showNotifyingMessage(String msg);
 }

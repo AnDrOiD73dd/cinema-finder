@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/gray300">
+    <item>
+        <selector>
+            <item
+                android:drawable="@drawable/ic_favorite_fill_color"
+                android:state_checked="true" />
+            <item
+                android:drawable="@drawable/ic_favorite_border"
+                android:state_checked="false" />
+        </selector>
+    </item>
+</ripple>

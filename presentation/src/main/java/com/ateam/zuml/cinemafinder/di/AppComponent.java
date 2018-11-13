@@ -7,6 +7,7 @@ import com.ateam.zuml.cinemafinder.di.modules.DatabaseModule;
 import com.ateam.zuml.cinemafinder.di.modules.ImageLoaderModule;
 import com.ateam.zuml.cinemafinder.di.modules.MapperModule;
 import com.ateam.zuml.cinemafinder.di.modules.NavigationModule;
+import com.ateam.zuml.cinemafinder.di.modules.ResourceModule;
 import com.ateam.zuml.cinemafinder.di.modules.SchedulersModule;
 import com.ateam.zuml.cinemafinder.di.modules.ServiceModule;
 import com.ateam.zuml.cinemafinder.di.modules.UtilsModule;
@@ -19,6 +20,7 @@ import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.favorites.FavoritesPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomeFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.home.HomePresenter;
+import com.ateam.zuml.cinemafinder.ui.screens.main.ratings.RatingsFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.main.ratings.RatingsPresenter;
 import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponseFragment;
 import com.ateam.zuml.cinemafinder.ui.screens.search.SearchResponsePresenter;
@@ -38,7 +40,8 @@ import dagger.Component;
         ImageLoaderModule.class,
         UtilsModule.class,
         SchedulersModule.class,
-        DatabaseModule.class})
+        DatabaseModule.class,
+        ResourceModule.class})
 public interface AppComponent {
 
     @Component.Builder
@@ -67,6 +70,8 @@ public interface AppComponent {
     void inject(MainContainerFragment fragment);
 
     void inject(MainContainerPresenter presenter);
+
+    void inject(RatingsFragment fragment);
 
     void inject(RatingsPresenter presenter);
 
