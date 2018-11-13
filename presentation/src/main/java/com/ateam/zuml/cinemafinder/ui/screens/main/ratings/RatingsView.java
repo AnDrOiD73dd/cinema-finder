@@ -4,37 +4,37 @@ import com.arellomobile.mvp.MvpView;
 
 public interface RatingsView extends MvpView {
 
-    void updateFirstRow();
+    void updateTopMoviesRow();
 
-    void updateSecondRow();
+    void updateTopActionsRow();
 
-    void updateThirdRow();
+    void updateTopComediesRow();
 
-    void updateFourthRow();
+    void updateTopAnimationsRow();
 
-    void showFirstLoading();
+    void showTopMoviesLoading();
 
-    void showSecondLoading();
+    void showTopActionsLoading();
 
-    void showThirdLoading();
+    void showTopComediesLoading();
 
-    void showFourthLoading();
+    void showTopAnimationsLoading();
 
-    void hideFirstLoading();
+    void hideTopMoviesLoading();
 
-    void hideSecondLoading();
+    void hideTopActionsLoading();
 
-    void hideThirdLoading();
+    void hideTopComediesLoading();
 
-    void hideFourthLoading();
+    void hideTopAnimationsLoading();
 
-    void showNoInFirst();
+    void showNoInTopMovies();
 
-    void showNoInSecond();
+    void showNoInTopActions();
 
-    void showNoInThird();
+    void showNoInTopComedies();
 
-    void showNoInFourth();
+    void showNoInTopAnimations();
 
     void showNotifyingMessage(String msg);
 }

@@ -20,17 +20,15 @@
     <string name="collection_row_no_results">No search results</string>
     <string name="category_title_now_playing">Now Playing</string>
     <string name="category_title_upcoming">Upcoming</string>
-    <string name="category_title_first">First</string>
-    <string name="category_title_second">Second</string>
-    <string name="category_title_third">Third</string>
-    <string name="category_title_fourth">Fourth</string>
+    <string name="category_title_top_movies">Top rated movies</string>
+    <string name="category_title_top_actions">Top rated actions</string>
+    <string name="category_title_top_comedies">Top rated comedies</string>
+    <string name="category_title_top_animations">Top rated animations</string>
     <string name="content_description_remove_favorite_item">Remove item from favorites</string>
-
     <string name="added_favorite_item">Item added in favorites</string>
     <string name="error_add_favorite_item">Error adding to favorites</string>
     <string name="removed_favorite_item">Item removed from favorites</string>
     <string name="error_remove_favorite_item">Error removing from favorites</string>
-
     <string name="pref_adult_title">Hide movies for adults</string>
     <string name="pref_adult_summ">Do not show movies which are tagged as \"Adult\".</string>
 </resources>

@@ -20,17 +20,15 @@
     <string name="collection_row_no_results">Нет результатов поиска</string>
     <string name="category_title_now_playing">В прокате</string>
     <string name="category_title_upcoming">Скоро на экранах</string>
-    <string name="category_title_first">Первый</string>
-    <string name="category_title_second">Второй</string>
-    <string name="category_title_third">Третий</string>
-    <string name="category_title_fourth">Четвёртый</string>
+    <string name="category_title_top_movies">Лучшие фильмы</string>
+    <string name="category_title_top_actions">Лучшие боевики</string>
+    <string name="category_title_top_comedies">Лучшие комедии</string>
+    <string name="category_title_top_animations">Лучшие анимации</string>
     <string name="content_description_remove_favorite_item">Удалить элемент из списка избранного</string>
-
     <string name="added_favorite_item">Элемент добавлен в избранное</string>
     <string name="error_add_favorite_item">Ошибка добавления в избранное</string>
     <string name="removed_favorite_item">Элемент удален из избранного</string>
     <string name="error_remove_favorite_item">Ошибка удаления из избранного</string>
-
     <string name="pref_adult_title">Скрыть фильмы \"только для взрослых\"</string>
     <string name="pref_adult_summ">Не отображать в списках фильмы, которые помечены как \"для взрослых\". Данное
         ограничение не распространяется на фильмы с возрастным рейтингом \"18+\"</string>

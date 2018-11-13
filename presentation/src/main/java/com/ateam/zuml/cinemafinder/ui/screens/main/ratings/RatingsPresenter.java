@@ -28,10 +28,10 @@ import ru.terrakok.cicerone.Router;
 @InjectViewState
 public class RatingsPresenter extends MvpPresenter<RatingsView> {
 
-    private RatingsRowListPresenter firstPresenter;
-    private RatingsRowListPresenter secondPresenter;
-    private RatingsRowListPresenter thirdPresenter;
-    private RatingsRowListPresenter fourthPresenter;
+    private RatingsRowListPresenter topMoviesPresenter;
+    private RatingsRowListPresenter topActionsPresenter;
+    private RatingsRowListPresenter topComediesPresenter;
+    private RatingsRowListPresenter topAnimationsPresenter;
 
     @Named(Constants.CHILD_CONTAINER)
     @Inject
@@ -48,114 +48,114 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
     @Inject ResourceManager resource;
 
     RatingsPresenter() {
-        this.firstPresenter = new RatingsRowListPresenter();
-        this.secondPresenter = new RatingsRowListPresenter();
-        this.thirdPresenter = new RatingsRowListPresenter();
-        this.fourthPresenter = new RatingsRowListPresenter();
+        this.topMoviesPresenter = new RatingsRowListPresenter();
+        this.topActionsPresenter = new RatingsRowListPresenter();
+        this.topComediesPresenter = new RatingsRowListPresenter();
+        this.topAnimationsPresenter = new RatingsRowListPresenter();
     }
 
     @Override
     public void onFirstViewAttach() {
         super.onFirstViewAttach();
-        loadFirstData();
-        loadSecondData();
-        loadThirdData();
-        loadFourthData();
+        loadTopMoviesData();
+        loadTopActionsData();
+        loadTopComediesData();
+        loadTopAnimationsData();
     }
 
     @SuppressLint("CheckResult")
-    private void loadFirstData() {
-        getViewState().showFirstLoading();
+    private void loadTopMoviesData() {
+        getViewState().showTopMoviesLoading();
         useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
-                .subscribe(this::onFirstLoadSuccess, throwable -> onFirstLoadFailed());
+                .subscribe(this::onTopMoviesLoadSuccess, throwable -> onTopMoviesLoadFailed());
     }
 
     @SuppressLint("CheckResult")
-    private void loadSecondData() {
-        getViewState().showFirstLoading();
+    private void loadTopActionsData() {
+        getViewState().showTopActionsLoading();
         useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
-                .subscribe(this::onSecondLoadSuccess, throwable -> onSecondLoadFailed());
+                .subscribe(this::onTopActionsLoadSuccess, throwable -> onTopActionsLoadFailed());
     }
 
     @SuppressLint("CheckResult")
-    private void loadThirdData() {
-        getViewState().showFirstLoading();
+    private void loadTopComediesData() {
+        getViewState().showTopComediesLoading();
         useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
-                .subscribe(this::onThirdLoadSuccess, throwable -> onThirdLoadFailed());
+                .subscribe(this::onTopComediesLoadSuccess, throwable -> onTopComediesLoadFailed());
     }
 
     @SuppressLint("CheckResult")
-    private void loadFourthData() {
-        getViewState().showFirstLoading();
+    private void loadTopAnimationsData() {
+        getViewState().showTopAnimationsLoading();
         useCase.execute("1", Language.RUSSIAN, Region.RUSSIAN, LogoSize.W_300)
                 .observeOn(schedulers.ui())
-                .subscribe(this::onFourthLoadSuccess, throwable -> onFourthLoadFailed());
+                .subscribe(this::onTopAnimationsLoadSuccess, throwable -> onTopAnimationsLoadFailed());
     }
 
-    private void onFirstLoadSuccess(List<MovieListModel> movieListModels) {
-        getViewState().hideFirstLoading();
-        firstPresenter.movieList = movieListModels;
-        getViewState().updateFirstRow();
+    private void onTopMoviesLoadSuccess(List<MovieListModel> movieListModels) {
+        getViewState().hideTopMoviesLoading();
+        topMoviesPresenter.movieList = movieListModels;
+        getViewState().updateTopMoviesRow();
         if (movieListModels.isEmpty()) {
-            getViewState().showNoInFirst();
+            getViewState().showNoInTopMovies();
         }
     }
 
-    private void onSecondLoadSuccess(List<MovieListModel> movieListModels) {
-        getViewState().hideSecondLoading();
-        secondPresenter.movieList = movieListModels;
-        getViewState().updateSecondRow();
+    private void onTopActionsLoadSuccess(List<MovieListModel> movieListModels) {
+        getViewState().hideTopActionsLoading();
+        topActionsPresenter.movieList = movieListModels;
+        getViewState().updateTopActionsRow();
         if (movieListModels.isEmpty()) {
-            getViewState().showNoInSecond();
+            getViewState().showNoInTopActions();
         }
     }
 
-    private void onThirdLoadSuccess(List<MovieListModel> movieListModels) {
-        getViewState().hideThirdLoading();
-        thirdPresenter.movieList = movieListModels;
-        getViewState().updateThirdRow();
+    private void onTopComediesLoadSuccess(List<MovieListModel> movieListModels) {
+        getViewState().hideTopComediesLoading();
+        topComediesPresenter.movieList = movieListModels;
+        getViewState().updateTopComediesRow();
         if (movieListModels.isEmpty()) {
-            getViewState().showNoInThird();
+            getViewState().showNoInTopComedies();
         }
     }
 
-    private void onFourthLoadSuccess(List<MovieListModel> movieListModels) {
-        getViewState().hideFourthLoading();
-        fourthPresenter.movieList = movieListModels;
-        getViewState().updateFourthRow();
+    private void onTopAnimationsLoadSuccess(List<MovieListModel> movieListModels) {
+        getViewState().hideTopAnimationsLoading();
+        topAnimationsPresenter.movieList = movieListModels;
+        getViewState().updateTopAnimationsRow();
         if (movieListModels.isEmpty()) {
-            getViewState().showNoInFourth();
+            getViewState().showNoInTopAnimations();
         }
     }
 
     //TODO 13.11.2018 add resources class
-    private void onFirstLoadFailed() {
-        getViewState().hideFirstLoading();
-        getViewState().showNoInFirst();
+    private void onTopMoviesLoadFailed() {
+        getViewState().hideTopMoviesLoading();
+        getViewState().showNoInTopMovies();
         getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
     //TODO 13.11.2018 add resources class
-    private void onSecondLoadFailed() {
-        getViewState().hideSecondLoading();
-        getViewState().showNoInSecond();
+    private void onTopActionsLoadFailed() {
+        getViewState().hideTopActionsLoading();
+        getViewState().showNoInTopActions();
         getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
     //TODO 13.11.2018 add resources class
-    private void onThirdLoadFailed() {
-        getViewState().hideThirdLoading();
-        getViewState().showNoInThird();
+    private void onTopComediesLoadFailed() {
+        getViewState().hideTopComediesLoading();
+        getViewState().showNoInTopComedies();
         getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
     //TODO 13.11.2018 add resources class
-    private void onFourthLoadFailed() {
-        getViewState().hideFourthLoading();
-        getViewState().showNoInFourth();
+    private void onTopAnimationsLoadFailed() {
+        getViewState().hideTopAnimationsLoading();
+        getViewState().showNoInTopAnimations();
         getViewState().showNotifyingMessage("An error occurred while loading collection category");
     }
 
@@ -163,20 +163,20 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
         localRouter.exit();
     }
 
-    RatingsRowListPresenter getFirstPresenter() {
-        return firstPresenter;
+    RatingsRowListPresenter getTopMoviesPresenter() {
+        return topMoviesPresenter;
     }
 
-    RatingsRowListPresenter getSecondPresenter() {
-        return secondPresenter;
+    RatingsRowListPresenter getTopActionsPresenter() {
+        return topActionsPresenter;
     }
 
-    RatingsRowListPresenter getThirdPresenter() {
-        return thirdPresenter;
+    RatingsRowListPresenter getTopComediesPresenter() {
+        return topComediesPresenter;
     }
 
-    RatingsRowListPresenter getFourthPresenter() {
-        return fourthPresenter;
+    RatingsRowListPresenter getTopAnimationsPresenter() {
+        return topAnimationsPresenter;
     }
 
     final class RatingsRowListPresenter {

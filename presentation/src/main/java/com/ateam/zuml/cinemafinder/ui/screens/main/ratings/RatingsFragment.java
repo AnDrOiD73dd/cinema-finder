@@ -30,32 +30,32 @@ import butterknife.ButterKnife;
 
 public class RatingsFragment extends BaseFragment implements RatingsView, BackButtonListener {
 
-    private RatingsCollectionRowAdapter firstAdapter;
-    private RatingsCollectionRowAdapter secondAdapter;
-    private RatingsCollectionRowAdapter thirdAdapter;
-    private RatingsCollectionRowAdapter fourthAdapter;
+    private RatingsCollectionRowAdapter topMoviesAdapter;
+    private RatingsCollectionRowAdapter topActionsAdapter;
+    private RatingsCollectionRowAdapter topComediesAdapter;
+    private RatingsCollectionRowAdapter topAnimationsAdapter;
 
     @BindView(R.id.rating_root) LinearLayout rootView;
 
-    @BindView(R.id.tv_first_row_name) TextView firstTitleView;
-    @BindView(R.id.rv_first_row) RecyclerView firstRecyclerView;
-    @BindView(R.id.pb_first_row) ProgressBar firstProgressBar;
-    @BindView(R.id.tv_first_row_no_results) TextView firstNoResultsView;
+    @BindView(R.id.tv_top_movies_row_name) TextView topMoviesTitleView;
+    @BindView(R.id.rv_top_movies_row) RecyclerView topMoviesRecyclerView;
+    @BindView(R.id.pb_top_movies_row) ProgressBar topMoviesProgressBar;
+    @BindView(R.id.tv_top_movies_row_no_results) TextView topMoviesNoResultsView;
 
-    @BindView(R.id.tv_second_row_name) TextView secondTitleView;
-    @BindView(R.id.rv_second_row) RecyclerView secondRecyclerView;
-    @BindView(R.id.pb_second_row) ProgressBar secondProgressBar;
-    @BindView(R.id.tv_second_row_no_results) TextView secondNoResultsView;
+    @BindView(R.id.tv_top_actions_row_name) TextView topActionsTitleView;
+    @BindView(R.id.rv_top_actions_row) RecyclerView topActionsRecyclerView;
+    @BindView(R.id.pb_top_actions_row) ProgressBar topActionsProgressBar;
+    @BindView(R.id.tv_top_actions_row_no_results) TextView topActionsNoResultsView;
 
-    @BindView(R.id.tv_third_row_name) TextView thirdTitleView;
-    @BindView(R.id.rv_third_row) RecyclerView thirdRecyclerView;
-    @BindView(R.id.pb_third_row) ProgressBar thirdProgressBar;
-    @BindView(R.id.tv_third_row_no_results) TextView thirdNoResultsView;
+    @BindView(R.id.tv_top_comedies_row_name) TextView topComediesTitleView;
+    @BindView(R.id.rv_top_comedies_row) RecyclerView topComediesRecyclerView;
+    @BindView(R.id.pb_top_comedies_row) ProgressBar topComediesProgressBar;
+    @BindView(R.id.tv_top_comedies_row_no_results) TextView topComediesNoResultsView;
 
-    @BindView(R.id.tv_fourth_row_name) TextView fourthTitleView;
-    @BindView(R.id.rv_fourth_row) RecyclerView fourthRecyclerView;
-    @BindView(R.id.pb_fourth_row) ProgressBar fourthProgressBar;
-    @BindView(R.id.tv_fourth_row_no_results) TextView fourthNoResultsView;
+    @BindView(R.id.tv_top_animations_row_name) TextView topAnimationsTitleView;
+    @BindView(R.id.rv_top_animations_row) RecyclerView topAnimationsRecyclerView;
+    @BindView(R.id.pb_top_animations_row) ProgressBar topAnimationsProgressBar;
+    @BindView(R.id.tv_top_animations_row_no_results) TextView topAnimationsNoResultsView;
 
     @Inject ImageLoader imageLoader;
 
@@ -77,10 +77,10 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ratings, container, false);
         init(view);
-        setupRecyclerView(firstRecyclerView, firstAdapter);
-        setupRecyclerView(secondRecyclerView, secondAdapter);
-        setupRecyclerView(thirdRecyclerView, thirdAdapter);
-        setupRecyclerView(fourthRecyclerView, fourthAdapter);
+        setupRecyclerView(topMoviesRecyclerView, topMoviesAdapter);
+        setupRecyclerView(topActionsRecyclerView, topActionsAdapter);
+        setupRecyclerView(topComediesRecyclerView, topComediesAdapter);
+        setupRecyclerView(topAnimationsRecyclerView, topAnimationsAdapter);
         setupToolbar(R.string.ratings, false);
         return view;
     }
@@ -88,10 +88,10 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
     private void init(View view) {
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
-        firstAdapter = new RatingsCollectionRowAdapter(presenter.getFirstPresenter(), imageLoader);
-        secondAdapter = new RatingsCollectionRowAdapter(presenter.getSecondPresenter(), imageLoader);
-        thirdAdapter = new RatingsCollectionRowAdapter(presenter.getThirdPresenter(), imageLoader);
-        fourthAdapter = new RatingsCollectionRowAdapter(presenter.getFourthPresenter(), imageLoader);
+        topMoviesAdapter = new RatingsCollectionRowAdapter(presenter.getTopMoviesPresenter(), imageLoader);
+        topActionsAdapter = new RatingsCollectionRowAdapter(presenter.getTopActionsPresenter(), imageLoader);
+        topComediesAdapter = new RatingsCollectionRowAdapter(presenter.getTopComediesPresenter(), imageLoader);
+        topAnimationsAdapter = new RatingsCollectionRowAdapter(presenter.getTopAnimationsPresenter(), imageLoader);
     }
 
     private void setupRecyclerView(RecyclerView recyclerView, RatingsCollectionRowAdapter adapter) {
@@ -108,92 +108,92 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
 
     //region ### RatingsView ###
     @Override
-    public void updateFirstRow() {
-        firstAdapter.refreshView();
+    public void updateTopMoviesRow() {
+        topMoviesAdapter.refreshView();
     }
 
     @Override
-    public void updateSecondRow() {
-        secondAdapter.refreshView();
+    public void updateTopActionsRow() {
+        topActionsAdapter.refreshView();
     }
 
     @Override
-    public void updateThirdRow() {
-        thirdAdapter.refreshView();
+    public void updateTopComediesRow() {
+        topComediesAdapter.refreshView();
     }
 
     @Override
-    public void updateFourthRow() {
-        fourthAdapter.refreshView();
+    public void updateTopAnimationsRow() {
+        topAnimationsAdapter.refreshView();
     }
 
     @Override
-    public void showFirstLoading() {
-        firstProgressBar.setVisibility(View.VISIBLE);
-        firstTitleView.setVisibility(View.GONE);
+    public void showTopMoviesLoading() {
+        topMoviesProgressBar.setVisibility(View.VISIBLE);
+        topMoviesTitleView.setVisibility(View.GONE);
     }
 
     @Override
-    public void showSecondLoading() {
-        secondProgressBar.setVisibility(View.VISIBLE);
-        secondTitleView.setVisibility(View.GONE);
+    public void showTopActionsLoading() {
+        topActionsProgressBar.setVisibility(View.VISIBLE);
+        topActionsTitleView.setVisibility(View.GONE);
     }
 
     @Override
-    public void showThirdLoading() {
-        thirdProgressBar.setVisibility(View.VISIBLE);
-        thirdTitleView.setVisibility(View.GONE);
+    public void showTopComediesLoading() {
+        topComediesProgressBar.setVisibility(View.VISIBLE);
+        topComediesTitleView.setVisibility(View.GONE);
     }
 
 
     @Override
-    public void showFourthLoading() {
-        fourthProgressBar.setVisibility(View.VISIBLE);
-        fourthTitleView.setVisibility(View.GONE);
+    public void showTopAnimationsLoading() {
+        topAnimationsProgressBar.setVisibility(View.VISIBLE);
+        topAnimationsTitleView.setVisibility(View.GONE);
     }
 
     @Override
-    public void hideFirstLoading() {
-        firstProgressBar.setVisibility(View.GONE);
-        firstTitleView.setVisibility(View.VISIBLE);
+    public void hideTopMoviesLoading() {
+        topMoviesProgressBar.setVisibility(View.GONE);
+        topMoviesTitleView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideSecondLoading() {
-        secondProgressBar.setVisibility(View.GONE);
-        secondTitleView.setVisibility(View.VISIBLE);
+    public void hideTopActionsLoading() {
+        topActionsProgressBar.setVisibility(View.GONE);
+        topActionsTitleView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideThirdLoading() {
-        thirdProgressBar.setVisibility(View.GONE);
-        thirdTitleView.setVisibility(View.VISIBLE);
+    public void hideTopComediesLoading() {
+        topComediesProgressBar.setVisibility(View.GONE);
+        topComediesTitleView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void hideFourthLoading() {
-        fourthProgressBar.setVisibility(View.GONE);
-        fourthTitleView.setVisibility(View.VISIBLE);
+    public void hideTopAnimationsLoading() {
+        topAnimationsProgressBar.setVisibility(View.GONE);
+        topAnimationsTitleView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showNoInFirst() {
-        firstNoResultsView.setVisibility(View.VISIBLE);
+    public void showNoInTopMovies() {
+        topMoviesNoResultsView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showNoInSecond() {
-        secondNoResultsView.setVisibility(View.VISIBLE);
+    public void showNoInTopActions() {
+        topActionsNoResultsView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showNoInThird() {
-        thirdNoResultsView.setVisibility(View.VISIBLE);
+    public void showNoInTopComedies() {
+        topComediesNoResultsView.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void showNoInFourth() {
-        fourthNoResultsView.setVisibility(View.VISIBLE);
+    public void showNoInTopAnimations() {
+        topAnimationsNoResultsView.setVisibility(View.VISIBLE);
     }
 
     @Override
