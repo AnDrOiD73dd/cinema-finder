@@ -35,7 +35,7 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
     private RatingsCollectionRowAdapter topComediesAdapter;
     private RatingsCollectionRowAdapter topAnimationsAdapter;
 
-    @BindView(R.id.rating_root) LinearLayout rootView;
+    @BindView(R.id.ratings_root) LinearLayout rootView;
 
     @BindView(R.id.tv_top_movies_row_name) TextView topMoviesTitleView;
     @BindView(R.id.rv_top_movies_row) RecyclerView topMoviesRecyclerView;

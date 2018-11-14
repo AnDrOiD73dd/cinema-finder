@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.ui.screens.main.ratings;
+package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -16,26 +16,26 @@ import com.ateam.zuml.cinemafinder.util.ImageLoader;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCollectionRowAdapter.ViewHolder>
+public class UpcomingRowAdapter extends RecyclerView.Adapter<UpcomingRowAdapter.ViewHolder>
         implements CollectionRowListView {
 
     private ImageLoader imageLoader;
-    private RatingsPresenter.RatingsRowListPresenter presenter;
+    private HomePresenter.UpcomingRowListPresenter presenter;
 
-    RatingsCollectionRowAdapter(RatingsPresenter.RatingsRowListPresenter presenter, ImageLoader imageLoader) {
+    UpcomingRowAdapter(HomePresenter.UpcomingRowListPresenter presenter, ImageLoader imageLoader) {
         this.presenter = presenter;
         this.imageLoader = imageLoader;
     }
 
     @NonNull
     @Override
-    public RatingsCollectionRowAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new RatingsCollectionRowAdapter.ViewHolder(LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.ratings_row_item, viewGroup, false));
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new ViewHolder(LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.upcoming_row_item, viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RatingsCollectionRowAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         presenter.bindViewAt(viewHolder, i);
     }
 
@@ -49,13 +49,12 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements RatingsRowCardView {
+    class ViewHolder extends RecyclerView.ViewHolder implements UpcomingRowCardView {
 
-        @BindView(R.id.iv_poster_ratings_list) ImageView posterView;
-        @BindView(R.id.tv_title_ratings_list) TextView titleView;
-        @BindView(R.id.tv_release_date_ratings_list) TextView releaseDateView;
-        @BindView(R.id.tv_ranking_position_ratings_list) TextView rankingPositionView;
-        @BindView(R.id.tb_favorites_ratings_list) ToggleButton toggleFavorites;
+        @BindView(R.id.iv_poster_upcoming_list) ImageView posterView;
+        @BindView(R.id.tv_title_upcoming_list) TextView titleView;
+        @BindView(R.id.tv_release_date_upcoming_list) TextView releaseDateView;
+        @BindView(R.id.tb_favorites_upcoming_list) ToggleButton toggleFavorites;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,11 +76,6 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
         @Override
         public void setReleaseDate(String releaseDate) {
             this.releaseDateView.setText(releaseDate);
-        }
-
-        @Override
-        public void setRankingPosition(String rankingPosition) {
-            this.rankingPositionView.setText(rankingPosition);
         }
 
         @Override

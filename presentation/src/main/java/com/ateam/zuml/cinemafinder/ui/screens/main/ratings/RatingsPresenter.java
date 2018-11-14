@@ -15,7 +15,6 @@ import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
-import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
@@ -193,11 +192,12 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
             this.movieList = new ArrayList<>();
         }
 
-        void bindViewAt(CollectionRowCardView view, int position) {
+        void bindViewAt(RatingsRowCardView view, int position) {
             MovieListModel movieListModel = movieList.get(position);
             view.setPoster(movieListModel.getPosterPath());
             view.setTitle(movieListModel.getTitle());
-            view.setVoteAverage(movieListModel.getVoteAverage());
+            //TODO 14.11.2018 optimize this
+            view.setRankingPosition(String.valueOf(position + 1));
             view.setReleaseDate(movieListModel.getReleaseYear());
             view.setToggleFavorites(movieListModel.isFavorite());
         }
@@ -219,8 +219,6 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
                         .subscribe(() -> {
                                 },
                                 throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
-//                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
-//                            throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
             } else {
                 useCaseRemoveFavoriteMovie
                         .execute(movieList.get(position).getId())

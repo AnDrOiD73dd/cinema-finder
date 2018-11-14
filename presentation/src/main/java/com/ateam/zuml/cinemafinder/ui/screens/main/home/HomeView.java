@@ -1,7 +1,11 @@
 package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 
 import com.arellomobile.mvp.MvpView;
+import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy;
+import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
+import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
+@StateStrategyType(AddToEndSingleStrategy.class)
 public interface HomeView extends MvpView {
 
     void updateNowPlayingRow();
@@ -20,5 +24,6 @@ public interface HomeView extends MvpView {
 
     void showNoInUpcoming();
 
+    @StateStrategyType(SkipStrategy.class)
     void showNotifyingMessage(String msg);
 }

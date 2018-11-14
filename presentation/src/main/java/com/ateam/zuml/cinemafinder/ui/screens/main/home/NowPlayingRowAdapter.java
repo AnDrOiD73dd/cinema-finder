@@ -10,20 +10,19 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
 import com.ateam.zuml.cinemafinder.ui.common.CollectionRowListView;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class HomeCollectionRowAdapter extends RecyclerView.Adapter<HomeCollectionRowAdapter.ViewHolder>
+public class NowPlayingRowAdapter extends RecyclerView.Adapter<NowPlayingRowAdapter.ViewHolder>
         implements CollectionRowListView {
 
     private ImageLoader imageLoader;
-    private HomePresenter.RowListPresenter presenter;
+    private HomePresenter.NowPlayingRowListPresenter presenter;
 
-    HomeCollectionRowAdapter(HomePresenter.RowListPresenter presenter, ImageLoader imageLoader) {
+    NowPlayingRowAdapter(HomePresenter.NowPlayingRowListPresenter presenter, ImageLoader imageLoader) {
         this.presenter = presenter;
         this.imageLoader = imageLoader;
     }
@@ -32,7 +31,7 @@ public class HomeCollectionRowAdapter extends RecyclerView.Adapter<HomeCollectio
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new ViewHolder(LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.collection_row_item, viewGroup, false));
+                .inflate(R.layout.now_playing_row_item, viewGroup, false));
     }
 
     @Override
@@ -50,13 +49,13 @@ public class HomeCollectionRowAdapter extends RecyclerView.Adapter<HomeCollectio
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements CollectionRowCardView {
+    class ViewHolder extends RecyclerView.ViewHolder implements NowPlayingRowCardView {
 
-        @BindView(R.id.iv_card_poster) ImageView posterView;
-        @BindView(R.id.tv_card_title) TextView titleView;
-        @BindView(R.id.tv_release_date_home_list) TextView releaseDateView;
-        @BindView(R.id.tv_vote_average_home_list) TextView voteAverageView;
-        @BindView(R.id.tb_card_favorites) ToggleButton toggleFavorites;
+        @BindView(R.id.iv_poster_now_playing_list) ImageView posterView;
+        @BindView(R.id.tv_title_now_playing_list) TextView titleView;
+        @BindView(R.id.tv_release_date_now_playing_list) TextView releaseDateView;
+        @BindView(R.id.tv_vote_average_now_playing_list) TextView voteAverageView;
+        @BindView(R.id.tb_favorites_now_playing_list) ToggleButton toggleFavorites;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

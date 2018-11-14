@@ -3,4 +3,5 @@
     <string name="app_name">ZUML: Cinema Finder</string>
     <string name="movie_details_adult_text">18+</string>
     <string name="category_title_none"> </string>
+    <string name="sharp">#</string>
 </resources>

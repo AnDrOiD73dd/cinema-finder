@@ -1,6 +1,6 @@
-package com.ateam.zuml.cinemafinder.ui.common;
+package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 
-public interface CollectionRowCardView {
+public interface NowPlayingRowCardView {
 
     void setPoster(String posterPath);
 

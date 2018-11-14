@@ -92,8 +92,6 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
                     .subscribe(() -> {
                             },
                             throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
-//                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
-//                            throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
         } else {
             useCaseRemoveFavoriteMovie
                     .execute(currentMovie.getId())

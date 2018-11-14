@@ -90,8 +90,6 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
                     .subscribe(() -> {
                             },
                             throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
-//                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
-//                            throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
         } else {
             useCaseRemoveFavoriteMovie
                     .execute(listPresenter.searchList.get(position).getId())
