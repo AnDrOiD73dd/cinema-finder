@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.ui.common.CollectionRowCardView;
 import com.ateam.zuml.cinemafinder.ui.common.CollectionRowListView;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
@@ -32,7 +31,7 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
     @Override
     public RatingsCollectionRowAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         return new RatingsCollectionRowAdapter.ViewHolder(LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.collection_row_item, viewGroup, false));
+                .inflate(R.layout.ratings_row_item, viewGroup, false));
     }
 
     @Override
@@ -50,13 +49,13 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements CollectionRowCardView {
+    class ViewHolder extends RecyclerView.ViewHolder implements RatingsRowCardView {
 
-        @BindView(R.id.iv_card_poster) ImageView posterView;
-        @BindView(R.id.tv_card_title) TextView titleView;
-        @BindView(R.id.tv_release_date_home_list) TextView releaseDateView;
-        @BindView(R.id.tv_vote_average_home_list) TextView voteAverageView;
-        @BindView(R.id.tb_card_favorites) ToggleButton toggleFavorites;
+        @BindView(R.id.iv_poster_ratings_list) ImageView posterView;
+        @BindView(R.id.tv_title_ratings_list) TextView titleView;
+        @BindView(R.id.tv_release_date_ratings_list) TextView releaseDateView;
+        @BindView(R.id.tv_ranking_position_ratings_list) TextView rankingPositionView;
+        @BindView(R.id.tb_favorites_ratings_list) ToggleButton toggleFavorites;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -81,8 +80,8 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
         }
 
         @Override
-        public void setVoteAverage(String voteAverage) {
-            this.voteAverageView.setText(voteAverage);
+        public void setRankingPosition(String rankingPosition) {
+            this.rankingPositionView.setText(rankingPosition);
         }
 
         @Override

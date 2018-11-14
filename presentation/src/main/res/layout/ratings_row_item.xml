@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv_ratings_list"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/movie_card_margin"
+    android:clickable="true"
+    android:elevation="@dimen/movie_card_elevation"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackgroundBorderless"
+    app:cardCornerRadius="@dimen/movie_card_corner_radius">
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/cl_ratings_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/iv_poster_ratings_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ToggleButton
+            android:id="@+id/tb_favorites_ratings_list"
+            android:layout_width="@dimen/search_favorite_icon_size"
+            android:layout_height="@dimen/search_favorite_icon_size"
+            android:layout_marginTop="@dimen/movie_card_layout_margin"
+            android:layout_marginEnd="@dimen/movie_card_layout_margin"
+            android:background="@drawable/favorite_color_ripple"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title_ratings_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/movie_card_layout_margin"
+            android:ellipsize="end"
+            android:ems="6"
+            android:lines="2"
+            app:layout_constraintBottom_toTopOf="@id/tv_release_date_ratings_list"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_poster_ratings_list" />
+
+        <TextView
+            android:id="@+id/tv_release_date_ratings_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/movie_card_layout_margin"
+            android:layout_marginBottom="@dimen/movie_card_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_sharp_ratings_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/movie_card_layout_margin"
+            android:layout_marginBottom="@dimen/movie_card_layout_margin"
+            android:fontFamily="@font/product_sans_bold"
+            android:text="@string/sharp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_ranking_position_ratings_list" />
+
+        <TextView
+            android:id="@+id/tv_ranking_position_ratings_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/movie_card_layout_margin"
+            android:layout_marginBottom="@dimen/movie_card_layout_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>
