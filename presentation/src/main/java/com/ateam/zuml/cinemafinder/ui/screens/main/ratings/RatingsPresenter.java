@@ -219,8 +219,6 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
                         .subscribe(() -> {
                                 },
                                 throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
-//                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getAddedInFavorites()),
-//                            throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
             } else {
                 useCaseRemoveFavoriteMovie
                         .execute(movieList.get(position).getId())
