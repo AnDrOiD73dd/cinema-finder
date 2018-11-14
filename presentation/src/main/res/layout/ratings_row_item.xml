@@ -17,10 +17,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--TODO 14.11.2018 fix height units -->
         <ImageView
             android:id="@+id/iv_poster_ratings_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="450px"
             android:contentDescription="@string/poster"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
