@@ -30,8 +30,8 @@ import butterknife.ButterKnife;
 
 public class HomeFragment extends BaseFragment implements HomeView, BackButtonListener {
 
-    private HomeCollectionRowAdapter nowPlayingAdapter;
-    private HomeCollectionRowAdapter upcomingAdapter;
+    private NowPlayingRowAdapter nowPlayingAdapter;
+    private UpcomingRowAdapter upcomingAdapter;
 
     @BindView(R.id.home_root) LinearLayout rootView;
     @BindView(R.id.tv_now_playing_row_name) TextView nowPlayingTitleView;
@@ -60,7 +60,8 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
         setupRecyclerView(nowPlayingRecyclerView, nowPlayingAdapter);
@@ -72,11 +73,12 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     private void init(View v) {
         App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, v);
-        nowPlayingAdapter = new HomeCollectionRowAdapter(presenter.getNowPlayingPresenter(), imageLoader);
-        upcomingAdapter = new HomeCollectionRowAdapter(presenter.getUpcomingPresenter(), imageLoader);
+        nowPlayingAdapter = new NowPlayingRowAdapter(presenter.getNowPlayingPresenter(), imageLoader);
+        upcomingAdapter = new UpcomingRowAdapter(presenter.getUpcomingPresenter(), imageLoader);
     }
 
-    private void setupRecyclerView(RecyclerView recyclerView, HomeCollectionRowAdapter adapter) {
+    private void setupRecyclerView(RecyclerView recyclerView,
+                                   RecyclerView.Adapter<? extends RecyclerView.ViewHolder> adapter) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(adapter);

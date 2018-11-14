@@ -31,5 +31,4 @@
     <string name="error_remove_favorite_item">Error removing from favorites</string>
     <string name="pref_adult_title">Hide movies for adults</string>
     <string name="pref_adult_summ">Do not show movies which are tagged as \"Adult\".</string>
-    <string name="sharp">#</string>
 </resources>

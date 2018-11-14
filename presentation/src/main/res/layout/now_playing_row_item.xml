@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cv_home_list"
+    android:id="@+id/cv_now_playing_list"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/movie_card_margin"
@@ -12,13 +13,13 @@
     app:cardCornerRadius="@dimen/movie_card_corner_radius">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/cl_home_list"
+        android:id="@+id/cl_now_playing_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <!--TODO 14.11.2018 fix height units -->
         <ImageView
-            android:id="@+id/iv_card_poster"
+            android:id="@+id/iv_poster_now_playing_list"
             android:layout_width="match_parent"
             android:layout_height="450px"
             android:contentDescription="@string/poster"
@@ -27,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
-            android:id="@+id/tb_card_favorites"
+            android:id="@+id/tb_favorites_now_playing_list"
             android:layout_width="@dimen/search_favorite_icon_size"
             android:layout_height="@dimen/search_favorite_icon_size"
             android:layout_marginTop="@dimen/movie_card_layout_margin"
@@ -39,45 +40,45 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_card_title"
+            android:id="@+id/tv_title_now_playing_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/movie_card_layout_margin"
             android:ellipsize="end"
             android:ems="6"
             android:lines="2"
-            app:layout_constraintBottom_toTopOf="@id/iv_vote_average_home_list"
+            app:layout_constraintBottom_toTopOf="@id/iv_vote_average_now_playing_list"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_card_poster" />
+            app:layout_constraintTop_toBottomOf="@id/iv_poster_now_playing_list" />
 
         <TextView
-            android:id="@+id/tv_release_date_home_list"
+            android:id="@+id/tv_release_date_now_playing_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/movie_card_layout_margin"
-            app:layout_constraintBottom_toBottomOf="@id/iv_vote_average_home_list"
+            app:layout_constraintBottom_toBottomOf="@id/iv_vote_average_now_playing_list"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_vote_average_home_list" />
+            app:layout_constraintTop_toTopOf="@id/iv_vote_average_now_playing_list" />
 
         <ImageView
-            android:id="@+id/iv_vote_average_home_list"
+            android:id="@+id/iv_vote_average_now_playing_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/movie_card_layout_margin"
             android:layout_marginBottom="@dimen/movie_card_layout_margin"
             android:contentDescription="@string/star"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_vote_average_home_list"
+            app:layout_constraintEnd_toStartOf="@id/tv_vote_average_now_playing_list"
             app:srcCompat="@drawable/ic_star" />
 
         <TextView
-            android:id="@+id/tv_vote_average_home_list"
+            android:id="@+id/tv_vote_average_now_playing_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/movie_card_layout_margin"
-            app:layout_constraintBottom_toBottomOf="@id/iv_vote_average_home_list"
+            app:layout_constraintBottom_toBottomOf="@id/iv_vote_average_now_playing_list"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/iv_vote_average_home_list" />
+            app:layout_constraintTop_toTopOf="@id/iv_vote_average_now_playing_list" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>
