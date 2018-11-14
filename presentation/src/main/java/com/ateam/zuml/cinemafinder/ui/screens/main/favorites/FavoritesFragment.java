@@ -7,9 +7,12 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.*;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
@@ -20,11 +23,14 @@ import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class FavoritesFragment extends BaseFragment implements FavoritesView, BackButtonListener {
 
     private FavoritesListAdapter adapter;
 
-    @BindView(R.id.favorite_root) CoordinatorLayout rootView;
+    @BindView(R.id.favorites_root) CoordinatorLayout rootView;
     @BindView(R.id.rv_favorites_list) RecyclerView favoritesListView;
 
     @Inject ImageLoader imageLoader;
@@ -78,16 +84,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
         }
     };
 
-    // #################################### BackButtonListener ###################################
-
-    @Override
-    public boolean onBackPressed() {
-        presenter.onBackPressed();
-        return true;
-    }
-
-    // #################################### FavoritesView ###################################
-
+    //region ### FavoritesView ###
     @Override
     public void updateItemsList() {
         adapter.refreshView();
@@ -102,4 +99,13 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
     public void showNotifyingMessage(String msg) {
         Snackbar.make(rootView, msg, Snackbar.LENGTH_LONG).show();
     }
+    //endregion
+
+    //region ### BackButtonListener ###
+    @Override
+    public boolean onBackPressed() {
+        presenter.onBackPressed();
+        return true;
+    }
+    //endregion
 }
