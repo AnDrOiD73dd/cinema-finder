@@ -7,10 +7,10 @@ import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
-import com.ateam.zuml.cinemafinder.repository.MoviesRepository;
 import com.ateam.zuml.cinemafinder.service.api.ApiService;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesList;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesListWithDates;
+import com.ateam.zuml.cinemafinder.util.PreferenceUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,13 +31,16 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
     private final ApiService apiService;
     private final MovieMapper movieMapper;
     private final CharacteristicsMapper characteristicsMapper;
+    private final PreferenceUtils preferenceUtils;
 
     @Inject
     MoviesRepositoryImpl(final ApiService apiService, final MovieMapper movieMapper,
-                         final CharacteristicsMapper characteristicsMapper) {
+                         final CharacteristicsMapper characteristicsMapper,
+                         final PreferenceUtils preferenceUtils) {
         this.apiService = apiService;
         this.movieMapper = movieMapper;
         this.characteristicsMapper = characteristicsMapper;
+        this.preferenceUtils = preferenceUtils;
     }
 
     @Override
@@ -45,7 +48,9 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
                                                           final Region region, final LogoSize logoSize) {
         final String mappedLanguage = characteristicsMapper.mapLanguage(language);
         final String mappedRegion = characteristicsMapper.mapRegion(region);
-        return getMappedMovies(apiService.getSearchMovies(mappedLanguage, query, page, mappedRegion),
+        final boolean isIncludeAdult = !preferenceUtils.isHideAdultContentActive();
+        return getMappedMovies(apiService.getSearchMovies(mappedLanguage, query, page, mappedRegion,
+                isIncludeAdult),
                 language, logoSize);
     }
 
