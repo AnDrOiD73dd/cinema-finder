@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.movies;
+package com.ateam.zuml.cinemafinder.repository;
 
 import com.ateam.zuml.cinemafinder.mapper.CharacteristicsMapper;
 import com.ateam.zuml.cinemafinder.mapper.MovieMapper;
