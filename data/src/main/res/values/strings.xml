@@ -7,4 +7,6 @@
     <string name="movie_type_post_production">Post Production</string>
     <string name="movie_type_released">Released</string>
     <string name="movie_type_canceled">Canceled</string>
+
+    <string name="is_adult_save_key">is_adult_save_key</string>
 </resources>
