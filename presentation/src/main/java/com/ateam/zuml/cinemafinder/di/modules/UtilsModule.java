@@ -2,6 +2,8 @@ package com.ateam.zuml.cinemafinder.di.modules;
 
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.Logger;
+import com.ateam.zuml.cinemafinder.util.PreferenceUtils;
+import com.ateam.zuml.cinemafinder.util.PreferenceUtilsImpl;
 import com.ateam.zuml.cinemafinder.util.StringUtilImpl;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
 
@@ -18,6 +20,10 @@ public abstract class UtilsModule {
     @Singleton
     @Binds
     abstract StringUtils provideStringUtil(final StringUtilImpl stringUtil);
+
+    @Singleton
+    @Binds
+    abstract PreferenceUtils providePreferenceUtils(final PreferenceUtilsImpl preferenceUtils);
 
     @Singleton
     @Provides
