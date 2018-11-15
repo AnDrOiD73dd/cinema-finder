@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.utils;
+package com.ateam.zuml.cinemafinder.util;
 
 public final class CommonConstants {
 
