@@ -11,19 +11,15 @@ import com.ateam.zuml.cinemafinder.service.api.ApiService;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesList;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesListWithDates;
 import com.ateam.zuml.cinemafinder.util.PreferenceUtils;
-
-import java.util.Arrays;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.ateam.zuml.cinemafinder.util.Constants.ACTION_GENRE_ID;
-import static com.ateam.zuml.cinemafinder.util.Constants.ANIMATION_GENRE_ID;
-import static com.ateam.zuml.cinemafinder.util.Constants.COMEDY_GENRE_ID;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.ateam.zuml.cinemafinder.util.Constants.*;
 
 @Singleton
 public final class MoviesRepositoryImpl implements MoviesRepository {
@@ -48,7 +44,7 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
                                                           final Region region, final LogoSize logoSize) {
         final String mappedLanguage = characteristicsMapper.mapLanguage(language);
         final String mappedRegion = characteristicsMapper.mapRegion(region);
-        final boolean isIncludeAdult = !preferenceUtils.isHideAdultContentActive();
+        final boolean isIncludeAdult = preferenceUtils.isAdultContentActive();
         return getMappedMovies(apiService.getSearchMovies(mappedLanguage, query, page, mappedRegion,
                 isIncludeAdult),
                 language, logoSize);

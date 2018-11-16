@@ -3,7 +3,6 @@ package com.ateam.zuml.cinemafinder.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.ateam.zuml.cinemafinder.R;
 
 import javax.inject.Inject;
@@ -23,7 +22,7 @@ public final class PreferenceUtilsImpl implements PreferenceUtils {
     }
 
     @Override
-    public boolean isHideAdultContentActive() {
+    public boolean isAdultContentActive() {
         return sharedPreferences.getBoolean(isAdultSaveKey, false);
     }
 }

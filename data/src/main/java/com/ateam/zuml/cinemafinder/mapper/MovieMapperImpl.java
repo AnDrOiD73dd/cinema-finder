@@ -11,12 +11,11 @@ import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieInfo;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MovieResult;
 import com.ateam.zuml.cinemafinder.util.PreferenceUtils;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import static com.ateam.zuml.cinemafinder.util.CommonConstants.EMPTY_STRING;
 
@@ -38,11 +37,11 @@ public final class MovieMapperImpl implements MovieMapper {
     @Override
     public List<MovieListModel> mapMovieResults(final List<MovieResult> movieResults, final Language language,
                                                 final LogoSize logoSize) {
-        final boolean isHideAdult = preferenceUtils.isHideAdultContentActive();
+        final boolean isShowAdult = preferenceUtils.isAdultContentActive();
         final List<MovieListModel> movieListModels = new ArrayList<>(movieResults.size());
         for (final MovieResult result : movieResults) {
             final MovieListModel model = mapMovieResult(result, language, logoSize);
-            if (!isHideAdult || !model.isAdult()) {
+            if (isShowAdult || !model.isAdult()) {
                 movieListModels.add(mapMovieResult(result, language, logoSize));
             }
         }
@@ -94,11 +93,11 @@ public final class MovieMapperImpl implements MovieMapper {
 
     @Override
     public List<MovieListModel> mapMovieEntities(final List<MovieEntity> movieEntities) {
-        final boolean isHideAdult = preferenceUtils.isHideAdultContentActive();
+        final boolean isShowAdult = preferenceUtils.isAdultContentActive();
         final List<MovieListModel> movieListModels = new ArrayList<>(movieEntities.size());
         for (final MovieEntity movieEntity : movieEntities) {
             final MovieListModel model = mapMovieEntity(movieEntity);
-            if (!isHideAdult || !model.isAdult()) {
+            if (isShowAdult || !model.isAdult()) {
                 movieListModels.add(mapMovieEntity(movieEntity));
             }
         }
