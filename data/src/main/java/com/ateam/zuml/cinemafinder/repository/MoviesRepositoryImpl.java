@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.movies;
+package com.ateam.zuml.cinemafinder.repository;
 
 import com.ateam.zuml.cinemafinder.mapper.CharacteristicsMapper;
 import com.ateam.zuml.cinemafinder.mapper.MovieMapper;
@@ -7,23 +7,19 @@ import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
-import com.ateam.zuml.cinemafinder.repository.MoviesRepository;
 import com.ateam.zuml.cinemafinder.service.api.ApiService;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesList;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MoviesListWithDates;
-
-import java.util.Arrays;
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
+import com.ateam.zuml.cinemafinder.util.PreferenceUtils;
 import io.reactivex.Single;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.ateam.zuml.cinemafinder.util.Constants.ACTION_GENRE_ID;
-import static com.ateam.zuml.cinemafinder.util.Constants.ANIMATION_GENRE_ID;
-import static com.ateam.zuml.cinemafinder.util.Constants.COMEDY_GENRE_ID;
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.ateam.zuml.cinemafinder.util.Constants.*;
 
 @Singleton
 public final class MoviesRepositoryImpl implements MoviesRepository {
@@ -31,13 +27,16 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
     private final ApiService apiService;
     private final MovieMapper movieMapper;
     private final CharacteristicsMapper characteristicsMapper;
+    private final PreferenceUtils preferenceUtils;
 
     @Inject
     MoviesRepositoryImpl(final ApiService apiService, final MovieMapper movieMapper,
-                         final CharacteristicsMapper characteristicsMapper) {
+                         final CharacteristicsMapper characteristicsMapper,
+                         final PreferenceUtils preferenceUtils) {
         this.apiService = apiService;
         this.movieMapper = movieMapper;
         this.characteristicsMapper = characteristicsMapper;
+        this.preferenceUtils = preferenceUtils;
     }
 
     @Override
@@ -45,7 +44,9 @@ public final class MoviesRepositoryImpl implements MoviesRepository {
                                                           final Region region, final LogoSize logoSize) {
         final String mappedLanguage = characteristicsMapper.mapLanguage(language);
         final String mappedRegion = characteristicsMapper.mapRegion(region);
-        return getMappedMovies(apiService.getSearchMovies(mappedLanguage, query, page, mappedRegion),
+        final boolean isIncludeAdult = preferenceUtils.isAdultContentActive();
+        return getMappedMovies(apiService.getSearchMovies(mappedLanguage, query, page, mappedRegion,
+                isIncludeAdult),
                 language, logoSize);
     }
 

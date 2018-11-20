@@ -23,11 +23,12 @@ public final class MovieEntity {
     private final String releaseDate;
     @ColumnInfo(name = "vote_average")
     private final String voteAverage;
-    private List<String> genres;
+    private final List<String> genres;
+    private final boolean isAdult;
 
     public MovieEntity(final int id, final String title, final String originalTitle,
                        final String posterPath, final String releaseDate, final String voteAverage,
-                       final List<String> genres) {
+                       final List<String> genres, final boolean isAdult) {
         this.id = id;
         this.title = title;
         this.originalTitle = originalTitle;
@@ -35,6 +36,7 @@ public final class MovieEntity {
         this.releaseDate = releaseDate;
         this.voteAverage = voteAverage;
         this.genres = genres;
+        this.isAdult = isAdult;
     }
 
     public int getId() {
@@ -63,5 +65,9 @@ public final class MovieEntity {
 
     public List<String> getGenres() {
         return genres;
+    }
+
+    public boolean isAdult() {
+        return isAdult;
     }
 }

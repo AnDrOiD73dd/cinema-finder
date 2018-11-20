@@ -1,7 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.details;
 
 import android.annotation.SuppressLint;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
@@ -14,13 +13,11 @@ import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
-
-import java.util.Locale;
+import ru.terrakok.cicerone.Router;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import ru.terrakok.cicerone.Router;
+import java.util.Locale;
 
 @InjectViewState
 public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
@@ -75,6 +72,9 @@ public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
         getViewState().setReleaseDate(stringUtil.addBrackets(movieDetailsModel.getReleaseDate()));
         getViewState().setTagline(movieDetailsModel.getTagline());
         getViewState().setOverview(movieDetailsModel.getOverview());
+        if (movieDetailsModel.isAdult()) {
+            getViewState().showAdult();
+        }
     }
 
     //TODO 13.11.2018 add resources class

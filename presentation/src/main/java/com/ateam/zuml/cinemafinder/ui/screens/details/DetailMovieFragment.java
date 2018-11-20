@@ -12,7 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
@@ -21,12 +22,8 @@ import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
-import java.util.Locale;
-
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import java.util.Locale;
 
 public final class DetailMovieFragment extends BaseFragment implements DetailMovieView, BackButtonListener {
 
@@ -111,11 +108,7 @@ public final class DetailMovieFragment extends BaseFragment implements DetailMov
 
     @Override
     public void setToggleFavorites(boolean isFavorite) {
-        if (isFavorite) {
-            toggleFavorites.setChecked(true);
-        } else {
-            toggleFavorites.setChecked(false);
-        }
+        toggleFavorites.setChecked(isFavorite);
     }
 
     @Override

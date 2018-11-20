@@ -37,7 +37,8 @@ public interface ApiService {
     Single<MoviesList> getSearchMovies(@Query("language") String language,
                                        @Query("query") String query,
                                        @Query("page") String page,
-                                       @Query("region") String region);
+                                       @Query("region") String region,
+                                       @Query("include_adult") boolean isIncludeAdult);
 
     /*
      * Get the primary information about a movie.
@@ -139,8 +140,8 @@ public interface ApiService {
      */
     @GET("movie/top_rated?api_key=" + ACCESS_TOKEN)
     Single<MoviesList> getTopRatedMovies(@Query("language") String language,
-                                                  @Query("page") String page,
-                                                  @Query("region") String region);
+                                         @Query("page") String page,
+                                         @Query("region") String region);
 
     /*
      * Get the top rated movies by genre on TMDb.
@@ -160,9 +161,9 @@ public interface ApiService {
      */
     @GET("discover/movie?api_key=" + ACCESS_TOKEN + "&sort_by=vote_average.desc&vote_count.gte=10")
     Single<MoviesList> getTopRatedByGenreMovies(@Query("language") String language,
-                                                         @Query("page") String page,
-                                                         @Query("region") String region,
-                                                         @Query("with_genres") String genreId);
+                                                @Query("page") String page,
+                                                @Query("region") String region,
+                                                @Query("with_genres") String genreId);
 
     /*
      * Get the cast and crew for a movie.

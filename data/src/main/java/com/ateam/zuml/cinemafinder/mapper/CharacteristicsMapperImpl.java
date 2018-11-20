@@ -12,7 +12,7 @@ import javax.inject.Singleton;
 
 import io.reactivex.schedulers.Schedulers;
 
-import static com.ateam.zuml.cinemafinder.utils.CommonConstants.EMPTY_STRING;
+import static com.ateam.zuml.cinemafinder.util.CommonConstants.EMPTY_STRING;
 
 @Singleton
 public final class CharacteristicsMapperImpl implements CharacteristicsMapper {

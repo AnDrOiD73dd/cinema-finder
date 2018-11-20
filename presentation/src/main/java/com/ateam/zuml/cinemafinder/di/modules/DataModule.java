@@ -1,7 +1,7 @@
 package com.ateam.zuml.cinemafinder.di.modules;
 
-import com.ateam.zuml.cinemafinder.favorites.FavoritesRepositoryImpl;
-import com.ateam.zuml.cinemafinder.movies.MoviesRepositoryImpl;
+import com.ateam.zuml.cinemafinder.repository.FavoritesRepositoryImpl;
+import com.ateam.zuml.cinemafinder.repository.MoviesRepositoryImpl;
 import com.ateam.zuml.cinemafinder.repository.FavoritesRepository;
 import com.ateam.zuml.cinemafinder.repository.MoviesRepository;
 

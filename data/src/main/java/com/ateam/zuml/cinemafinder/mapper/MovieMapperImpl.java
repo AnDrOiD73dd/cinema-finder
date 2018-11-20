@@ -9,34 +9,41 @@ import com.ateam.zuml.cinemafinder.model.movie.MovieDetailsModel;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.service.model.movie.details.MovieInfo;
 import com.ateam.zuml.cinemafinder.service.model.movie.lists.MovieResult;
+import com.ateam.zuml.cinemafinder.util.PreferenceUtils;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
-
-import static com.ateam.zuml.cinemafinder.utils.CommonConstants.EMPTY_STRING;
+import static com.ateam.zuml.cinemafinder.util.CommonConstants.EMPTY_STRING;
 
 @Singleton
 public final class MovieMapperImpl implements MovieMapper {
 
     private final CharacteristicsMapper characteristicsMapper;
     private final FavoritesDao favoritesDao;
+    private final PreferenceUtils preferenceUtils;
 
     @Inject
-    MovieMapperImpl(final CharacteristicsMapper characteristicsMapper, final FavoritesDao favoritesDao) {
+    MovieMapperImpl(final CharacteristicsMapper characteristicsMapper, final FavoritesDao favoritesDao,
+                    final PreferenceUtils preferenceUtils) {
         this.characteristicsMapper = characteristicsMapper;
         this.favoritesDao = favoritesDao;
+        this.preferenceUtils = preferenceUtils;
     }
 
     @Override
     public List<MovieListModel> mapMovieResults(final List<MovieResult> movieResults, final Language language,
                                                 final LogoSize logoSize) {
+        final boolean isShowAdult = preferenceUtils.isAdultContentActive();
         final List<MovieListModel> movieListModels = new ArrayList<>(movieResults.size());
         for (final MovieResult result : movieResults) {
-            movieListModels.add(mapMovieResult(result, language, logoSize));
+            final MovieListModel model = mapMovieResult(result, language, logoSize);
+            if (isShowAdult || !model.isAdult()) {
+                movieListModels.add(mapMovieResult(result, language, logoSize));
+            }
         }
         return movieListModels;
     }
@@ -54,9 +61,10 @@ public final class MovieMapperImpl implements MovieMapper {
         final String posterPath = movieResult.getPosterPath() == null ? EMPTY_STRING :
                 characteristicsMapper.mapLogoSizeToPath(logoSize, movieResult.getPosterPath());
         final boolean isFavorite = favoritesDao.getFavoriteMovie(id) != null;
+        final boolean isAdult = movieResult.isAdult();
 
         return new MovieListModel(id, title, originalTitle, releaseDate, genres, voteAverage,
-                posterPath, isFavorite);
+                posterPath, isFavorite, isAdult);
     }
 
     @Override
@@ -77,17 +85,21 @@ public final class MovieMapperImpl implements MovieMapper {
         final String budget = movieInfo.getBudget() == 0 ? EMPTY_STRING : String.valueOf(movieInfo.getBudget());
         final String revenue = movieInfo.getRevenue() == 0 ? EMPTY_STRING : String.valueOf(movieInfo.getRevenue());
         final String voteCount = movieInfo.getVoteCount() == 0 ? EMPTY_STRING : String.valueOf(movieInfo.getVoteCount());
-        final boolean adult = movieInfo.isAdult();
+        final boolean isAdult = movieInfo.isAdult();
 
         return new MovieDetailsModel(id, title, originalTitle, releaseDate, genres, voteAverage,
-                posterPath, isFavorite, tagline, overview, runtime, budget, revenue, voteCount, adult);
+                posterPath, isFavorite, tagline, overview, runtime, budget, revenue, voteCount, isAdult);
     }
 
     @Override
     public List<MovieListModel> mapMovieEntities(final List<MovieEntity> movieEntities) {
+        final boolean isShowAdult = preferenceUtils.isAdultContentActive();
         final List<MovieListModel> movieListModels = new ArrayList<>(movieEntities.size());
         for (final MovieEntity movieEntity : movieEntities) {
-            movieListModels.add(mapMovieEntity(movieEntity));
+            final MovieListModel model = mapMovieEntity(movieEntity);
+            if (isShowAdult || !model.isAdult()) {
+                movieListModels.add(mapMovieEntity(movieEntity));
+            }
         }
         return movieListModels;
     }
@@ -102,9 +114,10 @@ public final class MovieMapperImpl implements MovieMapper {
         final String voteAverage = movieEntity.getVoteAverage();
         final String posterPath = movieEntity.getPosterPath();
         final boolean isFavorite = favoritesDao.getFavoriteMovie(id) != null;
+        final boolean isAdult = movieEntity.isAdult();
 
         return new MovieListModel(id, title, originalTitle, releaseDate, genres, voteAverage,
-                posterPath, isFavorite);
+                posterPath, isFavorite, isAdult);
     }
 
     private String[] getGenres(final List<String> genres) {
@@ -124,8 +137,9 @@ public final class MovieMapperImpl implements MovieMapper {
         final List<String> genres = Arrays.asList(movieModel.getGenres());
         final String voteAverage = movieModel.getVoteAverage();
         final String posterPath = getPosterPath(movieModel.getPosterPath());
+        final boolean isAdult = movieModel.isAdult();
 
-        return new MovieEntity(id, title, originalTitle, posterPath, releaseDate, voteAverage, genres);
+        return new MovieEntity(id, title, originalTitle, posterPath, releaseDate, voteAverage, genres, isAdult);
     }
 
     private String getPosterPath(final String path) {

@@ -9,6 +9,7 @@
     <dimen name="elevation_toolbar">4dp</dimen>
 
     <dimen name="movie_details_delimiter_margin">4dp</dimen>
+    <dimen name="movie_details_poster_end_margin">5dp</dimen>
     <dimen name="movie_details_layout_padding">8dp</dimen>
     <dimen name="movie_details_poster_width">152dp</dimen>
     <dimen name="movie_details_poster_height">250dp</dimen>
@@ -23,4 +24,6 @@
     <dimen name="category_title_start_margin">10dp</dimen>
     <dimen name="favorite_remove_icon_size">36dp</dimen>
     <dimen name="search_favorite_icon_size">36dp</dimen>
+
+    <dimen name="adult_start_margin">15dp</dimen>
 </resources>

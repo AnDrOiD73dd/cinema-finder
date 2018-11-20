@@ -1,4 +1,4 @@
-package com.ateam.zuml.cinemafinder.favorites;
+package com.ateam.zuml.cinemafinder.repository;
 
 import com.ateam.zuml.cinemafinder.database.room.daos.FavoritesDao;
 import com.ateam.zuml.cinemafinder.database.room.daos.MoviesDao;
@@ -19,7 +19,7 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 @Singleton
-public class FavoritesRepositoryImpl implements FavoritesRepository {
+public final class FavoritesRepositoryImpl implements FavoritesRepository {
 
     private final MoviesDao moviesDao;
     private final FavoritesDao favoritesDao;

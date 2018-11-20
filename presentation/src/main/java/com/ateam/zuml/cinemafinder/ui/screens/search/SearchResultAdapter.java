@@ -8,12 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
-import com.ateam.zuml.cinemafinder.R;
-import com.ateam.zuml.cinemafinder.util.ImageLoader;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import com.ateam.zuml.cinemafinder.R;
+import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder>
         implements SearchListView {
@@ -111,11 +109,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
         @Override
         public void setToggleFavorites(boolean isFavorite) {
-            if (isFavorite) {
-                toggleFavorites.setChecked(true);
-            } else {
-                toggleFavorites.setChecked(false);
-            }
+            toggleFavorites.setChecked(isFavorite);
         }
     }
 }

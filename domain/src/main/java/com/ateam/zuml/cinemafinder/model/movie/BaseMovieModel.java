@@ -1,6 +1,6 @@
 package com.ateam.zuml.cinemafinder.model.movie;
 
-import static com.ateam.zuml.cinemafinder.utils.CommonConstants.EMPTY_STRING;
+import static com.ateam.zuml.cinemafinder.util.CommonConstants.EMPTY_STRING;
 
 public abstract class BaseMovieModel {
 
@@ -12,10 +12,11 @@ public abstract class BaseMovieModel {
     private final String voteAverage;
     private final String posterPath;
     private final boolean isFavorite;
+    private final boolean isAdult;
 
     BaseMovieModel(final String id, final String title, final String originalTitle,
                    final String releaseDate, final String[] genres, final String voteAverage,
-                   final String posterPath, final boolean isFavorite) {
+                   final String posterPath, final boolean isFavorite, final boolean isAdult) {
         this.id = id;
         this.title = title;
         this.originalTitle = originalTitle;
@@ -24,6 +25,7 @@ public abstract class BaseMovieModel {
         this.voteAverage = voteAverage;
         this.posterPath = posterPath;
         this.isFavorite = isFavorite;
+        this.isAdult = isAdult;
     }
 
     public String getId() {
@@ -68,6 +70,10 @@ public abstract class BaseMovieModel {
 
     public boolean isFavorite() {
         return isFavorite;
+    }
+
+    public boolean isAdult() {
+        return isAdult;
     }
 
     private String getPartOfReleaseDate(int part) {

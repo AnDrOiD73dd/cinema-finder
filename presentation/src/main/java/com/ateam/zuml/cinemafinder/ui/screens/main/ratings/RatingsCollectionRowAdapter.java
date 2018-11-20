@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.ui.common.CollectionRowListView;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCollectionRowAdapter.ViewHolder>
         implements CollectionRowListView {
@@ -86,11 +84,7 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
 
         @Override
         public void setToggleFavorites(boolean isFavorite) {
-            if (isFavorite) {
-                toggleFavorites.setChecked(true);
-            } else {
-                toggleFavorites.setChecked(false);
-            }
+            toggleFavorites.setChecked(isFavorite);
         }
 
         void onClickRowItem() {

@@ -12,4 +12,5 @@
     <color name="gray550">#818181</color>
     <color name="purple500">#6200EE</color>
     <color name="amber500">#FFC107</color>
+    <color name="red700">#FFD50000</color>
 </resources>

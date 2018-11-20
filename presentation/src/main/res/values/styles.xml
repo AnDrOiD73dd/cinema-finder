@@ -31,6 +31,12 @@
         <item name="android:textColor">@color/gray500</item>
     </style>
 
+    <style name="ProductSans.DetailsAdultTagTextAppearance">
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:textSize">@dimen/text_size_16_sp</item>
+        <item name="android:textColor">@color/red700</item>
+    </style>
+
     <style name="ProductSans.DetailsCommonTextAppearance">
         <item name="android:textSize">@dimen/text_size_14_sp</item>
         <item name="android:textColor">@color/black</item>
