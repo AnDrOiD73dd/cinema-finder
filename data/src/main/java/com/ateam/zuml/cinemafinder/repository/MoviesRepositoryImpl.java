@@ -19,7 +19,7 @@ import javax.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.ateam.zuml.cinemafinder.util.Constants.*;
+import static com.ateam.zuml.cinemafinder.util.DataConstants.*;
 
 @Singleton
 public final class MoviesRepositoryImpl implements MoviesRepository {
