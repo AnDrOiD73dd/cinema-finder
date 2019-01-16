@@ -12,7 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
@@ -23,9 +24,6 @@ import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class SearchResponseFragment extends BaseFragment
         implements SearchResultAdapter.OnItemClickListener, SearchResponseView, BackButtonListener {
@@ -95,8 +93,8 @@ public class SearchResponseFragment extends BaseFragment
     }
 
     @Override
-    public void onFavoritesClick(boolean isChecked, int position) {
-        presenter.onFavoritesClicked(isChecked, position);
+    public void onFavoritesClick(int position) {
+        presenter.onFavoritesClicked(position);
     }
 
     // #################################### SearchResponseView ###################################

@@ -1,7 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.search;
 
 import android.annotation.SuppressLint;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
@@ -16,14 +15,12 @@ import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
+import ru.terrakok.cicerone.Router;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import ru.terrakok.cicerone.Router;
+import java.util.ArrayList;
+import java.util.List;
 
 @InjectViewState
 public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
@@ -82,20 +79,20 @@ public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
     }
 
     @SuppressLint("CheckResult")
-    void onFavoritesClicked(boolean isChecked, int position) {
-        if (isChecked) {
+    void onFavoritesClicked(int position) {
+        if (listPresenter.searchList.get(position).isFavorite()) {
+            useCaseRemoveFavoriteMovie
+                    .execute(listPresenter.searchList.get(position).getId())
+                    .observeOn(schedulers.ui())
+                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
+                            throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
+        } else {
             useCaseAddFavoriteMovie
                     .execute(listPresenter.searchList.get(position))
                     .observeOn(schedulers.ui())
                     .subscribe(() -> {
                             },
                             throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
-        } else {
-            useCaseRemoveFavoriteMovie
-                    .execute(listPresenter.searchList.get(position).getId())
-                    .observeOn(schedulers.ui())
-                    .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
-                            throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
         }
     }
 

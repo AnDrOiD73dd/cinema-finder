@@ -59,7 +59,8 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> onClickRowItem());
-            toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> onFavoritesClick(isChecked));
+            //toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> onFavoritesClick(isChecked));
+            toggleFavorites.setOnClickListener(v -> onFavoritesClick());
         }
 
         @Override
@@ -91,8 +92,8 @@ public class RatingsCollectionRowAdapter extends RecyclerView.Adapter<RatingsCol
             presenter.onClickedRowItem(getAdapterPosition());
         }
 
-        void onFavoritesClick(boolean isChecked) {
-            presenter.onFavoritesClicked(isChecked, getAdapterPosition());
+        void onFavoritesClick() {
+            presenter.onFavoritesClicked(getAdapterPosition());
         }
     }
 }
