@@ -59,7 +59,7 @@ public class NowPlayingRowAdapter extends RecyclerView.Adapter<NowPlayingRowAdap
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> onClickRowItem());
-            toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> onFavoritesClick(isChecked));
+            toggleFavorites.setOnClickListener(v -> onFavoritesClick());
         }
 
         @Override
@@ -91,8 +91,9 @@ public class NowPlayingRowAdapter extends RecyclerView.Adapter<NowPlayingRowAdap
             presenter.onClickedRowItem(getAdapterPosition());
         }
 
-        void onFavoritesClick(boolean isChecked) {
-            presenter.onFavoritesClicked(isChecked, getAdapterPosition());
+        void onFavoritesClick() {
+            presenter.onFavoritesClicked(getAdapterPosition());
+
         }
     }
 }

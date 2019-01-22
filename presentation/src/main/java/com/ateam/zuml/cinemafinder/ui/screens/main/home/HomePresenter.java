@@ -1,7 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 
 import android.annotation.SuppressLint;
-
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
@@ -17,14 +16,12 @@ import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.Logger;
 import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
-
-import java.util.ArrayList;
-import java.util.List;
+import ru.terrakok.cicerone.Router;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-
-import ru.terrakok.cicerone.Router;
+import java.util.ArrayList;
+import java.util.List;
 
 @InjectViewState
 public class HomePresenter extends MvpPresenter<HomeView> {
@@ -154,20 +151,20 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         }
 
         @SuppressLint("CheckResult")
-        void onFavoritesClicked(boolean isChecked, int position) {
-            if (isChecked) {
+        void onFavoritesClicked(int position) {
+            if (movieList.get(position).isFavorite()) {
+                useCaseRemoveFavoriteMovie
+                        .execute(movieList.get(position).getId())
+                        .observeOn(schedulers.ui())
+                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
+                                throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
+            } else {
                 useCaseAddFavoriteMovie
                         .execute(movieList.get(position))
                         .observeOn(schedulers.ui())
                         .subscribe(() -> {
                                 },
                                 throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
-            } else {
-                useCaseRemoveFavoriteMovie
-                        .execute(movieList.get(position).getId())
-                        .observeOn(schedulers.ui())
-                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
-                                throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
             }
         }
     }
@@ -197,20 +194,20 @@ public class HomePresenter extends MvpPresenter<HomeView> {
         }
 
         @SuppressLint("CheckResult")
-        void onFavoritesClicked(boolean isChecked, int position) {
-            if (isChecked) {
+        void onFavoritesClicked(int position) {
+            if (movieList.get(position).isFavorite()) {
+                useCaseRemoveFavoriteMovie
+                        .execute(movieList.get(position).getId())
+                        .observeOn(schedulers.ui())
+                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
+                                throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
+            } else {
                 useCaseAddFavoriteMovie
                         .execute(movieList.get(position))
                         .observeOn(schedulers.ui())
                         .subscribe(() -> {
                                 },
                                 throwable -> getViewState().showNotifyingMessage(resource.getErrorAddInFavorites()));
-            } else {
-                useCaseRemoveFavoriteMovie
-                        .execute(movieList.get(position).getId())
-                        .observeOn(schedulers.ui())
-                        .subscribe(() -> getViewState().showNotifyingMessage(resource.getRemovedFromFavorites()),
-                                throwable -> getViewState().showNotifyingMessage(resource.getErrorRemoveFromFavorites()));
             }
         }
     }

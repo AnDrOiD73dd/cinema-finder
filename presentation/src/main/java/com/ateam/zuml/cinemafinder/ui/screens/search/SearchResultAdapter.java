@@ -28,7 +28,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     public interface OnItemClickListener {
         void onItemClick(int position);
 
-        void onFavoritesClick(boolean isChecked, int position);
+        void onFavoritesClick(int position);
     }
 
     void setOnItemClickListener(OnItemClickListener itemClickListener) {
@@ -73,8 +73,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> itemClickListener.onItemClick(getAdapterPosition()));
-            toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) ->
-                    itemClickListener.onFavoritesClick(isChecked, getAdapterPosition()));
+            toggleFavorites.setOnClickListener(v -> itemClickListener.onFavoritesClick(getAdapterPosition()));
         }
 
         @Override
