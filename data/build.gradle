@@ -14,16 +14,24 @@ android {
 
     }
 
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        def tmdbApiKey  = properties.getProperty("tmdb_api_key", "")
+
+        it.buildConfigField "String", "TMDB_API_KEY", tmdbApiKey
+
+        it.resValue 'string', "tmdb_api_key", tmdbApiKey
+    }
+
     buildTypes {
-        debug {
-            buildConfigField "String", "ACCESS_TOKEN", API_KEY
-        }
+        debug {}
         release {
-            buildConfigField "String", "ACCESS_TOKEN", API_KEY
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
