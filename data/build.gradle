@@ -14,16 +14,24 @@ android {
 
     }
 
+    buildTypes.each {
+        Properties properties = new Properties()
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+        def apiKey = properties.getProperty("API_KEY", "")
+
+        it.buildConfigField "String", "ACCESS_TOKEN", apiKey
+
+        it.resValue 'string', "api_key", apiKey
+    }
+
     buildTypes {
-        debug {
-            buildConfigField "String", "ACCESS_TOKEN", API_KEY
-        }
+        debug {}
         release {
-            buildConfigField "String", "ACCESS_TOKEN", API_KEY
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -56,7 +64,7 @@ dependencies {
 
     // gson(do not update the version until uses com.squareup.retrofit2: converter-gson 2.4.0,
     // because it uses gson 2.8.2)
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     // Room components
     def room_version = "1.1.1"
