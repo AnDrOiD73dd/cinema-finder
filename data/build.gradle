@@ -17,11 +17,11 @@ android {
     buildTypes.each {
         Properties properties = new Properties()
         properties.load(project.rootProject.file("local.properties").newDataInputStream())
-        def apiKey = properties.getProperty("API_KEY", "")
+        def tmdbApiKey  = properties.getProperty("tmdb_api_key", "")
 
-        it.buildConfigField "String", "ACCESS_TOKEN", apiKey
+        it.buildConfigField "String", "TMDB_API_KEY", tmdbApiKey
 
-        it.resValue 'string', "api_key", apiKey
+        it.resValue 'string', "tmdb_api_key", tmdbApiKey
     }
 
     buildTypes {
@@ -64,7 +64,7 @@ dependencies {
 
     // gson(do not update the version until uses com.squareup.retrofit2: converter-gson 2.4.0,
     // because it uses gson 2.8.2)
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.google.code.gson:gson:2.8.2'
 
     // Room components
     def room_version = "1.1.1"

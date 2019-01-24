@@ -15,7 +15,7 @@ import retrofit2.http.Query;
 
 public interface ApiService {
 
-    String ACCESS_TOKEN = BuildConfig.ACCESS_TOKEN;
+    String ACCESS_TOKEN = BuildConfig.TMDB_API_KEY;
 
     /*
      * Search for movies.
