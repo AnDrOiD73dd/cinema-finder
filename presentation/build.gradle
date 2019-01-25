@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 28
@@ -80,4 +81,12 @@ dependencies {
 
     // Picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    // Firebase
+    implementation 'com.google.firebase:firebase-core:16.0.6'
+
+    // Crashlytics
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
 }
+
+apply plugin: 'com.google.gms.google-services'
