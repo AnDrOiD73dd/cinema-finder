@@ -7,8 +7,4 @@
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"
         app:showAsAction="always"/>
-    <item
-        android:id="@+id/action_refresh_data"
-        android:title="@string/menu_refresh"
-        app:showAsAction="never"/>
 </menu>
