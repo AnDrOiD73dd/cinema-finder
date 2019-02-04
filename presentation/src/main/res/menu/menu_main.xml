@@ -6,9 +6,10 @@
         android:id="@+id/action_settings"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings"
-        app:showAsAction="always"/>
+        app:showAsAction="never"/>
     <item
         android:id="@+id/action_refresh_data"
+        android:icon="@drawable/ic_refresh_black"
         android:title="@string/menu_refresh"
         app:showAsAction="never"/>
 </menu>
