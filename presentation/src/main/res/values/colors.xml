@@ -13,4 +13,10 @@
     <color name="purple500">#6200EE</color>
     <color name="amber500">#FFC107</color>
     <color name="red700">#FFD50000</color>
+
+    <color name="swipe_color_1">#66561AC7</color>
+    <color name="swipe_color_2">#99561AC7</color>
+    <color name="swipe_color_3">#CC561AC7</color>
+    <color name="swipe_color_4">#561AC7</color>
+
 </resources>

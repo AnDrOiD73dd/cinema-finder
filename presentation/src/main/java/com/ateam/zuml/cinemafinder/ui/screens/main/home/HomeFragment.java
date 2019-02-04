@@ -44,7 +44,7 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     @BindView(R.id.rv_upcoming_row) RecyclerView upcomingRecyclerView;
     @BindView(R.id.pb_upcoming_row) ProgressBar upcomingProgressBar;
     @BindView(R.id.tv_upcoming_row_no_results) TextView upcomingNoResultsView;
-    @BindView(R.id.swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.sr_home) SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject ImageLoader imageLoader;
 
@@ -79,6 +79,9 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
         nowPlayingAdapter = new NowPlayingRowAdapter(presenter.getNowPlayingPresenter(), imageLoader);
         upcomingAdapter = new UpcomingRowAdapter(presenter.getUpcomingPresenter(), imageLoader);
         swipeRefreshLayout.setOnRefreshListener(() -> presenter.onSwipeForRefreshScreen());
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.swipe_color_1, R.color.swipe_color_2,
+                R.color.swipe_color_3, R.color.swipe_color_4);
     }
 
     private void setupRecyclerView(RecyclerView recyclerView,

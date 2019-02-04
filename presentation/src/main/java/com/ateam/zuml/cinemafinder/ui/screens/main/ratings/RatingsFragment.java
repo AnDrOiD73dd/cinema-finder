@@ -37,7 +37,7 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
     private RatingsCollectionRowAdapter topComediesAdapter;
     private RatingsCollectionRowAdapter topAnimationsAdapter;
 
-    @BindView(R.id.swipe_refresh) SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.sr_ratings) SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.ratings_root) LinearLayout rootView;
 
     @BindView(R.id.tv_top_movies_row_name) TextView topMoviesTitleView;
@@ -96,6 +96,9 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
         topComediesAdapter = new RatingsCollectionRowAdapter(presenter.getTopComediesPresenter(), imageLoader);
         topAnimationsAdapter = new RatingsCollectionRowAdapter(presenter.getTopAnimationsPresenter(), imageLoader);
         swipeRefreshLayout.setOnRefreshListener(() -> presenter.onSwipeForRefreshScreen());
+        swipeRefreshLayout.setColorSchemeResources(
+                R.color.swipe_color_1, R.color.swipe_color_2,
+                R.color.swipe_color_3, R.color.swipe_color_4);
     }
 
     private void setupRecyclerView(RecyclerView recyclerView, RatingsCollectionRowAdapter adapter) {
