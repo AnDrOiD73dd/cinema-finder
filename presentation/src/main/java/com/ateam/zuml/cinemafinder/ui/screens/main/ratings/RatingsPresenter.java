@@ -1,6 +1,7 @@
 package com.ateam.zuml.cinemafinder.ui.screens.main.ratings;
 
 import android.annotation.SuppressLint;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
@@ -17,12 +18,14 @@ import com.ateam.zuml.cinemafinder.navigation.Screens;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
-import ru.terrakok.cicerone.Router;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.List;
+
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class RatingsPresenter extends MvpPresenter<RatingsView> {
@@ -179,6 +182,14 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
 
     RatingsRowListPresenter getTopAnimationsPresenter() {
         return topAnimationsPresenter;
+    }
+
+    public void onSwipeForRefreshScreen() {
+        loadTopMoviesData();
+        loadTopActionsData();
+        loadTopComediesData();
+        loadTopAnimationsData();
+        getViewState().finishSwipeGestureAction();
     }
 
     final class RatingsRowListPresenter {

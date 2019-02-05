@@ -40,6 +40,8 @@ public interface RatingsView extends MvpView {
 
     void showNoInTopAnimations();
 
+    void finishSwipeGestureAction();
+
     @StateStrategyType(SkipStrategy.class)
     void showNotifyingMessage(String msg);
 }

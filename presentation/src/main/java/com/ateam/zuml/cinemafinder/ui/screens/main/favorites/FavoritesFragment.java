@@ -69,7 +69,7 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_main_fav_screen, menu);
     }
 
     private FavoritesListAdapter.OnItemClickListener favoriteItemClickListener = new FavoritesListAdapter.OnItemClickListener() {

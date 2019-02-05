@@ -1,6 +1,7 @@
 package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 
 import android.annotation.SuppressLint;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
@@ -16,12 +17,14 @@ import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.Logger;
 import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
-import ru.terrakok.cicerone.Router;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.List;
+
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class HomePresenter extends MvpPresenter<HomeView> {
@@ -115,6 +118,12 @@ public class HomePresenter extends MvpPresenter<HomeView> {
 
     public void onBackPressed() {
         localRouter.exit();
+    }
+
+    public void onSwipeForRefreshScreen() {
+        loadNowPlayingData();
+        loadUpcomingData();
+        getViewState().finishSwipeGestureAction();
     }
 
     NowPlayingRowListPresenter getNowPlayingPresenter() {

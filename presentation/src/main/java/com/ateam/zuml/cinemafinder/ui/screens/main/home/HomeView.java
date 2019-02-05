@@ -24,6 +24,8 @@ public interface HomeView extends MvpView {
 
     void showNoInUpcoming();
 
+    void finishSwipeGestureAction();
+
     @StateStrategyType(SkipStrategy.class)
     void showNotifyingMessage(String msg);
 }
