@@ -10,13 +10,16 @@
     <color name="gray300">#E0E0E0</color>
     <color name="gray500">#9E9E9E</color>
     <color name="gray550">#818181</color>
-    <color name="purple500">#6200EE</color>
     <color name="amber500">#FFC107</color>
     <color name="red700">#FFD50000</color>
+    <color name="purple200">#b794f6</color>
+    <color name="purple300">#9965f4</color>
+    <color name="purple400">#7e3ff2</color>
+    <color name="purple500">#6200EE</color>
 
-    <color name="swipe_color_1">#66561AC7</color>
-    <color name="swipe_color_2">#99561AC7</color>
-    <color name="swipe_color_3">#CC561AC7</color>
-    <color name="swipe_color_4">#561AC7</color>
+    <color name="swipe_color_1">@color/purple500</color>
+    <color name="swipe_color_2">@color/purple400</color>
+    <color name="swipe_color_3">@color/purple300</color>
+    <color name="swipe_color_4">@color/purple200</color>
 
 </resources>
