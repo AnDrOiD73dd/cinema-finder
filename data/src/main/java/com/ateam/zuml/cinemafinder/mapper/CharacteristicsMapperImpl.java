@@ -4,8 +4,8 @@ import com.ateam.zuml.cinemafinder.model.characteristic.Language;
 import com.ateam.zuml.cinemafinder.model.characteristic.LogoSize;
 import com.ateam.zuml.cinemafinder.model.characteristic.Region;
 import com.ateam.zuml.cinemafinder.service.api.ApiService;
-import com.ateam.zuml.cinemafinder.service.model.configuration.Images;
 import com.ateam.zuml.cinemafinder.service.model.common.genre.Genre;
+import com.ateam.zuml.cinemafinder.service.model.configuration.Images;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,18 +21,14 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
     private static final String EN_LANGUAGE = "en-EN";
     private static final String RU_REGION = "ru";
     private static final String EN_REGION = "en";
-    private final Images images;
-    private final Genre[] ruGenres;
-    private final Genre[] enGenres;
+    private final ApiService apiService;
+    private Images images;
+    private Genre[] ruGenres;
+    private Genre[] enGenres;
 
     @Inject
     CharacteristicsMapperImpl(final ApiService apiService) {
-        images = apiService.getConfiguration()
-                .subscribeOn(Schedulers.io()).blockingGet().getImages();// TODO: temporary solution. It will be replaced by cache
-        ruGenres = apiService.getGenres(mapLanguage(Language.RUSSIAN))
-                .subscribeOn(Schedulers.io()).blockingGet().getGenres();// TODO: temporary solution. It will be replaced by cache
-        enGenres = apiService.getGenres(mapLanguage(Language.ENGLISH))
-                .subscribeOn(Schedulers.io()).blockingGet().getGenres();// TODO: temporary solution. It will be replaced by cache
+        this.apiService = apiService;
     }
 
     @Override
@@ -61,6 +57,10 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
 
     @Override
     public String mapLogoSizeToPath(final LogoSize logoSize, final String logoPath) {
+        if(images == null)  {
+            images = apiService.getConfiguration()
+                    .subscribeOn(Schedulers.io()).blockingGet().getImages();
+        }
         final String baseUrl = images.getSecureBaseUrl();
         String size;
         try {
@@ -97,6 +97,14 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
 
     @Override
     public String[] mapGenres(final int[] genresIds, final Language language) {
+        if(ruGenres == null)    {
+            ruGenres = apiService.getGenres(mapLanguage(Language.RUSSIAN))
+                    .subscribeOn(Schedulers.io()).blockingGet().getGenres();
+        }
+        if(enGenres == null)    {
+            enGenres = apiService.getGenres(mapLanguage(Language.ENGLISH))
+                    .subscribeOn(Schedulers.io()).blockingGet().getGenres();
+        }
         final Genre[] genres = language == Language.RUSSIAN ? ruGenres : enGenres;
         final String[] resultGenres = new String[genresIds.length];
         for (int i = 0; i < genresIds.length; i++) {
