@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.preference.PreferenceFragmentCompat;
@@ -17,6 +18,7 @@ import com.ateam.zuml.cinemafinder.util.Constants;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import dagger.android.support.AndroidSupportInjection;
 import ru.terrakok.cicerone.Router;
 
 
@@ -31,6 +33,12 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
     }
 
     @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
     public void onCreatePreferences(Bundle bundle, String s) {
         addPreferencesFromResource(R.xml.preferences);
     }
@@ -42,7 +50,6 @@ public class SettingsFragment extends PreferenceFragmentCompat implements BackBu
     }
 
     private void init() {
-        App.getApp().getAppComponent().inject(this);
         setHasOptionsMenu(true);
         WidgetTuning widgetTuning = (AppActivity) getActivity();
         if (widgetTuning != null) {

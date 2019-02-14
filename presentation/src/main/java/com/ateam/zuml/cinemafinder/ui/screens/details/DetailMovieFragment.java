@@ -12,18 +12,21 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
-import com.ateam.zuml.cinemafinder.App;
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.ui.BaseFragment;
 import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
-import javax.inject.Inject;
 import java.util.Locale;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public final class DetailMovieFragment extends BaseFragment implements DetailMovieView, BackButtonListener {
 
@@ -47,6 +50,7 @@ public final class DetailMovieFragment extends BaseFragment implements DetailMov
     @BindView(R.id.pb_movie_detail) ProgressBar progressBarView;
 
     @Inject ImageLoader imageLoader;
+    @Inject Provider<DetailMoviePresenter> presenterProvider;
 
     @InjectPresenter DetailMoviePresenter presenter;
 
@@ -60,8 +64,8 @@ public final class DetailMovieFragment extends BaseFragment implements DetailMov
 
     @ProvidePresenter
     public DetailMoviePresenter provideDetailMoviePresenter() {
-        DetailMoviePresenter presenter = new DetailMoviePresenter(getMovieId());
-        App.getApp().getAppComponent().inject(presenter);
+        DetailMoviePresenter presenter = presenterProvider.get();
+        presenter.setMovieId(getMovieId());
         return presenter;
     }
 
@@ -85,7 +89,6 @@ public final class DetailMovieFragment extends BaseFragment implements DetailMov
     }
 
     private void init(View view) {
-        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
         toggleFavorites.setOnCheckedChangeListener((buttonView, isChecked) -> presenter.onFavoritesClick(isChecked));
     }
