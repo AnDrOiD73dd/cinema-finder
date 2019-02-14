@@ -32,23 +32,33 @@ public class HomePresenter extends MvpPresenter<HomeView> {
     private NowPlayingRowListPresenter nowPlayingPresenter;
     private UpcomingRowListPresenter upcomingPresenter;
 
-    @Named(Constants.CHILD_CONTAINER)
+    private final Router localRouter;
+    private final Router globalRouter;
+    private final GetNowPlayingMoviesUseCase useCaseNowPlaying;
+    private final GetUpcomingMoviesUseCase useCaseUpcoming;
+    private final AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
+    private final RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
+    private final SchedulersProvider schedulers;
+    private final ResourceManager resource;
+    private final Logger logger;
+
     @Inject
-    Router localRouter;
-
-    @Named(Constants.MAIN_CONTAINER)
-    @Inject
-    Router globalRouter;
-
-    @Inject GetNowPlayingMoviesUseCase useCaseNowPlaying;
-    @Inject GetUpcomingMoviesUseCase useCaseUpcoming;
-    @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
-    @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
-    @Inject SchedulersProvider schedulers;
-    @Inject ResourceManager resource;
-    @Inject Logger logger;
-
-    HomePresenter() {
+    HomePresenter(@Named(Constants.CHILD_CONTAINER) Router localRouter,
+                  @Named(Constants.MAIN_CONTAINER) Router globalRouter,
+                  GetNowPlayingMoviesUseCase useCaseNowPlaying,
+                  GetUpcomingMoviesUseCase useCaseUpcoming,
+                  AddFavoriteMovieUseCase useCaseAddFavoriteMovie,
+                  RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie,
+                  SchedulersProvider schedulers, ResourceManager resource, Logger logger) {
+        this.localRouter = localRouter;
+        this.globalRouter = globalRouter;
+        this.useCaseNowPlaying = useCaseNowPlaying;
+        this.useCaseUpcoming = useCaseUpcoming;
+        this.useCaseAddFavoriteMovie = useCaseAddFavoriteMovie;
+        this.useCaseRemoveFavoriteMovie = useCaseRemoveFavoriteMovie;
+        this.schedulers = schedulers;
+        this.resource = resource;
+        this.logger = logger;
         this.nowPlayingPresenter = new NowPlayingRowListPresenter();
         this.upcomingPresenter = new UpcomingRowListPresenter();
     }
