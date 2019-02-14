@@ -57,7 +57,9 @@ dependencies {
     // Dagger2
     def dagger2_version = "2.18"
     implementation "com.google.dagger:dagger:$dagger2_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger2_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger2_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger2_version"
 
     // ButterKnife
     def butter_knife_version = "8.8.1"
