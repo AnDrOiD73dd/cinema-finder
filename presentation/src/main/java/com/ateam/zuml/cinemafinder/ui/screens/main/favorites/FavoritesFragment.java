@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.main.favorites;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -22,6 +23,7 @@ import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,14 +36,13 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
     @BindView(R.id.rv_favorites_list) RecyclerView favoritesListView;
 
     @Inject ImageLoader imageLoader;
+    @Inject Provider<FavoritesPresenter> presenterProvider;
 
     @InjectPresenter FavoritesPresenter presenter;
 
     @ProvidePresenter
     FavoritesPresenter provideFavoritesPresenter() {
-        FavoritesPresenter presenter = new FavoritesPresenter();
-        App.getApp().getAppComponent().inject(presenter);
-        return presenter;
+        return presenterProvider.get();
     }
 
     public static FavoritesFragment newInstance() {
@@ -57,7 +58,6 @@ public class FavoritesFragment extends BaseFragment implements FavoritesView, Ba
     }
 
     private void init(View v) {
-        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, v);
         setupToolbar(R.string.favorites, false);
         adapter = new FavoritesListAdapter(presenter.getListPresenter(), imageLoader);

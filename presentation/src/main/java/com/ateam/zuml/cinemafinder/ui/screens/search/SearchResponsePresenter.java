@@ -1,6 +1,7 @@
 package com.ateam.zuml.cinemafinder.ui.screens.search;
 
 import android.annotation.SuppressLint;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
@@ -15,34 +16,48 @@ import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
-import ru.terrakok.cicerone.Router;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.List;
+
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class SearchResponsePresenter extends MvpPresenter<SearchResponseView> {
 
-    private final String movieTitle;
+    private String movieTitle;
 
     private SearchListPresenter listPresenter;
 
-    @Named(Constants.MAIN_CONTAINER)
+    private final Router router;
+    private final StringUtils stringUtil;
+    private final GetMoviesBySearchUseCase useCaseGetMoviesBySearch;
+    private final AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
+    private final RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
+    private final SchedulersProvider schedulers;
+    private final ResourceManager resource;
+
     @Inject
-    Router router;
-
-    @Inject StringUtils stringUtil;
-    @Inject GetMoviesBySearchUseCase useCaseGetMoviesBySearch;
-    @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
-    @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
-    @Inject SchedulersProvider schedulers;
-    @Inject ResourceManager resource;
-
-    SearchResponsePresenter(String movieTitle) {
-        this.movieTitle = movieTitle;
+    SearchResponsePresenter(@Named(Constants.MAIN_CONTAINER) Router router, StringUtils stringUtil,
+                            GetMoviesBySearchUseCase useCaseGetMoviesBySearch,
+                            AddFavoriteMovieUseCase useCaseAddFavoriteMovie,
+                            RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie,
+                            SchedulersProvider schedulers, ResourceManager resource) {
+        this.router = router;
+        this.stringUtil = stringUtil;
+        this.useCaseGetMoviesBySearch = useCaseGetMoviesBySearch;
+        this.useCaseAddFavoriteMovie = useCaseAddFavoriteMovie;
+        this.useCaseRemoveFavoriteMovie = useCaseRemoveFavoriteMovie;
+        this.schedulers = schedulers;
+        this.resource = resource;
         this.listPresenter = new SearchListPresenter();
+    }
+
+    public void setMovieTitle(String movieTitle) {
+        this.movieTitle = movieTitle;
     }
 
     @Override

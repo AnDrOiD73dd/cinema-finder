@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.search;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,8 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import butterknife.BindView;
-import butterknife.ButterKnife;
+
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.ateam.zuml.cinemafinder.App;
@@ -24,6 +24,10 @@ import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class SearchResponseFragment extends BaseFragment
         implements SearchResultAdapter.OnItemClickListener, SearchResponseView, BackButtonListener {
@@ -38,6 +42,7 @@ public class SearchResponseFragment extends BaseFragment
     @BindView(R.id.tv_no_search_results) TextView noSearchResultsView;
 
     @Inject ImageLoader imageLoader;
+    @Inject Provider<SearchResponsePresenter> presenterProvider;
 
     @InjectPresenter SearchResponsePresenter presenter;
 
@@ -51,8 +56,8 @@ public class SearchResponseFragment extends BaseFragment
 
     @ProvidePresenter
     SearchResponsePresenter provideSearchResponsePresenter() {
-        SearchResponsePresenter presenter = new SearchResponsePresenter(getMovieTitle());
-        App.getApp().getAppComponent().inject(presenter);
+        SearchResponsePresenter presenter = presenterProvider.get();
+        presenter.setMovieTitle(getMovieTitle());
         return presenter;
     }
 
@@ -75,7 +80,6 @@ public class SearchResponseFragment extends BaseFragment
     }
 
     private void init(View v) {
-        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, v);
 
         adapter = new SearchResultAdapter(presenter.getListPresenter(), imageLoader);

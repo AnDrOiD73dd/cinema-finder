@@ -1,6 +1,7 @@
 package com.ateam.zuml.cinemafinder.ui.screens.details;
 
 import android.annotation.SuppressLint;
+
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 import com.ateam.zuml.cinemafinder.interactor.favorites.AddFavoriteMovieUseCase;
@@ -13,31 +14,45 @@ import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
 import com.ateam.zuml.cinemafinder.util.StringUtils;
-import ru.terrakok.cicerone.Router;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Locale;
+
+import ru.terrakok.cicerone.Router;
 
 @InjectViewState
 public class DetailMoviePresenter extends MvpPresenter<DetailMovieView> {
 
-    private final String movieId;
+    private String movieId;
 
     private MovieDetailsModel currentMovie;
 
-    @Named(Constants.MAIN_CONTAINER)
+    private final Router router;
+    private final StringUtils stringUtil;
+    private final GetMovieDetailsUseCase detailsUseCase;
+    private final AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
+    private final RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
+    private final SchedulersProvider schedulers;
+    private final ResourceManager resource;
+
     @Inject
-    Router router;
+    DetailMoviePresenter(@Named(Constants.MAIN_CONTAINER) Router router, StringUtils stringUtil,
+                         GetMovieDetailsUseCase detailsUseCase,
+                         AddFavoriteMovieUseCase useCaseAddFavoriteMovie,
+                         RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie,
+                         SchedulersProvider schedulers, ResourceManager resource) {
+        this.router = router;
+        this.stringUtil = stringUtil;
+        this.detailsUseCase = detailsUseCase;
+        this.useCaseAddFavoriteMovie = useCaseAddFavoriteMovie;
+        this.useCaseRemoveFavoriteMovie = useCaseRemoveFavoriteMovie;
+        this.schedulers = schedulers;
+        this.resource = resource;
+    }
 
-    @Inject StringUtils stringUtil;
-    @Inject GetMovieDetailsUseCase detailsUseCase;
-    @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
-    @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
-    @Inject SchedulersProvider schedulers;
-    @Inject ResourceManager resource;
-
-    DetailMoviePresenter(String movieId) {
+    public void setMovieId(String movieId) {
         this.movieId = movieId;
     }
 

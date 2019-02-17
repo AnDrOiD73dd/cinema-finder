@@ -21,13 +21,15 @@ public class MainContainerPresenter extends MvpPresenter<MainContainerView> {
 
     private BottomScreens currentScreen;
 
-    @Named(Constants.CHILD_CONTAINER)
-    @Inject
-    Router localRouter;
+    private final Router localRouter;
+    private final Router globalRouter;
 
-    @Named(Constants.MAIN_CONTAINER)
     @Inject
-    Router globalRouter;
+    MainContainerPresenter(@Named(Constants.CHILD_CONTAINER) Router localRouter,
+                           @Named(Constants.MAIN_CONTAINER) Router globalRouter) {
+        this.localRouter = localRouter;
+        this.globalRouter = globalRouter;
+    }
 
     void onHomeScreenSelected() {
         if (currentScreen == BottomScreens.HOME) {
