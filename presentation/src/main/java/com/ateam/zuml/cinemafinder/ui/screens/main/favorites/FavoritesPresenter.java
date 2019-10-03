@@ -8,7 +8,6 @@ import com.ateam.zuml.cinemafinder.interactor.favorites.GetFavoriteMoviesUseCase
 import com.ateam.zuml.cinemafinder.interactor.favorites.RemoveFavoriteMovieUseCase;
 import com.ateam.zuml.cinemafinder.model.movie.MovieListModel;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
-import com.ateam.zuml.cinemafinder.repository.FavoritesRepository;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.ResourceManager;
 import com.ateam.zuml.cinemafinder.util.SchedulersProvider;
@@ -27,23 +26,29 @@ public class FavoritesPresenter extends MvpPresenter<FavoritesView> {
 
     private final FavoritesListPresenter favoriteListPresenter;
 
-    @Named(Constants.CHILD_CONTAINER)
+    private final Router localRouter;
+    private final Router globalRouter;
+    private final GetFavoriteMoviesUseCase useCaseGetMovies;
+    private final RemoveFavoriteMovieUseCase useCaseRemoveMovie;
+    private final SchedulersProvider schedulers;
+    private final ResourceManager resource;
+
+    private final StringUtils stringUtil;
+
     @Inject
-    Router localRouter;
-
-    @Named(Constants.MAIN_CONTAINER)
-    @Inject
-    Router globalRouter;
-
-    @Inject GetFavoriteMoviesUseCase useCaseGetMovies;
-    @Inject RemoveFavoriteMovieUseCase useCaseRemoveMovie;
-    @Inject FavoritesRepository repository;
-    @Inject SchedulersProvider schedulers;
-    @Inject ResourceManager resource;
-
-    @Inject StringUtils stringUtil;
-
-    FavoritesPresenter() {
+    FavoritesPresenter(@Named(Constants.CHILD_CONTAINER) Router localRouter,
+                       @Named(Constants.MAIN_CONTAINER) Router globalRouter,
+                       GetFavoriteMoviesUseCase useCaseGetMovies,
+                       RemoveFavoriteMovieUseCase useCaseRemoveMovie,
+                       SchedulersProvider schedulers, ResourceManager resource,
+                       StringUtils stringUtil) {
+        this.localRouter = localRouter;
+        this.globalRouter = globalRouter;
+        this.useCaseGetMovies = useCaseGetMovies;
+        this.useCaseRemoveMovie = useCaseRemoveMovie;
+        this.schedulers = schedulers;
+        this.resource = resource;
+        this.stringUtil = stringUtil;
         this.favoriteListPresenter = new FavoritesListPresenter();
     }
 

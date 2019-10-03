@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.main.ratings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -61,6 +63,7 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
     @BindView(R.id.tv_top_animations_row_no_results) TextView topAnimationsNoResultsView;
 
     @Inject ImageLoader imageLoader;
+    @Inject Provider<RatingsPresenter> presenterProvider;
 
     @InjectPresenter RatingsPresenter presenter;
 
@@ -70,9 +73,7 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
 
     @ProvidePresenter
     RatingsPresenter provideRatingsPresenter() {
-        RatingsPresenter presenter = new RatingsPresenter();
-        App.getApp().getAppComponent().inject(presenter);
-        return presenter;
+        return presenterProvider.get();
     }
 
     @Nullable
@@ -89,7 +90,6 @@ public class RatingsFragment extends BaseFragment implements RatingsView, BackBu
     }
 
     private void init(View view) {
-        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
         topMoviesAdapter = new RatingsCollectionRowAdapter(presenter.getTopMoviesPresenter(), imageLoader);
         topActionsAdapter = new RatingsCollectionRowAdapter(presenter.getTopActionsPresenter(), imageLoader);

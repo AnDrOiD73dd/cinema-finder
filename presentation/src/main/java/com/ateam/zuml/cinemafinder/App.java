@@ -1,32 +1,33 @@
 package com.ateam.zuml.cinemafinder;
 
+import android.app.Activity;
 import android.app.Application;
 import android.support.v7.app.AppCompatDelegate;
 
-import com.ateam.zuml.cinemafinder.di.AppComponent;
 import com.ateam.zuml.cinemafinder.di.DaggerAppComponent;
 
-public final class App extends Application {
+import javax.inject.Inject;
 
-    private static App app;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 
-    private AppComponent appComponent;
+public final class App extends Application implements HasActivityInjector {
+
+    @Inject DispatchingAndroidInjector<Activity> injector;
+
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return injector;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        app = this;
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-        appComponent = DaggerAppComponent.builder()
+        DaggerAppComponent.builder()
                 .with(getApplicationContext())
-                .build();
-    }
-
-    public static App getApp() {
-        return app;
-    }
-
-    public AppComponent getAppComponent() {
-        return appComponent;
+                .build()
+                .inject(this);
     }
 }

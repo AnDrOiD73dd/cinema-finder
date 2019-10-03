@@ -35,24 +35,37 @@ public class RatingsPresenter extends MvpPresenter<RatingsView> {
     private RatingsRowListPresenter topComediesPresenter;
     private RatingsRowListPresenter topAnimationsPresenter;
 
-    @Named(Constants.CHILD_CONTAINER)
+    private final Router localRouter;
+    private final Router globalRouter;
+    private final GetTopRatingsUseCase useCaseGetTopRatings;
+    private final GetActionRatingsUseCase useCaseGetActionRatings;
+    private final GetComedyRatingsUseCase useCaseGetComedyRatings;
+    private final GetAnimationRatingsUseCase useCaseGetAnimationRatings;
+    private final AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
+    private final RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
+    private final SchedulersProvider schedulers;
+    private final ResourceManager resource;
+
     @Inject
-    Router localRouter;
-
-    @Named(Constants.MAIN_CONTAINER)
-    @Inject
-    Router globalRouter;
-
-    @Inject GetTopRatingsUseCase useCaseGetTopRatings;
-    @Inject GetActionRatingsUseCase useCaseGetActionRatings;
-    @Inject GetComedyRatingsUseCase useCaseGetComedyRatings;
-    @Inject GetAnimationRatingsUseCase useCaseGetAnimationRatings;
-    @Inject AddFavoriteMovieUseCase useCaseAddFavoriteMovie;
-    @Inject RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie;
-    @Inject SchedulersProvider schedulers;
-    @Inject ResourceManager resource;
-
-    RatingsPresenter() {
+    RatingsPresenter(@Named(Constants.CHILD_CONTAINER) Router localRouter,
+                     @Named(Constants.MAIN_CONTAINER) Router globalRouter,
+                     GetTopRatingsUseCase useCaseGetTopRatings,
+                     GetActionRatingsUseCase useCaseGetActionRatings,
+                     GetComedyRatingsUseCase useCaseGetComedyRatings,
+                     GetAnimationRatingsUseCase useCaseGetAnimationRatings,
+                     AddFavoriteMovieUseCase useCaseAddFavoriteMovie,
+                     RemoveFavoriteMovieUseCase useCaseRemoveFavoriteMovie,
+                     SchedulersProvider schedulers, ResourceManager resource) {
+        this.localRouter = localRouter;
+        this.globalRouter = globalRouter;
+        this.useCaseGetTopRatings = useCaseGetTopRatings;
+        this.useCaseGetActionRatings = useCaseGetActionRatings;
+        this.useCaseGetComedyRatings = useCaseGetComedyRatings;
+        this.useCaseGetAnimationRatings = useCaseGetAnimationRatings;
+        this.useCaseAddFavoriteMovie = useCaseAddFavoriteMovie;
+        this.useCaseRemoveFavoriteMovie = useCaseRemoveFavoriteMovie;
+        this.schedulers = schedulers;
+        this.resource = resource;
         this.topMoviesPresenter = new RatingsRowListPresenter();
         this.topActionsPresenter = new RatingsRowListPresenter();
         this.topComediesPresenter = new RatingsRowListPresenter();

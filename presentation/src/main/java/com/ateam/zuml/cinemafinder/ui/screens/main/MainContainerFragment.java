@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.main;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,9 +21,11 @@ import com.ateam.zuml.cinemafinder.util.Constants;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.AndroidSupportInjection;
 import ru.terrakok.cicerone.Navigator;
 import ru.terrakok.cicerone.NavigatorHolder;
 
@@ -33,8 +36,8 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
     @BindView(R.id.bottom_navigation) BottomNavigationView bottomNavigationView;
 
     @Named(Constants.CHILD_CONTAINER)
-    @Inject
-    NavigatorHolder navigatorHolder;
+    @Inject NavigatorHolder navigatorHolder;
+    @Inject Provider<MainContainerPresenter> presenterProvider;
 
     @InjectPresenter MainContainerPresenter presenter;
 
@@ -44,9 +47,13 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
 
     @ProvidePresenter
     MainContainerPresenter provideHomePresenter() {
-        MainContainerPresenter presenter = new MainContainerPresenter();
-        App.getApp().getAppComponent().inject(presenter);
-        return presenter;
+        return presenterProvider.get();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
     }
 
     @Override
@@ -54,7 +61,6 @@ public class MainContainerFragment extends MvpAppCompatFragment implements MainC
                              final Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_container, container, false);
 
-        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, view);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(menuItem ->

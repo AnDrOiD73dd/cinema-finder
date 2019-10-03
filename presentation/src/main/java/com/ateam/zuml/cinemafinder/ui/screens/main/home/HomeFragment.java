@@ -1,5 +1,6 @@
 package com.ateam.zuml.cinemafinder.ui.screens.main.home;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.util.ImageLoader;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -47,14 +49,13 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     @BindView(R.id.sr_home) SwipeRefreshLayout swipeRefreshLayout;
 
     @Inject ImageLoader imageLoader;
+    @Inject Provider<HomePresenter> presenterProvider;
 
     @InjectPresenter HomePresenter presenter;
 
     @ProvidePresenter
     HomePresenter provideHomePresenter() {
-        HomePresenter presenter = new HomePresenter();
-        App.getApp().getAppComponent().inject(presenter);
-        return presenter;
+        return presenterProvider.get();
     }
 
     public static HomeFragment newInstance() {
@@ -74,7 +75,6 @@ public class HomeFragment extends BaseFragment implements HomeView, BackButtonLi
     }
 
     private void init(View v) {
-        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this, v);
         nowPlayingAdapter = new NowPlayingRowAdapter(presenter.getNowPlayingPresenter(), imageLoader);
         upcomingAdapter = new UpcomingRowAdapter(presenter.getUpcomingPresenter(), imageLoader);

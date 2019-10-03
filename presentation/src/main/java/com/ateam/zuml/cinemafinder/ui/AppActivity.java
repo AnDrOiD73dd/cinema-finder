@@ -11,9 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import com.ateam.zuml.cinemafinder.App;
+
 import com.ateam.zuml.cinemafinder.R;
 import com.ateam.zuml.cinemafinder.navigation.CustomNavigator;
 import com.ateam.zuml.cinemafinder.navigation.Screens;
@@ -21,15 +19,23 @@ import com.ateam.zuml.cinemafinder.ui.common.BackButtonListener;
 import com.ateam.zuml.cinemafinder.ui.common.WidgetTuning;
 import com.ateam.zuml.cinemafinder.util.Constants;
 import com.ateam.zuml.cinemafinder.util.Logger;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 import ru.terrakok.cicerone.NavigatorHolder;
 import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.commands.Command;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.util.List;
-
-public final class AppActivity extends AppCompatActivity implements WidgetTuning {
+public final class AppActivity extends AppCompatActivity implements WidgetTuning, HasSupportFragmentInjector {
 
     @BindView(R.id.toolbar) Toolbar toolbar;
     @BindView(R.id.search) SearchView searchView;
@@ -43,6 +49,7 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
     Router router;
 
     @Inject Logger logger;
+    @Inject DispatchingAndroidInjector<Fragment> injector;
 
     private final CustomNavigator navigator = new CustomNavigator(this, R.id.main_container) {
         @Override
@@ -53,7 +60,13 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
     };
 
     @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return injector;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
@@ -67,7 +80,6 @@ public final class AppActivity extends AppCompatActivity implements WidgetTuning
 
     private void init() {
         setContentView(R.layout.activity_main);
-        App.getApp().getAppComponent().inject(this);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
