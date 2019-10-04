@@ -19,8 +19,8 @@ public final class CharacteristicsMapperImpl implements CharacteristicsMapper {
 
     private static final String RU_LANGUAGE = "ru-RU";
     private static final String EN_LANGUAGE = "en-EN";
-    private static final String RU_REGION = "ru";
-    private static final String EN_REGION = "en";
+    private static final String RU_REGION = "RU";
+    private static final String EN_REGION = "EN";
     private final ApiService apiService;
     private Images images;
     private Genre[] ruGenres;
